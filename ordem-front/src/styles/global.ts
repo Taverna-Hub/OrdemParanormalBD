@@ -9,7 +9,8 @@ export const GlobalStyles = createGlobalStyle`
 
   html {
     font-size: 62.5%;
-    font-family: 'Source Sans 3';
+    font-family: 'Inter';
+    background-color: ${({ theme }) => theme.colors.blue_900};
   }
 
   html, body, #__next {

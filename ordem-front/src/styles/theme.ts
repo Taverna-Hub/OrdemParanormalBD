@@ -1,11 +1,11 @@
 export default {
   grid: {
-    container: '100%',
-    secondContainer: '160rem',
+    container: '1440px',
     gutter: '3.2rem',
   },
   border: {
     radius: {
+      full: '9999rem',
       xlg: '3.125rem',
       medium: '1.125rem',
       xsmall: '0.8rem',
@@ -15,8 +15,9 @@ export default {
   font: {
     light: 300,
     normal: 400,
-    bold: 600,
     medium: 500,
+    semibold: 600,
+    bold: 700,
     sizes: {
       xsmall: '1.2rem',
       small: '1.4rem',
@@ -28,7 +29,16 @@ export default {
       '4xlarge': '4.8rem',
     },
   },
-  colors: {},
+  colors: {
+    nav_bar: '#1F2022',
+    blue_200: '#A2F4FD',
+    blue_600: '#007595',
+    blue_900: '#000214',
+
+    gray_500: '#6A7282',
+
+    white: '#fff',
+  },
   spacings: {
     xxsmall: '0.8rem',
     xsmall: '1.6rem',
