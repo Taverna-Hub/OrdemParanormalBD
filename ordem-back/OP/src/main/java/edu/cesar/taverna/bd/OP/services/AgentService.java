@@ -1,7 +1,7 @@
 package edu.cesar.taverna.bd.OP.services;
 
 import edu.cesar.taverna.bd.OP.dao.AgentDAO;
-import edu.cesar.taverna.bd.OP.entity.agent.Agent;
+import edu.cesar.taverna.bd.OP.entity.Agent;
 
 public class AgentService {
 
@@ -14,9 +14,9 @@ public class AgentService {
         if (agent.getId() == null){
             agent.setId();
         }
-        if (agent.getLogin() == null){
-            agent.setLogin();
-        }
+//        if (agent.getLogin() == null){
+//            agent.setLogin();
+//        }
 
         agentDAO.save(agent);
     }

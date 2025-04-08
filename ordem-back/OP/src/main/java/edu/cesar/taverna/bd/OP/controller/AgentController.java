@@ -1,6 +1,6 @@
 package edu.cesar.taverna.bd.OP.controller;
 
-import edu.cesar.taverna.bd.OP.entity.agent.Agent;
+import edu.cesar.taverna.bd.OP.entity.Agent;
 import edu.cesar.taverna.bd.OP.services.AgentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
