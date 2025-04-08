@@ -1,13 +1,14 @@
 import { Helmet } from 'react-helmet-async';
+import * as S from './styles';
 import { Navigation } from '../../components/Navigation';
 
-export function Dashboard() {
+export function Teams() {
   return (
-    <>
-      <Helmet title="Dashboard" />
+    <S.Wrapper>
+      <Helmet title="Equipes" />
+      <h1>Teams</h1>
 
-      <h1>Dashboard</h1>
       <Navigation />
-    </>
+    </S.Wrapper>
   );
 }
