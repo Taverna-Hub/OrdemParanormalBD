@@ -23,7 +23,7 @@ public class AgentDAO {
             stmt.setDate(3, java.sql.Date.valueOf(agent.getBirthDate()));
             stmt.setString(4, agent.getTelNumber());
             stmt.setString(5, agent.getAndress());
-            stmt.setString(6, agent.getPrestige());
+            stmt.setString(6, agent.getRank_agent());
             stmt.setInt(7, agent.getNex());
             stmt.setBoolean(8, agent.isRetired());
             stmt.setBoolean(9, agent.isTrancended());
