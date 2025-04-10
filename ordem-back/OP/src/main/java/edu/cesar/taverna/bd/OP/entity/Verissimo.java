@@ -4,12 +4,19 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 
 public class Verissimo extends Agent{
-    //Need to do smth here later
+
+    public Verissimo(String name, LocalDate birthDate, String telNumber, String andress,
+                     String prestige, int nex, boolean retired, boolean trancended){
+        super( name,  birthDate,  telNumber,  andress,
+                 prestige,  nex,  retired, trancended);
+        setId();
+    }
+
+
 }

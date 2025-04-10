@@ -11,9 +11,8 @@ public class AgentDAO {
     public void save(Agent agent) {
         System.out.println("Salvando no banco:");
         System.out.println(agent.getId());
-//        System.out.println(agent.getLogin());
 
-        String sql = "INSERT INTO agents (id_agent, name, birth_date, tel_number, andress, prestige, nex, retired, trancended)" +
+        String sql = "INSERT INTO AGENTS (id_agent, name, birth_date, phone, address, rank_agent, nex, retired, transcended)" +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = ConnectionFactory.getConnection();
