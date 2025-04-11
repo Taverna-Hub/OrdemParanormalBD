@@ -10,20 +10,20 @@ export const InputWrapper = styled.div`
   ${({ theme }) => css`
     display: flex;
     align-items: center;
-    background: ${theme.colors.white};
-    border-radius: 0.4rem;
-    border: 0.2rem solid ${theme.colors.blue_200};
+    background: ${theme.colors.purple_800};
+    border-radius: 0.8rem;
+    border: 0.2rem solid ${theme.colors.gray_500};
     transition: all 0.3s;
 
     &:focus-within {
-      border: 0.2rem solid ${theme.colors.blue_600};
+      border: 0.2rem solid ${theme.colors.blue_200};
     }
   `}
 `;
 
 export const Input = styled.input<IconPositionProps>`
   ${({ theme, iconPosition }) => css`
-    color: ${theme.colors.blue_900};
+    color: ${theme.colors.white};
     font-size: ${theme.font.sizes.medium};
     padding: ${theme.spacings.xxsmall} 0;
     padding-${iconPosition}: ${theme.spacings.xsmall};
@@ -49,6 +49,8 @@ export const Label = styled.label`
     font-size: ${theme.font.sizes.small};
     color: ${theme.colors.white};
     cursor: pointer;
+    display: block;
+    margin-bottom: 0.8rem;
   `}
 `;
 
