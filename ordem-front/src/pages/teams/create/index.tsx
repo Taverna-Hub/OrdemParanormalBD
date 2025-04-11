@@ -6,7 +6,7 @@ import { Select } from "../../../components/Select";
 import { Button } from "../../../components/Button";
 import { Navigation } from "../../../components/Navigation";
 
-export function CreatingTeam() {
+export function CreateTeam() {
     const {control} = useForm()
     const specOptions = [
         {
