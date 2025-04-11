@@ -24,6 +24,7 @@ export const StyledSelect = styled(Select).attrs({
       padding: ${theme.spacings.xxsmall};
       box-shadow: none;
       cursor: pointer;
+      background-color: ${theme.colors.purple_800};
 
       font-size: ${theme.font.sizes.small};
 

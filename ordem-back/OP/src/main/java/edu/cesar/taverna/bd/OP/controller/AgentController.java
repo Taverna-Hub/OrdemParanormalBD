@@ -17,7 +17,7 @@ public class AgentController {
     @PostMapping
     public ResponseEntity<String> register(@RequestBody Agent agent){
         try{
-            agentService.registerAgent(agent);
+            agentService.register(agent);
             return ResponseEntity.status(HttpStatus.CREATED).body("Agent sucessfuly registered");
 
         } catch (Exception e) {

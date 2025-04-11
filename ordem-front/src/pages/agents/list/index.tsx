@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import * as S from './styles';
-import { Navigation } from '../../components/Navigation';
+import { Navigation } from '../../../components/Navigation';
 
 export function Agents() {
   return (

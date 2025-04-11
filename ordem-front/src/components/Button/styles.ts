@@ -28,9 +28,11 @@ const wrapperModifiers = {
 const variantModifiers = {
   primary: (theme: DefaultTheme) => css`
     background-color: ${theme.colors.blue_200};
+    color: ${theme.colors.white};
   `,
   secondary: (theme: DefaultTheme) => css`
-    background-color: ${theme.colors.blue_200};
+    background-color: ${theme.colors.white};
+    color: ${theme.colors.gray_500};
   `,
 };
 
@@ -42,7 +44,6 @@ export const Wrapper = styled.button<WrapperProps>`
 
     border: none;
     border-radius: ${theme.border.radius.xxsmall};
-    color: ${theme.colors.blue_900};
     font-weight: ${theme.font.bold};
     cursor: pointer;
     padding: ${theme.spacings.xxsmall};

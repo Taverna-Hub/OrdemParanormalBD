@@ -37,7 +37,7 @@ export const Page = styled.a`
 
     &.active ${IconWrapper} {
       background-color: #a2f4fd;
-      color: #007595;
+      color: ${theme.colors.blue_200};
     }
 
     &.active p {

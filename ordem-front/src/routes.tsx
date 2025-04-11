@@ -1,12 +1,13 @@
 import { createBrowserRouter } from 'react-router';
 import { Dashboard } from './pages/dashboard';
 import { Missions } from './pages/missions';
-import { Agents } from './pages/agents';
+import { Agents } from './pages/agents/list';
 import { Teams } from './pages/teams';
 import { Threats } from './pages/threats';
 import { Arsenal } from './pages/arsenal';
 import { Login } from './pages/login';
-import { CreatingTeam } from './pages/teams/create';
+import { CreateAgent } from './pages/agents/create';
+import { CreateTeam } from './pages/teams/create';
 
 export const router = createBrowserRouter([
   {
@@ -22,12 +23,16 @@ export const router = createBrowserRouter([
     element: <Agents />,
   },
   {
+    path: '/agentes/criar',
+    element: <CreateAgent />,
+  },
+  {
     path: '/equipes',
     element: <Teams />,
   },
   {
     path: '/equipes/criar',
-    element: <CreatingTeam />,
+    element: <CreateTeam />,
   },
   {
     path: '/ameacas',
