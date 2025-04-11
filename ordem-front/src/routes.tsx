@@ -6,6 +6,7 @@ import { Teams } from './pages/teams';
 import { Threats } from './pages/threats';
 import { Arsenal } from './pages/arsenal';
 import { Login } from './pages/login';
+import { CreatingTeam } from './pages/teams/create';
 
 export const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ export const router = createBrowserRouter([
   {
     path: '/equipes',
     element: <Teams />,
+  },
+  {
+    path: '/equipes/criar',
+    element: <CreatingTeam />,
   },
   {
     path: '/ameacas',

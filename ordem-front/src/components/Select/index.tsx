@@ -33,12 +33,10 @@ export function Select({
       <Controller
         name={name}
         control={control}
-        defaultValue={options[0]}
         render={({ field }) => (
           <S.StyledSelect
             {...field}
             options={options}
-            defaultValue={options[0]}
             classNamePrefix="select"
             className="custom"
             isLoading={isLoading}
