@@ -1,12 +1,12 @@
 package edu.cesar.taverna.bd.OP.entity;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -22,10 +22,19 @@ public class Agent {
     private String rank_agent;
     private int nex;
     private boolean retired;
-    private boolean trancended;
-
-    public Agent(String name, LocalDate birthDate, String telNumber, String andress,
-                   String rank_agent, int nex, boolean retired, boolean trancended) {
+    private boolean transcended;
+    private String specialization;
+    @JsonCreator
+    public Agent(
+            @JsonProperty("name") String name,
+            @JsonProperty("birthDate") LocalDate birthDate,
+            @JsonProperty("telNumber") String telNumber,
+            @JsonProperty("andress") String andress,
+            @JsonProperty("rank_agent") String rank_agent,
+            @JsonProperty("nex") int nex,
+            @JsonProperty("retired") boolean retired,
+            @JsonProperty("transcended") boolean transcended,
+            @JsonProperty("specialization") String specialization) {
         this.name = name;
         this.birthDate = birthDate;
         this.telNumber = telNumber;
@@ -33,24 +42,19 @@ public class Agent {
         this.rank_agent = rank_agent;
         this.nex = nex;
         this.retired = retired;
-        this.trancended = trancended;
+        this.transcended = transcended;
+        this.specialization = specialization;
         setId();
+        System.out.println("Con 1");
     }
 
-    public Agent(String name, LocalDate birthDate, String telNumber, String andress,
-                 String rank_agent) {
-        this.name = name;
-        this.birthDate = birthDate;
-        this.telNumber = telNumber;
-        this.andress = andress;
-        this.rank_agent = rank_agent;
-        this.nex = nex;
-        this.retired = retired;
-        this.trancended = trancended;
-        setId();
+    // only to promote to Verissimo
+    public Agent(Agent agent){
+        this(agent.id, agent.name, agent.birthDate, agent.telNumber, agent.andress, agent.rank_agent, agent.nex, agent.retired, agent.transcended, agent.specialization);
     }
 
-    public void setId() {
+
+    private void setId() {
         this.id = UUID.randomUUID();
     }
 

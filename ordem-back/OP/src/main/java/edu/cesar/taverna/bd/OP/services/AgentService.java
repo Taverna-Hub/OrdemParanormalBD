@@ -11,11 +11,6 @@ public class AgentService {
         System.out.println("Agent recebido no service:");
         System.out.println(agent);
 
-        if (agent.getId() == null){
-            agent.setId();
-        }
-
-
         agentDAO.save(agent);
     }
 }
