@@ -1,7 +1,12 @@
 package edu.cesar.taverna.bd.OP.controller;
 
 
+import edu.cesar.taverna.bd.OP.dao.AgentDAO;
+import edu.cesar.taverna.bd.OP.dao.GenericDAO;
+import edu.cesar.taverna.bd.OP.dao.TeamDAO;
+import edu.cesar.taverna.bd.OP.entity.Agent;
 import edu.cesar.taverna.bd.OP.entity.Team;
+import edu.cesar.taverna.bd.OP.services.AgentService;
 import edu.cesar.taverna.bd.OP.services.TeamService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,19 +16,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/Teams")
-public class TeamController {
-    private final TeamService teamService = new TeamService();
-
-    @PostMapping
-    public ResponseEntity<String> register(@RequestBody Team team) {
-        try {
-
-            return ResponseEntity.status(HttpStatus.CREATED).body("Agent sucessfuly registered");
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Error on register Agent.");
-        }
+@RequestMapping("/teams")
+public class TeamController extends GenericController<Team, TeamService> {
+    public TeamController(){
+        super(new TeamService());
     }
+
+    @Override
+    protected void performRegister(Team team) {
+        service.register(team);
+    }
+
+    @Override
+    protected String successMessage() {
+        return "team registered successfully";
+    }
+
+    @Override
+    protected String errorMessage() {
+        return "Failed to register team";
+    }
+
 }
