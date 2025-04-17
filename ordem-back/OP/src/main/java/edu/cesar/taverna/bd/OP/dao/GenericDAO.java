@@ -8,20 +8,25 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public abstract class GenericDAO<T> {
 
 
     protected abstract String getInsertSQL();
+
     protected abstract String getSelectByIdSQL();
+
     protected abstract String getSelectAllSQL();
+
     protected abstract String getDeleteSQL();
+
     protected abstract String getUpdateSQL();
 
     protected abstract void prepareInsert(PreparedStatement stmt, T entity) throws SQLException;
+
     protected abstract void prepareUpdate(PreparedStatement stmt, T entity) throws SQLException;
-    protected abstract void prepareDelete(PreparedStatement stmt, Object id) throws SQLException;
-    protected abstract void prepareSelectById(PreparedStatement stmt, Object id) throws SQLException;
+
 
     protected abstract T mapResultSetToEntity(ResultSet rs) throws SQLException;
 
@@ -90,7 +95,24 @@ public abstract class GenericDAO<T> {
         } catch (SQLException e) {
             throw new RuntimeException("Error updating entity", e);
         }
+
+
+    }
+
+    protected void prepareDelete(PreparedStatement stmt, Object id) throws SQLException {
+        if (id instanceof UUID) {
+            stmt.setString(1, id.toString());
+        }
+
+    }
+
+    protected void prepareSelectById(PreparedStatement stmt, Object id) throws SQLException {
+        if (id instanceof UUID) {
+            stmt.setString(1, id.toString());
+        }
     }
 
 }
+
+
 

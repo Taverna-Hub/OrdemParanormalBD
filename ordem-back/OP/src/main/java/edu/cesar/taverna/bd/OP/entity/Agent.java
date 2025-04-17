@@ -18,7 +18,6 @@ public class Agent {
     private String name;
     private LocalDate birthDate;
     private String telNumber;
-    private String andress;
     private String rank_agent;
     private int nex;
     private boolean retired;
@@ -29,7 +28,6 @@ public class Agent {
             @JsonProperty("name") String name,
             @JsonProperty("birthDate") LocalDate birthDate,
             @JsonProperty("telNumber") String telNumber,
-            @JsonProperty("andress") String andress,
             @JsonProperty("rank_agent") String rank_agent,
             @JsonProperty("nex") int nex,
             @JsonProperty("retired") boolean retired,
@@ -38,7 +36,6 @@ public class Agent {
         this.name = name;
         this.birthDate = birthDate;
         this.telNumber = telNumber;
-        this.andress = andress;
         this.rank_agent = rank_agent;
         this.nex = nex;
         this.retired = retired;
@@ -50,7 +47,7 @@ public class Agent {
 
     // only to promote to Verissimo
     public Agent(Agent agent){
-        this(agent.id, agent.name, agent.birthDate, agent.telNumber, agent.andress, agent.rank_agent, agent.nex, agent.retired, agent.transcended, agent.specialization);
+        this(agent.id, agent.name, agent.birthDate, agent.telNumber, agent.rank_agent, agent.nex, agent.retired, agent.transcended, agent.specialization);
     }
 
 
