@@ -15,6 +15,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.SQLException;
+import java.util.List;
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/teams")
 public class TeamController extends GenericController<Team, TeamService> {
@@ -35,6 +39,26 @@ public class TeamController extends GenericController<Team, TeamService> {
     @Override
     protected String errorMessage() {
         return "Failed to register team";
+    }
+
+    @Override
+    public ResponseEntity<List<Team>> getAll() throws SQLException {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<Team> getById(UUID id) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<String> update(UUID id, Team entity) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<String> delete(UUID id) {
+        return null;
     }
 
 }
