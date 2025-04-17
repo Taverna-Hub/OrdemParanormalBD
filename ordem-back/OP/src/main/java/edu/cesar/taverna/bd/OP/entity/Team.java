@@ -6,8 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -22,11 +20,14 @@ public class Team {
                 @JsonProperty("specialization") String specialization){
         this.name = name;
         this.specialization = specialization;
-        setId_team();
+        setId();
     }
 
-    public void setId_team() {
+    public void setId() {
         this.id_team = UUID.randomUUID();
+    }
+    public void setId(UUID id) {
+        this.id_team = id;
     }
 
 
