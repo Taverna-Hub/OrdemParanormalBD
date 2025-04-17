@@ -23,15 +23,6 @@ public class MissionController extends GenericController<Mission, MissionService
         service.register(mission);
     }
 
-    @Override
-    protected String successMessage() {
-        return "Mission Created Successfully";
-    }
-
-    @Override
-    protected String errorMessage() {
-        return "Erron on creating Mission";
-    }
 
     @Override
     public ResponseEntity<List<Mission>> getAll() throws SQLException {

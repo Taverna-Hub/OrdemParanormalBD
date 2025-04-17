@@ -16,19 +16,17 @@ public abstract class GenericController<T, S> {
     }
 
     protected abstract void performRegister(T entity);
-    protected abstract String successMessage();
-    protected abstract String errorMessage();
 
     @PostMapping
     public ResponseEntity<String> register(@RequestBody T entity){
         try{
             performRegister(entity);
-            return ResponseEntity.status(HttpStatus.CREATED).body(successMessage());
+            return ResponseEntity.status(HttpStatus.CREATED).body(entity.getClass().getName() + " registered successfully");
 
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(errorMessage());
+                    .body("Error in creating " + entity.getClass().getName());
         }
     }
 

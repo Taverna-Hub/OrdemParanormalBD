@@ -31,15 +31,6 @@ public class TeamController extends GenericController<Team, TeamService> {
         service.register(team);
     }
 
-    @Override
-    protected String successMessage() {
-        return "team registered successfully";
-    }
-
-    @Override
-    protected String errorMessage() {
-        return "Failed to register team";
-    }
 
     @Override
     public ResponseEntity<List<Team>> getAll() throws SQLException {

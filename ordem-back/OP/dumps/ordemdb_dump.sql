@@ -28,6 +28,7 @@ CREATE TABLE `AGENTS` (
   `birth_date` date DEFAULT NULL,
   `phone` varchar(12) DEFAULT NULL,
   `address` varchar(60) DEFAULT NULL,
+  `specialization` varchar(60) DEFAULT NULL,
   `rank_agent` varchar(20) DEFAULT NULL,
   `nex` int DEFAULT NULL,
   `retired` tinyint(1) DEFAULT NULL,

@@ -23,16 +23,6 @@
         }
 
         @Override
-        protected String successMessage() {
-            return "Agent registered successfully";
-        }
-
-        @Override
-        protected String errorMessage() {
-            return "Failed to register Agent";
-        }
-
-        @Override
         public ResponseEntity<List<Agent>> getAll() throws SQLException {
             return ResponseEntity.ok(service.getAllAgents());
         }
@@ -46,12 +36,14 @@
 
         @Override
         public ResponseEntity<String> update(UUID id, Agent agent) {
+            System.out.println(agent);
+            System.out.println(id);
             try {
                 agent.setId(id);
                 service.updateAgent(agent);
                 return ResponseEntity.ok("Agent updated successfully.");
             } catch (Exception e) {
-                return ResponseEntity.status(500).body("Failed to update agent.");
+                return ResponseEntity.status(500).body("Failed to update agent." + e);
             }
         }
 
