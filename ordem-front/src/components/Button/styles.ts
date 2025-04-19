@@ -27,7 +27,7 @@ const wrapperModifiers = {
 
 const variantModifiers = {
   primary: (theme: DefaultTheme) => css`
-    background-color: ${theme.colors.blue_200};
+    background-color: ${theme.colors.purple_500};
     color: ${theme.colors.white};
   `,
   secondary: (theme: DefaultTheme) => css`

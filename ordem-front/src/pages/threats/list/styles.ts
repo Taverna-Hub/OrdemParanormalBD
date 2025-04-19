@@ -28,20 +28,14 @@ export const SearchInterface = styled.div`
 `;
 
 export const TableContainer = styled.div`
-  ${({ theme }) => css`
-    margin-top: ${theme.spacings.medium};
-    overflow-x: auto;
-    background-color: rgba(255, 255, 255, 1);
-    border-radius: ${theme.border.radius.xxsmall};
+  margin-top: ${({ theme }) => theme.spacings.medium};
+  overflow-x: auto;
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: ${({ theme }) => theme.border.radius.xxsmall};
 
-    div {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      padding: 2.4rem;
-    }
-  `}
+  div {
+    padding: 2.4rem;
+  }
 `;
 
 export const Table = styled.table`

@@ -27,11 +27,11 @@ export const Wrapper = styled.div`
       background-color: ${theme.colors.white};
     }
     .checkboxRoot:focus {
-      box-shadow: 0 0 0 2px ${theme.colors.blue_200};
+      box-shadow: 0 0 0 2px ${theme.colors.purple_500};
     }
 
     .checkboxIndicator {
-      color: ${theme.colors.blue_200};
+      color: ${theme.colors.purple_500};
     }
 
     label {

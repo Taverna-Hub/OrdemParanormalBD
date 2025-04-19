@@ -19,7 +19,7 @@ export const StyledSelect = styled(Select).attrs({
 })`
   ${({ theme }) => css`
     .react-select__control {
-      border: 1px solid ${theme.colors.blue_200};
+      border: 2px solid ${theme.colors.gray_500};
       border-radius: ${theme.border.radius.medium};
       padding: ${theme.spacings.xxsmall};
       box-shadow: none;
@@ -29,7 +29,7 @@ export const StyledSelect = styled(Select).attrs({
       font-size: ${theme.font.sizes.small};
 
       &:hover {
-        border-color: ${theme.colors.blue_600};
+        border-color: ${theme.colors.purple_500};
       }
     }
 
@@ -47,20 +47,20 @@ export const StyledSelect = styled(Select).attrs({
       color: ${theme.colors.blue_900};
 
       &:hover {
-        background-color: ${theme.colors.blue_200};
+        background-color: ${theme.colors.purple_500};
       }
     }
 
     .react-select__option--is-selected {
-      background-color: ${theme.colors.blue_200};
+      background-color: ${theme.colors.purple_500};
     }
 
     .react-select__dropdown-indicator {
-      color: ${theme.colors.blue_200};
+      color: ${theme.colors.white};
     }
 
     .react-select__placeholder {
-      color: ${theme.colors.blue_200};
+      color: ${theme.colors.white};
     }
   `}
 `;

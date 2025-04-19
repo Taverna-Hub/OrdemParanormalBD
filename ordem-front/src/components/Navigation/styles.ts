@@ -36,12 +36,12 @@ export const Page = styled.a`
     }
 
     &.active ${IconWrapper} {
-      background-color: #a2f4fd;
-      color: ${theme.colors.blue_200};
+      background-color: ${theme.colors.purple_700};
+      color: ${theme.colors.purple_500};
     }
 
     &.active p {
-      color: #a2f4fd;
+      color: ${theme.colors.purple_500};
     }
   `}
 `;

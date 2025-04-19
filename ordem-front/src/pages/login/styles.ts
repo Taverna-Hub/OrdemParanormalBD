@@ -37,7 +37,7 @@ export const LoginForm = styled.form`
     align-items: center;
     justify-content: center;
 
-    background-color: ${({ theme }) => theme.colors.blue_200};
+    background-color: ${({ theme }) => theme.colors.purple_500};
     border-radius: ${({ theme }) => theme.border.radius.xlg};
 
     width: 26.5rem;

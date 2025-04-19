@@ -16,7 +16,7 @@ export const InputWrapper = styled.div`
     transition: all 0.3s;
 
     &:focus-within {
-      border: 0.2rem solid ${theme.colors.blue_200};
+      border: 0.2rem solid ${theme.colors.purple_500};
     }
   `}
 `;
@@ -35,7 +35,7 @@ export const Input = styled.input<IconPositionProps>`
 
     &:-webkit-autofill {
       -webkit-box-shadow: 0 0 0 ${theme.spacings.small}
-        ${theme.colors.blue_200} inset;
+        ${theme.colors.purple_500} inset;
       filter: none;
       &::first-line {
         font-size: ${theme.font.sizes.medium};
@@ -69,7 +69,7 @@ export const Icon = styled.div<IconPositionProps>`
 
 export const Error = styled.p`
   ${({ theme }) => css`
-    color: ${theme.colors.blue_200}; // change to red
+    color: ${theme.colors.purple_500}; // change to red
     font-size: ${theme.font.sizes.xsmall};
   `}
 `;
@@ -77,12 +77,12 @@ export const Error = styled.p`
 const wrapperModifiers = {
   error: (theme: DefaultTheme) => css`
     ${InputWrapper} {
-      border-color: ${theme.colors.blue_200}; // change to red
+      border-color: ${theme.colors.purple_500}; // change to red
     }
 
     ${Icon},
     ${Label} {
-      color: ${theme.colors.blue_200}; // change to red
+      color: ${theme.colors.purple_500}; // change to red
     }
   `,
   disabled: (theme: DefaultTheme) => css`

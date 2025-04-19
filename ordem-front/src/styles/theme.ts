@@ -31,10 +31,14 @@ export default {
   },
   colors: {
     nav_bar: '#1F2022',
-    blue_200: '#6366f1',
+
+    purple_500: '#6366f1',
+    purple_700: '#1A194D',
     purple_800: '#2A2D45',
     purple_900: '#1E2235',
+
     blue_600: '#007595',
+    blue_800: '#111827',
     blue_900: '#000214',
 
     gray_500: '#6A7282',

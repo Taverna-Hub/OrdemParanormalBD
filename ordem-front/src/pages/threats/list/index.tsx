@@ -1,36 +1,34 @@
 import { Helmet } from 'react-helmet-async';
 import * as S from './styles';
 import { Navigation } from '../../../components/Navigation';
+import { Input } from '../../../components/Input';
 import { Button } from '../../../components/Button';
 import { useNavigate } from 'react-router';
-import { Input } from '../../../components/Input';
 
-export function Agents() {
+export function Threats() {
   const navigate = useNavigate();
 
   return (
     <S.Wrapper>
       <Helmet title="Agentes" />
 
-      <h1>Agentes</h1>
+      <h1>Ameaças</h1>
 
       <S.SearchInterface>
-        <Input placeholder="Procure um agente..." />
+        <Input placeholder="Procure uma ameaças..." />
 
-        <Button onClick={() => navigate('/agentes/criar')}>Criar agente</Button>
+        <Button onClick={() => navigate('/ameacas/criar')}>Criar ameaça</Button>
       </S.SearchInterface>
 
       <S.TableContainer>
         <div>
-          <h2>Agentes</h2>
+          <h2>Ameaças</h2>
         </div>
         <S.Table>
           <S.TableHead>
             <tr>
               <th>#</th>
               <th>Nome</th>
-              <th>Especialização</th>
-              <th>Equipe</th>
             </tr>
           </S.TableHead>
           <tbody>
@@ -41,12 +39,6 @@ export function Agents() {
               <td>
                 <p>Paulo Henrique Rosado Fernandes</p>
               </td>
-              <td>
-                <p>Ocultista</p>
-              </td>
-              <td>
-                <p>Equipe</p>
-              </td>
             </S.TableRow>
 
             <S.TableRow>
@@ -55,12 +47,6 @@ export function Agents() {
               </td>
               <td>
                 <p>Gustavo Mourato Aureliano de Melo</p>
-              </td>
-              <td>
-                <p>Ocultista</p>
-              </td>
-              <td>
-                <p>Equipe</p>
               </td>
             </S.TableRow>
 
@@ -71,12 +57,6 @@ export function Agents() {
               <td>
                 <p>Luan Hiroshi Kato</p>
               </td>
-              <td>
-                <p>Especialista</p>
-              </td>
-              <td>
-                <p>Equipe</p>
-              </td>
             </S.TableRow>
 
             <S.TableRow>
@@ -85,12 +65,6 @@ export function Agents() {
               </td>
               <td>
                 <p>Vinicius de Andrade Jordão</p>
-              </td>
-              <td>
-                <p>Combatente</p>
-              </td>
-              <td>
-                <p>-</p>
               </td>
             </S.TableRow>
           </tbody>
