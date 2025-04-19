@@ -9,8 +9,8 @@ import java.util.UUID;
 public class ElementService {
 
 private final ElementDAO elementDAO = new ElementDAO();
-    public Element getElementById(UUID id){
-        return elementDAO.searchByID(id);
+    public Element getElementById(String name){
+        return elementDAO.searchByID(name);
     }
 
     public List<Element> getAllElements() {

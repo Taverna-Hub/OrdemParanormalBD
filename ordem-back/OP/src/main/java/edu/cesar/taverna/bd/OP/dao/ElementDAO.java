@@ -13,7 +13,7 @@ public class ElementDAO extends GenericDAO<Element>{
 
     @Override
     protected String getSelectByIdSQL() {
-        return "SELECT * FROM ELEMENTS WHERE id_element = ?";
+        return "SELECT * FROM ELEMENTS WHERE name = ?";
     }
 
     @Override

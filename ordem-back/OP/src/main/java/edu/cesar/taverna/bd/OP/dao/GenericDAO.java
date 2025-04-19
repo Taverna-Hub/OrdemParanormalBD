@@ -107,9 +107,8 @@ public abstract class GenericDAO<T> {
     }
 
     protected void prepareSelectById(PreparedStatement stmt, Object id) throws SQLException {
-        if (id instanceof UUID) {
             stmt.setString(1, id.toString());
-        }
+
     }
 
 }
