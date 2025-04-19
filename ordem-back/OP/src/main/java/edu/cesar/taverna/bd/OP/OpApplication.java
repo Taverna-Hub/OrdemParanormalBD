@@ -1,6 +1,7 @@
 package edu.cesar.taverna.bd.OP;
 
 import io.github.cdimascio.dotenv.Dotenv;
+import io.github.cdimascio.dotenv.DotenvException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -8,9 +9,19 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class OpApplication {
 
 	public static void main(String[] args) {
-		Dotenv dotenv = Dotenv.configure()
-				.directory("./ordem-back/OP")
-				.load();
+		Dotenv dotenv;
+
+		try {
+			dotenv = Dotenv.configure()
+					.directory("./ordem-back/OP")
+					.load();
+
+		} catch (DotenvException e) {
+			dotenv = Dotenv.configure()
+					.directory("./")
+					.load();
+		}
+
 
 		// Define as propriedades para o Spring Boot
 		System.setProperty("spring.datasource.url", dotenv.get("DB_URL"));
