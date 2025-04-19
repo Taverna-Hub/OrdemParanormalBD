@@ -7,9 +7,26 @@ import * as S from './styles';
 import { useForm } from 'react-hook-form';
 import { Checkbox } from '../../../components/Checkbox';
 import { Helmet } from 'react-helmet-async';
+import { useMutation } from '@tanstack/react-query';
+import {
+  Agent,
+  AgentService,
+} from '../../../services/http/agents/AgentService';
+import { toast } from 'sonner';
+import { useNavigate } from 'react-router';
+
+type SelectOptions = {
+  label: string;
+  value: string;
+};
+type CreateAgentProps = Omit<Agent, 'rank_agent' | 'specialization'> & {
+  rank_agent: SelectOptions;
+  specialization: SelectOptions;
+};
 
 export function CreateAgent() {
-  const { control, register } = useForm();
+  const navigate = useNavigate();
+  const { control, register, handleSubmit } = useForm<CreateAgentProps>();
 
   const specialties = [
     {
@@ -32,22 +49,37 @@ export function CreateAgent() {
       label: 'Recruta',
     },
     {
-      value: 'Operator',
-      label: 'Operator',
+      value: 'Veterano',
+      label: 'Veterano',
     },
     {
-      value: 'Agente Especial',
-      label: 'Agente Especial',
-    },
-    {
-      value: 'Oficial de Operações',
-      label: 'Oficial de Operações',
-    },
-    {
-      value: 'Agente de Elite',
-      label: 'Agente de Elite',
+      value: 'Elite',
+      label: 'Elite',
     },
   ];
+
+  const { mutate } = useMutation({
+    mutationFn: async (data: CreateAgentProps) => {
+      const reformattedData = {
+        ...data,
+        specialization: data.specialization.value,
+        rank_agent: data.rank_agent.value,
+      };
+
+      await AgentService.create(reformattedData as Agent);
+    },
+    onSuccess: async () => {
+      toast.success('Agente cadastrado com sucesso!');
+      navigate('/agentes');
+    },
+    onError: () => {
+      toast.error('Ocorreu um erro ao cadastrar agente!');
+    },
+  });
+
+  function handleCreateAgent(data: CreateAgentProps) {
+    mutate(data);
+  }
 
   return (
     <S.Wrapper>
@@ -57,24 +89,27 @@ export function CreateAgent() {
           <h2>Adicionar agente</h2>
         </div>
 
-        <S.Form>
-          <Input label="Nome" />
-          <Input label="Telefone" />
-          <Input label="Data de Nascimento" type="date" />
-          <Input label="Endereço" />
+        <S.Form onSubmit={handleSubmit(handleCreateAgent)}>
+          <Input label="Nome" {...register('name')} />
+          <Input label="Telefone" {...register('phone')} />
+          <Input
+            label="Data de Nascimento"
+            type="date"
+            {...register('birthDate')}
+          />
 
           <Select
             control={control}
             options={specialties}
             label="Especialidade"
-            name="specialty"
+            name="specialization"
           />
 
           <Select
             control={control}
             options={patents}
             label="Patente"
-            name="patent"
+            name="rank_agent"
           />
 
           <Input label="NEX" type="number" />
@@ -83,13 +118,13 @@ export function CreateAgent() {
             <Checkbox
               control={control}
               label="Aposentado"
-              {...register('isRetired')}
+              {...register('retired')}
             />
 
             <Checkbox
               control={control}
               label="Transcendido"
-              {...register('isTrans')}
+              {...register('transcended')}
             />
           </S.BooleanFields>
           <div />

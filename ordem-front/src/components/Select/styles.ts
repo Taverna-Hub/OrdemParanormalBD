@@ -62,5 +62,9 @@ export const StyledSelect = styled(Select).attrs({
     .react-select__placeholder {
       color: ${theme.colors.white};
     }
+
+    .react-select__single-value {
+      color: ${theme.colors.white};
+    }
   `}
 `;
