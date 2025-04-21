@@ -8,9 +8,6 @@ import java.sql.SQLException;
 import java.util.UUID;
 
 public class ElementDAO extends GenericDAO<Element>{
-
-
-
     @Override
     protected String getSelectByIdSQL() {
         return "SELECT * FROM ELEMENTS WHERE name = ?";

@@ -6,24 +6,91 @@ import {
   Mission,
   MissionService,
 } from '../../../services/http/missions/MissionService';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { Select } from '../../../components/Select';
+import { useForm } from 'react-hook-form';
+import { Team, TeamService } from '../../../services/http/teams/TeamService';
+import { Button } from '../../../components/Button';
+import {
+  MissionAssignment,
+  MissionAssignmentService,
+} from '../../../services/http/missionAssignment/MissionAssignmentService';
+import { toast } from 'sonner';
+
+type Options = {
+  label: string;
+  value: string;
+};
+
+type CreateAssignmentProps = Omit<MissionAssignment, 'id_team'> & {
+  id_team: Options;
+};
 
 export function SpecificMission() {
   const { id } = useParams();
+  const { control, getValues } = useForm();
 
   const { data: mission } = useQuery<Mission>({
     queryKey: ['mission', id],
     queryFn: () => MissionService.findById(id as string),
   });
 
+  const { data: teams } = useQuery<Team[]>({
+    queryKey: ['teams'],
+    queryFn: () => TeamService.findAll(),
+  });
+
+  const { data: teamAssigned } = useQuery<Team[]>({
+    queryKey: ['assignment', id],
+    queryFn: () => MissionAssignmentService.findById(id as string),
+  });
+
+  console.log(teamAssigned);
+
+  const { mutate } = useMutation({
+    mutationFn: async (data: CreateAssignmentProps) => {
+      const reformattedData = {
+        id_team: data.id_team.value,
+        id_mission: id,
+      };
+
+      console.log(reformattedData);
+
+      await MissionAssignmentService.create(
+        reformattedData as MissionAssignment,
+      );
+    },
+    onSuccess: async () => {
+      toast.success('Equipe alocada com sucesso!');
+    },
+    onError: () => {
+      toast.error('Ocorreu um erro ao alocar equipe!');
+    },
+  });
+
+  function handleCreateAssignment() {
+    const data = getValues() as CreateAssignmentProps;
+    mutate(data);
+  }
+
   if (!mission) {
     return 'AAAAAAAAAAA';
   }
 
+  if (!teams) {
+    return 'AAAAAAAAA';
+  }
+
+  const teamOptions = teams?.map((team: Team) => {
+    return {
+      label: team.name,
+      value: team.id,
+    };
+  });
+
   return (
     <S.Wrapper>
       <S.MissionHeader>
-        <img src="" alt="" />
         <S.HeaderDetail>
           <div>
             <S.Status className={mission?.status}>
@@ -79,12 +146,23 @@ export function SpecificMission() {
         <S.InfoCard>
           <S.InfoCardHeader>
             <FiUsers />
-            <h2>Agentes</h2>
+            <h2>Atribuição de Equipe</h2>
           </S.InfoCardHeader>
 
-          <S.CardContent>
-            <p>{mission.objective}</p>
-          </S.CardContent>
+          <S.CardNoAllocation>
+            <Select
+              control={control}
+              options={teamOptions}
+              label="Selecione uma equipe para esta missão:"
+              name="id_team"
+            />
+
+            <Button onClick={() => handleCreateAssignment()}>
+              Atribuir equipe
+            </Button>
+          </S.CardNoAllocation>
+
+          <S.CardContent></S.CardContent>
         </S.InfoCard>
       </S.MissionInfo>
 

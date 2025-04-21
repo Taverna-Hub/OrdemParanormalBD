@@ -62,16 +62,16 @@ export function EditAgent() {
                 rank_agent: data.rank_agent.value,
             };
 
-            await AgentService.update(id as string, formattedData);
-        },
-        onSuccess: () => {
-            toast.success('Agente atualizado com sucesso!');
-            navigate('/agentes');
-        },
-        onError: () => {
-            toast.error('Erro ao atualizar agente!');
-        },
-    });
+      await AgentService.update(id as string, formattedData);
+    },
+    onSuccess: () => {
+      toast.success('Agente atualizado com sucesso!');
+      navigate('/agentes');
+    },
+    onError: () => {
+      toast.error('Erro ao atualizar agente!');
+    },
+  });
 
     const {
         data: agent,
