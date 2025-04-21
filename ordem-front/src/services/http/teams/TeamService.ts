@@ -12,6 +12,14 @@ export type CreateTeamProps = {
 };
 
 export const TeamService = {
+  findAgentsById: async (id: string) => {
+    const { data } = await api.get(`/teams/${id}/agents`);
+    return data;
+  },
+  findById: async (id: string) => {
+    const { data } = await api.get(`/teams/${id}`);
+    return data;
+  },
   findAll: async () => {
     const { data } = await api.get('/teams');
     return data;

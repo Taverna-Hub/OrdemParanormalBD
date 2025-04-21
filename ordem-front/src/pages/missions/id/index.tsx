@@ -16,6 +16,7 @@ import {
   MissionAssignmentService,
 } from '../../../services/http/missionAssignment/MissionAssignmentService';
 import { toast } from 'sonner';
+import { Agent } from '../../../services/http/agents/AgentService';
 
 type Options = {
   label: string;
@@ -40,12 +41,20 @@ export function SpecificMission() {
     queryFn: () => TeamService.findAll(),
   });
 
-  const { data: teamAssigned } = useQuery<Team[]>({
+  const { data: assignment } = useQuery<MissionAssignment>({
     queryKey: ['assignment', id],
     queryFn: () => MissionAssignmentService.findById(id as string),
   });
 
-  console.log(teamAssigned);
+  const { data: assignedTeam } = useQuery<Team>({
+    queryKey: ['team', id],
+    queryFn: () => TeamService.findById(assignment?.id_team as string),
+  });
+
+  const { data: teamAgents } = useQuery<Agent[]>({
+    queryKey: ['team-agents', id],
+    queryFn: () => TeamService.findAgentsById(assignment?.id_team as string),
+  });
 
   const { mutate } = useMutation({
     mutationFn: async (data: CreateAssignmentProps) => {
@@ -53,8 +62,6 @@ export function SpecificMission() {
         id_team: data.id_team.value,
         id_mission: id,
       };
-
-      console.log(reformattedData);
 
       await MissionAssignmentService.create(
         reformattedData as MissionAssignment,
@@ -110,12 +117,48 @@ export function SpecificMission() {
 
           <S.HeaderAgents>
             <div>
-              <S.AvatarAgent />
-              <S.AvatarAgent />
-              <S.AvatarAgent />
-              <S.AvatarAgent />
+              {teamAgents && teamAgents?.length <= 4 ? (
+                <>
+                  {teamAgents?.map((agent) => (
+                    <S.AvatarAgent>{agent.name[0]}</S.AvatarAgent>
+                  ))}
+                </>
+              ) : (
+                <>
+                  {teamAgents?.map((agent, index) => {
+                    if (index < 4) {
+                      return <S.AvatarAgent>{agent.name[0]}</S.AvatarAgent>;
+                    }
+                  })}
+                </>
+              )}
             </div>
-            Dante, Arthur, Carina, Rubens e 4 outros
+            <p>
+              {teamAgents && teamAgents?.length <= 4 ? (
+                <>
+                  {teamAgents?.map((agent, index) => {
+                    if (index === teamAgents.length - 1) {
+                      return `${agent.name.split(' ')[0]}`;
+                    } else {
+                      return `${agent.name.split(' ')[0]}, `;
+                    }
+                  })}
+                </>
+              ) : (
+                <>
+                  {teamAgents?.map((agent, index) => {
+                    if (index < 4) {
+                      if (index === teamAgents.length - 1) {
+                        return `${agent.name.split(' ')[0]}`;
+                      } else {
+                        return `${agent.name.split(' ')[0]}, `;
+                      }
+                    }
+                  })}
+                  e {teamAgents && teamAgents?.length - 4} outros
+                </>
+              )}
+            </p>
           </S.HeaderAgents>
         </S.HeaderDetail>
       </S.MissionHeader>
@@ -149,18 +192,54 @@ export function SpecificMission() {
             <h2>Atribuição de Equipe</h2>
           </S.InfoCardHeader>
 
-          <S.CardNoAllocation>
-            <Select
-              control={control}
-              options={teamOptions}
-              label="Selecione uma equipe para esta missão:"
-              name="id_team"
-            />
+          {!teamAgents ? (
+            <S.CardNoAllocation>
+              <Select
+                control={control}
+                options={teamOptions}
+                label="Selecione uma equipe para esta missão:"
+                name="id_team"
+              />
 
-            <Button onClick={() => handleCreateAssignment()}>
-              Atribuir equipe
-            </Button>
-          </S.CardNoAllocation>
+              <Button onClick={() => handleCreateAssignment()}>
+                Atribuir equipe
+              </Button>
+            </S.CardNoAllocation>
+          ) : (
+            <>
+              <S.CardContent>
+                <S.SelectedTeam>
+                  <section>
+                    <S.Avatar>
+                      <FiUsers />
+                    </S.Avatar>
+                    <div>
+                      <p>{assignedTeam?.name}</p>
+                      <span>{teamAgents.length} agentes atribuidos</span>
+                    </div>
+                  </section>
+
+                  {/* <S.SelectedTeamsAction>
+                    <Button>
+                      Remover <FiTrash2 />
+                    </Button>
+                  </S.SelectedTeamsAction> */}
+                </S.SelectedTeam>
+
+                <S.AgentCardList>
+                  {teamAgents.map((agent: Agent) => {
+                    return (
+                      <S.AgentCard>
+                        <S.Avatar>{agent.name[0]}</S.Avatar>
+
+                        <p>{agent.name}</p>
+                      </S.AgentCard>
+                    );
+                  })}
+                </S.AgentCardList>
+              </S.CardContent>
+            </>
+          )}
 
           <S.CardContent></S.CardContent>
         </S.InfoCard>
