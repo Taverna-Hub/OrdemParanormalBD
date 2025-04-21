@@ -43,5 +43,4 @@ public class Mission {
     private void setId() {
         this.id_mission = UUID.randomUUID();
     }
-
 }
