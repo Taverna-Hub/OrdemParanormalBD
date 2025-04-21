@@ -24,8 +24,8 @@ public class ParanormalEntityService {
         return Optional.ofNullable(paranormalDAO.getById(id));
     }
 
-    public void updateParanormalEntity(ParanormalEntity entity) {
-        paranormalDAO.update(entity);
+    public void updateParanormalEntity(ParanormalEntity entity) throws SQLException {
+        paranormalDAO.updatee(entity);
     }
 
     public void deleteParanormalEntity(UUID id) throws SQLException {
