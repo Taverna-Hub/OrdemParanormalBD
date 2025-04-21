@@ -10,7 +10,7 @@ export function Threats() {
 
   return (
     <S.Wrapper>
-      <Helmet title="Agentes" />
+      <Helmet title="Ameaças" />
 
       <h1>Ameaças</h1>
 

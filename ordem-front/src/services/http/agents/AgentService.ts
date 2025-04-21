@@ -1,9 +1,10 @@
 import { api } from '../../../lib/axios';
 
 export type Agent = {
+  id: string;
   name: string;
   birthDate: Date;
-  phone: string;
+  telNumber: string;
   specialization: string;
   rank_agent: 'Recruta' | 'Veterano' | 'Elite';
   nex: number;
@@ -12,9 +13,13 @@ export type Agent = {
 };
 
 export const AgentService = {
+  findAll: async () => {
+    const { data } = await api.get('/agents');
+    return data;
+  },
   create: async (agent: Agent) => {
     try {
-      const data = api.post('/agents', agent);
+      const data = await api.post('/agents', agent);
       return data;
     } catch (error) {
       console.log(error);

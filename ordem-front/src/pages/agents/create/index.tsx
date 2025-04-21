@@ -91,7 +91,7 @@ export function CreateAgent() {
 
         <S.Form onSubmit={handleSubmit(handleCreateAgent)}>
           <Input label="Nome" {...register('name')} />
-          <Input label="Telefone" {...register('phone')} />
+          <Input label="Telefone" {...register('telNumber')} />
           <Input
             label="Data de Nascimento"
             type="date"
@@ -130,9 +130,13 @@ export function CreateAgent() {
           <div />
 
           <S.Actions>
-            <Button variant="secondary">Cancelar</Button>
+            <Button variant="secondary" type="button">
+              Cancelar
+            </Button>
 
-            <Button iconRight={() => <FiArrowRight />}>Adicionar agente</Button>
+            <Button iconRight={() => <FiArrowRight />} type="submit">
+              Adicionar agente
+            </Button>
           </S.Actions>
         </S.Form>
       </S.FormWrapper>

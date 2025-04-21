@@ -4,10 +4,19 @@ import { Navigation } from '../../../components/Navigation';
 import { Button } from '../../../components/Button';
 import { useNavigate } from 'react-router';
 import { Input } from '../../../components/Input';
+import { useQuery } from '@tanstack/react-query';
+import {
+  Agent,
+  AgentService,
+} from '../../../services/http/agents/AgentService';
 
 export function Agents() {
   const navigate = useNavigate();
 
+  const { data: agents } = useQuery({
+    queryKey: ['agents'],
+    queryFn: () => AgentService.findAll(),
+  });
   return (
     <S.Wrapper>
       <Helmet title="Agentes" />
@@ -30,69 +39,28 @@ export function Agents() {
               <th>#</th>
               <th>Nome</th>
               <th>Especialização</th>
-              <th>Equipe</th>
+              <th>Patente</th>
             </tr>
           </S.TableHead>
           <tbody>
-            <S.TableRow>
-              <td>
-                <span>1</span>
-              </td>
-              <td>
-                <p>Paulo Henrique Rosado Fernandes</p>
-              </td>
-              <td>
-                <p>Ocultista</p>
-              </td>
-              <td>
-                <p>Equipe</p>
-              </td>
-            </S.TableRow>
-
-            <S.TableRow>
-              <td>
-                <span>2</span>
-              </td>
-              <td>
-                <p>Gustavo Mourato Aureliano de Melo</p>
-              </td>
-              <td>
-                <p>Ocultista</p>
-              </td>
-              <td>
-                <p>Equipe</p>
-              </td>
-            </S.TableRow>
-
-            <S.TableRow>
-              <td>
-                <span>3</span>
-              </td>
-              <td>
-                <p>Luan Hiroshi Kato</p>
-              </td>
-              <td>
-                <p>Especialista</p>
-              </td>
-              <td>
-                <p>Equipe</p>
-              </td>
-            </S.TableRow>
-
-            <S.TableRow>
-              <td>
-                <span>4</span>
-              </td>
-              <td>
-                <p>Vinicius de Andrade Jordão</p>
-              </td>
-              <td>
-                <p>Combatente</p>
-              </td>
-              <td>
-                <p>-</p>
-              </td>
-            </S.TableRow>
+            {agents?.map((agent: Agent, index: number) => {
+              return (
+                <S.TableRow>
+                  <td>
+                    <span>{index + 1}</span>
+                  </td>
+                  <td>
+                    <p>{agent.name}</p>
+                  </td>
+                  <td>
+                    <p>{agent.specialization}</p>
+                  </td>
+                  <td>
+                    <p>{agent.rank_agent}</p>
+                  </td>
+                </S.TableRow>
+              );
+            })}
           </tbody>
         </S.Table>
       </S.TableContainer>

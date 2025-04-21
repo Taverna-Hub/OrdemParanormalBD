@@ -1,56 +1,57 @@
 import { Helmet } from 'react-helmet-async';
 import * as S from './styles';
 import { Navigation } from '../../../components/Navigation';
-import { Button } from '../../../components/Button';
-import { useNavigate } from 'react-router';
 import { Input } from '../../../components/Input';
 import { useQuery } from '@tanstack/react-query';
-import { Team, TeamService } from '../../../services/http/teams/TeamService';
+import {
+  Element,
+  ElementService,
+} from '../../../services/http/elements/ElementService';
 
-export function Teams() {
-  const navigate = useNavigate();
-
-  const { data: teams } = useQuery({
-    queryKey: ['teams'],
-    queryFn: () => TeamService.findAll(),
+export function Elements() {
+  const { data: elements } = useQuery({
+    queryKey: ['elements'],
+    queryFn: () => ElementService.findAll(),
   });
 
   return (
     <S.Wrapper>
-      <Helmet title="Equipes" />
+      <Helmet title="Elementos" />
 
-      <h1>Equipes</h1>
+      <h1>Elementos</h1>
 
       <S.SearchInterface>
-        <Input placeholder="Procure uma equipe..." />
-
-        <Button onClick={() => navigate('/equipes/criar')}>Criar equipe</Button>
+        <Input placeholder="Procure um elemento..." />
       </S.SearchInterface>
 
       <S.TableContainer>
         <div>
-          <h2>Equipes</h2>
+          <h2>Elementos</h2>
         </div>
         <S.Table>
           <S.TableHead>
             <tr>
               <th>#</th>
               <th>Nome</th>
-              <th>Especialização</th>
+              <th>Descrição</th>
+              <th>Vantagem</th>
             </tr>
           </S.TableHead>
           <tbody>
-            {teams?.map((team: Team, index: number) => {
+            {elements?.map((element: Element, index: number) => {
               return (
                 <S.TableRow>
                   <td>
                     <span>{index + 1}</span>
                   </td>
                   <td>
-                    <p>{team.name}</p>
+                    <p>{element.name}</p>
                   </td>
                   <td>
-                    <p>{team.specialization}</p>
+                    <p>{element.desciption}</p>
+                  </td>
+                  <td>
+                    <p>{element.vantagem}</p>
                   </td>
                 </S.TableRow>
               );

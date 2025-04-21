@@ -8,6 +8,7 @@ import { Arsenal } from './pages/arsenal';
 import { Login } from './pages/login';
 import { CreateAgent } from './pages/agents/create';
 import { CreateTeam } from './pages/teams/create';
+import { Elements } from './pages/elements/list';
 
 export const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ export const router = createBrowserRouter([
   {
     path: '/arsenal',
     element: <Arsenal />,
+  },
+  {
+    path: '/elementos',
+    element: <Elements />,
   },
   {
     path: '/login',

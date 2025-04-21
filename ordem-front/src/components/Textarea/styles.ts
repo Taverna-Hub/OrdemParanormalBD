@@ -2,11 +2,9 @@ import styled, { css, DefaultTheme } from 'styled-components';
 
 import { TextFieldProps } from '.';
 
-type IconPositionProps = Pick<TextFieldProps, 'iconPosition'>;
-
 type WrapperProps = Pick<TextFieldProps, 'disabled'> & { error?: boolean };
 
-export const InputWrapper = styled.div`
+export const TextareaWrapper = styled.div`
   ${({ theme }) => css`
     display: flex;
     align-items: center;
@@ -21,17 +19,17 @@ export const InputWrapper = styled.div`
   `}
 `;
 
-export const Input = styled.input<IconPositionProps>`
-  ${({ theme, iconPosition }) => css`
+export const Textarea = styled.textarea`
+  ${({ theme }) => css`
     color: ${theme.colors.white};
     font-size: ${theme.font.sizes.medium};
-    padding: ${theme.spacings.xxsmall} 0;
-    padding-${iconPosition}: ${theme.spacings.xsmall};
+    padding: ${theme.spacings.xxsmall};
     background: transparent;
     border: 0;
     outline: none;
-    width: ${iconPosition === 'right' ? `calc(100% - 2.2rem)` : `100%`};
-    height: 4.8rem;
+    width: 100%;
+    height: 25rem;
+    resize: none;
 
     &:-webkit-autofill {
       -webkit-box-shadow: 0 0 0 ${theme.spacings.small}
@@ -54,19 +52,6 @@ export const Label = styled.label`
   `}
 `;
 
-export const Icon = styled.div<IconPositionProps>`
-  ${({ theme, iconPosition }) => css`
-    display: flex;
-    color: ${theme.colors.white};
-    order: ${iconPosition === 'right' ? 1 : 0};
-
-    & > svg {
-      width: 2.2rem;
-      height: 100%;
-    }
-  `}
-`;
-
 export const Error = styled.p`
   ${({ theme }) => css`
     color: ${theme.colors.purple_500}; // change to red
@@ -76,19 +61,17 @@ export const Error = styled.p`
 
 const wrapperModifiers = {
   error: (theme: DefaultTheme) => css`
-    ${InputWrapper} {
+    ${TextareaWrapper} {
       border-color: ${theme.colors.purple_500}; // change to red
     }
 
-    ${Icon},
     ${Label} {
       color: ${theme.colors.purple_500}; // change to red
     }
   `,
   disabled: (theme: DefaultTheme) => css`
     ${Label},
-    ${Input},
-    ${Icon} {
+    ${Textarea} {
       cursor: not-allowed;
       color: ${theme.colors.white};
 

@@ -13,7 +13,7 @@ export const Wrapper = styled.main`
   `}
 `;
 
-export const GridWrapper = styled.section`
+export const GridWrapper = styled.form`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
@@ -54,6 +54,10 @@ export const TeamBasicInfo = styled(GridCard)`
 export const TeamStatistics = styled(GridCard)`
   ${({ theme }) => css`
     gap: ${theme.spacings.xsmall};
+
+    p {
+      font-size: ${theme.font.sizes.small};
+    }
   `}
 `;
 
@@ -65,6 +69,13 @@ export const TeamSelectAgents = styled(GridCard)`
   h2 {
     margin-bottom: ${({ theme }) => theme.spacings.small};
   }
+`;
+
+export const SelectAgentsInterface = styled.div`
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  align-items: center;
+  grid-column-gap: ${({ theme }) => theme.spacings.small};
 `;
 
 export const AgentsHeader = styled.header`

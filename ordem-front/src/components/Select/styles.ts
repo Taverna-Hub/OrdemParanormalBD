@@ -66,5 +66,9 @@ export const StyledSelect = styled(Select).attrs({
     .react-select__single-value {
       color: ${theme.colors.white};
     }
+
+    .react-select__input-container input {
+      color: ${theme.colors.white} !important;
+    }
   `}
 `;

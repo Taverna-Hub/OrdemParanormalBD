@@ -8,7 +8,7 @@ export const Wrapper = styled.main`
     width: 100%;
 
     h1 {
-      color: white;
+      color: ${theme.colors.white};
       font-size: ${theme.font.sizes['3xlarge']};
     }
   `}

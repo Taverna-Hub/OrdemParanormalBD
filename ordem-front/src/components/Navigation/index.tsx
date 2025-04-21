@@ -4,6 +4,7 @@ import { FiUser, FiUsers } from 'react-icons/fi';
 import { LuBiohazard, LuShoppingBasket } from 'react-icons/lu';
 import { TfiLocationPin } from 'react-icons/tfi';
 import { useLocation } from 'react-router';
+import { SlChemistry } from 'react-icons/sl';
 
 export function Navigation() {
   const location = useLocation();
@@ -65,6 +66,16 @@ export function Navigation() {
           <LuShoppingBasket />
         </S.IconWrapper>
         <p>Arsenal</p>
+      </S.Page>
+
+      <S.Page
+        className={`${location.pathname.includes('elementos') && 'active'}`}
+        href="/elementos"
+      >
+        <S.IconWrapper>
+          <SlChemistry />
+        </S.IconWrapper>
+        <p>Elementos</p>
       </S.Page>
     </S.Wrapper>
   );

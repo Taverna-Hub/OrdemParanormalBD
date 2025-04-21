@@ -16,6 +16,7 @@ type SelectProps = {
   isLoading?: boolean;
   placeholder?: string;
   onInputChange?: (value: string) => void;
+  isMulti?: boolean;
 };
 
 export function Select({
@@ -26,6 +27,7 @@ export function Select({
   isLoading,
   placeholder,
   onInputChange,
+  isMulti = false,
 }: SelectProps) {
   return (
     <S.Wrapper>
@@ -42,6 +44,7 @@ export function Select({
             isLoading={isLoading}
             placeholder={placeholder}
             onInputChange={onInputChange}
+            isMulti={isMulti}
           />
         )}
       />
