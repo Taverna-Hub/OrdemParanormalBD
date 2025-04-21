@@ -19,7 +19,7 @@ export function Agents() {
   });
 
   const handleEditAgent = (agentId: string | number) => {
-      navigate(`/agentes/editar/${agentId}`)
+      navigate(`/agentes/${agentId}`)
   }
 
   return (

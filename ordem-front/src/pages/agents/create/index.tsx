@@ -112,7 +112,7 @@ export function CreateAgent() {
             name="rank_agent"
           />
 
-          <Input label="NEX" type="number" />
+          <Input label="NEX" type="number" {...register('nex')} />
 
           <S.BooleanFields>
             <Checkbox
