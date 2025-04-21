@@ -87,7 +87,7 @@ public abstract class GenericDAO<T> {
         }
     }
 
-    public void update(T entity) {
+    public void update(T entity){
         try (Connection conn = ConnectionFactory.getConnection();
              PreparedStatement stmt = conn.prepareStatement(getUpdateSQL())) {
             prepareUpdate(stmt, entity);
@@ -100,9 +100,7 @@ public abstract class GenericDAO<T> {
     }
 
     protected void prepareDelete(PreparedStatement stmt, Object id) throws SQLException {
-        if (id instanceof UUID) {
             stmt.setString(1, id.toString());
-        }
 
     }
 
