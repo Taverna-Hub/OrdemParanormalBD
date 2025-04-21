@@ -10,6 +10,7 @@ import { CreateAgent } from './pages/agents/create';
 import { CreateTeam } from './pages/teams/create';
 import { Elements } from './pages/elements/list';
 import { CreateMission } from './pages/missions/create';
+import { SpecificMission } from './pages/missions/id';
 
 export const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ export const router = createBrowserRouter([
   {
     path: '/missoes/criar',
     element: <CreateMission />,
+  },
+  {
+    path: '/missoes/:id',
+    element: <SpecificMission />,
   },
   {
     path: '/agentes',

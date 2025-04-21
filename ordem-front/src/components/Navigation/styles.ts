@@ -7,6 +7,7 @@ export const Wrapper = styled.main`
   width: 68.8rem;
   padding: 0.8rem 1.6rem;
   background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(0.4rem);
   border-radius: ${({ theme }) => theme.border.radius.full};
 
   position: fixed;
