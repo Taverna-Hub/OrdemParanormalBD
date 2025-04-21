@@ -18,6 +18,10 @@ export function Missions() {
     queryFn: () => MissionService.findAll(),
   });
 
+  function handleGoToMission(id: string) {
+    navigate(`/missoes/${id}`);
+  }
+
   return (
     <S.Wrapper>
       <Helmet title="Missões" />
@@ -47,7 +51,9 @@ export function Missions() {
             {missions &&
               missions.map((mission: Mission, index: number) => {
                 return (
-                  <S.TableRow>
+                  <S.TableRow
+                    onClick={() => handleGoToMission(mission.id_mission)}
+                  >
                     <td>
                       <span>{index + 1}</span>
                     </td>

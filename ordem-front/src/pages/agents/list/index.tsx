@@ -17,6 +17,11 @@ export function Agents() {
     queryKey: ['agents'],
     queryFn: () => AgentService.findAll(),
   });
+
+  const handleEditAgent = (agentId: string | number) => {
+      navigate(`/agentes/${agentId}`)
+  }
+
   return (
     <S.Wrapper>
       <Helmet title="Agentes" />
@@ -45,7 +50,10 @@ export function Agents() {
           <tbody>
             {agents?.map((agent: Agent, index: number) => {
               return (
-                <S.TableRow>
+                <S.TableRow
+                    key={agent.id || index}
+                    onClick={() => handleEditAgent(agent.id)}
+                >
                   <td>
                     <span>{index + 1}</span>
                   </td>

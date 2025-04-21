@@ -13,6 +13,10 @@ export type Agent = {
 };
 
 export const AgentService = {
+  findById: async (id: string) => {
+    const { data } = await api.get(`/agents/${id}`)
+    return data;
+  },
   findAll: async () => {
     const { data } = await api.get('/agents');
     return data;
@@ -23,6 +27,15 @@ export const AgentService = {
       return data;
     } catch (error) {
       console.log(error);
+    }
+  },
+  update: async (id: string, updateAgent: Partial<Omit<Agent, 'id'>>) => {
+    try {
+      const { data } = await api.put(`/agents/${id}`, updateAgent);
+      return data;
+    } catch (error) {
+      console.error('Erro ao atualizar agente:', error);
+      throw error;
     }
   },
 };

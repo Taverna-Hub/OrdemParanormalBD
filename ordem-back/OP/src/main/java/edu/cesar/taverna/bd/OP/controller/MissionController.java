@@ -31,7 +31,10 @@ public class MissionController extends GenericController<Mission, MissionService
 
     @Override
     public ResponseEntity<Mission> getById(UUID id) {
-        return null;
+        System.out.println(id);
+        return service.getMissionById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @Override

@@ -12,6 +12,10 @@ export type Mission = {
 };
 
 export const MissionService = {
+  findById: async (id: string) => {
+    const { data } = await api.get(`/missions/${id}`);
+    return data;
+  },
   findAll: async () => {
     const { data } = await api.get('/missions');
     return data;
