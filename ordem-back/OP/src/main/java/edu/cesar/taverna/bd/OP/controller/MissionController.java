@@ -26,7 +26,7 @@ public class MissionController extends GenericController<Mission, MissionService
 
     @Override
     public ResponseEntity<List<Mission>> getAll() throws SQLException {
-        return null;
+        return ResponseEntity.ok(service.getAllMissions());
     }
 
     @Override

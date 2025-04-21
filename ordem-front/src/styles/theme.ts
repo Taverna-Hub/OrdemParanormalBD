@@ -43,6 +43,15 @@ export default {
 
     gray_500: '#6A7282',
 
+    green_200: '#DCFCE7',
+    green_600: '#016630',
+
+    red_200: '#FFE2E2',
+    red_600: '#C10007',
+
+    yellow_200: '#FEF9C2',
+    yellow_600: '#F8B425',
+
     white: '#fff',
   },
   spacings: {

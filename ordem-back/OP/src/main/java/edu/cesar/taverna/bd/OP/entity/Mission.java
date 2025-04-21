@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Data
@@ -15,25 +16,27 @@ public class Mission {
     private UUID id_mission;
     private String title;
     private String status;
-    private String report;
     private String risks;
     private String objective;
-    private String location;
+    private LocalDate start_date;
+    private LocalDate end_date;
 
     @JsonCreator
     public Mission(
                    @JsonProperty("title") String title,
                    @JsonProperty("status") String status,
-                   @JsonProperty("report")String report ,
                    @JsonProperty("risks")String risks,
                    @JsonProperty("objective")String objective,
-                   @JsonProperty("location")String location){
+                   @JsonProperty("start_date")LocalDate start_date,
+                   @JsonProperty("end_date")LocalDate end_date)
+
+    {
         this.title = title;
         this.status = status;
-        this.report = report;
         this.risks = risks;
         this.objective = objective;
-        this.location = location;
+        this.start_date = start_date;
+        this.end_date = end_date;
         setId();
     }
 

@@ -1,0 +1,27 @@
+import { api } from '../../../lib/axios';
+
+export type Mission = {
+  id_mission: string;
+  title: string;
+  status: 'Arquivada' | 'Concluida' | 'Aberta';
+  risks: string;
+  objective: string;
+  start_date: Date;
+  end_date: Date;
+  id_address: string;
+};
+
+export const MissionService = {
+  findAll: async () => {
+    const { data } = await api.get('/missions');
+    return data;
+  },
+  create: async (mission: Mission) => {
+    try {
+      const data = await api.post('/missions', mission);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  },
+};

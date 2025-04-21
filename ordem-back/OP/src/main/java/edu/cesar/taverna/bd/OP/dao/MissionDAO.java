@@ -1,16 +1,18 @@
 package edu.cesar.taverna.bd.OP.dao;
 
+import edu.cesar.taverna.bd.OP.entity.Agent;
 import edu.cesar.taverna.bd.OP.entity.Mission;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.UUID;
 
 public class MissionDAO extends GenericDAO<Mission>{
 
     @Override
     protected String getInsertSQL() {
-        return "INSERT INTO MISSION (id_mission, title, status, report, risks, objective, location)" +
+        return "INSERT INTO MISSION (id_mission, title, status, risks, objective, start_date, end_date)" +
                 " VALUES (?, ? ,? ,?, ?, ?, ?)";
     }
 
@@ -21,7 +23,7 @@ public class MissionDAO extends GenericDAO<Mission>{
 
     @Override
     protected String getSelectAllSQL() {
-        return "";
+        return "SELECT id_mission, title, status, risks, objective, start_date, end_date, id_address FROM MISSION";
     }
 
     @Override
@@ -39,10 +41,10 @@ public class MissionDAO extends GenericDAO<Mission>{
         stmt.setString(1, mission.getId_mission().toString());
         stmt.setString(2, mission.getTitle());
         stmt.setString(3, mission.getStatus());
-        stmt.setString(4, mission.getReport());
-        stmt.setString(5, mission.getRisks());
-        stmt.setString(6, mission.getObjective());
-        stmt.setString(7, mission.getLocation());
+        stmt.setString(4, mission.getRisks());
+        stmt.setString(5, mission.getObjective());
+        stmt.setDate(6, java.sql.Date.valueOf(mission.getStart_date()));
+        stmt.setDate(7, mission.getEnd_date() != null ? java.sql.Date.valueOf(mission.getEnd_date()) : null);
     }
 
     @Override
@@ -62,6 +64,15 @@ public class MissionDAO extends GenericDAO<Mission>{
 
     @Override
     protected Mission mapResultSetToEntity(ResultSet rs) throws SQLException {
-        return null;
+        Mission mission = new Mission();
+
+        mission.setId_mission(UUID.fromString(rs.getString("id_mission")));
+        mission.setStatus(rs.getString("status"));
+        mission.setRisks(rs.getString("risks"));
+        mission.setTitle(rs.getString("title"));
+        mission.setObjective(rs.getString("objective"));
+        mission.setStart_date(rs.getDate("start_date").toLocalDate());
+        mission.setEnd_date(rs.getDate("end_date") != null ? rs.getDate("end_date").toLocalDate() : null);
+        return mission;
     }
 }

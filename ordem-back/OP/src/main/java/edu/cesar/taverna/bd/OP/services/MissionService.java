@@ -1,7 +1,11 @@
 package edu.cesar.taverna.bd.OP.services;
 
 import edu.cesar.taverna.bd.OP.dao.MissionDAO;
+import edu.cesar.taverna.bd.OP.entity.Agent;
 import edu.cesar.taverna.bd.OP.entity.Mission;
+
+import java.sql.SQLException;
+import java.util.List;
 
 public class MissionService {
     private  final MissionDAO missionDAO = new MissionDAO();
@@ -10,4 +14,9 @@ public class MissionService {
 
         missionDAO.save(mission);
     }
+
+    public List<Mission> getAllMissions() throws SQLException {
+        return missionDAO.getAll();
+    }
+
 }

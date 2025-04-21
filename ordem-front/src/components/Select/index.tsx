@@ -17,6 +17,7 @@ type SelectProps = {
   placeholder?: string;
   onInputChange?: (value: string) => void;
   isMulti?: boolean;
+  defaultValue?: SelectOptions;
 };
 
 export function Select({
@@ -28,6 +29,7 @@ export function Select({
   placeholder,
   onInputChange,
   isMulti = false,
+  defaultValue,
 }: SelectProps) {
   return (
     <S.Wrapper>
@@ -35,6 +37,7 @@ export function Select({
       <Controller
         name={name}
         control={control}
+        defaultValue={defaultValue}
         render={({ field }) => (
           <S.StyledSelect
             {...field}
@@ -45,6 +48,7 @@ export function Select({
             placeholder={placeholder}
             onInputChange={onInputChange}
             isMulti={isMulti}
+            defaultValue={defaultValue}
           />
         )}
       />

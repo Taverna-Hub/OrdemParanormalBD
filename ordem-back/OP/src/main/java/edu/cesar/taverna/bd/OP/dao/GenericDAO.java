@@ -68,6 +68,7 @@ public abstract class GenericDAO<T> {
              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
+                System.out.println(rs.getString("title"));
                 entities.add(mapResultSetToEntity(rs));
             }
 
