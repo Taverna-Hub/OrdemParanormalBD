@@ -101,8 +101,10 @@ export function EditAgent() {
     if (isError) return <p>Erro ao carregar agente.</p>;
 
     useEffect(() => {
-        handleLoadValues();
-    }, []);
+        if (agent) {
+            handleLoadValues();
+        }
+    }, [agent]);
 
     return (
         <S.Wrapper>

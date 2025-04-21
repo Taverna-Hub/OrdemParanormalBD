@@ -7,7 +7,7 @@ import io.github.cdimascio.dotenv.Dotenv;
 
 public class ConnectionFactory {
     private static final Dotenv dotenv =
-            Dotenv.configure().directory("./").load();
+            Dotenv.configure().directory("./ordem-back/OP").load();
 
     public static Connection getConnection() throws SQLException{
 

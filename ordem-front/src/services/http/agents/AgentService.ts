@@ -38,4 +38,12 @@ export const AgentService = {
       throw error;
     }
   },
+  delete: async (id: string) => {
+    try {
+      await api.delete(`/agents/${id}`);
+    } catch (error) {
+      console.error('Erro ao deletar agente:', error);
+      throw error;
+    }
+  }
 };
