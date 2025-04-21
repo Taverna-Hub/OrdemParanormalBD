@@ -1,7 +1,7 @@
 import { RxDashboard } from 'react-icons/rx';
 import * as S from './styles';
 import { FiUser, FiUsers } from 'react-icons/fi';
-import { LuBiohazard, LuShoppingBasket } from 'react-icons/lu';
+import { LuBiohazard } from 'react-icons/lu';
 import { TfiLocationPin } from 'react-icons/tfi';
 import { useLocation } from 'react-router';
 import { SlChemistry } from 'react-icons/sl';
@@ -56,16 +56,6 @@ export function Navigation() {
           <LuBiohazard />
         </S.IconWrapper>
         <p>Ameaças</p>
-      </S.Page>
-
-      <S.Page
-        className={`${location.pathname.includes('arsenal') && 'active'}`}
-        href="/arsenal"
-      >
-        <S.IconWrapper>
-          <LuShoppingBasket />
-        </S.IconWrapper>
-        <p>Arsenal</p>
       </S.Page>
 
       <S.Page
