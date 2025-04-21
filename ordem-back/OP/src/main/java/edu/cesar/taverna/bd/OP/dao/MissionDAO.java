@@ -18,7 +18,7 @@ public class MissionDAO extends GenericDAO<Mission>{
 
     @Override
     protected String getSelectByIdSQL() {
-        return "";
+        return "SELECT * FROM MISSION WHERE id_mission = ?";
     }
 
     @Override
@@ -54,11 +54,6 @@ public class MissionDAO extends GenericDAO<Mission>{
 
     @Override
     protected void prepareDelete(PreparedStatement stmt, Object id) throws SQLException {
-
-    }
-
-    @Override
-    protected void prepareSelectById(PreparedStatement stmt, Object id) throws SQLException {
 
     }
 

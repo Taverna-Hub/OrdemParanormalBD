@@ -45,9 +45,7 @@ public class AgentDAO extends GenericDAO<Agent> {
         stmt.setBoolean(6, agent.isRetired());
         stmt.setBoolean(7, agent.isTranscended());
         stmt.setString(8, agent.getSpecialization());
-
         stmt.setString(9, agent.getId().toString());
-
     }
 
     @Override
