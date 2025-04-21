@@ -200,11 +200,3 @@ create table MEMBERS (
     foreign key (id_organization) references PARANORMAL_ORGANIZATION(id_organization),
     primary key (id_member, id_organization)
 );
-
-create table MEMBER_RITUALS (
-    id_member VARCHAR(36) NOT NULL ,
-    id_ritual VARCHAR(36) NOT NULL ,
-    foreign key (id_member) references MEMBERS(id_member),
-    foreign key (id_ritual) references RITUALS(id_ritual),
-    primary key (id_member, id_ritual)
-);
