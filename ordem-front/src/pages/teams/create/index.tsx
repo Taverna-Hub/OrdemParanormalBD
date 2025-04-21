@@ -134,7 +134,7 @@ export function CreateTeam() {
 
   const { mutate } = useMutation({
     mutationFn: async (data: CreateTeamUnformattedProps) => {
-      const agentIds = data.agents.map((agent) => agent.value);
+      const agentIds = agentsList.map((agent) => agent.id);
 
       const reformattedData = {
         team: {

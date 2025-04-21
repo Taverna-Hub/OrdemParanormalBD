@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { Wrapper as SelectWrapper } from '../../../components/Select/styles';
 
 const StatusModifiers = {
   Aberta: () => css`
@@ -145,6 +146,24 @@ export const InfoCardHeader = styled.div`
 
     svg {
       font-size: ${theme.font.sizes.xxlarge};
+    }
+  `}
+`;
+
+export const CardNoAllocation = styled.div`
+  ${({ theme }) => css`
+    display: flex;
+    align-items: flex-end;
+    gap: ${theme.spacings.small};
+
+    padding: ${theme.spacings.xsmall};
+
+    ${SelectWrapper} {
+      width: 85%;
+    }
+
+    button {
+      transform: translateY(-25%);
     }
   `}
 `;
