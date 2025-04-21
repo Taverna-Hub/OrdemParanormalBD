@@ -1,5 +1,5 @@
-create table ordemdb
-
+create database IF NOT EXISTS ordemdb;
+use ordemdb;
 CREATE TABLE AGENTS (
     id_agent VARCHAR(36) PRIMARY KEY,
     name VARCHAR(60) NOT NULL,
