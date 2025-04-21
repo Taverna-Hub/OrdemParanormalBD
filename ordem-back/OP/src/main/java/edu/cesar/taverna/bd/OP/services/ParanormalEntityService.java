@@ -20,15 +20,15 @@ public class ParanormalEntityService {
         return paranormalDAO.getAll();
     }
 
-    public Optional<ParanormalEntity> getParanormalEntityById(UUID id) {
-        return Optional.ofNullable(paranormalDAO.searchByID(id));
+    public Optional<ParanormalEntity> getParanormalEntityById(UUID id) throws SQLException {
+        return Optional.ofNullable(paranormalDAO.getById(id));
     }
 
     public void updateParanormalEntity(ParanormalEntity entity) {
         paranormalDAO.update(entity);
     }
 
-    public void deleteParanormalEntity(UUID id) {
+    public void deleteParanormalEntity(UUID id) throws SQLException {
         paranormalDAO.delete(id);
     }
 }

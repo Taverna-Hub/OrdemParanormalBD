@@ -36,7 +36,7 @@ public abstract class GenericController<T, S> {
 
     // GET by ID
     @GetMapping("/{id}")
-    public abstract ResponseEntity<T> getById(@PathVariable UUID id);
+    public abstract ResponseEntity<T> getById(@PathVariable UUID id) throws SQLException;
 
     // PUT
     @PutMapping("/{id}")

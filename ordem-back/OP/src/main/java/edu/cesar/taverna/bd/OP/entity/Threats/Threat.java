@@ -17,6 +17,7 @@ public abstract class Threat {
     private List<String> names;
     private String description;
     private List<UUID> elements;
+    private List<String> elementsNames;
 
     protected Threat(List<String> names, String description, List<String> elements){
         this.id_threat = UUID.randomUUID();
