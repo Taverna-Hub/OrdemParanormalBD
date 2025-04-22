@@ -21,8 +21,9 @@ public class OrganizationService {
     }
 
     public Optional<Organization> getById(UUID id) throws SQLException {
-        return Optional.ofNullable(organizationDAO.getById(id));
+        return organizationDAO.getById(id);
     }
+
 
     public void update(Organization organization){
         organizationDAO.update(organization);

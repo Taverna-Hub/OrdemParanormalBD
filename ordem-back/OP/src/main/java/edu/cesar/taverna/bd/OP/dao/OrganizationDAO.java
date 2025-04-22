@@ -20,37 +20,29 @@ public class OrganizationDAO extends GenericDAO<Organization> {
 
     @Override
     protected String getSelectAllSQL() {
-        return """
-                SELECT
-                    po.id_organization,
-                    po.name AS organization_name,
-                    m.id_member,
-                    m.name AS member_name,
-                    m.role
-                FROM
-                    PARANORMAL_ORGANIZATION po
-                JOIN
-                    MEMBERS m ON po.id_organization = m.id_organization
-                ORDER BY
-                    po.id_organization, m.name;
-                
-                """;
+        return null;
     }
 
     public List<Organization> getAll() throws SQLException {
         String sql =
-                "SELECT po.id_organization    AS org_id, " +
-                        "       t.description         AS org_description, " +
-                        "       tn.name               AS threat_name, " +
-                        "       te.id_element         AS element_id, " +
-                        "       m.id_member           AS member_id, " +
-                        "       m.name                AS member_name, " +
-                        "       m.role                AS member_role " +
-                        "FROM PARANORMAL_ORGANIZATION po " +
-                        "  JOIN THREATS t ON po.id_organization = t.id_threat " +
-                        "  LEFT JOIN THREATS_NAMES tn ON t.id_threat = tn.id_threat " +
-                        "  LEFT JOIN THREAT_ELEMENTS te ON t.id_threat = te.id_threat " +
-                        "  LEFT JOIN MEMBERS m ON po.id_organization = m.id_organization";
+                """
+                
+                        SELECT\s
+                    po.id_organization AS org_id,
+                    t.description AS org_description,
+                    tn.name AS threat_name,
+                    te.id_element AS element_id,
+                    e.name AS element_name,  -- Nome do elemento vindo da tabela ELEMENTS
+                    m.id_member AS member_id,
+                    m.name AS member_name,
+                    m.role AS member_role
+                FROM PARANORMAL_ORGANIZATION po
+                JOIN THREATS t ON po.id_organization = t.id_threat
+                LEFT JOIN THREATS_NAMES tn ON t.id_threat = tn.id_threat
+                LEFT JOIN THREAT_ELEMENTS te ON t.id_threat = te.id_threat
+                LEFT JOIN ELEMENTS e ON te.id_element = e.id_element  -- Junção com a tabela ELEMENTS para pegar o nome
+                LEFT JOIN MEMBERS m ON po.id_organization = m.id_organization;
+                """;
 
         // Mapa para agrupar por UUID do threat/org
         Map<UUID, Organization> orgMap = new LinkedHashMap<>();
@@ -93,6 +85,12 @@ public class OrganizationDAO extends GenericDAO<Organization> {
                         org.getElements().add(elemId);
                     }
                 }
+                String elemenName = rs.getString("element_name  ");
+                if (elemenName != null) {
+                    if (!org.getElementsNames().contains(elemenName)) {
+                        org.getElementsNames().add(elemenName);
+                    }
+                }
 
                 // Se houver MEMBER, adiciona à lista
                 String memberIdStr = rs.getString("member_id");
@@ -112,50 +110,14 @@ public class OrganizationDAO extends GenericDAO<Organization> {
         return new ArrayList<>(orgMap.values());
     }
 
-    public Organization getById(UUID id) throws SQLException {
-        String queryOrg = "SELECT * FROM PARANORMAL_ORGANIZATION WHERE id_organization = ?";
-        String queryMembers = "SELECT * FROM MEMBERS WHERE id_organization = ?";
+    public Optional<Organization> getById(UUID id) throws SQLException {
+        // Recupera todas as organizações usando o mé
+        List<Organization> organizations = getAll();
 
-        Connection conn = ConnectionFactory.getConnection();
-
-        PreparedStatement stmtOrg = conn.prepareStatement(queryOrg);
-        stmtOrg.setObject(1, id);
-        ResultSet rsOrg = stmtOrg.executeQuery();
-
-        if (!rsOrg.next()) {
-            return null; // ou você pode lançar uma exceção customizada
-        }
-
-        List<String> names = Arrays.asList((String[]) rsOrg.getArray("names").getArray());
-        String description = rsOrg.getString("description");
-
-        // Supondo que elements são armazenados como array de UUID (tipo PostgreSQL)
-        List<String> elementStrings = Arrays.asList((String[]) rsOrg.getArray("elements").getArray());
-
-        // Buscar os membros da organização
-        PreparedStatement stmtMembers = conn.prepareStatement(queryMembers);
-        stmtMembers.setObject(1, id);
-        ResultSet rsMembers = stmtMembers.executeQuery();
-
-        List<OrgMember> members = new ArrayList<>();
-        while (rsMembers.next()) {
-            UUID idMember = UUID.fromString(rsMembers.getString("id_member"));
-            String name = rsMembers.getString("name");
-            String role = rsMembers.getString("role");
-
-            members.add(new OrgMember(idMember, name, role));
-        }
-
-        Organization org = new Organization(names, description, elementStrings, members);
-        org.setId_threat(id); // já que o construtor gera um novo UUID, sobrescrevemos com o original do banco
-
-        rsOrg.close();
-        rsMembers.close();
-        stmtOrg.close();
-        stmtMembers.close();
-        conn.close();
-
-        return org;
+        // Filtra a lista de organizações pelo ID (se encontrado)
+        return organizations.stream()
+                .filter(org -> org.getId_threat().equals(id))
+                .findFirst(); // Retorna a primeira organização encontrada com o ID
     }
 
     @Override
