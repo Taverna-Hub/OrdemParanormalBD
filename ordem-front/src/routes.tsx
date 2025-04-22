@@ -12,6 +12,7 @@ import { CreateMission } from './pages/missions/create';
 import { SpecificMission } from './pages/missions/id';
 import { EditAgent } from './pages/agents/id';
 import { CreateThreats } from './pages/threats/create';
+import { UpdateTeam } from "./pages/teams/id";
 
 export const router = createBrowserRouter([
   {
@@ -49,6 +50,10 @@ export const router = createBrowserRouter([
   {
     path: '/equipes/criar',
     element: <CreateTeam />,
+  },
+  {
+    path: '/equipes/:id',
+    element: <UpdateTeam />,
   },
   {
     path: '/ameacas',
