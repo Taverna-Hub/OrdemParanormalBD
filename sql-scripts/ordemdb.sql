@@ -26,7 +26,7 @@ CREATE TABLE ADDRESS (
     neighborhood VARCHAR(60),
     city VARCHAR(60) NOT NULL,
     state CHAR(2) NOT NULL,
-    postal_code CHAR(8)
+    postal_code CHAR(9)
 );
 
 CREATE TABLE HQ (

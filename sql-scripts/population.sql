@@ -55,7 +55,7 @@ INSERT INTO VERISSIMO (id_verissimo, login, password_ver) VALUES
 
 -- População de ENDEREÇOS
 INSERT INTO ADDRESS (id_address, street, number, neighborhood, city, state, postal_code) VALUES
-(@addr1, 'Rua da Aurora', 123, 'Boa Vista', 'Recife', 'PE', '50000000');
+(@addr1, 'Rua da Aurora', 123, 'Boa Vista', 'Recife', 'PE', '50000-000');
 
 -- População de QGs (apenas 1)
 INSERT INTO HQ (id_hq, name, security_level, room_count, id_address, id_verissimo) VALUES
