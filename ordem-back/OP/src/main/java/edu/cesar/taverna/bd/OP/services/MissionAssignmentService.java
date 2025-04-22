@@ -24,11 +24,11 @@ public class MissionAssignmentService {
         return Optional.ofNullable(missionAssignmentDAO.searchByID(id));
     }
 
-    public void updateMissionAssignment(MissionAssignment missionAssignment) {
-        missionAssignmentDAO.update(missionAssignment);
+    public void updateMissionAssignment(UUID id_team, UUID id_mission) {
+        missionAssignmentDAO.update(id_team, id_mission);
     }
 
-    public void deleteMissionAssignment(UUID id) {
-        missionAssignmentDAO.delete(id);
+    public void deleteMissionAssignment(UUID id_team, UUID id_mission) {
+        return;
     }
 }
