@@ -13,7 +13,8 @@ import { SpecificMission } from './pages/missions/id';
 import { EditAgent } from './pages/agents/id';
 import { CreateThreats } from './pages/threats/create';
 import { UpdateThreats } from './pages/threats/id';
-import { UpdateTeam } from "./pages/teams/id";
+import { UpdateTeam } from './pages/teams/id';
+import { CreateAddress } from './pages/address/create';
 
 export const router = createBrowserRouter([
   {
@@ -75,5 +76,9 @@ export const router = createBrowserRouter([
   {
     path: '/login',
     element: <Login />,
+  },
+  {
+    path: '/endereco/criar',
+    element: <CreateAddress />,
   },
 ]);

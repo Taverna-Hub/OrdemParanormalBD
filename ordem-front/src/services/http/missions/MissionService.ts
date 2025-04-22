@@ -11,6 +11,8 @@ export type Mission = {
   id_address: string;
 };
 
+export type CreateMissionProps = Omit<Mission, 'id_mission'>;
+
 export const MissionService = {
   findById: async (id: string) => {
     const { data } = await api.get(`/missions/${id}`);

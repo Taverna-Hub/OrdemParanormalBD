@@ -12,8 +12,8 @@ public class MissionDAO extends GenericDAO<Mission>{
 
     @Override
     protected String getInsertSQL() {
-        return "INSERT INTO MISSION (id_mission, title, status, risks, objective, start_date, end_date)" +
-                " VALUES (?, ? ,? ,?, ?, ?, ?)";
+        return "INSERT INTO MISSION (id_mission, title, status, risks, objective, start_date, end_date, id_address)" +
+                " VALUES (?, ? ,? ,?, ?, ?, ?, ?)";
     }
 
     @Override
@@ -45,6 +45,7 @@ public class MissionDAO extends GenericDAO<Mission>{
         stmt.setString(5, mission.getObjective());
         stmt.setDate(6, java.sql.Date.valueOf(mission.getStart_date()));
         stmt.setDate(7, mission.getEnd_date() != null ? java.sql.Date.valueOf(mission.getEnd_date()) : null);
+        stmt.setString(8, mission.getId_address().toString());
     }
 
     @Override
@@ -68,6 +69,7 @@ public class MissionDAO extends GenericDAO<Mission>{
         mission.setObjective(rs.getString("objective"));
         mission.setStart_date(rs.getDate("start_date").toLocalDate());
         mission.setEnd_date(rs.getDate("end_date") != null ? rs.getDate("end_date").toLocalDate() : null);
+        mission.setId_address(UUID.fromString(rs.getString("id_address")));
         return mission;
     }
 }

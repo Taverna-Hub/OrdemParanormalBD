@@ -12,7 +12,7 @@ import {
   Mission,
   MissionService,
 } from '../../../services/http/missions/MissionService';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Select } from '../../../components/Select';
 import { useForm } from 'react-hook-form';
 import { Team, TeamService } from '../../../services/http/teams/TeamService';
@@ -36,6 +36,8 @@ type CreateAssignmentProps = Omit<MissionAssignment, 'id_team'> & {
 export function SpecificMission() {
   const { id } = useParams();
   const { control, getValues } = useForm();
+
+  const queryClient = useQueryClient();
 
   const { data: mission } = useQuery<Mission>({
     queryKey: ['mission', id],
@@ -101,6 +103,7 @@ export function SpecificMission() {
   function handleCreateAssignment() {
     const data = getValues() as CreateAssignmentProps;
     mutate(data);
+    queryClient.invalidateQueries({ queryKey: ['team-agents', id] });
   }
 
   if (!mission) {
