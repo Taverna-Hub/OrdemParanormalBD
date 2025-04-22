@@ -9,7 +9,7 @@ export type MissionAssignment = {
 
 export const MissionAssignmentService = {
   findById: async (id: string) => {
-    const { data } = await api.get(`/assignment/${id}`);
+    const { data } = await api.get(`/assignment/mission/${id}`);
     return data;
   },
   create: async (assignment: MissionAssignment) => {
@@ -22,10 +22,12 @@ export const MissionAssignmentService = {
   },
   update: async (id_team: string, id_mission: string) => {
     try {
-      const date = {
-        deallocation_date: new Date(),
+      const body = {
+        id_team,
+        id_mission,
       };
-      const data = await api.post(`/assignment/${id_mission}/${id_team}`, date);
+
+      const data = await api.put(`/assignment`, body);
       return data;
     } catch (error) {
       console.log(error);

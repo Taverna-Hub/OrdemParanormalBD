@@ -36,6 +36,8 @@ public class OrganizationController extends GenericController<Organization, Orga
 
     @Override
     public ResponseEntity<Organization> getById(@PathVariable UUID id) throws SQLException {
+        System.out.println("Controller recebeu ID: " + id);
+
         Optional<Organization> optionalOrg = service.getById(id);
 
         return optionalOrg

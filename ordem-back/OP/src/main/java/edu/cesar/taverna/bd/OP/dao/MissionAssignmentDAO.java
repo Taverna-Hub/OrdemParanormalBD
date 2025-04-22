@@ -8,7 +8,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 public class MissionAssignmentDAO extends GenericDAO<MissionAssignment> {
@@ -66,8 +68,6 @@ public class MissionAssignmentDAO extends GenericDAO<MissionAssignment> {
         } catch (SQLException e) {
             throw new RuntimeException("Error updating entity", e);
         }
-
-
     }
 
 
@@ -83,5 +83,19 @@ public class MissionAssignmentDAO extends GenericDAO<MissionAssignment> {
         return missionAssignment;
     }
 
-
+    public List<MissionAssignment> findByMissionId(UUID id_mission) {
+        List<MissionAssignment> results = new ArrayList<>();
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(getSelectByIdSQL())) {
+            stmt.setString(1, id_mission.toString());
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    results.add(mapResultSetToEntity(rs));
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error fetching assignments by mission ID", e);
+        }
+        return results;
+    }
 }

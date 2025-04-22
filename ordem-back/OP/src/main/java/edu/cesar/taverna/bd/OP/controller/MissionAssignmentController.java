@@ -4,10 +4,7 @@ package edu.cesar.taverna.bd.OP.controller;
 import edu.cesar.taverna.bd.OP.entity.MissionAssignment;
 import edu.cesar.taverna.bd.OP.services.MissionAssignmentService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -33,9 +30,7 @@ public class MissionAssignmentController extends GenericController<MissionAssign
 
     @Override
     public ResponseEntity<MissionAssignment> getById(UUID id) {
-        return service.getMissionAssignmentById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        return null;
     }
 
     @Override
@@ -59,6 +54,15 @@ public class MissionAssignmentController extends GenericController<MissionAssign
             return ResponseEntity.status(500).body("Failed to update entity. " + e.getMessage());
         }
 
+    }
+
+    @GetMapping("/mission/{id_mission}")
+    public ResponseEntity<List<MissionAssignment>> getByMission(@PathVariable UUID id_mission) {
+        List<MissionAssignment> assignments = service.getAssignmentsByMissionId(id_mission);
+        if (assignments.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(assignments);
     }
 
 
