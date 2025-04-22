@@ -29,10 +29,11 @@ export const ThreatService = {
   },
   update: async (id: string, threat: CreateThreatProps) => {
     try {
-      const data = await api.put(`/ParanormalEntity/${id}`, threat);
+      const { data } = await api.put(`/ParanormalEntity/${id}`, threat);
       return data;
     } catch (error) {
-      console.log(error);
+      console.error('Erro ao atualizar ameaça:', error);
+      throw error;
     }
   },
   findAllParanormalEntity: async () => {
