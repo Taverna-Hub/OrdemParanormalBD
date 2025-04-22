@@ -18,6 +18,8 @@ import {
   TeamService,
 } from '../../../services/http/teams/TeamService';
 import ReactApexChart from 'react-apexcharts';
+import { IconButton } from '../../../components/IconButton';
+import { FiTrash2 } from 'react-icons/fi';
 
 type Option = {
   label: string;
@@ -217,25 +219,18 @@ export function CreateTeam() {
             <S.AgentsHeader>
               <span>Agentes</span>
               <span></span>
-              <span>Líder</span>
+              <span></span>
             </S.AgentsHeader>
 
             {agentsList.length > 0 &&
               agentsList?.map((agent: Agent, index) => (
                 <S.AgentCard>
-                  <input
-                    type="radio"
-                    name={'lider' + index}
-                    id={'lider' + index}
-                    style={{ marginRight: '1rem' }}
-                  />
-
                   <S.Label htmlFor={'lider' + index}>
                     <h3>{agent.name}</h3>
                     <p>{agent.rank_agent}</p>
                   </S.Label>
 
-                  <Button size="sm">Definir como líder</Button>
+                  <IconButton icon={<FiTrash2 />} />
                 </S.AgentCard>
               ))}
           </S.TeamSelectAgents>

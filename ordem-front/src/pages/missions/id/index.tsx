@@ -1,4 +1,10 @@
-import { FiAlertCircle, FiCalendar, FiTarget, FiUsers } from 'react-icons/fi';
+import {
+  FiAlertCircle,
+  FiCalendar,
+  FiTarget,
+  FiTrash2,
+  FiUsers,
+} from 'react-icons/fi';
 import { Navigation } from '../../../components/Navigation';
 import * as S from './styles';
 import { useParams } from 'react-router';
@@ -72,6 +78,23 @@ export function SpecificMission() {
     },
     onError: () => {
       toast.error('Ocorreu um erro ao alocar equipe!');
+    },
+  });
+
+  const { mutate: mutateAssignment } = useMutation({
+    mutationFn: async () => {
+      const data = {
+        id_mission: id!,
+        id_team: assignedTeam!.id,
+      };
+
+      await MissionAssignmentService.update(data.id_mission, data.id_team);
+    },
+    onSuccess: async () => {
+      toast.success('Equipe desalocada com sucesso!');
+    },
+    onError: () => {
+      toast.error('Ocorreu um erro ao desalocar equipe!');
     },
   });
 
@@ -219,11 +242,11 @@ export function SpecificMission() {
                     </div>
                   </section>
 
-                  {/* <S.SelectedTeamsAction>
-                    <Button>
+                  <S.SelectedTeamsAction>
+                    <Button onClick={() => mutateAssignment()}>
                       Remover <FiTrash2 />
                     </Button>
-                  </S.SelectedTeamsAction> */}
+                  </S.SelectedTeamsAction>
                 </S.SelectedTeam>
 
                 <S.AgentCardList>

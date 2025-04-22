@@ -20,4 +20,15 @@ export const MissionAssignmentService = {
       console.log(error);
     }
   },
+  update: async (id_team: string, id_mission: string) => {
+    try {
+      const date = {
+        deallocation_date: new Date(),
+      };
+      const data = await api.post(`/assignment/${id_mission}/${id_team}`, date);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  },
 };

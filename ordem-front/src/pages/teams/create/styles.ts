@@ -100,9 +100,9 @@ export const GridButtons = styled.div`
 
 export const AgentCard = styled.div`
   ${({ theme }) => css`
-    display: grid;
-    grid-template-columns: auto 1fr auto;
+    display: flex;
     align-items: center;
+    justify-content: space-between;
     padding: ${theme.spacings.xsmall} 0;
     border-bottom: 1px solid #2c2f3b;
 
