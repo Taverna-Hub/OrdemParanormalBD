@@ -1,10 +1,14 @@
 package edu.cesar.taverna.bd.OP.dao;
 
+import edu.cesar.taverna.bd.OP.config.ConnectionFactory;
 import edu.cesar.taverna.bd.OP.entity.MissionAssignment;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.UUID;
 
 public class MissionAssignmentDAO extends GenericDAO<MissionAssignment> {
@@ -40,10 +44,30 @@ public class MissionAssignmentDAO extends GenericDAO<MissionAssignment> {
         stmt.setDate(3, missionAssignment.getDeallocation_date() != null ? java.sql.Date.valueOf(missionAssignment.getDeallocation_date()) : null);
     }
 
-
     @Override
-    protected void prepareUpdate(PreparedStatement stmt, MissionAssignment missionAssignment) throws SQLException {
-        this.prepareInsert(stmt, missionAssignment);
+    protected void prepareUpdate(PreparedStatement stmt, MissionAssignment entity) throws SQLException {
+
+    }
+
+
+    protected void prepareUpdate(PreparedStatement stmt, UUID id_team, UUID id_mission) throws SQLException {
+        stmt.setString(1, LocalDate.now().toString());
+        stmt.setString(2, id_team.toString());
+        stmt.setString(3, id_mission.toString());
+    }
+
+    public void update(UUID id_team, UUID id_mission){
+        System.out.println(id_mission);
+        System.out.println(id_team);
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(getUpdateSQL())) {
+            prepareUpdate(stmt, id_team, id_mission);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error updating entity", e);
+        }
+
+
     }
 
 
