@@ -4,15 +4,17 @@ import { Navigation } from '../../../components/Navigation';
 import { Button } from '../../../components/Button';
 import { useNavigate } from 'react-router';
 import { Input } from '../../../components/Input';
-import {useMutation, useQuery} from '@tanstack/react-query';
+import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import { Team, TeamService } from '../../../services/http/teams/TeamService';
 import { DeleteModal } from '../../../components/DeleteModal';
-import { FiTrash2 } from 'react-icons/fi';
-import {useState} from "react";
+import { FiTrash2, FiEdit3 } from 'react-icons/fi';
+import { useState } from "react";
+import { toast } from 'sonner';
 
 
 export function Teams() {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const { data: teams } = useQuery({
     queryKey: ['teams'],
@@ -33,6 +35,10 @@ export function Teams() {
             toast.error('Erro ao deletar equipe');
         },
     });
+
+    const handleUpdateTeam = (teamId: string | number) => {
+        navigate(`/equipes/${teamId}`);
+    };
 
     const handleOpenDeleteModal = (team: Team) => {
         setSelectedTeam(team);
@@ -73,6 +79,7 @@ export function Teams() {
               <th>Nome</th>
               <th>Especialização</th>
               <th></th>
+              <th></th>
             </tr>
           </S.TableHead>
           <tbody>
@@ -88,6 +95,9 @@ export function Teams() {
                   <td>
                     <p>{team.specialization}</p>
                   </td>
+                    <td onClick={() => handleUpdateTeam(team.id)}>
+                        <FiEdit3 style={{ cursor: 'pointer' }} />
+                    </td>
                   <td
                       onClick={() => handleOpenDeleteModal(team)}
                       style={{ cursor: 'pointer' }}

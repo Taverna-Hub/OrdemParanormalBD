@@ -32,7 +32,7 @@ export const TeamService = {
       console.log(error);
     }
   },
-  update: async (id: string, updatedTeam: Omit<Team, 'id'>, agentIds: string[]) => {
+  update: async (id: string, updatedTeam: { name: string; specialization: string }, agentIds: string[]) => {
     try {
       const { data } = await api.put(`/teams/${id}`, {
         team: updatedTeam,
@@ -40,7 +40,26 @@ export const TeamService = {
       });
       return data;
     } catch (error) {
-      console.log(error);
+      console.error('Erro ao atualizar equipe:', error);
+      throw error;
+    }
+  },
+  addAgents: async (teamId: string, agentIds: string[]) => {
+    try {
+      const { data } = await api.post(`/teams/${teamId}/agents`, agentIds);
+      return data;
+    } catch (error) {
+      console.error('Erro ao adicionar agentes:', error);
+      throw error; // Garantir que o erro seja propagado para o front-end
+    }
+  },
+  removeAgents: async (teamId: string, agentIds: string[]) => {
+    try {
+      const { data } = await api.delete(`/teams/${teamId}/agents`, { data: agentIds });
+      return data;
+    } catch (error) {
+      console.error('Erro ao remover agentes:', error);
+      throw error; // Garantir que o erro seja propagado para o front-end
     }
   },
   delete: async (id: string) => {
