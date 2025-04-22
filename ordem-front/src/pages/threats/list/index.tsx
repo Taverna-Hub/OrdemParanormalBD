@@ -4,31 +4,58 @@ import { Navigation } from '../../../components/Navigation';
 import { Input } from '../../../components/Input';
 import { Button } from '../../../components/Button';
 import { useNavigate } from 'react-router';
-import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import {
+  GetOrganizationProps,
   GetThreatProps,
   ThreatService,
 } from '../../../services/http/threats/ThreatService';
 import { DeleteModal } from '../../../components/DeleteModal';
 import { FiTrash2, FiEdit3 } from 'react-icons/fi';
-import {useState} from "react";
-import {toast} from "sonner";
+import { useState } from 'react';
+import { toast } from 'sonner';
+import { Select } from '../../../components/Select';
+import { useForm } from 'react-hook-form';
 
 export function Threats() {
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [selectedThreat, setSelectedThreat] = useState<GetThreatProps | null>(
+    null,
+  );
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const { control, watch } = useForm();
+
+  const threatType = watch('threatType');
+
+  const threatsTypes = [
+    {
+      label: 'Entidade Paranormal',
+      value: 'entity',
+    },
+    {
+      label: 'Organização',
+      value: 'organization',
+    },
+  ];
 
   const { data: paranormalEntities } = useQuery<GetThreatProps[]>({
     queryKey: ['paranormalEntities'],
     queryFn: () => ThreatService.findAllParanormalEntity(),
   });
 
-  function handleGoToThreat(id: string) {
-    navigate(`/ameacas/${id}`);
+  const { data: organizations } = useQuery<GetOrganizationProps[]>({
+    queryKey: ['organizations'],
+    queryFn: () => ThreatService.findAllOrganization(),
+  });
+
+  function handleGoToParanormalEntity(id: string) {
+    navigate(`/ameacas/paranormal/${id}`);
   }
 
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [selectedThreat, setSelectedThreat] = useState<GetThreatProps  | null>(null);
+  function handleGoToOrganization(id: string) {
+    navigate(`/ameacas/organizacao/${id}`);
+  }
 
   const deleteMutation = useMutation({
     mutationFn: (threatId: string) => ThreatService.delete(threatId),
@@ -43,7 +70,7 @@ export function Threats() {
   });
 
   const handleOpenDeleteModal = (threat: GetThreatProps) => {
-    setSelectedThreat(threat); // corrigido nome da função
+    setSelectedThreat(threat);
     setIsDeleteModalOpen(true);
   };
 
@@ -67,7 +94,25 @@ export function Threats() {
       <S.SearchInterface>
         <Input placeholder="Procure uma ameaças..." />
 
-        <Button onClick={() => navigate('/ameacas/criar')}>Criar ameaça</Button>
+        <div>
+          <Select
+            control={control}
+            options={threatsTypes}
+            label="Filtro de ameaça"
+            name="threatType"
+            defaultValue={{
+              label: 'Entidade Paranormal',
+              value: 'entity',
+            }}
+          />
+
+          <Button onClick={() => navigate('/ameacas/criar/paranormal')}>
+            Criar entidade
+          </Button>
+          <Button onClick={() => navigate('/ameacas/criar/organizacao')}>
+            Criar organização
+          </Button>
+        </div>
       </S.SearchInterface>
 
       <S.TableContainer>
@@ -75,71 +120,131 @@ export function Threats() {
           <h2>Ameaças</h2>
         </div>
         <S.Table>
-          <S.TableHead>
-            <tr>
-              <th>#</th>
-              <th>Nome</th>
-              <th>Elementos</th>
-              <th></th>
-              <th></th>
-            </tr>
-          </S.TableHead>
-          <tbody>
-            {paranormalEntities?.map((paranormalEntity, index) => {
-              return (
-                <S.TableRow>
-                  <td>
-                    <span>{index + 1}</span>
-                  </td>
-                  <td>
-                    <p>
-                      {' '}
-                      {paranormalEntity.names.map((name, index) => {
-                        if (index + 1 === paranormalEntity.names.length) {
-                          return `${name}`;
-                        } else {
-                          return `${name}, `;
+          {threatType?.value === 'entity' && (
+            <>
+              <S.TableHead>
+                <tr>
+                  <th>#</th>
+                  <th>Nome</th>
+                  <th>Elementos</th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </S.TableHead>
+              <tbody>
+                {paranormalEntities?.map((paranormalEntity, index) => {
+                  return (
+                    <S.TableRow>
+                      <td>
+                        <span>{index + 1}</span>
+                      </td>
+                      <td>
+                        <p>
+                          {' '}
+                          {paranormalEntity.names.map((name, index) => {
+                            if (index + 1 === paranormalEntity.names.length) {
+                              return `${name}`;
+                            } else {
+                              return `${name}, `;
+                            }
+                          })}
+                        </p>
+                      </td>
+                      <td>
+                        <p>
+                          {paranormalEntity.elementsNames.map((name, index) => {
+                            if (
+                              index + 1 ===
+                              paranormalEntity.elementsNames.length
+                            ) {
+                              return `${name}`;
+                            } else {
+                              return `${name}, `;
+                            }
+                          })}
+                        </p>
+                      </td>
+                      <td
+                        onClick={() =>
+                          handleGoToParanormalEntity(paranormalEntity.id_threat)
                         }
-                      })}
-                    </p>
-                  </td>
-                  <td>
-                    <p>
-                      {paranormalEntity.elementsNames.map((name, index) => {
-                        if (
-                          index + 1 ===
-                          paranormalEntity.elementsNames.length
-                        ) {
-                          return `${name}`;
-                        } else {
-                          return `${name}, `;
-                        }
-                      })}
-                    </p>
-                  </td>
-                  <td onClick={() => handleGoToThreat(paranormalEntity.id_threat)}>
-                    <FiEdit3 style={{ cursor: 'pointer' }} />
-                  </td>
-                  <td
-                      onClick={() => handleOpenDeleteModal(paranormalEntity)}
-                      style={{ cursor: 'pointer' }}
-                  >
-                    <FiTrash2/>
-                  </td>
-                </S.TableRow>
-              );
-            })}
-          </tbody>
+                      >
+                        <FiEdit3 style={{ cursor: 'pointer' }} />
+                      </td>
+                      <td
+                        onClick={() => handleOpenDeleteModal(paranormalEntity)}
+                        style={{ cursor: 'pointer' }}
+                      >
+                        <FiTrash2 />
+                      </td>
+                    </S.TableRow>
+                  );
+                })}
+              </tbody>
+            </>
+          )}
+
+          {threatType?.value === 'organization' && (
+            <>
+              <S.TableHead>
+                <tr>
+                  <th>#</th>
+                  <th>Nomes</th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </S.TableHead>
+              <tbody>
+                {organizations?.map(
+                  (organization: GetOrganizationProps, index) => {
+                    return (
+                      <S.TableRow>
+                        <td>
+                          <span>{index + 1}</span>
+                        </td>
+                        <td>
+                          <p>
+                            {organization.names.map((name, index) => {
+                              if (index + 1 === organization.names.length) {
+                                return `${name}`;
+                              } else {
+                                return `${name}, `;
+                              }
+                            })}
+                          </p>
+                        </td>
+                        <td
+                          onClick={() =>
+                            handleGoToOrganization(organization.id_threat)
+                          }
+                        >
+                          <FiEdit3 style={{ cursor: 'pointer' }} />
+                        </td>
+                        <td
+                          onClick={() => handleOpenDeleteModal(organization)}
+                          style={{ cursor: 'pointer' }}
+                        >
+                          <FiTrash2 />
+                        </td>
+                      </S.TableRow>
+                    );
+                  },
+                )}
+              </tbody>
+            </>
+          )}
         </S.Table>
       </S.TableContainer>
 
       <Navigation />
       <DeleteModal
-          isOpen={isDeleteModalOpen}
-          onClose={handleCloseDeleteModal}
-          onConfirm={handleConfirmDelete}
-          title="Excluir Ameaça"
-          message={`Tem certeza que deseja excluir "${selectedThreat?.names.join(', ')}"?`}
+        isOpen={isDeleteModalOpen}
+        onClose={handleCloseDeleteModal}
+        onConfirm={handleConfirmDelete}
+        title="Excluir Ameaça"
+        message={`Tem certeza que deseja excluir "${selectedThreat?.names.join(
+          ', ',
+        )}"?`}
       />
     </S.Wrapper>
   );

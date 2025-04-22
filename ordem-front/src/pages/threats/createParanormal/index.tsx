@@ -11,15 +11,12 @@ import {
   Element,
   ElementService,
 } from '../../../services/http/elements/ElementService';
-import { useCallback, useEffect, useState } from 'react';
+import { useState } from 'react';
 import { IconButton } from '../../../components/IconButton';
 import { Textarea } from '../../../components/Textarea';
-import {
-  GetThreatProps,
-  ThreatService,
-} from '../../../services/http/threats/ThreatService';
+import { ThreatService } from '../../../services/http/threats/ThreatService';
 import { toast } from 'sonner';
-import { useNavigate, useParams } from 'react-router';
+import { useNavigate } from 'react-router';
 
 type Options = {
   label: string;
@@ -34,25 +31,17 @@ type CreateThreatProps = {
   elements: Options[];
 };
 
-export function UpdateThreats() {
-  const { id } = useParams();
-
+export function CreateParanormalThreats() {
   const [names, setNames] = useState<string[]>([]);
   const [abilities, setAbilities] = useState<string[]>([]);
   const navigate = useNavigate();
 
-  const { control, register, getValues, resetField, handleSubmit, setValue } =
+  const { control, register, getValues, resetField, handleSubmit } =
     useForm<CreateThreatProps>();
 
   const { data: elements } = useQuery({
     queryKey: ['elements'],
     queryFn: () => ElementService.findAll(),
-  });
-
-  const { data: threat } = useQuery<GetThreatProps>({
-    queryKey: ['threat', id],
-    queryFn: () => ThreatService.findParanormalById(id),
-    enabled: !!id,
   });
 
   const elementsOptions = elements?.map((element: Element) => {
@@ -64,31 +53,23 @@ export function UpdateThreats() {
 
   const { mutate } = useMutation({
     mutationFn: async (data: CreateThreatProps) => {
-      if (!id) throw new Error('ID da ameaça não encontrado');
+      const elementsList = data.elements.map((element) => element.value);
 
-      const elementsList = Array.isArray(data.elements)
-        ? data.elements.map((e) => e.value)
-        : [];
-
-      const payload = {
-        id_threat: id,
-        names: names.length > 0 ? names : [data.name],
-        abilities: abilities.length > 0 ? abilities : [data.ability],
-        description: data.description,
-        enigma: data.enigma,
+      const reformattedData = {
+        ...data,
+        names,
+        abilities,
         elements: elementsList,
       };
 
-      console.log('Payload enviado para update:', payload);
-      await ThreatService.update(id, payload);
+      await ThreatService.createParanormal(reformattedData);
     },
-    onSuccess: () => {
-      toast.success('Ameaça atualizada com sucesso!');
+    onSuccess: async () => {
+      toast.success('Ameaça cadastrada com sucesso!');
       navigate('/ameacas');
     },
-    onError: (error: any) => {
-      console.error('Erro ao atualizar:', error);
-      toast.error(error?.response?.data?.message || 'Erro ao editar ameaça!');
+    onError: () => {
+      toast.error('Ocorreu um erro ao cadastrar ameaça!');
     },
   });
 
@@ -112,31 +93,12 @@ export function UpdateThreats() {
     }
   }
 
-  const loadThreatData = useCallback(() => {
-    if (threat) {
-      const elements = threat.elements.map((elementId, i) => ({
-        value: elementId,
-        label: threat.elementsNames[i],
-      }));
-
-      setNames(threat.names || []);
-      setAbilities(threat.abilities || []);
-      setValue('description', threat.description);
-      setValue('enigma', threat.enigma);
-      setValue('elements', elements);
-    }
-  }, [threat]);
-
-  useEffect(() => {
-    loadThreatData();
-  }, [loadThreatData]);
-
   return (
     <S.Wrapper>
-      <Helmet title="Editar Ameaça" />
+      <Helmet title="Criar Entidade Paranormal" />
       <S.FormWrapper>
         <div>
-          <h2>Editar ameaça</h2>
+          <h2>Adicionar entidade paranormal</h2>
         </div>
 
         <S.Form onSubmit={handleSubmit(handleCreateThreat)}>
@@ -148,6 +110,7 @@ export function UpdateThreats() {
 
             <S.NamesListWrapper>
               <h2>Nomes</h2>
+
               <S.List>
                 {names?.length > 0 &&
                   names.map((name, index) => (
@@ -168,6 +131,7 @@ export function UpdateThreats() {
 
             <S.NamesListWrapper>
               <h2>Habilidades</h2>
+
               <S.List>
                 {abilities?.length > 0 &&
                   abilities.map((ability, index) => (
@@ -191,16 +155,12 @@ export function UpdateThreats() {
           <div />
 
           <S.Actions>
-            <Button
-              onClick={() => navigate('/ameacas')}
-              variant="secondary"
-              type="button"
-            >
+            <Button variant="secondary" type="button">
               Cancelar
             </Button>
 
             <Button iconRight={() => <FiArrowRight />} type="submit">
-              Atualizar ameaça
+              Adicionar ameaça
             </Button>
           </S.Actions>
         </S.Form>

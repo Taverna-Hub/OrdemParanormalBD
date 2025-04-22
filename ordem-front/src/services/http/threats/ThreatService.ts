@@ -18,8 +18,29 @@ export type CreateThreatProps = {
   enigma: string;
 };
 
+export type CreateOrganizationProps = {
+  names: string[];
+  description: string;
+  elements: string[];
+};
+
+export type Member = {
+  name: string;
+  role: string;
+  id_member: string;
+};
+
+export type GetOrganizationProps = {
+  names: string[];
+  description: string;
+  elements: string[];
+  members: Member[];
+  id_threat: string;
+  elementsNames: [];
+};
+
 export const ThreatService = {
-  create: async (threat: CreateThreatProps) => {
+  createParanormal: async (threat: CreateThreatProps) => {
     try {
       const data = await api.post('/ParanormalEntity', threat);
       return data;
@@ -27,30 +48,36 @@ export const ThreatService = {
       console.log(error);
     }
   },
-  update: async (id: string, threat: CreateThreatProps) => {
+  createOrganization: async (threat: CreateOrganizationProps) => {
     try {
-      const { data } = await api.put(`/ParanormalEntity/${id}`, threat);
+      const data = await api.post('/Organization', threat);
       return data;
     } catch (error) {
-      console.error('Erro ao atualizar ameaça:', error);
-      throw error;
+      console.log(error);
     }
   },
   findAllParanormalEntity: async () => {
     const { data } = await api.get('/ParanormalEntity');
     return data;
   },
-  findById: async (id: string) => {
+  findAllOrganization: async () => {
+    const { data } = await api.get('/Organization');
+    return data;
+  },
+  findParanormalById: async (id: string) => {
     const { data } = await api.get(`/ParanormalEntity/${id}`);
     return data;
   },
-  delete: async (id: string) => {
+  findOrganizationById: async (id: string) => {
+    const { data } = await api.get(`/Organization/${id}`);
+    return data;
+  },
+  addMember: async (id: string, member: Member) => {
     try {
-      const { data } = await api.delete(`/ParanormalEntity/${id}`);
+      const data = await api.post(`/Organization/add/${id}`, member);
       return data;
     } catch (error) {
-      console.error('Erro ao deletar ameaça:', error);
-      throw error;
+      console.log(error);
     }
   },
 };

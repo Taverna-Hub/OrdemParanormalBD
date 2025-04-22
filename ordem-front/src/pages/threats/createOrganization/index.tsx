@@ -25,15 +25,13 @@ type Options = {
 
 type CreateThreatProps = {
   name: string;
-  ability: string;
   description: string;
   enigma: string;
   elements: Options[];
 };
 
-export function CreateThreats() {
+export function CreateOrganizationThreats() {
   const [names, setNames] = useState<string[]>([]);
-  const [abilities, setAbilities] = useState<string[]>([]);
   const navigate = useNavigate();
 
   const { control, register, getValues, resetField, handleSubmit } =
@@ -58,11 +56,10 @@ export function CreateThreats() {
       const reformattedData = {
         ...data,
         names,
-        abilities,
         elements: elementsList,
       };
 
-      await ThreatService.create(reformattedData);
+      await ThreatService.createOrganization(reformattedData);
     },
     onSuccess: async () => {
       toast.success('Ameaça cadastrada com sucesso!');
@@ -85,20 +82,12 @@ export function CreateThreats() {
     }
   }
 
-  function handleAddAbilities() {
-    const ability = getValues().ability;
-    if (ability.trim() !== '') {
-      setAbilities((oldAbilities) => [...oldAbilities, ability]);
-      resetField('ability');
-    }
-  }
-
   return (
     <S.Wrapper>
-      <Helmet title="Criar Ameaça" />
+      <Helmet title="Criar Organização" />
       <S.FormWrapper>
         <div>
-          <h2>Adicionar ameaça</h2>
+          <h2>Adicionar Organização</h2>
         </div>
 
         <S.Form onSubmit={handleSubmit(handleCreateThreat)}>
@@ -120,29 +109,6 @@ export function CreateThreats() {
             </S.NamesListWrapper>
           </S.InputWrapper>
 
-          <S.InputWrapper>
-            <div className="inputsection">
-              <Input label="Habilidades" {...register('ability')} />
-              <IconButton
-                onClick={() => handleAddAbilities()}
-                icon={<FiPlus />}
-              />
-            </div>
-
-            <S.NamesListWrapper>
-              <h2>Habilidades</h2>
-
-              <S.List>
-                {abilities?.length > 0 &&
-                  abilities.map((ability, index) => (
-                    <S.ListItem key={index}>{ability}</S.ListItem>
-                  ))}
-              </S.List>
-            </S.NamesListWrapper>
-          </S.InputWrapper>
-
-          <Textarea label="Descrição" {...register('description')} />
-          <Textarea label="Enigma" {...register('enigma')} />
           <Select
             control={control}
             options={elementsOptions}
@@ -150,6 +116,8 @@ export function CreateThreats() {
             name="elements"
             isMulti
           />
+
+          <Textarea label="Descrição" {...register('description')} />
 
           <div />
           <div />
@@ -160,7 +128,7 @@ export function CreateThreats() {
             </Button>
 
             <Button iconRight={() => <FiArrowRight />} type="submit">
-              Adicionar ameaça
+              Adicionar organização
             </Button>
           </S.Actions>
         </S.Form>
