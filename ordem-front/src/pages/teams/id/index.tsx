@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Agent, AgentService } from '../../../services/http/agents/AgentService';
+import { api } from '../../../services/http/lib/axios';
 import { TeamService } from '../../../services/http/teams/TeamService';
 import { Input } from '../../../components/Input';
 import { Select } from '../../../components/Select';
@@ -23,9 +24,11 @@ type TeamForm = {
 export function UpdateTeam() {
     const { id } = useParams();
     const navigate = useNavigate();
+    const queryClient = useQueryClient();
 
     const [allAgents, setAllAgents] = useState<Agent[]>([]);
     const [teamAgents, setTeamAgents] = useState<Agent[]>([]);
+    const [originalIds, setOriginalIds] = useState<string[]>([]);
     const { control, getValues, handleSubmit, resetField } = useForm<TeamForm>();
 
     const { data: teamData } = useQuery({
@@ -39,95 +42,86 @@ export function UpdateTeam() {
         queryFn: () => AgentService.findAll(),
     });
 
-    const { data: initialTeamAgents } = useQuery({
+    const { data: initialAgents } = useQuery({
         queryKey: ['team-agents', id],
         queryFn: () => TeamService.findAgentsById(id!),
         enabled: !!teamData,
     });
 
     useEffect(() => {
-        if (agents?.length) {
-            setAllAgents(agents);
-        }
+        if (agents) setAllAgents(agents);
     }, [agents]);
 
     useEffect(() => {
-        if (initialTeamAgents?.length && agents?.length) {
-            const formattedAgents = initialTeamAgents.map((item: any) => {
-                if (typeof item === 'string') {
-                    return agents.find((a) => a.id === item);
-                }
-                return item;
-            }).filter(Boolean) as Agent[];
-
-            setTeamAgents(formattedAgents);
+        if (initialAgents && agents) {
+            const formatted = initialAgents
+                .map(item => (typeof item === 'string' ? agents.find(a => a.id === item) : item))
+                .filter(Boolean) as Agent[];
+            setTeamAgents(formatted);
+            setOriginalIds(formatted.map(a => a.id));
         }
-    }, [initialTeamAgents, agents]);
+    }, [initialAgents, agents]);
 
-    const agentOptions = allAgents?.map((agent) => ({
-        label: agent.name,
-        value: agent.id,
-    }));
+    const agentOptions = allAgents.map(agent => ({ label: agent.name, value: agent.id }));
 
     const { mutate } = useMutation({
         mutationFn: async () => {
-            const agentIds = teamAgents.map((a) => a.id);
+            if (!teamData) throw new Error('Dados da equipe não carregados');
 
-            // Adicionar agentes
-            const addedAgents = agentIds.filter(
-                (id) => !teamData.agentIds.includes(id)
-            );
-            if (addedAgents.length > 0) {
-                await TeamService.addAgents(id!, addedAgents);
+            const newIds = teamAgents.map(a => a.id);
+            const origIds = originalIds;
+
+            const added = newIds.filter(id => !origIds.includes(id));
+            if (added.length) {
+                await TeamService.addAgents(id!, added);
             }
 
-            // Remover agentes
-            const removedAgents = teamData.agentIds.filter(
-                (id) => !agentIds.includes(id)
-            );
-            if (removedAgents.length > 0) {
-                await TeamService.removeAgents(id!, removedAgents);
+            const removed = origIds.filter(id => !newIds.includes(id));
+            if (removed.length) {
+                await Promise.all(
+                    removed.map(agentId =>
+                        TeamService.removeAgent(id!, agentId)
+                    )
+                );
             }
+
+            return { addedCount: added.length, removedCount: removed.length };
         },
-
-        onSuccess: () => {
-            toast.success('Equipe atualizada com sucesso!');
+        onSuccess: ({ addedCount, removedCount }) => {
+            if (addedCount)   toast.success(`${addedCount} agente(s) adicionados`);
+            if (removedCount) toast.success(`${removedCount} agente(s) removidos`);
+            if (!addedCount && !removedCount) toast('Nenhuma alteração detectada');
+            queryClient.invalidateQueries(['team', id]);
+            queryClient.invalidateQueries(['team-agents', id]);
             navigate('/equipes');
         },
-        onError: () => {
-            toast.error('Erro ao atualizar equipe!');
-        },
+        onError: err => {
+            console.error(err);
+            toast.error(err?.response?.data?.message || 'Erro ao atualizar equipe!');
+        }
     });
 
-    function handleAddAgents() {
-        const selected = getValues().agents || []; // Garantir que seja um array, mesmo que getValues() não retorne nada
-
-        if (Array.isArray(selected)) {  // Verifica se selected é um array
-            const toAdd = selected
-                .map((option) =>
-                    allAgents.find((a) => a.id === option.value)
-                )
-                .filter(Boolean) as Agent[];
-
-            const unique = toAdd.filter(
-                (newAgent) => !teamAgents.some((a) => a.id === newAgent.id)
-            );
-
-            setTeamAgents((prev) => [...prev, ...unique]);
-            resetField('agents');
-        } else {
-            console.error("selected não é um array válido", selected);
+    const handleAddAgents = () => {
+        const selected = getValues().agents || [];
+        if (!Array.isArray(selected)) {
+            console.error('selected não é um array válido', selected);
+            return;
         }
-    }
+        const toAdd = selected
+            .map(opt => allAgents.find(a => a.id === opt.value))
+            .filter(Boolean) as Agent[];
+        const unique = toAdd.filter(el => !teamAgents.some(a => a.id === el.id));
+        setTeamAgents(prev => [...prev, ...unique]);
+        resetField('agents');
+    };
 
+    const handleRemoveAgent = (agentId: string) => {
+        setTeamAgents(prev => prev.filter(a => a.id !== agentId));
+    };
 
-    function handleRemoveAgent(agentId: string) {
-        setTeamAgents((prev) => prev.filter((a) => a.id !== agentId));
-    }
-
-    function handleUpdateTeam() {
+    const handleUpdateTeam = () => {
         mutate();
-    }
+    };
 
     return (
         <S.Wrapper>
@@ -160,9 +154,9 @@ export function UpdateTeam() {
                             <span>Agentes na equipe</span>
                         </S.AgentsHeader>
 
-                        {teamAgents?.map((agent) => (
+                        {teamAgents.map(agent => (
                             <S.AgentCard key={agent.id}>
-                                <h3>{agent.name} </h3>
+                                <h3>{agent.name}</h3>
                                 <p>| {agent.rank_agent}</p>
                                 <Button size="sm" onClick={() => handleRemoveAgent(agent.id)}>Remover</Button>
                             </S.AgentCard>
