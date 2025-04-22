@@ -179,10 +179,9 @@ CREATE TABLE PARANORMAL_ORGANIZATION (
 );
 
 CREATE TABLE MEMBERS (
-    id_member VARCHAR(36) NOT NULL UNIQUE,
-    id_organization VARCHAR(36) NOT NULL,
-    name VARCHAR(60) NOT NULL,
-    role VARCHAR(30) CHECK (role IN ('Lider', 'Pesquisador', 'Ocultista', 'Simpatizante')),
-    FOREIGN KEY (id_organization) REFERENCES PARANORMAL_ORGANIZATION(id_organization) ON DELETE CASCADE,
-    PRIMARY KEY (id_member, id_organization)
+     id_member VARCHAR(36) PRIMARY KEY,
+     id_organization VARCHAR(36) NOT NULL,
+     name VARCHAR(60) NOT NULL,
+     role VARCHAR(30) CHECK (role IN ('Lider', 'Pesquisador', 'Ocultista', 'Simpatizante')),
+     FOREIGN KEY (id_organization) REFERENCES PARANORMAL_ORGANIZATION(id_organization) ON DELETE CASCADE
 );

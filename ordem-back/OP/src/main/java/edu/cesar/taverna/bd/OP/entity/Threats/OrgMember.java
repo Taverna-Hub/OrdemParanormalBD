@@ -12,16 +12,15 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrgMembers {
+public class OrgMember {
     private UUID id_member;
-    private UUID id_organization;
+//    private UUID id_organization;
     private String name;
     private String role;
 
     @JsonCreator
-    public OrgMembers(@JsonProperty("name") String name,
-                      @JsonProperty("role") String role,
-                      @JsonProperty("id_organization") String id_organization){
-        this(UUID.randomUUID(), UUID.fromString(id_organization), name, role);
+    public OrgMember(@JsonProperty("name") String name,
+                     @JsonProperty("role") String role){
+        this(UUID.randomUUID(), name, role);
     }
 }
