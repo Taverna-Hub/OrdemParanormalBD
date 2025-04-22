@@ -187,7 +187,7 @@ export function UpdateThreats() {
           <div />
 
           <S.Actions>
-            <Button variant="secondary" type="button">
+            <Button  onClick={() => navigate('/ameacas')} variant="secondary" type="button">
               Cancelar
             </Button>
 

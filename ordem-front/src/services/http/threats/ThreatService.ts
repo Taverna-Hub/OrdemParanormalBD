@@ -43,4 +43,13 @@ export const ThreatService = {
     const { data } = await api.get(`/ParanormalEntity/${id}`);
     return data;
   },
+  delete: async (id: string) => {
+    try {
+      const { data } = await api.delete(`/ParanormalEntity/${id}`);
+      return data;
+    } catch (error) {
+      console.error('Erro ao deletar ameaça:', error);
+      throw error;
+    }
+  },
 };
