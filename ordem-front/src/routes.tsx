@@ -11,10 +11,12 @@ import { Elements } from './pages/elements/list';
 import { CreateMission } from './pages/missions/create';
 import { SpecificMission } from './pages/missions/id';
 import { EditAgent } from './pages/agents/id';
-import { CreateThreats } from './pages/threats/create';
+import { CreateParanormalThreats } from './pages/threats/createParanormal';
 import { UpdateThreats } from './pages/threats/id';
 import { UpdateTeam } from './pages/teams/id';
 import { CreateAddress } from './pages/address/create';
+import { CreateOrganizationThreats } from './pages/threats/createOrganization';
+import { UpdateOrganization } from './pages/threats/idOrganizatino';
 
 export const router = createBrowserRouter([
   {
@@ -62,12 +64,20 @@ export const router = createBrowserRouter([
     element: <Threats />,
   },
   {
-    path: '/ameacas/criar',
-    element: <CreateThreats />,
+    path: '/ameacas/criar/paranormal',
+    element: <CreateParanormalThreats />,
   },
   {
-    path: '/ameacas/:id',
+    path: '/ameacas/criar/organizacao',
+    element: <CreateOrganizationThreats />,
+  },
+  {
+    path: '/ameacas/paranormal/:id',
     element: <UpdateThreats />,
+  },
+  {
+    path: '/ameacas/organizacao/:id',
+    element: <UpdateOrganization />,
   },
   {
     path: '/elementos',

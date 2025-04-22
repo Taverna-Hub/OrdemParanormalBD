@@ -24,6 +24,17 @@ export const SearchInterface = styled.div`
     ${Input} {
       width: 40rem;
     }
+
+    > div {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-column-gap: ${theme.spacings.xsmall};
+      align-items: flex-end;
+
+      button {
+        transform: translateY(-20%);
+      }
+    }
   `}
 `;
 

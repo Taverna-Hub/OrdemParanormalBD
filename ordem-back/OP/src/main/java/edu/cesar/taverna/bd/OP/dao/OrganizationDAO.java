@@ -85,7 +85,7 @@ public class OrganizationDAO extends GenericDAO<Organization> {
                         org.getElements().add(elemId);
                     }
                 }
-                String elemenName = rs.getString("element_name  ");
+                String elemenName = rs.getString("element_name");
                 if (elemenName != null) {
                     if (!org.getElementsNames().contains(elemenName)) {
                         org.getElementsNames().add(elemenName);

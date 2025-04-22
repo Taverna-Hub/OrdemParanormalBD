@@ -54,10 +54,12 @@ public class OrganizationController extends GenericController<Organization, Orga
     public ResponseEntity<String> delete(UUID id) {
         return null;
     }
+
     @PostMapping("/add/{id}")
     public void addMember(@PathVariable UUID id, @RequestBody OrgMember member) throws SQLException {
         service.addMember(id, member);
     }
+
     @DeleteMapping("/remove/{id}")
     public void removeMember(@RequestBody Map<String, UUID> payload) throws SQLException {
         UUID id_org = payload.get("id_org");
