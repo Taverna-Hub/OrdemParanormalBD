@@ -1,6 +1,7 @@
 import {
   FiAlertCircle,
   FiCalendar,
+  FiPlus,
   FiTarget,
   FiTrash2,
   FiUsers,
@@ -23,6 +24,13 @@ import {
 } from '../../../services/http/missionAssignment/MissionAssignmentService';
 import { toast } from 'sonner';
 import { Agent } from '../../../services/http/agents/AgentService';
+import { IconButton } from '../../../components/IconButton';
+import { useState } from 'react';
+import { AddEvidenceModal } from '../../../components/AddEvidenceModal';
+import {
+  Evidence,
+  EvidenceService,
+} from '../../../services/http/evidences/EvidenceService';
 
 type Options = {
   label: string;
@@ -36,6 +44,7 @@ type CreateAssignmentProps = Omit<MissionAssignment, 'id_team'> & {
 export function SpecificMission() {
   const { id } = useParams();
   const { control, getValues } = useForm();
+  const [isAddEvidenceModalOpen, setIsAddEvidenceModalOpen] = useState(false);
 
   const queryClient = useQueryClient();
 
@@ -67,6 +76,13 @@ export function SpecificMission() {
     queryKey: ['team-agents', id],
     queryFn: () => TeamService.findAgentsById(assignment?.id_team as string),
   });
+
+  const { data: evidences } = useQuery<Agent[]>({
+    queryKey: ['evidences', id],
+    queryFn: () => EvidenceService.findById(id as string),
+  });
+
+  console.log(evidences);
 
   const { mutate } = useMutation({
     mutationFn: async (data: CreateAssignmentProps) => {
@@ -275,12 +291,39 @@ export function SpecificMission() {
               </S.CardContent>
             </>
           )}
+        </S.InfoCard>
 
-          <S.CardContent></S.CardContent>
+        <S.InfoCard>
+          <S.InfoCardHeader>
+            <FiAlertCircle />
+            <h2>Evidências</h2>
+
+            <IconButton
+              icon={<FiPlus />}
+              onClick={() => setIsAddEvidenceModalOpen(true)}
+            />
+          </S.InfoCardHeader>
+
+          <ul>
+            {evidences?.map((evidence: Evidence) => {
+              return (
+                <li key={evidence.id_evidence}>
+                  {evidence.origin} - {evidence.stability_level} -{' '}
+                  {evidence.description}
+                </li>
+              );
+            })}
+          </ul>
         </S.InfoCard>
       </S.MissionInfo>
 
       <Navigation />
+
+      <AddEvidenceModal
+        isOpen={isAddEvidenceModalOpen}
+        onClose={() => setIsAddEvidenceModalOpen(false)}
+        id_mission={id!}
+      />
     </S.Wrapper>
   );
 }
