@@ -20,8 +20,8 @@ public class MissionAssignmentService {
         return missionAssignmentDAO.getAll();
     }
 
-    public Optional<MissionAssignment> getMissionAssignmentById(UUID id) {
-        return Optional.ofNullable(missionAssignmentDAO.searchByID(id));
+    public List<MissionAssignment> getAssignmentsByMissionId(UUID id_mission) {
+        return missionAssignmentDAO.findByMissionId(id_mission);
     }
 
     public void updateMissionAssignment(UUID id_team, UUID id_mission) {

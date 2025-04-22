@@ -1,7 +1,8 @@
 import { api } from '../../../lib/axios';
 
 export type Team = {
-  id: string;
+  id?: string;
+  id_team: string;
   name: string;
   specialization: string;
 };
@@ -34,10 +35,7 @@ export const TeamService = {
   },
   addAgents: async (teamId: string, agentIds: string[]) => {
     try {
-      const { data } = await api.post(
-          `/teams/${teamId}/agents`,
-          agentIds
-      );
+      const { data } = await api.post(`/teams/${teamId}/agents`, agentIds);
       return data;
     } catch (error) {
       console.error('Erro ao adicionar agentes:', error);
@@ -46,19 +44,21 @@ export const TeamService = {
   },
   removeAgent: async (teamId: string, agentId: string) => {
     try {
-      const { data } = await api.delete(
-          `/teams/${teamId}/agents/${agentId}`
-      );
+      const { data } = await api.delete(`/teams/${teamId}/agents/${agentId}`);
       return data;
     } catch (error) {
       console.error('Erro ao remover agente:', error);
       throw error;
     }
   },
-  update: async (id: string, updatedTeam: { name: string; specialization: string }, agentIds: string[]) => {
+  update: async (
+    id: string,
+    updatedTeam: { name: string; specialization: string },
+    agentIds: string[],
+  ) => {
     const { data } = await api.put(`/teams/${id}`, {
       team: updatedTeam,
-      agentIds,                         // backend pode processar inclusão/removal de uma vez
+      agentIds, // backend pode processar inclusão/removal de uma vez
     });
     return data;
   },

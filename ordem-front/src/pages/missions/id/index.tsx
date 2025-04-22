@@ -49,12 +49,16 @@ export function SpecificMission() {
     queryFn: () => TeamService.findAll(),
   });
 
-  const { data: assignment } = useQuery<MissionAssignment>({
-    queryKey: ['assignment', id],
+  const { data: assignments } = useQuery<MissionAssignment[]>({
+    queryKey: ['assignments', id],
     queryFn: () => MissionAssignmentService.findById(id as string),
   });
 
-  const { data: assignedTeam } = useQuery<Team>({
+  const assignment = assignments?.find(
+    (ass: MissionAssignment) => ass.deallocation_date === null,
+  );
+
+  const { data: assignedTeam } = useQuery<Team[]>({
     queryKey: ['team', id],
     queryFn: () => TeamService.findById(assignment?.id_team as string),
   });
@@ -83,14 +87,14 @@ export function SpecificMission() {
     },
   });
 
-  const { mutate: mutateAssignment } = useMutation({
+  const { mutate: mutateDeallocateTeam } = useMutation({
     mutationFn: async () => {
       const data = {
         id_mission: id!,
-        id_team: assignedTeam!.id,
+        id_team: assignedTeam!.id_team,
       };
 
-      await MissionAssignmentService.update(data.id_mission, data.id_team);
+      await MissionAssignmentService.update(data.id_team, data.id_mission);
     },
     onSuccess: async () => {
       toast.success('Equipe desalocada com sucesso!');
@@ -99,6 +103,11 @@ export function SpecificMission() {
       toast.error('Ocorreu um erro ao desalocar equipe!');
     },
   });
+
+  function handleDeallocate() {
+    mutateDeallocateTeam();
+    queryClient.invalidateQueries({ queryKey: ['team-agents', id] });
+  }
 
   function handleCreateAssignment() {
     const data = getValues() as CreateAssignmentProps;
@@ -114,10 +123,10 @@ export function SpecificMission() {
     return 'AAAAAAAAA';
   }
 
-  const teamOptions = teams?.map((team: Team) => {
+  const teamOptions = teams.map((team: Team) => {
     return {
       label: team.name,
-      value: team.id,
+      value: team.id!,
     };
   });
 
@@ -246,7 +255,7 @@ export function SpecificMission() {
                   </section>
 
                   <S.SelectedTeamsAction>
-                    <Button onClick={() => mutateAssignment()}>
+                    <Button onClick={() => handleDeallocate()}>
                       Remover <FiTrash2 />
                     </Button>
                   </S.SelectedTeamsAction>
