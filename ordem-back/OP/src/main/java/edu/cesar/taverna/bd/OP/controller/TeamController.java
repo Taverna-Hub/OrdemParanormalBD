@@ -16,11 +16,21 @@ import java.util.UUID;
 public class TeamController {
     private final TeamService service = new TeamService();
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Team> getById(@PathVariable String id) {
+        return service.getTeamById(UUID.fromString(id))
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+
+    @PostMapping
     public ResponseEntity<String> create(@RequestBody TeamWithAgentsDTO dto) {
         service.createTeamWithAgents(dto.getTeam(), dto.getAgentIds());
         return ResponseEntity.status(HttpStatus.CREATED).body("Team created with agents");
     }
 
+    @PostMapping("/{id}/agents")
     public ResponseEntity<String> addAgents(
             @PathVariable UUID id,
             @RequestBody List<UUID> agentIds) {

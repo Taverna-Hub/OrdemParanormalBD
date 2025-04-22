@@ -31,5 +31,4 @@ public class MissionAssignmentService {
     public void deleteMissionAssignment(UUID id) {
         missionAssignmentDAO.delete(id);
     }
-
 }

@@ -29,7 +29,7 @@ public class ParanormalEntityController extends GenericController<ParanormalEnti
     }
 
     @Override
-    public ResponseEntity<ParanormalEntity> getById(UUID id) {
+    public ResponseEntity<ParanormalEntity> getById(UUID id) throws SQLException {
         return service.getParanormalEntityById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());

@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { Wrapper as Button } from '../../../components/Button/styles';
 import { Wrapper as SelectWrapper } from '../../../components/Select/styles';
 
 const StatusModifiers = {
@@ -73,11 +74,16 @@ export const DateAndTime = styled.div`
 
 export const AvatarAgent = styled.div`
   ${({ theme }) => css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     width: 5rem;
     height: 5rem;
     border-radius: ${theme.border.radius.full};
     border: 4px solid ${theme.colors.blue_900};
-    background-color: ${theme.colors.red_200};
+    background-color: ${theme.colors.green_600};
+    color: ${theme.colors.white};
     position: relative;
     margin-left: -10px;
 
@@ -122,7 +128,7 @@ export const InfoCard = styled.div`
     border: 1px solid ${theme.colors.gray_500};
     border-radius: ${theme.border.radius.xxsmall};
     color: oklch(55.4% 0.046 257.417);
-    height: 25rem;
+    min-height: 25rem;
 
     > div {
       display: flex;
@@ -170,7 +176,90 @@ export const CardNoAllocation = styled.div`
 
 export const CardContent = styled.div`
   ${({ theme }) => css`
+    display: flex;
+    flex-direction: column;
     padding: ${theme.spacings.xsmall};
     font-size: ${theme.font.sizes.medium};
+  `}
+`;
+
+export const Avatar = styled.div`
+  ${({ theme }) => css`
+    width: 5rem;
+    height: 5rem;
+    border-radius: ${theme.border.radius.full};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  `}
+`;
+
+export const SelectedTeam = styled.div`
+  ${({ theme }) => css`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    border: 1px solid ${theme.colors.gray_500};
+    padding: ${theme.spacings.xsmall} ${theme.spacings.xxsmall};
+    border-radius: ${theme.border.radius.xxsmall};
+
+    p {
+      color: ${theme.colors.white};
+      font-weight: ${theme.font.bold};
+    }
+
+    span {
+      font-size: ${theme.font.sizes.small};
+    }
+
+    ${Avatar} {
+      margin-right: ${theme.spacings.xxsmall};
+      background-color: ${theme.colors.purple_500};
+      color: ${theme.colors.white};
+
+      svg {
+        font-size: ${theme.font.sizes.xlarge};
+      }
+    }
+
+    section {
+      display: flex;
+      align-items: center;
+    }
+  `}
+`;
+
+export const SelectedTeamsAction = styled.div`
+  ${Button} {
+    background-color: ${({ theme }) => theme.colors.red_600};
+    margin-left: auto;
+  }
+`;
+
+export const AgentCardList = styled.div`
+  ${({ theme }) => css`
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: ${theme.spacings.xsmall};
+
+    margin-top: ${theme.spacings.medium};
+  `}
+`;
+
+export const AgentCard = styled.div`
+  ${({ theme }) => css`
+    display: flex;
+    align-items: center;
+    gap: ${theme.spacings.xxsmall};
+    padding: ${theme.spacings.xsmall};
+    border: 1px solid ${theme.colors.gray_500};
+    border-radius: ${theme.border.radius.xxsmall};
+
+    ${Avatar} {
+      background-color: ${theme.colors.green_600};
+      color: ${theme.colors.green_200};
+    }
   `}
 `;

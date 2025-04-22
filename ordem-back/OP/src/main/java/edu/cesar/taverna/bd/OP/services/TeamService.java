@@ -4,8 +4,10 @@ import edu.cesar.taverna.bd.OP.dao.TeamDAO;
 import edu.cesar.taverna.bd.OP.entity.Agent;
 import edu.cesar.taverna.bd.OP.entity.Team;
 
+import javax.swing.text.html.Option;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public class TeamService {
@@ -46,8 +48,8 @@ public class TeamService {
     /**
      * Busca um time por ID (searchByID é o método da GenericDAO)
      */
-    public Team getTeamById(UUID teamId) {
-        return teamDAO.searchByID(teamId);
+    public Optional<Team> getTeamById(UUID teamId) {
+        return Optional.ofNullable(teamDAO.searchByID(teamId));
     }
 
     /**

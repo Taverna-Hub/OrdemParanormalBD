@@ -36,7 +36,7 @@ public class MissionAssignmentDAO extends GenericDAO<MissionAssignment> {
     @Override
     protected void prepareInsert(PreparedStatement stmt, MissionAssignment missionAssignment) throws SQLException {
         stmt.setString(1, missionAssignment.getId_team().toString());
-        stmt.setString(21, missionAssignment.getId_mission().toString());
+        stmt.setString(2, missionAssignment.getId_mission().toString());
         stmt.setDate(3, missionAssignment.getDeallocation_date() != null ? java.sql.Date.valueOf(missionAssignment.getDeallocation_date()) : null);
     }
 
