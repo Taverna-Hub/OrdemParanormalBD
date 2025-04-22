@@ -30,4 +30,13 @@ export const MissionService = {
       console.log(error);
     }
   },
+  delete: async (id: string) => {
+    try {
+      const { data } = await api.delete<void>(`/missions/${id}`);
+      return data;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  },
 };
