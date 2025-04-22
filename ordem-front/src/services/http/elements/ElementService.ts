@@ -1,7 +1,7 @@
 import { api } from '../../../lib/axios';
 
 export type Element = {
-  id: string;
+  id_element: string;
   name: string;
   desciption: string;
   vantagem: string;

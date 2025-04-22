@@ -11,12 +11,15 @@ import {
   Element,
   ElementService,
 } from '../../../services/http/elements/ElementService';
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { IconButton } from '../../../components/IconButton';
 import { Textarea } from '../../../components/Textarea';
-import { ThreatService } from '../../../services/http/threats/ThreatService';
+import {
+  GetThreatProps,
+  ThreatService,
+} from '../../../services/http/threats/ThreatService';
 import { toast } from 'sonner';
-import { useNavigate } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 
 type Options = {
   label: string;
@@ -31,17 +34,25 @@ type CreateThreatProps = {
   elements: Options[];
 };
 
-export function CreateThreats() {
+export function UpdateThreats() {
+  const { id } = useParams();
+
   const [names, setNames] = useState<string[]>([]);
   const [abilities, setAbilities] = useState<string[]>([]);
   const navigate = useNavigate();
 
-  const { control, register, getValues, resetField, handleSubmit } =
+  const { control, register, getValues, resetField, handleSubmit, setValue } =
     useForm<CreateThreatProps>();
 
   const { data: elements } = useQuery({
     queryKey: ['elements'],
     queryFn: () => ElementService.findAll(),
+  });
+
+  const { data: threat } = useQuery<GetThreatProps>({
+    queryKey: ['threat', id],
+    queryFn: () => ThreatService.findById(id),
+    enabled: !!id,
   });
 
   const elementsOptions = elements?.map((element: Element) => {
@@ -62,7 +73,7 @@ export function CreateThreats() {
         elements: elementsList,
       };
 
-      await ThreatService.create(reformattedData);
+      await ThreatService.update(id!, reformattedData);
     },
     onSuccess: async () => {
       toast.success('Ameaça cadastrada com sucesso!');
@@ -93,12 +104,33 @@ export function CreateThreats() {
     }
   }
 
+  const loadThreatData = useCallback(() => {
+    if (threat) {
+      const elements = threat.elements.map((elementId, i) => ({
+        value: elementId,
+        label: threat.elementsNames[i],
+      }));
+
+      console.log(elements);
+
+      setNames(threat.names || []);
+      setAbilities(threat.abilities || []);
+      setValue('description', threat.description);
+      setValue('enigma', threat.enigma);
+      setValue('elements', elements);
+    }
+  }, [threat]);
+
+  useEffect(() => {
+    loadThreatData();
+  }, [loadThreatData]);
+
   return (
     <S.Wrapper>
-      <Helmet title="Criar Ameaça" />
+      <Helmet title="Editar Ameaça" />
       <S.FormWrapper>
         <div>
-          <h2>Adicionar ameaça</h2>
+          <h2>Editar ameaça</h2>
         </div>
 
         <S.Form onSubmit={handleSubmit(handleCreateThreat)}>
@@ -160,7 +192,7 @@ export function CreateThreats() {
             </Button>
 
             <Button iconRight={() => <FiArrowRight />} type="submit">
-              Adicionar ameaça
+              Atualizar ameaça
             </Button>
           </S.Actions>
         </S.Form>

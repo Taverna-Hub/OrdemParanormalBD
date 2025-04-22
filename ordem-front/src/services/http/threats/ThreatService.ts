@@ -1,36 +1,13 @@
 import { api } from '../../../lib/axios';
 
-export type Threat = {
+export type GetThreatProps = {
   id_threat: string;
+  names: string[];
   description: string;
-};
-
-export type ThreatName = {
-  id_threat: string;
-  name: string;
-};
-
-export type ThreatMission = {
-  id_threat: string;
-  id_mission: string;
-};
-
-export type ThreatNeutralization = {
-  id_team: string;
-  id_mission: string;
-  id_threat: string;
-  method: string;
-  result: string;
-};
-
-export type ThreatElement = {
-  id_element: string;
-  id_threat: string;
-};
-
-export type ParanormalEntity = {
-  id_entity: string;
-  enigma: string | null;
+  enigma: string;
+  abilities: string[];
+  elements: string[];
+  elementsNames: string[];
 };
 
 export type CreateThreatProps = {
@@ -49,5 +26,21 @@ export const ThreatService = {
     } catch (error) {
       console.log(error);
     }
+  },
+  update: async (id: string, threat: CreateThreatProps) => {
+    try {
+      const data = await api.put(`/ParanormalEntity/${id}`, threat);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  findAllParanormalEntity: async () => {
+    const { data } = await api.get('/ParanormalEntity');
+    return data;
+  },
+  findById: async (id: string) => {
+    const { data } = await api.get(`/ParanormalEntity/${id}`);
+    return data;
   },
 };
