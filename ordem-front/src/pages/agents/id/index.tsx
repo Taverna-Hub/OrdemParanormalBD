@@ -97,9 +97,6 @@ export function EditAgent() {
         mutate(data);
     }
 
-    if (isLoading) return <p>Carregando agente...</p>;
-    if (isError) return <p>Erro ao carregar agente.</p>;
-
     useEffect(() => {
         if (agent) {
             handleLoadValues();
