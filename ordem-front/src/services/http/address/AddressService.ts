@@ -25,4 +25,9 @@ export const AddressService = {
       console.log(error);
     }
   },
+  findById: async (id: string) => {
+    const { data } = await api.get(`/addresses/${id}`);
+    return data;
+  }
+
 };
