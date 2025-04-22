@@ -4,8 +4,12 @@ import { Navigation } from '../../../components/Navigation';
 import { Button } from '../../../components/Button';
 import { useNavigate } from 'react-router';
 import { Input } from '../../../components/Input';
-import { useQuery } from '@tanstack/react-query';
+import {useMutation, useQuery} from '@tanstack/react-query';
 import { Team, TeamService } from '../../../services/http/teams/TeamService';
+import { DeleteModal } from '../../../components/DeleteModal';
+import { FiTrash2 } from 'react-icons/fi';
+import {useState} from "react";
+
 
 export function Teams() {
   const navigate = useNavigate();
@@ -14,6 +18,37 @@ export function Teams() {
     queryKey: ['teams'],
     queryFn: () => TeamService.findAll(),
   });
+
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+    const [selectedTeam, setSelectedTeam] = useState<Team | null>(null);
+
+    const deleteMutation = useMutation({
+        mutationFn: (teamId: string) => TeamService.delete(teamId),
+        onSuccess: () => {
+            toast.success('Equipe deletada com sucesso!');
+            queryClient.invalidateQueries({ queryKey: ['teams'] });
+            handleCloseDeleteModal();
+        },
+        onError: () => {
+            toast.error('Erro ao deletar equipe');
+        },
+    });
+
+    const handleOpenDeleteModal = (team: Team) => {
+        setSelectedTeam(team);
+        setIsDeleteModalOpen(true);
+    };
+
+    const handleCloseDeleteModal = () => {
+        setIsDeleteModalOpen(false);
+        setSelectedTeam(null);
+    };
+
+    const handleConfirmDelete = () => {
+        if (selectedTeam) {
+            deleteMutation.mutate(selectedTeam.id);
+        }
+    };
 
   return (
     <S.Wrapper>
@@ -37,6 +72,7 @@ export function Teams() {
               <th>#</th>
               <th>Nome</th>
               <th>Especialização</th>
+              <th></th>
             </tr>
           </S.TableHead>
           <tbody>
@@ -52,6 +88,12 @@ export function Teams() {
                   <td>
                     <p>{team.specialization}</p>
                   </td>
+                  <td
+                      onClick={() => handleOpenDeleteModal(team)}
+                      style={{ cursor: 'pointer' }}
+                  >
+                    <FiTrash2/>
+                  </td>
                 </S.TableRow>
               );
             })}
@@ -60,6 +102,13 @@ export function Teams() {
       </S.TableContainer>
 
       <Navigation />
+      <DeleteModal
+        isOpen={isDeleteModalOpen}
+        onClose={handleCloseDeleteModal}
+        onConfirm={handleConfirmDelete}
+        title="Excluir Equipe"
+        message={`Tem certeza que deseja excluir "${selectedTeam?.name}"?`}
+      />
     </S.Wrapper>
   );
 }

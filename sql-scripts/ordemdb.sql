@@ -54,14 +54,6 @@ CREATE TABLE TEAM (
     specialization VARCHAR(60) NOT NULL CHECK (specialization IN ('Investigação','Combate','Suporte'))
 );
 
-CREATE TABLE TEAM_LEADERS (
-    id_team VARCHAR(36) NOT NULL,
-    id_agent VARCHAR(36) NOT NULL,
-    FOREIGN KEY (id_team) REFERENCES TEAM(id_team) ON DELETE CASCADE,
-    FOREIGN KEY (id_agent) REFERENCES AGENTS(id_agent) ON DELETE CASCADE,
-    PRIMARY KEY (id_agent, id_team)
-);
-
 CREATE TABLE AGENTS_IN_TEAM (
     id_team VARCHAR(36) NOT NULL,
     id_agent VARCHAR(36) NOT NULL,
