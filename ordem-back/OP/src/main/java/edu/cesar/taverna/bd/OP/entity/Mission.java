@@ -20,6 +20,7 @@ public class Mission {
     private String objective;
     private LocalDate start_date;
     private LocalDate end_date;
+    private UUID id_address;
 
     @JsonCreator
     public Mission(
@@ -28,7 +29,9 @@ public class Mission {
                    @JsonProperty("risks")String risks,
                    @JsonProperty("objective")String objective,
                    @JsonProperty("start_date")LocalDate start_date,
-                   @JsonProperty("end_date")LocalDate end_date)
+                   @JsonProperty("end_date")LocalDate end_date,
+                   @JsonProperty("id_address")UUID id_address
+    )
 
     {
         this.title = title;
@@ -37,6 +40,7 @@ public class Mission {
         this.objective = objective;
         this.start_date = start_date;
         this.end_date = end_date;
+        this.id_address = id_address;
         setId();
     }
 

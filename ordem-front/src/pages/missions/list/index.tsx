@@ -30,7 +30,9 @@ export function Missions() {
       <S.SearchInterface>
         <Input placeholder="Procure uma missão..." />
 
-        <Button onClick={() => navigate('/missoes/criar')}>Criar missão</Button>
+        <Button onClick={() => navigate('/endereco/criar')}>
+          Criar missão
+        </Button>
       </S.SearchInterface>
 
       <S.TableContainer>
