@@ -29,7 +29,7 @@ public class EvidenceDAO extends GenericDAO<Evidence>{
     }
 
     public List<Evidence> getSelectByIdMission(UUID id) {
-        String SQL = "SELECT * FROM EVIDENCE WHERE id_evidence = ?";
+        String SQL = "SELECT * FROM EVIDENCE WHERE id_mission = ?";
         List<Evidence> list = new ArrayList<>();
         try (Connection conn = ConnectionFactory.getConnection();
              PreparedStatement stmt = conn.prepareStatement(SQL)) {
