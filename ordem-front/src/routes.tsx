@@ -12,6 +12,9 @@ import { CreateMission } from './pages/missions/create';
 import { SpecificMission } from './pages/missions/id';
 import { EditAgent } from './pages/agents/id';
 import { CreateThreats } from './pages/threats/create';
+import { UpdateThreats } from './pages/threats/id';
+import { UpdateTeam } from './pages/teams/id';
+import { CreateAddress } from './pages/address/create';
 
 export const router = createBrowserRouter([
   {
@@ -51,6 +54,10 @@ export const router = createBrowserRouter([
     element: <CreateTeam />,
   },
   {
+    path: '/equipes/:id',
+    element: <UpdateTeam />,
+  },
+  {
     path: '/ameacas',
     element: <Threats />,
   },
@@ -59,11 +66,19 @@ export const router = createBrowserRouter([
     element: <CreateThreats />,
   },
   {
+    path: '/ameacas/:id',
+    element: <UpdateThreats />,
+  },
+  {
     path: '/elementos',
     element: <Elements />,
   },
   {
     path: '/login',
     element: <Login />,
+  },
+  {
+    path: '/endereco/criar',
+    element: <CreateAddress />,
   },
 ]);

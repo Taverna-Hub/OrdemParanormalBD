@@ -166,6 +166,10 @@ export function CreateTeam() {
     mutate(data);
   }
 
+  const handleRemoveAgent = (agentId: string) => {
+    setAgentsList((prev) => prev.filter((agent) => agent.id !== agentId));
+  };
+
   return (
     <S.Wrapper>
       <Helmet title="Criar Nova Equipe" />
@@ -229,13 +233,12 @@ export function CreateTeam() {
 
             {agentsList.length > 0 &&
               agentsList?.map((agent: Agent, index) => (
-                <S.AgentCard>
+                <S.AgentCard key={agent.id}>
                   <S.Label htmlFor={'lider' + index}>
                     <h3>{agent.name}</h3>
-                    <p>{agent.rank_agent}</p>
+                    <p>{agent.specialization}</p>
                   </S.Label>
-
-                  <IconButton icon={<FiTrash2 />} />
+                  <IconButton type="button" onClick={() => handleRemoveAgent(agent.id)} icon={<FiTrash2 />} />
                 </S.AgentCard>
               ))}
           </S.TeamSelectAgents>

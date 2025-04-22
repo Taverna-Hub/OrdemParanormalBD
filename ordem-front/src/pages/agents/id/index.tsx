@@ -75,8 +75,6 @@ export function EditAgent() {
 
     const {
         data: agent,
-        isLoading,
-        isError,
     } = useQuery<Agent>({
         queryKey: ['agent', id],
         queryFn: () => AgentService.findById(id as string)

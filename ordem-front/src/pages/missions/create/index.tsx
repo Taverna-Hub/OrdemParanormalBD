@@ -6,7 +6,7 @@ import { Select } from '../../../components/Select';
 import * as S from './styles';
 import { useForm } from 'react-hook-form';
 import { Helmet } from 'react-helmet-async';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import { useNavigate } from 'react-router';
 import { Textarea } from '../../../components/Textarea';
@@ -14,6 +14,10 @@ import {
   Mission,
   MissionService,
 } from '../../../services/http/missions/MissionService';
+import {
+  Address,
+  AddressService,
+} from '../../../services/http/address/AddressService';
 
 type SelectOptions = {
   label: string;
@@ -25,6 +29,7 @@ type CreateMissionProps = Omit<
   'id_mission' | 'id_address' | 'status'
 > & {
   status: SelectOptions;
+  id_address: SelectOptions;
 };
 
 export function CreateMission() {
@@ -46,11 +51,24 @@ export function CreateMission() {
     },
   ];
 
+  const { data: addressess } = useQuery<Address[]>({
+    queryKey: ['addressess'],
+    queryFn: () => AddressService.findAll(),
+  });
+
+  const addressOptions = addressess?.map((address: Address) => {
+    return {
+      label: `${address.street}, ${address.number}, ${address.city} - ${address.state}, ${address.postal_code}`,
+      value: address.id_address,
+    };
+  });
+
   const { mutate } = useMutation({
     mutationFn: async (data: CreateMissionProps) => {
       const reformattedData = {
         ...data,
         status: data.status.value,
+        id_address: data.id_address.value,
       };
 
       await MissionService.create(reformattedData as Mission);
@@ -107,6 +125,14 @@ export function CreateMission() {
             {...register('end_date')}
           />
 
+          <Select
+            control={control}
+            options={addressOptions!}
+            label="Endereço"
+            name="id_address"
+          />
+
+          <div />
           <div />
 
           <S.Actions>
