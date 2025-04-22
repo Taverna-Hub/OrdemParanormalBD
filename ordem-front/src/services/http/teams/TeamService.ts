@@ -32,4 +32,23 @@ export const TeamService = {
       console.log(error);
     }
   },
+  update: async (id: string, updatedTeam: Omit<Team, 'id'>, agentIds: string[]) => {
+    try {
+      const { data } = await api.put(`/teams/${id}`, {
+        team: updatedTeam,
+        agentIds,
+      });
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  delete: async (id: string) => {
+    try {
+      const { data } = await api.delete(`/teams/${id}`);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  },
 };

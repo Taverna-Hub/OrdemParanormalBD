@@ -62,6 +62,11 @@ export function CreateTeam() {
   });
 
   const navigate = useNavigate();
+
+  const handleCancel = () => {
+    navigate('/equipes');
+  }
+
   const { control, getValues, handleSubmit, register, resetField } =
     useForm<CreateTeamUnformattedProps>();
 
@@ -241,7 +246,7 @@ export function CreateTeam() {
           </S.TeamSelectAgents>
 
           <S.GridButtons>
-            <Button type="button">Cancelar</Button>
+            <Button type="button" onClick={handleCancel}>Cancelar</Button>
             <Button type="submit"> Criar Equipe </Button>
           </S.GridButtons>
         </S.GridColumn>

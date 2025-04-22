@@ -108,12 +108,6 @@ INSERT INTO TEAM (id_team, name, specialization) VALUES
 (@team2, 'Equipe Combate',      'Combate'),
 (@team3, 'Equipe Suporte',      'Suporte');
 
--- Líderes
-INSERT INTO TEAM_LEADERS (id_team, id_agent) VALUES
-(@team1, @ag1),
-(@team2, @ag3),
-(@team3, @ag5);
-
 -- Agentes nas equipes
 INSERT INTO AGENTS_IN_TEAM (id_team, id_agent, start_date, end_date) VALUES
 (@team1, @ag1, '2025-01-10 08:00:00', NULL),
