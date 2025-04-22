@@ -1,4 +1,4 @@
-import { FiArrowRight } from 'react-icons/fi';
+import { FiArrowRight, FiPlus } from 'react-icons/fi';
 import { Button } from '../../../components/Button';
 import { Input } from '../../../components/Input';
 import { Navigation } from '../../../components/Navigation';
@@ -6,65 +6,39 @@ import { Select } from '../../../components/Select';
 import * as S from './styles';
 import { useForm } from 'react-hook-form';
 import { Helmet } from 'react-helmet-async';
-import { useMutation } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import {
-  Agent,
-  AgentService,
-} from '../../../services/http/agents/AgentService';
-import { toast } from 'sonner';
-import { useNavigate } from 'react-router';
+  Element,
+  ElementService,
+} from '../../../services/http/elements/ElementService';
+import { useState } from 'react';
+import { IconButton } from '../../../components/IconButton';
 import { Textarea } from '../../../components/Textarea';
-import { CreateThreatProps } from '../../../services/http/threats/ThreatService';
-
-type SelectOptions = {
-  label: string;
-  value: string;
-};
-type CreateThreat = Omit<CreateThreatProps, 'elements'> & {
-  elements: SelectOptions;
-};
 
 export function CreateThreats() {
-  const navigate = useNavigate();
-  const { control, register, handleSubmit } = useForm<CreateThreat>();
+  const [names, setNames] = useState<string[]>([]);
 
-  const specialties = [
-    {
-      value: 'Especialista',
-      label: 'Especialista',
-    },
-    {
-      value: 'Ocultista',
-      label: 'Ocultista',
-    },
-    {
-      value: 'Combatente',
-      label: 'Combatente',
-    },
-  ];
+  // const navigate = useNavigate();
+  const { control, register, getValues } = useForm();
 
-  const { mutate } = useMutation({
-    mutationFn: async (data: CreateThreat) => {
-      const reformattedData = {
-        ...data,
-        specialization: data.specialization.value,
-        rank_agent: data.rank_agent.value,
-      };
-
-      await AgentService.create(reformattedData as Agent);
-    },
-    onSuccess: async () => {
-      toast.success('Agente cadastrado com sucesso!');
-      navigate('/agentes');
-    },
-    onError: () => {
-      toast.error('Ocorreu um erro ao cadastrar agente!');
-    },
+  const { data: elements } = useQuery({
+    queryKey: ['elements'],
+    queryFn: () => ElementService.findAll(),
   });
 
-  function handleCreateAgent(data: CreateAgentProps) {
-    mutate(data);
+  const elementsOptions = elements?.map((element: Element) => {
+    return {
+      label: element.name,
+      value: element.id,
+    };
+  });
+
+  function handleAddNames() {
+    const name = getValues().name;
+    setNames((oldNames) => [...oldNames, name]);
   }
+
+  console.log(names);
 
   return (
     <S.Wrapper>
@@ -74,13 +48,30 @@ export function CreateThreats() {
           <h2>Adicionar ameaça</h2>
         </div>
 
-        <S.Form onSubmit={handleSubmit(handleCreateAgent)}>
-          <Input label="Nomes" {...register('names')} />
+        <S.Form>
+          <S.InputWrapper>
+            <div className="inputsection">
+              <Input label="Nomes" {...register('name')} />
+              <IconButton onClick={() => handleAddNames()} icon={<FiPlus />} />
+            </div>
+
+            <S.NamesListWrapper>
+              <h2>Nomes</h2>
+
+              <S.List>
+                {names?.length > 0 &&
+                  names.map((name, index) => (
+                    <S.ListItem key={index}>{name}</S.ListItem>
+                  ))}
+              </S.List>
+            </S.NamesListWrapper>
+          </S.InputWrapper>
+
           <Input label="Habilidades" {...register('abilities')} />
 
           <Select
             control={control}
-            options={specialties}
+            options={elementsOptions}
             label="Elementos"
             name="specialization"
             isMulti

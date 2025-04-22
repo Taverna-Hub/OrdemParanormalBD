@@ -1,10 +1,14 @@
-import { ReactNode } from 'react';
+import { ButtonHTMLAttributes, ReactNode } from 'react';
 import * as S from './styles';
 
-interface IconButtonProps {
+type IconButtonProps = {
   icon: ReactNode;
-}
+} & ButtonHTMLAttributes<HTMLButtonElement>;
 
-export function IconButton({ icon }: IconButtonProps) {
-  return <S.Wrapper type="button">{icon}</S.Wrapper>;
+export function IconButton({ icon, ...rest }: IconButtonProps) {
+  return (
+    <S.Wrapper type="button" {...rest}>
+      {icon}
+    </S.Wrapper>
+  );
 }
