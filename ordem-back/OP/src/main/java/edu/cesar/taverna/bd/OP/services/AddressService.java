@@ -4,6 +4,7 @@ import edu.cesar.taverna.bd.OP.dao.AddressDAO;
 import edu.cesar.taverna.bd.OP.dao.AgentDAO;
 import edu.cesar.taverna.bd.OP.entity.Address;
 import edu.cesar.taverna.bd.OP.entity.Agent;
+import org.springframework.http.ResponseEntity;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -13,8 +14,9 @@ import java.util.UUID;
 public class AddressService {
     private final AddressDAO addressDAO = new AddressDAO();
 
-    public void register(Address address){
+    public ResponseEntity<String> register(Address address){
         addressDAO.save(address);
+        return ResponseEntity.ok("Created");
     }
 
     public List<Address> getAllAddressess() throws SQLException {

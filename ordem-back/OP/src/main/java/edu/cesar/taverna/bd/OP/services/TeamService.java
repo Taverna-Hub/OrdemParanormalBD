@@ -3,6 +3,7 @@ package edu.cesar.taverna.bd.OP.services;
 import edu.cesar.taverna.bd.OP.dao.TeamDAO;
 import edu.cesar.taverna.bd.OP.entity.Agent;
 import edu.cesar.taverna.bd.OP.entity.Team;
+import org.springframework.http.ResponseEntity;
 
 import javax.swing.text.html.Option;
 import java.sql.SQLException;
@@ -13,17 +14,26 @@ import java.util.UUID;
 public class TeamService {
     private final TeamDAO teamDAO = new TeamDAO();
 
-    public void createTeamWithAgents(Team team, List<UUID> agentIds) {
+    public ResponseEntity<String> createTeamWithAgents(Team team, List<UUID> agentIds) {
+
         teamDAO.saveWithAgents(team, agentIds);
+        return ResponseEntity.ok("");
     }
 
-    public void addAgents(UUID teamId, List<UUID> agentIds) {
+
+    public ResponseEntity<String> addAgents(UUID teamId, List<UUID> agentIds) {
+
         teamDAO.addAgentsToTeam(teamId, agentIds);
+        return ResponseEntity.ok("");
     }
 
-    public void removeAgent(UUID teamId, UUID agentId) {
+
+    public ResponseEntity<String> removeAgent(UUID teamId, UUID agentId) {
+
         teamDAO.removeAgentFromTeam(teamId, agentId);
+        return ResponseEntity.ok("");
     }
+
 
     public void removeAllAgents(UUID teamId) {
         teamDAO.removeAllAgentsFromTeam(teamId);
@@ -33,10 +43,6 @@ public class TeamService {
         return teamDAO.getAgentsByTeam(teamId);
     }
 
-    /**
-     * Corrige chamada: era selectAll(), agora chama getAll()
-     * e encapsula a SQLException numa RuntimeException.
-     */
     public List<Team> getAllTeams() {
         try {
             return teamDAO.getAll();
@@ -45,18 +51,14 @@ public class TeamService {
         }
     }
 
-    /**
-     * Busca um time por ID (searchByID é o método da GenericDAO)
-     */
+
     public Optional<Team> getTeamById(UUID teamId) {
         return Optional.ofNullable(teamDAO.searchByID(teamId));
     }
 
-    /**
-     * Remove primeiro os vínculos e depois exclui o registro.
-     */
-    public void deleteTeamSafe(UUID teamId) {
+    public ResponseEntity<String> deleteTeamSafe(UUID teamId) {
         teamDAO.removeAllAgentsFromTeam(teamId);
         teamDAO.delete(teamId);
+        return ResponseEntity.ok("");
     }
 }

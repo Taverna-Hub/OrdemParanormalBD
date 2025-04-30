@@ -17,8 +17,8 @@ public class QGController extends GenericController<QGService, QG> {
     }
 
     @Override
-    protected void performRegister(QGService entity) {
-
+    protected ResponseEntity<String> performRegister(QGService entity) {
+        return null;
     }
 
     @Override

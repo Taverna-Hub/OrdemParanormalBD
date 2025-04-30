@@ -18,8 +18,8 @@
         }
 
         @Override
-        protected void performRegister(Agent agent) {
-            service.register(agent);
+        protected ResponseEntity<String> performRegister(Agent agent) {
+           return service.register(agent);
         }
 
         @Override
@@ -40,8 +40,7 @@
             System.out.println(id);
             try {
                 agent.setId(id);
-                service.updateAgent(agent);
-                return ResponseEntity.ok("Agent updated successfully.");
+                return service.updateAgent(agent);
             } catch (Exception e) {
                 return ResponseEntity.status(500).body("Failed to update agent." + e);
             }
@@ -50,8 +49,7 @@
         @Override
         public ResponseEntity<String> delete(UUID id) {
             try {
-                service.deleteAgent(id);
-                return ResponseEntity.ok("Agent deleted successfully.");
+                return service.deleteAgent(id);
             } catch (Exception e) {
                 return ResponseEntity.status(500).body("Failed to delete agent.");
             }

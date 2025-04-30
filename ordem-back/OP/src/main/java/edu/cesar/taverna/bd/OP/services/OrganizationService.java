@@ -3,6 +3,7 @@ package edu.cesar.taverna.bd.OP.services;
 import edu.cesar.taverna.bd.OP.dao.OrganizationDAO;
 import edu.cesar.taverna.bd.OP.entity.Threats.OrgMember;
 import edu.cesar.taverna.bd.OP.entity.Threats.Organization;
+import org.springframework.http.ResponseEntity;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -12,8 +13,10 @@ import java.util.UUID;
 public class OrganizationService {
     private final OrganizationDAO organizationDAO = new OrganizationDAO();
 
-    public void register(Organization organization){
+    public ResponseEntity<String> register(Organization organization){
         organizationDAO.save(organization);
+        return ResponseEntity.ok("");
+
     }
 
     public List<Organization> getAll() throws SQLException {
@@ -32,11 +35,14 @@ public class OrganizationService {
     public void delete(UUID id){
         organizationDAO.delete(id);
     }
-    public void addMember(UUID id_org, OrgMember member) throws SQLException {
+    public ResponseEntity<String> addMember(UUID id_org, OrgMember member) throws SQLException {
         organizationDAO.addMember(id_org, member);
+        return ResponseEntity.ok("");
     }
-    public void removeMember(UUID id_org, UUID member) throws SQLException {
+    public ResponseEntity<String> removeMember(UUID id_org, UUID member) throws SQLException {
         organizationDAO.removeMember(id_org, member);
+        return ResponseEntity.ok("");
+
     }
 
 

@@ -19,8 +19,8 @@ public class MissionAssignmentController extends GenericController<MissionAssign
     }
 
     @Override
-    protected void performRegister(MissionAssignment missionAssignment) {
-        service.register(missionAssignment);
+    protected ResponseEntity<String> performRegister(MissionAssignment missionAssignment) {
+        return service.register(missionAssignment);
     }
 
     @Override
@@ -48,8 +48,7 @@ public class MissionAssignmentController extends GenericController<MissionAssign
         try {
             UUID id_team = payload.get("id_team");
             UUID id_mission = payload.get("id_mission");
-            service.updateMissionAssignment(id_team, id_mission);
-            return ResponseEntity.ok("Entity updated successfully.");
+           return service.updateMissionAssignment(id_team, id_mission);
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Failed to update entity. " + e.getMessage());
         }

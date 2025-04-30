@@ -20,8 +20,8 @@ public class AddressController extends GenericController<Address, AddressService
     }
 
     @Override
-    protected void performRegister(Address address) {
-        service.register(address);
+    protected ResponseEntity<String> performRegister(Address address) {
+       return service.register(address);
     }
 
     @Override

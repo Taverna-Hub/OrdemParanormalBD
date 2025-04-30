@@ -3,6 +3,7 @@ package edu.cesar.taverna.bd.OP.services;
 
 import edu.cesar.taverna.bd.OP.dao.ParanormalEntityDAO;
 import edu.cesar.taverna.bd.OP.entity.Threats.ParanormalEntity;
+import org.springframework.http.ResponseEntity;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -12,8 +13,10 @@ import java.util.UUID;
 public class ParanormalEntityService {
     private final ParanormalEntityDAO paranormalDAO = new ParanormalEntityDAO();
 
-    public void register(ParanormalEntity entity){
-        paranormalDAO.save(entity);
+    public ResponseEntity<String> register(ParanormalEntity entity){
+         paranormalDAO.save(entity);
+        return ResponseEntity.ok("");
+
     }
 
     public List<ParanormalEntity> getAllParanormalEntities() throws SQLException {
@@ -24,11 +27,14 @@ public class ParanormalEntityService {
         return Optional.ofNullable(paranormalDAO.getById(id));
     }
 
-    public void updateParanormalEntity(ParanormalEntity entity) throws SQLException {
-        paranormalDAO.updatee(entity);
+    public ResponseEntity<String> updateParanormalEntity(ParanormalEntity entity) throws SQLException {
+         paranormalDAO.updatee(entity);
+        return ResponseEntity.ok("");
+
     }
 
-    public void deleteParanormalEntity(UUID id) throws SQLException {
-        paranormalDAO.delete(id);
+    public ResponseEntity<String> deleteParanormalEntity(UUID id) throws SQLException {
+         paranormalDAO.delete(id);
+         return ResponseEntity.ok("");
     }
 }

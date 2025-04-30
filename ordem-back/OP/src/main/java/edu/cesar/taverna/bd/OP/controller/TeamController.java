@@ -26,24 +26,22 @@ public class TeamController {
 
     @PostMapping
     public ResponseEntity<String> create(@RequestBody TeamWithAgentsDTO dto) {
-        service.createTeamWithAgents(dto.getTeam(), dto.getAgentIds());
-        return ResponseEntity.status(HttpStatus.CREATED).body("Team created with agents");
+        return service.createTeamWithAgents(dto.getTeam(), dto.getAgentIds());
     }
 
     @PostMapping("/{id}/agents")
     public ResponseEntity<String> addAgents(
             @PathVariable UUID id,
             @RequestBody List<UUID> agentIds) {
-        service.addAgents(id, agentIds);
-        return ResponseEntity.ok("Agents added to team");
+        return service.addAgents(id, agentIds);
     }
 
     @DeleteMapping("/{teamId}/agents/{agentId}")
     public ResponseEntity<String> removeAgent(
             @PathVariable UUID teamId,
             @PathVariable UUID agentId) {
-        service.removeAgent(teamId, agentId);
-        return ResponseEntity.ok("Agent removed");
+        return service.removeAgent(teamId, agentId);
+
     }
 
     @GetMapping("/{id}/agents")
@@ -68,7 +66,6 @@ public class TeamController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable UUID id) {
-        service.deleteTeamSafe(id);
-        return ResponseEntity.ok("Team deleted safely");
+        return service.deleteTeamSafe(id);
     }
 }

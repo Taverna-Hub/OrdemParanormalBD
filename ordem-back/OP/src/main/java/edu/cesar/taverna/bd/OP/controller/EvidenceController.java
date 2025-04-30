@@ -21,8 +21,8 @@ public class EvidenceController extends GenericController<Evidence, EvidenceServ
     }
 
     @Override
-    protected void performRegister(Evidence entity) {
-        service.register(entity);
+    protected ResponseEntity<String> performRegister(Evidence entity) {
+        return service.register(entity);
     }
 
     @Override

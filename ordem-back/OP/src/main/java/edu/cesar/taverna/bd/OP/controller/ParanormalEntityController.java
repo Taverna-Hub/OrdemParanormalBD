@@ -19,8 +19,9 @@ public class ParanormalEntityController extends GenericController<ParanormalEnti
         super(new ParanormalEntityService());
     }
     @Override
-    protected void performRegister(ParanormalEntity entity) {
-        service.register(entity);
+    protected ResponseEntity<String> performRegister(ParanormalEntity entity) {
+        return service.register(entity);
+
     }
 
     @Override
@@ -40,8 +41,7 @@ public class ParanormalEntityController extends GenericController<ParanormalEnti
         System.out.println(entity);
         System.out.println(id);
         try {
-            service.updateParanormalEntity(entity);
-            return ResponseEntity.ok("entity updated successfully.");
+            return service.updateParanormalEntity(entity);
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Failed to update en." + e);
         }
@@ -50,8 +50,7 @@ public class ParanormalEntityController extends GenericController<ParanormalEnti
     @Override
     public ResponseEntity<String> delete(UUID id) {
         try {
-            service.deleteParanormalEntity(id);
-            return ResponseEntity.ok("Agent deleted successfully.");
+            return service.deleteParanormalEntity(id);
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Failed to delete agent.");
         }

@@ -21,8 +21,8 @@ public class MissionController extends GenericController<Mission, MissionService
 
 
     @Override
-    protected void performRegister(Mission mission) {
-        service.register(mission);
+    protected ResponseEntity<String> performRegister(Mission mission) {
+        return service.register(mission);
     }
 
 

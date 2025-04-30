@@ -22,8 +22,8 @@ public class OrganizationController extends GenericController<Organization, Orga
 
 
     @Override
-    protected void performRegister(Organization entity) {
-        service.register(entity);
+    protected ResponseEntity<String> performRegister(Organization entity) {
+        return service.register(entity);
     }
 
     @Override
@@ -56,14 +56,14 @@ public class OrganizationController extends GenericController<Organization, Orga
     }
 
     @PostMapping("/add/{id}")
-    public void addMember(@PathVariable UUID id, @RequestBody OrgMember member) throws SQLException {
-        service.addMember(id, member);
+    public ResponseEntity<String> addMember(@PathVariable UUID id, @RequestBody OrgMember member) throws SQLException {
+        return service.addMember(id, member);
     }
 
     @DeleteMapping("/remove/{id}")
-    public void removeMember(@RequestBody Map<String, UUID> payload) throws SQLException {
+    public ResponseEntity<String> removeMember(@RequestBody Map<String, UUID> payload) throws SQLException {
         UUID id_org = payload.get("id_org");
         UUID id_member = payload.get("id_member");
-        service.removeMember(id_org, id_member);
+        return service.removeMember(id_org, id_member);
     }
 }
