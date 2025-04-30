@@ -31,7 +31,7 @@ public class AddressDAO extends GenericDAO<Address> {
 
     @Override
     protected String getUpdateSQL() {
-        return "UPDATE ADDRESS SET street = ?, number = ?, neighborhood = ?, city = ?, state = ?, postal_code = ? WHERE id_agent = ?";
+        return "UPDATE ADDRESS SET street = ?, number = ?, neighborhood = ?, city = ?, state = ?, postal_code = ? WHERE id_address = ?";
     }
 
     @Override
