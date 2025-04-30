@@ -38,20 +38,16 @@ public class AddressController extends GenericController<Address, AddressService
 
     @Override
     public ResponseEntity<String> update(UUID id, Address address) {
-        try {
+
             address.setId_address(id);
-            service.updateAddress(address);
-            return ResponseEntity.ok("Address updated successfully.");
-        } catch (Exception e) {
-            return ResponseEntity.status(500).body("Failed to update agent." + e);
-        }
+            return service.updateAddress(address);
+
     }
 
     @Override
     public ResponseEntity<String> delete(UUID id) {
         try {
-            service.deleteAddress(id);
-            return ResponseEntity.ok("Address deleted successfully.");
+            return service.deleteAddress(id);
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Failed to delete address.");
         }
