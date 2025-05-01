@@ -9,7 +9,7 @@ public class VerissimoService extends AgentService {
     
     public void register(Verissimo verissimo){
          if (verissimo.getLogin() == null){
-            verissimo.setLogin();
+            verissimo.setLogin( );
         }
          super.register(verissimo);
     }

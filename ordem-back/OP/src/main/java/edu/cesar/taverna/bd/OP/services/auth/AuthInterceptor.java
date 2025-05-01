@@ -15,7 +15,7 @@ public class AuthInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest req,
                              HttpServletResponse res,
                              Object handler) throws Exception {
-        HttpSession session = req.getSession(true);
+        HttpSession session = req.getSession(false);
         if (session == null) {
             res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             res.getWriter().write("Você precisa estar logado para poder acessar.");

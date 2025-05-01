@@ -17,12 +17,12 @@ public class VerissimoDAO extends GenericDAO<Verissimo> {
 
     @Override
     protected String getInsertSQL() {
-        return "INSERT INTO VERISSIMO (id_verissimo, login, password_ver) VALUES (?, ?, ?)";
+        return "INSERT INTO VERISSIMO (login, password_ver, id_verissimo) VALUES (?, ?, ?)";
     }
 
     @Override
     protected String getSelectByIdSQL() {
-        return "SELECT id_verissimo, login, password_ver FROM VERSSIMO WHERE id_verissimo = ?";
+        return "SELECT id_verissimo, login, password_ver FROM VERISSIMO WHERE id_verissimo = ?";
     }
 
     @Override
@@ -44,7 +44,7 @@ public class VerissimoDAO extends GenericDAO<Verissimo> {
     protected void prepareInsert(PreparedStatement stmt, Verissimo verissimo) throws SQLException {
         stmt.setString(1, verissimo.getLogin());
         stmt.setString(2, verissimo.getPassword());
-        stmt.setString(3, verissimo.getId().toString());
+        stmt.setString(3, String.valueOf(verissimo.getId()));
     }
 
     @Override

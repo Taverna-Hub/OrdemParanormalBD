@@ -2,7 +2,9 @@ package edu.cesar.taverna.bd.OP.DTO;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
 
+@Getter
 public class LoginDTO {
     private final String login;
     private final String password;
@@ -16,11 +18,4 @@ public class LoginDTO {
         this.password = password;
     }
 
-    public String getLogin() {
-        return login;
-    }
-
-    public String getPassword() {
-        return password;
-    }
 }

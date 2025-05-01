@@ -24,7 +24,7 @@ public class AuthController {
     public ResponseEntity<String> login(@RequestBody LoginDTO req, HttpSession session) {
         boolean ok = authService.authenticate(req.getLogin(), req.getPassword());
         if (ok) {
-            session.setAttribute("VERISSIMO_USER", req.getLogin());
+            session.setAttribute("login", req.getLogin());
             return ResponseEntity.ok("Login realizado com sucesso!");
         } else {
             return ResponseEntity
