@@ -197,16 +197,16 @@ INSERT INTO AGENT_RITUALS (id_agent, id_ritual) VALUES
 (@ag17,@rit14),(@ag18,@rit15);
 
 -- Missões
-INSERT INTO MISSION (id_mission, title, status, risks, objective, start_date, end_date, id_address) VALUES
-(@miss1, 'Investigação no Cemitério',               'Aberta',    'Alto',   'Investigar aparições',                '2025-04-01 07:00:00', NULL,         @addrM1),
-(@miss2, 'Combate à Seita Oculta',                  'Concluida', 'Médio',  'Desmantelar seita',                   '2025-02-01 09:00:00', '2025-03-15', @addrM2),
-(@miss3, 'Patrulha Noturna',                        'Aberta',    'Baixo',  'Monitorar atividade paranormal',      '2025-05-05 22:00:00', NULL,         @addrM3),
-(@miss4, 'Investigação na Praia',                   'Aberta',    'Médio',  'Coletar testemunhos',                 '2025-05-10 06:00:00', NULL,         @addrM4),
-(@miss5, 'Ritual de Contenção',                     'Aberta',    'Alto',   'Conter manifestação',                 '2025-05-12 20:00:00', NULL,         @addrM5),
-(@miss6, 'Reconhecimento Urbano',                   'Concluida', 'Baixo',  'Mapear pontos quentes',               '2025-04-20 10:00:00', '2025-04-21', @addrM6),
-(@miss7, 'Investigação em Fábrica Abandonada',      'Aberta',    'Alto',   'Examinar fenômenos',                  '2025-05-08 14:00:00', NULL,         @addrM7),
-(@miss8, 'Proteção de Local Histórico',             'Aberta',    'Médio',  'Garantir segurança',                  '2025-05-15 09:00:00', NULL,         @addrM8),
-(@miss9, 'Análise de Artefato',                     'Concluida', 'Baixo',  'Estudar relíquia',                    '2025-03-01 08:00:00', '2025-03-03', @addrM9);
+INSERT INTO MISSION (id_mission, title, status, risks, objective, start_date, end_date, id_address, id_hq) VALUES
+(@miss1, 'Investigação no Cemitério',               'Aberta',    'Alto',   'Investigar aparições',                '2025-04-01 07:00:00', NULL,         @addrM1, @hq1),
+(@miss2, 'Combate à Seita Oculta',                  'Concluida', 'Médio',  'Desmantelar seita',                   '2025-02-01 09:00:00', '2025-03-15', @addrM2, @hq1),
+(@miss3, 'Patrulha Noturna',                        'Aberta',    'Baixo',  'Monitorar atividade paranormal',      '2025-05-05 22:00:00', NULL,         @addrM3, @hq1),
+(@miss4, 'Investigação na Praia',                   'Aberta',    'Médio',  'Coletar testemunhos',                 '2025-05-10 06:00:00', NULL,         @addrM4, @hq2),
+(@miss5, 'Ritual de Contenção',                     'Aberta',    'Alto',   'Conter manifestação',                 '2025-05-12 20:00:00', NULL,         @addrM5, @hq2),
+(@miss6, 'Reconhecimento Urbano',                   'Concluida', 'Baixo',  'Mapear pontos quentes',               '2025-04-20 10:00:00', '2025-04-21', @addrM6, @hq2),
+(@miss7, 'Investigação em Fábrica Abandonada',      'Aberta',    'Alto',   'Examinar fenômenos',                  '2025-05-08 14:00:00', NULL,         @addrM7, @hq3),
+(@miss8, 'Proteção de Local Histórico',             'Aberta',    'Médio',  'Garantir segurança',                  '2025-05-15 09:00:00', NULL,         @addrM8, @hq3),
+(@miss9, 'Análise de Artefato',                     'Concluida', 'Baixo',  'Estudar relíquia',                    '2025-03-01 08:00:00', '2025-03-03', @addrM9, @hq3);
 
 -- Equipes
 INSERT INTO TEAM (id_team, name, specialization) VALUES
