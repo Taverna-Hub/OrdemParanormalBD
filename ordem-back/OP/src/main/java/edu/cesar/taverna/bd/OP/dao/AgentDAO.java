@@ -3,9 +3,12 @@ package edu.cesar.taverna.bd.OP.dao;
 import edu.cesar.taverna.bd.OP.config.ConnectionFactory;
 import edu.cesar.taverna.bd.OP.entity.Agent;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class AgentDAO extends GenericDAO<Agent> {
@@ -68,6 +71,38 @@ public class AgentDAO extends GenericDAO<Agent> {
         agent.setTranscended(rs.getBoolean("transcended"));
         agent.setSpecialization(rs.getString("specialization"));
         return agent;
+    }
+
+    public List<Agent> findByHQ(UUID id_hq) throws SQLException {
+        String getID = """
+                SELECT a.id_agent,
+                       a.name,
+                       a.birth_date,
+                       a.phone,
+                       a.rank_agent,
+                       a.nex,
+                       a.retired,
+                       a.transcended,
+                       a.specialization
+                FROM AGENTS a
+                JOIN AGENTS_IN_HQ ai
+                    ON a.id_agent = ai.id_agent
+                WHERE ai.id_hq = ?
+                """;
+
+        List<Agent> list = new ArrayList<>();
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(getID)) {
+            stmt.setString(1, id_hq.toString());
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Agent agent = mapResultSetToEntity(rs);
+                    list.add(agent);
+                }
+            }
+        }
+        return list;
     }
 
 }

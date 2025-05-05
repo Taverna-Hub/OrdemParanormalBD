@@ -2,6 +2,7 @@ package edu.cesar.taverna.bd.OP.services;
 
 import edu.cesar.taverna.bd.OP.dao.AgentDAO;
 import edu.cesar.taverna.bd.OP.entity.Agent;
+import org.hibernate.annotations.processing.SQL;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -84,6 +85,14 @@ public class AgentService {
         }
         agentDAO.delete(id);
         return ResponseEntity.ok("Deletado com sucesso");
+    }
+
+    public List<Agent> listByHQ(UUID id_hq) {
+        try {
+            return new AgentDAO().findByHQ(id_hq);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

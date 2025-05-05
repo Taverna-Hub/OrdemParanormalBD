@@ -12,7 +12,7 @@ public class LoginDTO {
     @JsonCreator
     public LoginDTO(
             @JsonProperty("login") String login,
-            @JsonProperty("password_ver") String password
+            @JsonProperty("password") String password
     ){
         this.login = login;
         this.password = password;

@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/login")
 public class AuthController {
@@ -21,11 +23,13 @@ public class AuthController {
     }
 
     @PostMapping
-    public ResponseEntity<String> login(@RequestBody LoginDTO req, HttpSession session) {
-        boolean ok = authService.authenticate(req.getLogin(), req.getPassword());
-        if (ok) {
-            session.setAttribute("login", req.getLogin());
-            return ResponseEntity.ok("Login realizado com sucesso!");
+    public ResponseEntity<String> login(
+            @RequestBody LoginDTO req,
+            HttpSession session) {
+        UUID hq_id = authService.authenticate(req.getLogin(), req.getPassword(), session);
+        if (hq_id != null) {
+            //session.setAttribute("login", req.getLogin());
+            return ResponseEntity.ok("Login realizado com sucesso! Você está no QG: " + hq_id);
         } else {
             return ResponseEntity
                     .status(HttpStatus.UNAUTHORIZED)
