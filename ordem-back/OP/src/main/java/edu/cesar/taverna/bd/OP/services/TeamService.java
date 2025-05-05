@@ -1,5 +1,6 @@
 package edu.cesar.taverna.bd.OP.services;
 
+import edu.cesar.taverna.bd.OP.dao.AgentDAO;
 import edu.cesar.taverna.bd.OP.dao.TeamDAO;
 import edu.cesar.taverna.bd.OP.entity.Agent;
 import edu.cesar.taverna.bd.OP.entity.Team;
@@ -60,5 +61,13 @@ public class TeamService {
         teamDAO.removeAllAgentsFromTeam(teamId);
         teamDAO.delete(teamId);
         return ResponseEntity.ok("");
+    }
+
+    public List<Team> getAllTeamByHq(UUID id_hq) {
+        try {
+            return new TeamDAO().findByHQ(id_hq);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

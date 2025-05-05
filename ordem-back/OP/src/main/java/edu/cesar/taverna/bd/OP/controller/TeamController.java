@@ -5,6 +5,8 @@ import edu.cesar.taverna.bd.OP.DTO.TeamDTO;
 import edu.cesar.taverna.bd.OP.entity.Agent;
 import edu.cesar.taverna.bd.OP.entity.Team;
 import edu.cesar.taverna.bd.OP.services.TeamService;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +16,10 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/teams")
 public class TeamController {
+    @Autowired
+    private HttpSession session;
+
+
     private final TeamService service = new TeamService();
 
     @GetMapping("/{id}")
@@ -52,7 +58,12 @@ public class TeamController {
 
     @GetMapping
     public ResponseEntity<List<TeamDTO>> getAll() {
-        List<Team> teams = service.getAllTeams();
+        UUID id_hq = (UUID) session.getAttribute("id_hq");
+        if (id_hq == null){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        List<Team> teams = service.getAllTeamByHq(id_hq);
         List<TeamDTO> dtos = teams.stream().map(t -> {
             TeamDTO dto = new TeamDTO();
             dto.setId(t.getId_team());
@@ -63,6 +74,8 @@ public class TeamController {
         }).toList();
         return ResponseEntity.ok(dtos);
     }
+
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable UUID id) {
