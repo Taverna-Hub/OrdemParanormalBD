@@ -41,10 +41,14 @@ export default {
     blue_800: '#111827',
     blue_900: '#000214',
 
+    midnight_500: '#1e2040',
+
     gray_500: '#6A7282',
 
     green_200: '#DCFCE7',
     green_600: '#016630',
+
+    teal_700: '#00866e',
 
     red_200: '#FFE2E2',
     red_600: '#C10007',

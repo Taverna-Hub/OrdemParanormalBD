@@ -12,7 +12,7 @@ export const InputWrapper = styled.div`
     align-items: center;
     background: ${theme.colors.purple_800};
     border-radius: 0.8rem;
-    border: 0.2rem solid ${theme.colors.gray_500};
+    border: 0.2rem solid ${theme.colors.midnight_500};
     transition: all 0.3s;
 
     &:focus-within {
@@ -41,6 +41,10 @@ export const Input = styled.input<IconPositionProps>`
         font-size: ${theme.font.sizes.medium};
       }
     }
+
+       &::placeholder {
+        color: ${theme.colors.gray_500};
+      }
   `}
 `;
 
@@ -57,8 +61,10 @@ export const Label = styled.label`
 export const Icon = styled.div<IconPositionProps>`
   ${({ theme, iconPosition }) => css`
     display: flex;
-    color: ${theme.colors.white};
+    color: ${theme.colors.gray_500};
     order: ${iconPosition === 'right' ? 1 : 0};
+    margin-${iconPosition}: ${theme.spacings.xxsmall};
+
 
     & > svg {
       width: 2.2rem;
