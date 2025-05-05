@@ -21,6 +21,7 @@ public class Mission {
     private LocalDate start_date;
     private LocalDate end_date;
     private UUID id_address;
+    private UUID id_hq;
 
     @JsonCreator
     public Mission(

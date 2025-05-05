@@ -23,6 +23,10 @@ public class MissionService {
         return missionDAO.getAll();
     }
 
+    public List<Mission> getAllMissionsByHQ(UUID id){
+        return missionDAO.getAllFromHQ(id);
+    }
+
     public Optional<Mission> getMissionById(UUID id) {
         return Optional.ofNullable(missionDAO.searchByID(id));
     }

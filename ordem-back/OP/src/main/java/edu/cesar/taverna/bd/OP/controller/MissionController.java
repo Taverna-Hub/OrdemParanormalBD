@@ -2,6 +2,9 @@ package edu.cesar.taverna.bd.OP.controller;
 
 import edu.cesar.taverna.bd.OP.entity.Mission;
 import edu.cesar.taverna.bd.OP.services.MissionService;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +18,8 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/missions")
 public class MissionController extends GenericController<Mission, MissionService>{
+    @Autowired
+    private HttpSession session;
     public MissionController(){
         super(new MissionService());
     }
@@ -22,13 +27,21 @@ public class MissionController extends GenericController<Mission, MissionService
 
     @Override
     protected ResponseEntity<String> performRegister(Mission mission) {
+        UUID id_hq = (UUID) session.getAttribute("id_hq");
+        mission.setId_hq(id_hq);
         return service.register(mission);
     }
 
 
     @Override
     public ResponseEntity<List<Mission>> getAll() throws SQLException {
-        return ResponseEntity.ok(service.getAllMissions());
+        UUID id_hq = (UUID) session.getAttribute("id_hq");
+        System.out.println(id_hq);
+        List<Mission> missionList = service.getAllMissionsByHQ(id_hq);
+        if (missionList.isEmpty()){
+            return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).body(null);
+        }
+        return ResponseEntity.ok(missionList);
     }
 
     @Override

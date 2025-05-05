@@ -1,19 +1,23 @@
 package edu.cesar.taverna.bd.OP.dao;
 
+import edu.cesar.taverna.bd.OP.config.ConnectionFactory;
 import edu.cesar.taverna.bd.OP.entity.Agent;
 import edu.cesar.taverna.bd.OP.entity.Mission;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class MissionDAO extends GenericDAO<Mission>{
 
     @Override
     protected String getInsertSQL() {
-        return "INSERT INTO MISSION (id_mission, title, status, risks, objective, start_date, end_date, id_address)" +
-                " VALUES (?, ? ,? ,?, ?, ?, ?, ?)";
+        return "INSERT INTO MISSION (id_mission, title, status, risks, objective, start_date, end_date, id_address, id_hq)" +
+                " VALUES (?, ? ,? ,?, ?, ?, ?, ?, ?)";
     }
 
     @Override
@@ -23,7 +27,43 @@ public class MissionDAO extends GenericDAO<Mission>{
 
     @Override
     protected String getSelectAllSQL() {
-        return "SELECT id_mission, title, status, risks, objective, start_date, end_date, id_address FROM MISSION";
+        return "SELECT id_mission, title, status, risks, objective, start_date, end_date, id_address, id_hq FROM MISSION";
+    }
+
+    public List<Mission> getAllFromHQ(UUID id){
+        List<Mission> missionList = new ArrayList<>();
+        String SQL =
+                """
+                SELECT m.id_mission,
+                 m.title,
+                 m.status,
+                 m.objective,
+                 m.risks,
+                 m.start_date,
+                 m.end_date,
+                 m.id_address,
+                 m.id_hq
+                FROM MISSION m
+                WHERE m.id_hq = ?;
+                """;
+
+        try(Connection conn = ConnectionFactory.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(SQL)) {
+            stmt.setString(1, id.toString());
+
+            try(ResultSet rs = stmt.executeQuery()){
+                while (rs.next()){
+                    missionList.add(mapResultSetToEntity(rs));
+                }
+            }
+
+            return missionList;
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro na busca por missões do HQ: ", e);
+        }
+
+
     }
 
     @Override
@@ -46,6 +86,7 @@ public class MissionDAO extends GenericDAO<Mission>{
         stmt.setDate(6, java.sql.Date.valueOf(mission.getStart_date()));
         stmt.setDate(7, mission.getEnd_date() != null ? java.sql.Date.valueOf(mission.getEnd_date()) : null);
         stmt.setString(8, mission.getId_address().toString());
+        stmt.setString(9, mission.getId_hq().toString());
     }
 
     @Override
@@ -70,6 +111,7 @@ public class MissionDAO extends GenericDAO<Mission>{
         mission.setStart_date(rs.getDate("start_date").toLocalDate());
         mission.setEnd_date(rs.getDate("end_date") != null ? rs.getDate("end_date").toLocalDate() : null);
         mission.setId_address(UUID.fromString(rs.getString("id_address")));
+        mission.setId_hq(UUID.fromString(rs.getString("id_hq")));
         return mission;
     }
 }

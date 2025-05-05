@@ -14,7 +14,7 @@ import java.util.UUID;
 
 
 @RestController
-@RequestMapping("/Organization")
+@RequestMapping("/organization")
 public class OrganizationController extends GenericController<Organization, OrganizationService>{
     public OrganizationController() {
         super(new OrganizationService());

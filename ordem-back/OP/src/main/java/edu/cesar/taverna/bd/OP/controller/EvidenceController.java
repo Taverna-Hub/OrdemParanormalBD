@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/Evidence")
+@RequestMapping("/evidence")
 public class EvidenceController extends GenericController<Evidence, EvidenceService>{
     public EvidenceController() {
         super(new EvidenceService());

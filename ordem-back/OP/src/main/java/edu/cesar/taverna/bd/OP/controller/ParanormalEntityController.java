@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/ParanormalEntity")
+@RequestMapping("/paranormalEntity")
 public class ParanormalEntityController extends GenericController<ParanormalEntity, ParanormalEntityService> {
 
     public ParanormalEntityController() {
