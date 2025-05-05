@@ -1,5 +1,6 @@
     package edu.cesar.taverna.bd.OP.controller;
 
+    import edu.cesar.taverna.bd.OP.DTO.AgentByRanksDTO;
     import edu.cesar.taverna.bd.OP.entity.Agent;
     import edu.cesar.taverna.bd.OP.services.AgentService;
     import jakarta.servlet.http.HttpSession;
@@ -70,6 +71,17 @@
                 return ResponseEntity.status(500).body("Failed to delete agent.");
             }
 
+        }
+
+        @GetMapping("/ranks")
+        public ResponseEntity<List<AgentByRanksDTO>> getAgentsRanks() {
+            UUID id_hq = (UUID) session.getAttribute("id_hq");
+            if (id_hq == null){
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            }
+
+            List<AgentByRanksDTO> ranks = service.getAgentsRanks(id_hq);
+            return ResponseEntity.ok(ranks);
         }
 
         /*

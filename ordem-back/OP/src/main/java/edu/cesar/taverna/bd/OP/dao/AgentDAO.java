@@ -1,5 +1,6 @@
 package edu.cesar.taverna.bd.OP.dao;
 
+import edu.cesar.taverna.bd.OP.DTO.AgentByRanksDTO;
 import edu.cesar.taverna.bd.OP.config.ConnectionFactory;
 import edu.cesar.taverna.bd.OP.entity.Agent;
 
@@ -103,6 +104,34 @@ public class AgentDAO extends GenericDAO<Agent> {
             }
         }
         return list;
+    }
+
+    public List<AgentByRanksDTO> getRankAgents(UUID id_hq) throws SQLException {
+        List<AgentByRanksDTO> agentsRank = new ArrayList<>();
+
+        String getID = """
+                SELECT a.rank_agent, COUNT(*) AS total_agents
+                FROM AGENTS a
+                JOIN AGENTS_IN_HQ ai ON a.id_agent = ai.id_agent
+                WHERE ai.id_hq = ?
+                GROUP BY a.rank_agent
+            """;
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(getID)) {
+            stmt.setString(1, id_hq.toString());
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    String rank = rs.getString("rank_agent");
+                    int total = rs.getInt("total_agents");
+                    agentsRank.add(new AgentByRanksDTO(rank, total));
+                }
+            }
+        }
+
+
+        return agentsRank;
     }
 
 }

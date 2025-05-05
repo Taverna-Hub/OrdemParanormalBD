@@ -1,5 +1,6 @@
 package edu.cesar.taverna.bd.OP.services;
 
+import edu.cesar.taverna.bd.OP.DTO.AgentByRanksDTO;
 import edu.cesar.taverna.bd.OP.dao.AgentDAO;
 import edu.cesar.taverna.bd.OP.entity.Agent;
 import org.hibernate.annotations.processing.SQL;
@@ -95,4 +96,12 @@ public class AgentService {
         }
     }
 
+
+    public List<AgentByRanksDTO> getAgentsRanks(UUID id_hq) {
+        try {
+            return agentDAO.getRankAgents(id_hq);
+        } catch (SQLException e) {
+            throw  new RuntimeException(e);
+        }
+    }
 }
