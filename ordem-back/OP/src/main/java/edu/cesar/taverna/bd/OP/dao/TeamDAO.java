@@ -173,4 +173,29 @@ public class TeamDAO extends GenericDAO<Team> {
             throw new RuntimeException("Erro ao obter agentes do time", e);
         }
     }
+
+    public List<Team> findByHQ(UUID id_hq) throws SQLException {
+        String getID = """
+                SELECT DISTINCT t.id_team, t.name, t.specialization
+                FROM AGENTS_IN_HQ aih
+                JOIN AGENTS_IN_TEAM ait ON aih.id_agent = ait.id_agent
+                JOIN TEAM t ON ait.id_team = t.id_team
+                WHERE aih.id_hq = ?;
+                """;
+
+        List<Team> list = new ArrayList<>();
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(getID)) {
+            stmt.setString(1, id_hq.toString());
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Team team = mapResultSetToEntity(rs);
+                    list.add(team);
+                }
+            }
+        }
+        return list;
+    }
+
 }
