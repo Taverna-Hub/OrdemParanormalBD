@@ -1,5 +1,7 @@
 package edu.cesar.taverna.bd.OP.dao;
 
+import edu.cesar.taverna.bd.OP.DTO.AgentByRanksDTO;
+import edu.cesar.taverna.bd.OP.DTO.AgentsBySpecializationDTO;
 import edu.cesar.taverna.bd.OP.DTO.MissionByStatusDTO;
 import edu.cesar.taverna.bd.OP.DTO.TeamsSpecializationsInHQ;
 import edu.cesar.taverna.bd.OP.config.ConnectionFactory;
@@ -92,5 +94,34 @@ public class QGDAO{
         }
 
         return missionsStatus;
+    }
+
+    public List<AgentsBySpecializationDTO> getSpecializationsAgents(UUID id_hq) {
+        List<AgentsBySpecializationDTO> agentsSpecialization = new ArrayList<>();
+
+        String SQL = """
+                SELECT a.specialization, COUNT(*) AS total
+                FROM AGENTS a
+                JOIN AGENTS_IN_HQ ai ON a.id_agent = ai.id_agent
+                WHERE ai.id_hq = ?
+                GROUP BY a.specialization
+            """;
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(SQL)) {
+            stmt.setString(1, id_hq.toString());
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    String specialization = rs.getString("specialization");
+                    int total = rs.getInt("total");
+                    agentsSpecialization.add(new AgentsBySpecializationDTO(specialization, total));
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return agentsSpecialization;
     }
 }

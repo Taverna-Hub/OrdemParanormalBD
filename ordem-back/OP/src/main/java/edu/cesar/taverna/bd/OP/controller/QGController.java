@@ -1,5 +1,6 @@
 package edu.cesar.taverna.bd.OP.controller;
 
+import edu.cesar.taverna.bd.OP.DTO.AgentsBySpecializationDTO;
 import edu.cesar.taverna.bd.OP.DTO.MissionByStatusDTO;
 import edu.cesar.taverna.bd.OP.DTO.TeamsSpecializationsInHQ;
 import edu.cesar.taverna.bd.OP.services.QGService;
@@ -32,6 +33,12 @@ public class QGController {
     public List<MissionByStatusDTO> getMissionsByStatus() {
         UUID id = (UUID) session.getAttribute("id_hq");
         return service.getMissionByStatus(id);
+    }
+
+    @GetMapping("/agents/specialization")
+    public List<AgentsBySpecializationDTO> getAgentsBySpecializationInHq() {
+        UUID id = (UUID) session.getAttribute("id_hq");
+        return service.getAgentsBySpecializationInHq(id);
     }
 
 }
