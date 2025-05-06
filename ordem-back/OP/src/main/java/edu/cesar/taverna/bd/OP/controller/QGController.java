@@ -1,5 +1,6 @@
 package edu.cesar.taverna.bd.OP.controller;
 
+import edu.cesar.taverna.bd.OP.DTO.AgentsBySpecializationDTO;
 import edu.cesar.taverna.bd.OP.DTO.MissionByStatusDTO;
 import edu.cesar.taverna.bd.OP.DTO.NexByHqDTO;
 import edu.cesar.taverna.bd.OP.DTO.TeamsSpecializationsInHQ;
@@ -40,5 +41,11 @@ public class QGController {
         return service.getMeanNexByHQ();
     }
 
+
+    @GetMapping("/agents/specialization")
+    public List<AgentsBySpecializationDTO> getAgentsBySpecializationInHq() {
+        UUID id = (UUID) session.getAttribute("id_hq");
+        return service.getAgentsBySpecializationInHq(id);
+    }
 
 }
