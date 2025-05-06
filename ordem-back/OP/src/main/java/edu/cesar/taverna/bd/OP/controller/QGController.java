@@ -1,6 +1,7 @@
 package edu.cesar.taverna.bd.OP.controller;
 
 import edu.cesar.taverna.bd.OP.DTO.MissionByStatusDTO;
+import edu.cesar.taverna.bd.OP.DTO.NexByHqDTO;
 import edu.cesar.taverna.bd.OP.DTO.TeamsSpecializationsInHQ;
 import edu.cesar.taverna.bd.OP.services.QGService;
 import jakarta.servlet.http.HttpSession;
@@ -21,7 +22,7 @@ public class QGController {
     private final QGService service = new QGService();
 
 
-    @GetMapping("/teamsSpecializations")
+    @GetMapping("/teams/specializations")
     private List<TeamsSpecializationsInHQ> getSpecialzationsInHQ(){
         UUID id = (UUID) session.getAttribute("id_hq");
         return service.getSpecializationsInHQ(id);
@@ -33,5 +34,11 @@ public class QGController {
         UUID id = (UUID) session.getAttribute("id_hq");
         return service.getMissionByStatus(id);
     }
+
+    @GetMapping("/agents/nex")
+    public List<NexByHqDTO> getMeanNexByHQ() {
+        return service.getMeanNexByHQ();
+    }
+
 
 }
