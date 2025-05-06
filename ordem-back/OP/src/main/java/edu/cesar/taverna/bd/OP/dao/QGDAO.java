@@ -1,5 +1,6 @@
 package edu.cesar.taverna.bd.OP.dao;
 
+import edu.cesar.taverna.bd.OP.DTO.MissionByStatusDTO;
 import edu.cesar.taverna.bd.OP.DTO.TeamsSpecializationsInHQ;
 import edu.cesar.taverna.bd.OP.config.ConnectionFactory;
 import lombok.Data;
@@ -64,4 +65,32 @@ public class QGDAO{
         return specializations;
     }
 
+    public List<MissionByStatusDTO> getMissionsByStatus(UUID id) {
+        List<MissionByStatusDTO> missionsStatus = new ArrayList<>();
+
+        String SQL = """
+                SELECT m.status, COUNT(*) AS total
+                FROM MISSION m
+                JOIN HQ hq ON hq.id_hq = m.id_hq
+                WHERE m.id_hq = ?
+                GROUP BY m.status
+                """;
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(SQL)) {
+            stmt.setString(1, id.toString());
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    String status = rs.getString("status");
+                    int total = rs.getInt("total");
+                    missionsStatus.add(new MissionByStatusDTO(status, total));
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return missionsStatus;
+    }
 }
