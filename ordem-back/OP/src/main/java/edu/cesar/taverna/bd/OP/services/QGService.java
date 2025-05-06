@@ -1,11 +1,17 @@
 package edu.cesar.taverna.bd.OP.services;
 
-import edu.cesar.taverna.bd.OP.dao.MissionDAO;
-import edu.cesar.taverna.bd.OP.dao.TeamDAO;
-import edu.cesar.taverna.bd.OP.entity.Mission;
-import edu.cesar.taverna.bd.OP.entity.Team;
+import edu.cesar.taverna.bd.OP.DTO.TeamsSpecializationsInHQ;
+import edu.cesar.taverna.bd.OP.dao.QGDAO;
+
+import java.util.List;
+import java.util.UUID;
 
 public class QGService {
 
+    private final QGDAO hqDAO = new QGDAO();
+
+    public List<TeamsSpecializationsInHQ> getSpecializationsInHQ(UUID id){
+        return hqDAO.getSpecializationsInHQ(id);
+    }
 
 }

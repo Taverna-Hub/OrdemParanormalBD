@@ -1,56 +1,22 @@
 package edu.cesar.taverna.bd.OP.dao;
 
-import edu.cesar.taverna.bd.OP.entity.QG;
+import edu.cesar.taverna.bd.OP.DTO.TeamsSpecializationsInHQ;
+import edu.cesar.taverna.bd.OP.config.ConnectionFactory;
+import lombok.Data;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import static edu.cesar.taverna.bd.OP.config.ConnectionFactory.getConnection;
 
-public class QGDAO extends GenericDAO<QG>{
+@Data
+public class QGDAO{
 
-    @Override
-    protected String getInsertSQL() {
-        return "INSERT INTO QG (id, name, security, location, sales_amount, verissimo_id) VALUES (?, ?, ?, ?, ?, ?)";
-    }
-
-    @Override
-    protected String getSelectByIdSQL() {
-        return "SELECT id, name, security, location, sales_amount, verissimo_id FROM QG WHERE id = ?";
-    }
-
-    @Override
-    protected String getSelectAllSQL() {
-        return "SELECT id, name, security, location, sales_amount, verissimo_id FROM QG";
-    }
-
-    @Override
-    protected String getDeleteSQL() {
-        return "DELETE FROM QG WHERE id = ?";
-    }
-
-    @Override
-    protected String getUpdateSQL() {
-        return "UPDATE QG SET name = ?, security = ?, location = ?, sales_amount = ?, verissimo_id = ? WHERE id = ?";
-    }
-
-    @Override
-    protected void prepareInsert(PreparedStatement stmt, QG entity) throws SQLException {
-
-    }
-
-    @Override
-    protected void prepareUpdate(PreparedStatement stmt, QG entity) throws SQLException {
-
-    }
-
-    @Override
-    protected QG mapResultSetToEntity(ResultSet rs) throws SQLException {
-        return null;
-    }
 
     public UUID findQGIdByVerissimo(UUID verissimo_id) throws SQLException {
         String selectHQ = "SELECT id_hq FROM HQ WHERE id_verissimo = ?";
@@ -66,6 +32,36 @@ public class QGDAO extends GenericDAO<QG>{
         }
 
         return null;
+    }
+
+    public List<TeamsSpecializationsInHQ> getSpecializationsInHQ(UUID id){
+        List<TeamsSpecializationsInHQ> specializations = new ArrayList<>();
+
+        String SQL =
+                """
+                SELECT T.specialization, COUNT(*) as quantity
+                FROM HQ H
+                 JOIN AGENTS_IN_HQ AH ON H.id_hq = AH.id_hq
+                 JOIN AGENTS_IN_TEAM AT ON AH.id_agent = AT.id_agent
+                 JOIN TEAM T ON AT.id_team = T.id_team
+                WHERE H.id_hq = ?
+                group by T.specialization;
+                """;
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(SQL)) {
+            stmt.setString(1, id.toString());
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    String specialization = rs.getString("specialization");
+                    int quantity = rs.getInt("quantity");
+                    specializations.add(new TeamsSpecializationsInHQ(specialization, quantity));
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return specializations;
     }
 
 }

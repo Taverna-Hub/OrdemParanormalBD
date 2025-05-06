@@ -1,43 +1,32 @@
 package edu.cesar.taverna.bd.OP.controller;
 
-import edu.cesar.taverna.bd.OP.entity.QG;
+import edu.cesar.taverna.bd.OP.DTO.TeamsSpecializationsInHQ;
 import edu.cesar.taverna.bd.OP.services.QGService;
-import org.springframework.http.ResponseEntity;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.UUID;
 
-public class QGController extends GenericController<QGService, QG> {
+@RestController
+@RequestMapping("/QG")
+public class QGController {
 
-    private final QGService qgService = new QGService();
+    @Autowired
+    private HttpSession session;
+    private final QGService service = new QGService();
 
-    public QGController(QG service) {
-        super(service);
+
+    @GetMapping("/teamsSpecializations")
+    private List<TeamsSpecializationsInHQ> getSpecialzationsInHQ(){
+        UUID id = (UUID) session.getAttribute("id_hq");
+        return service.getSpecializationsInHQ(id);
     }
 
-    @Override
-    protected ResponseEntity<String> performRegister(QGService entity) {
-        return null;
-    }
 
-    @Override
-    public ResponseEntity<List<QGService>> getAll() throws SQLException {
-        return null;
-    }
 
-    @Override
-    public ResponseEntity<QGService> getById(UUID id) {
-        return null;
-    }
 
-    @Override
-    public ResponseEntity<String> update(UUID id, QGService entity) {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity<String> delete(UUID id) {
-        return null;
-    }
 }
