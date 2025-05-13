@@ -1,6 +1,5 @@
 package edu.cesar.taverna.bd.OP.dao;
 
-import edu.cesar.taverna.bd.OP.DTO.AgentByRanksDTO;
 import edu.cesar.taverna.bd.OP.DTO.AgentsBySpecializationDTO;
 import edu.cesar.taverna.bd.OP.DTO.MissionByStatusDTO;
 import edu.cesar.taverna.bd.OP.DTO.TeamsSpecializationsInHQ;
