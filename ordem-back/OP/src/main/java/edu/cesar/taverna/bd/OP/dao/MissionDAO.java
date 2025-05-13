@@ -1,5 +1,6 @@
 package edu.cesar.taverna.bd.OP.dao;
 
+import edu.cesar.taverna.bd.OP.DTO.AgentsBySpecializationDTO;
 import edu.cesar.taverna.bd.OP.config.ConnectionFactory;
 import edu.cesar.taverna.bd.OP.entity.Agent;
 import edu.cesar.taverna.bd.OP.entity.Mission;
@@ -113,5 +114,37 @@ public class MissionDAO extends GenericDAO<Mission>{
         mission.setId_address(UUID.fromString(rs.getString("id_address")));
         mission.setId_hq(UUID.fromString(rs.getString("id_hq")));
         return mission;
+    }
+
+    public List<AgentsBySpecializationDTO> getAgentSpecializationMission(UUID id_hq, UUID id_mission) {
+        List<AgentsBySpecializationDTO> agentsSpecialization = new ArrayList<>();
+
+        String SQL = """
+                SELECT a.specialization, COUNT(*) AS total
+                FROM AGENTS a
+                JOIN AGENTS_IN_HQ ai ON a.id_agent = ai.id_agent
+                JOIN AGENTS_IN_TEAM at ON at.id_agent = a.id_agent
+                JOIN MISSION_ASSIGNMENT ma ON ma.id_team = at.id_team 
+                WHERE ai.id_hq = ? AND ma.id_mission = ?
+                GROUP BY a.specialization
+            """;
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(SQL)) {
+            stmt.setString(1, id_hq.toString());
+            stmt.setString(2, id_mission.toString());
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    String specialization = rs.getString("specialization");
+                    int total = rs.getInt("total");
+                    agentsSpecialization.add(new AgentsBySpecializationDTO(specialization, total));
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return agentsSpecialization;
     }
 }

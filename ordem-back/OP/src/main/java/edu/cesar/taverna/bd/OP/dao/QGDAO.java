@@ -1,6 +1,9 @@
 package edu.cesar.taverna.bd.OP.dao;
 
-import edu.cesar.taverna.bd.OP.DTO.*;
+import edu.cesar.taverna.bd.OP.DTO.AgentsBySpecializationDTO;
+import edu.cesar.taverna.bd.OP.DTO.MissionByStatusDTO;
+import edu.cesar.taverna.bd.OP.DTO.NexByHqDTO;
+import edu.cesar.taverna.bd.OP.DTO.TeamsSpecializationsInHQ;
 import edu.cesar.taverna.bd.OP.config.ConnectionFactory;
 import lombok.Data;
 
