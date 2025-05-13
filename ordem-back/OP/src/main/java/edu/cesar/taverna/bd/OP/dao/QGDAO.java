@@ -1,10 +1,6 @@
 package edu.cesar.taverna.bd.OP.dao;
 
-import edu.cesar.taverna.bd.OP.DTO.AgentByRanksDTO;
-import edu.cesar.taverna.bd.OP.DTO.AgentsBySpecializationDTO;
-import edu.cesar.taverna.bd.OP.DTO.MissionByStatusDTO;
-import edu.cesar.taverna.bd.OP.DTO.NexByHqDTO;
-import edu.cesar.taverna.bd.OP.DTO.TeamsSpecializationsInHQ;
+import edu.cesar.taverna.bd.OP.DTO.*;
 import edu.cesar.taverna.bd.OP.config.ConnectionFactory;
 import lombok.Data;
 
@@ -152,5 +148,46 @@ public class QGDAO{
         }
 
         return agentsSpecialization;
+    }
+
+    public List<RankAgentsDTO> getRankAgentsByHQ(UUID id){
+        List<RankAgentsDTO> rankList = new ArrayList<>();
+
+        String SQL =
+                """
+                        SELECT a.name, (
+                            SELECT COUNT(*)
+                            FROM AGENTS_IN_TEAM ait
+                                JOIN TEAM t ON ait.id_team = t.id_team
+                                JOIN MISSION_ASSIGNMENT ma ON ma.id_team = t.id_team
+                                JOIN MISSION m ON m.id_mission = ma.id_mission
+                            WHERE ait.id_agent = a.id_agent
+                            AND m.status = 'Concluida'
+                            ) as missoes_concluidas
+                        FROM AGENTS a
+                            JOIN AGENTS_IN_HQ aq ON a.id_agent = aq.id_agent
+                        WHERE aq.id_hq = ?
+                        ORDER BY missoes_concluidas DESC;
+                """;
+
+        try(Connection conn = ConnectionFactory.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(SQL)){
+            stmt.setString(1, id.toString());
+            try(ResultSet rs = stmt.executeQuery()){
+                while (rs.next()){
+
+                    String name = rs.getString("name");
+                    long count_missions = rs.getLong("missoes_concluidas");
+
+                    rankList.add(new RankAgentsDTO(name, count_missions));
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return rankList;
+
     }
 }

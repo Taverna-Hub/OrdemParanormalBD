@@ -1,9 +1,6 @@
 package edu.cesar.taverna.bd.OP.controller;
 
-import edu.cesar.taverna.bd.OP.DTO.AgentsBySpecializationDTO;
-import edu.cesar.taverna.bd.OP.DTO.MissionByStatusDTO;
-import edu.cesar.taverna.bd.OP.DTO.NexByHqDTO;
-import edu.cesar.taverna.bd.OP.DTO.TeamsSpecializationsInHQ;
+import edu.cesar.taverna.bd.OP.DTO.*;
 import edu.cesar.taverna.bd.OP.services.QGService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +43,12 @@ public class QGController {
     public List<AgentsBySpecializationDTO> getAgentsBySpecializationInHq() {
         UUID id = (UUID) session.getAttribute("id_hq");
         return service.getAgentsBySpecializationInHq(id);
+    }
+
+    @GetMapping("/agents/rank")
+    public List<RankAgentsDTO> getRankAgentsByHQ(){
+        UUID id = (UUID) session.getAttribute("id_hq");
+        return service.getRankAgentsByHQ(id);
     }
 
 }
