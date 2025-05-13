@@ -2,6 +2,7 @@ package edu.cesar.taverna.bd.OP.dao;
 
 import edu.cesar.taverna.bd.OP.DTO.AgentsBySpecializationDTO;
 import edu.cesar.taverna.bd.OP.DTO.MissionByStatusDTO;
+import edu.cesar.taverna.bd.OP.DTO.NexByHqDTO;
 import edu.cesar.taverna.bd.OP.DTO.TeamsSpecializationsInHQ;
 import edu.cesar.taverna.bd.OP.config.ConnectionFactory;
 import lombok.Data;
@@ -18,6 +19,8 @@ import static edu.cesar.taverna.bd.OP.config.ConnectionFactory.getConnection;
 
 @Data
 public class QGDAO{
+
+
 
 
     public UUID findQGIdByVerissimo(UUID verissimo_id) throws SQLException {
@@ -94,6 +97,32 @@ public class QGDAO{
 
         return missionsStatus;
     }
+
+    public List<NexByHqDTO> getNexbyHQ(){
+        List<NexByHqDTO> nexByHq = new ArrayList<>();
+
+        String SQL =
+                """
+                Select h.name, AVG(a.nex) as nivel_de_exposição_medio
+                FROM AGENTS a, HQ h, AGENTS_IN_HQ ahq
+                where a.id_agent = ahq.id_agent and h.id_hq = ahq.id_hq
+                GROUP BY h.name;
+                """;
+        try(Connection conn = ConnectionFactory.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(SQL);
+            ResultSet rs = stmt.executeQuery()){
+                while (rs.next()) {
+                    int meanNext = rs.getInt("nivel_de_exposição_medio");
+                    String HQ = rs.getString("name");
+                    nexByHq.add(new NexByHqDTO(meanNext, HQ));
+                }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return nexByHq;
+    }
+
 
     public List<AgentsBySpecializationDTO> getSpecializationsAgents(UUID id_hq) {
         List<AgentsBySpecializationDTO> agentsSpecialization = new ArrayList<>();

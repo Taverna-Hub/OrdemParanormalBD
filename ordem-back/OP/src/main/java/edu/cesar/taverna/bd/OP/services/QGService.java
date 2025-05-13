@@ -2,6 +2,7 @@ package edu.cesar.taverna.bd.OP.services;
 
 import edu.cesar.taverna.bd.OP.DTO.AgentsBySpecializationDTO;
 import edu.cesar.taverna.bd.OP.DTO.MissionByStatusDTO;
+import edu.cesar.taverna.bd.OP.DTO.NexByHqDTO;
 import edu.cesar.taverna.bd.OP.DTO.TeamsSpecializationsInHQ;
 import edu.cesar.taverna.bd.OP.dao.QGDAO;
 
@@ -18,6 +19,10 @@ public class QGService {
 
     public List<MissionByStatusDTO> getMissionByStatus(UUID id) {
         return hqDAO.getMissionsByStatus(id);
+    }
+
+    public List<NexByHqDTO> getMeanNexByHQ(){
+        return hqDAO.getNexbyHQ();
     }
 
     public List<AgentsBySpecializationDTO> getAgentsBySpecializationInHq(UUID id) {
