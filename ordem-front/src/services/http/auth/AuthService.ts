@@ -2,13 +2,13 @@ import { api } from '../../../lib/axios';
 
 export type LoginProps = {
   login: string;
-  password_ver: string;
+  password: string;
 };
 export const AuthService = {
-  login: async ({ login, password_ver }: LoginProps) => {
+  login: async ({ login, password }: LoginProps) => {
     const { data } = await api.post(`/login`, {
       login,
-      password_ver,
+      password,
     });
 
     return data;

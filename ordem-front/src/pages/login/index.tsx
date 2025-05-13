@@ -14,8 +14,8 @@ export function Login() {
 
   const today = new Date();
 
-  async function handleSubmitLogin({ login, password_ver }: LoginProps) {
-    handleLogin({ login, password_ver });
+  async function handleSubmitLogin({ login, password }: LoginProps) {
+    handleLogin({ login, password });
   }
 
   return (
@@ -40,7 +40,7 @@ export function Login() {
           <Input
             label="Senha"
             type="password"
-            {...register('password_ver')}
+            {...register('password')}
             icon={<FiLock />}
             placeholder="Digite sua senha"
           />
