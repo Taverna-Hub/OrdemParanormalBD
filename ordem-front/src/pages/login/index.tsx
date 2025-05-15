@@ -27,8 +27,8 @@ export function Login() {
         </S.Icon>
         <S.LoginForm onSubmit={handleSubmit(handleSubmitLogin)}>
           <header>
-            <h2>Ordem Paranormal</h2>
-            <p>Sistema de Gerenciamento de Operações Paranormais</p>
+            <h2>UMBRA</h2>
+            <p>Unidade de Monitoramento de Bizarros e Realidades Alternativas</p>
           </header>
 
           <Input
