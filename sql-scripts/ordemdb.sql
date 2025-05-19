@@ -249,5 +249,29 @@ END $$
 
 DELIMITER ;
 
+DELIMITER $$
+
+CREATE PROCEDURE GetAvgMissionDurationByHqAndDate(
+    IN id VARCHAR(36),
+    IN month INT,
+    IN year INT
+)
+BEGIN
+    SELECT
+        hq.name AS hq_name,
+        AVG(DATEDIFF(m.end_date, m.start_date)) AS avg_duration_days
+    FROM
+        MISSION m
+            JOIN
+        HQ hq ON m.id_hq = hq.id_hq
+    WHERE
+        m.id_hq = id
+      AND m.status = 'Concluida'
+      AND m.end_date <= LAST_DAY(STR_TO_DATE(CONCAT(year, '-', month, '-01'), '%Y-%m-%d'))
+    GROUP BY
+        hq.name;
+END $$
+DELIMITER ;
+
 
 

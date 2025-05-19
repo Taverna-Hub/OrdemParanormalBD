@@ -2,12 +2,10 @@ package edu.cesar.taverna.bd.OP.dao;
 
 import edu.cesar.taverna.bd.OP.DTO.*;
 import edu.cesar.taverna.bd.OP.config.ConnectionFactory;
+import edu.cesar.taverna.bd.OP.entity.Mission;
 import lombok.Data;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -185,6 +183,125 @@ public class QGDAO{
         }
 
         return rankList;
-
     }
+
+    public FinishedMissionDTO getFinishedMissions(UUID id, Integer month, Integer year) {
+        String SQL =
+                """
+                   SELECT
+                   hq.name AS hq_name,
+                   COUNT(CASE WHEN m.status = 'Concluida' THEN 1 END) AS total_finished,
+                   COUNT(CASE
+                             WHEN m.status = 'Concluida'
+                              AND MONTH(m.end_date) = ?
+                              AND YEAR(m.end_date) = ?
+                          THEN 1
+                        END) AS total_finished_month
+                   FROM MISSION m
+                   JOIN HQ hq ON m.id_hq = hq.id_hq
+                   WHERE m.id_hq = ?
+                   GROUP BY hq.name;
+               """;
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(SQL)) {
+            stmt.setInt(1, month);
+            stmt.setInt(2, year);
+            stmt.setString(3, id.toString());
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                String hqName = rs.getString("hq_name");
+                int totalFinished = rs.getInt("total_finished");
+                int totalFinishedMonth = rs.getInt("total_finished_month");
+                return new FinishedMissionDTO(hqName, totalFinished, totalFinishedMonth);
+            } else {
+                return new FinishedMissionDTO(null, 0, 0);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ActiveAgentsDTO getActiveAgents(UUID id) {
+        String SQL =
+                """
+                    SELECT COUNT(*) AS total_agents, SUM(CASE WHEN a.retired = FALSE THEN 1 ELSE 0 END) AS active_agents
+                    FROM AGENTS a
+                     JOIN AGENTS_IN_HQ ahq ON a.id_agent = ahq.id_agent
+                    WHERE ahq.id_hq = ?
+                """;
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(SQL)) {
+            stmt.setString(1, id.toString());
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                int totalAgents = rs.getInt("total_agents");
+                int activeAgents = rs.getInt("active_agents");
+                return new ActiveAgentsDTO(totalAgents, activeAgents);
+            } else {
+                return new ActiveAgentsDTO(0, 0);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public OpenMissionsDTO getOpenMissions(UUID id) {
+        String SQL =
+                """
+                SELECT hq.name AS hq_name, COUNT(*) AS open_missions
+                FROM MISSION m
+                JOIN HQ hq ON m.id_hq = hq.id_hq
+                WHERE m.id_hq = ?
+                  AND m.status = 'Concluida'
+                GROUP BY hq.name;
+                """;
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(SQL)) {
+            stmt.setString(1, id.toString());
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                String hqName = rs.getString("hq_name");
+                int total = rs.getInt("open_missions");
+                return new OpenMissionsDTO(hqName, total);
+            } else {
+                return new OpenMissionsDTO(null, 0);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public MissionAvgDurationDTO getMissionAverageDuration(UUID id, int month, int year) {
+        String SQL = "{CALL GET_AVG_MISSION_DURATION_BY_HQ_AND_DATE(?, ?, ?)}";
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             CallableStatement stmt = conn.prepareCall(SQL)) {
+
+            stmt.setString(1, id.toString());
+            stmt.setInt(2, month);
+            stmt.setInt(3, year);
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                String hqName = rs.getString("hq_name");
+                double avgDuration = rs.getDouble("avg_duration_days");
+                return new MissionAvgDurationDTO(hqName, avgDuration);
+            } else {
+                return new MissionAvgDurationDTO(null, 0.0);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

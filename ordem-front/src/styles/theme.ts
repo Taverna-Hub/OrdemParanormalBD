@@ -45,7 +45,10 @@ export default {
 
     gray_500: '#6A7282',
 
+    slate_700: 'oklch(37.2% 0.044 257.287)',
+
     green_200: '#DCFCE7',
+    green_500: 'oklch(62.7% 0.194 149.214)',
     green_600: '#016630',
 
     teal_700: '#00866e',

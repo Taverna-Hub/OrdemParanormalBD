@@ -1,10 +1,10 @@
-import { Navigate, useLocation } from "react-router";
+import { Navigate, useLocation } from 'react-router';
 
-export function ProtectedRoute({children}: any) {
+export function ProtectedRoute({ children }: any) {
   const location = useLocation();
 
   const isAuthenticated = () => {
-    return !!localStorage.getItem("ordem:auth"); 
+    return !!localStorage.getItem('ordem:auth');
   };
 
   if (!isAuthenticated()) {
@@ -12,5 +12,4 @@ export function ProtectedRoute({children}: any) {
   }
 
   return children;
-};
-
+}
