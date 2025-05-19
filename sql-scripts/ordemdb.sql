@@ -187,3 +187,28 @@ CREATE TABLE MEMBERS (
      role VARCHAR(30) CHECK (role IN ('Lider', 'Pesquisador', 'Ocultista', 'Simpatizante')),
      FOREIGN KEY (id_organization) REFERENCES PARANORMAL_ORGANIZATION(id_organization) ON DELETE CASCADE
 );
+
+DELIMITER $$
+
+CREATE TRIGGER TRG_VERIFY_CEP
+    BEFORE INSERT ON ADDRESS
+    FOR EACH ROW
+BEGIN
+    IF CHAR_LENGTH(NEW.postal_code) != 9 THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'CEP inválido. Formato esperado: 00000-000';
+    END IF;
+
+    IF SUBSTRING(NEW.postal_code, 6, 1) != '-' THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'CEP inválido. Formato esperado: 00000-000';
+    END IF;
+
+    IF NOT (SUBSTRING(NEW.postal_code, 1, 5) REGEXP '^[0-9]{5}$' AND SUBSTRING(NEW.postal_code, 7, 3) REGEXP '^[0-9]{3}$') THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'CEP inválido. Deve conter apenas dígitos no formato 00000-000';
+    END IF;
+END$$
+
+DELIMITER ;
+
