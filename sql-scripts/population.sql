@@ -2,42 +2,63 @@
 -- ===================================================================
 -- Agentes
 SET
-  @ag1=UUID(),  @ag2=UUID(),  @ag3=UUID(),  @ag4=UUID(), @ag5=UUID(), @ag6=UUID(),
-  @ag7=UUID(),  @ag8=UUID(),  @ag9=UUID(),  @ag10=UUID(), @ag11=UUID(), @ag12=UUID(),
-  @ag13=UUID(), @ag14=UUID(), @ag15=UUID(), @ag16=UUID(), @ag17=UUID(), @ag18=UUID(),
-  @ag19=UUID(), @ag20=UUID(), @ag21=UUID(), @ag22=UUID(), @ag23=UUID(), @ag24=UUID(),
-  @ag25=UUID(), @ag26=UUID(), @ag27=UUID(), @ag28=UUID(), @ag29=UUID(), @ag30=UUID(),
-  @ag31=UUID(), @ag32=UUID(), @ag33=UUID(), @ag34=UUID(), @ag35=UUID(), @ag36=UUID(),
-  @ag37=UUID(), @ag38=UUID(), @ag39=UUID(), @ag40=UUID(), @ag41=UUID(), @ag42=UUID(),
-  @ag43=UUID(), @ag44=UUID(), @ag45=UUID(), @ag46=UUID(), @ag47=UUID(), @ag48=UUID(),
-  @ag49=UUID(), @ag50=UUID(), @ag51=UUID(), @ag52=UUID(), @ag53=UUID(), @ag54=UUID(),
-  @ag55=UUID(), @ag56=UUID(), @ag57=UUID(), @ag58=UUID(), @ag59=UUID(), @ag60=UUID();
+    @ag1=UUID(), @ag2=UUID(), @ag3=UUID(), @ag4=UUID(), @ag5=UUID(), @ag6=UUID(), @ag7=UUID(), @ag8=UUID(), @ag9=UUID(), @ag10=UUID(),
+    @ag11=UUID(), @ag12=UUID(), @ag13=UUID(), @ag14=UUID(), @ag15=UUID(), @ag16=UUID(), @ag17=UUID(), @ag18=UUID(), @ag19=UUID(), @ag20=UUID(),
+    @ag21=UUID(), @ag22=UUID(), @ag23=UUID(), @ag24=UUID(), @ag25=UUID(), @ag26=UUID(), @ag27=UUID(), @ag28=UUID(), @ag29=UUID(), @ag30=UUID(),
+    @ag31=UUID(), @ag32=UUID(), @ag33=UUID(), @ag34=UUID(), @ag35=UUID(), @ag36=UUID(), @ag37=UUID(), @ag38=UUID(), @ag39=UUID(), @ag40=UUID(),
+    @ag41=UUID(), @ag42=UUID(), @ag43=UUID(), @ag44=UUID(), @ag45=UUID(), @ag46=UUID(), @ag47=UUID(), @ag48=UUID(), @ag49=UUID(), @ag50=UUID(),
+    @ag51=UUID(), @ag52=UUID(), @ag53=UUID(), @ag54=UUID(), @ag55=UUID(), @ag56=UUID(), @ag57=UUID(), @ag58=UUID(), @ag59=UUID(), @ag60=UUID(),
+    @ag61=UUID(), @ag62=UUID(), @ag63=UUID(), @ag64=UUID(), @ag65=UUID(), @ag66=UUID(), @ag67=UUID(), @ag68=UUID(), @ag69=UUID(), @ag70=UUID(),
+    @ag71=UUID(), @ag72=UUID(), @ag73=UUID(), @ag74=UUID(), @ag75=UUID(), @ag76=UUID(), @ag77=UUID(), @ag78=UUID(), @ag79=UUID(), @ag80=UUID(),
+    @ag81=UUID(), @ag82=UUID(), @ag83=UUID(), @ag84=UUID(), @ag85=UUID(), @ag86=UUID(), @ag87=UUID(), @ag88=UUID(), @ag89=UUID(), @ag90=UUID(),
+    @ag91=UUID(), @ag92=UUID(), @ag93=UUID(), @ag94=UUID(), @ag95=UUID(), @ag96=UUID(), @ag97=UUID(), @ag98=UUID(), @ag99=UUID(), @ag100=UUID();
+
+
 
 -- ===================================================================
 -- Verissimos
 SET
-    @ver1 = @ag2, @ver2=@ag15, @ver3=@ag23;
+    @ver1 = @ag2, @ver2=@ag15, @ver3=@ag23, @ver4=@ag58, @ver5=@ag57, @ver6=@ag59;
 
 -- ===================================================================
 -- Endereços
 SET
-    @addr1= UUID(), @addr2=UUID(), @addr3=UUID();
+    @addr1  = UUID(), @addr2  = UUID(), @addr3  = UUID(), @addr4  = UUID(), @addr5  = UUID(),
+    @addr6  = UUID(), @addr7  = UUID(), @addr8  = UUID(), @addr9  = UUID(), @addr10 = UUID(),
+    @addr11 = UUID(), @addr12 = UUID(), @addr13 = UUID(), @addr14 = UUID(), @addr15 = UUID(),
+    @addr16 = UUID(), @addr17 = UUID(), @addr18 = UUID(), @addr19 = UUID(), @addr20 = UUID(),
+    @addr21 = UUID(), @addr22 = UUID(), @addr23 = UUID(), @addr24 = UUID(), @addr25 = UUID(),
+    @addr26 = UUID(), @addr27 = UUID(), @addr28 = UUID(), @addr29 = UUID(), @addr30 = UUID(),
+    @addr31 = UUID(), @addr32 = UUID(), @addr33 = UUID(), @addr34 = UUID(), @addr35 = UUID(),
+    @addr36 = UUID(), @addr37 = UUID(), @addr38 = UUID(), @addr39 = UUID(), @addr40 = UUID(),
+    @addr41 = UUID(), @addr42 = UUID(), @addr43 = UUID(), @addr44 = UUID(), @addr45 = UUID(),
+    @addr46 = UUID(), @addr47 = UUID(), @addr48 = UUID(), @addr49 = UUID(), @addr50 = UUID(),
+    @addr51 = UUID(), @addr52 = UUID(), @addr53 = UUID(), @addr54 = UUID(), @addr55 = UUID(),
+    @addr56 = UUID(), @addr57 = UUID(), @addr58 = UUID(), @addr59 = UUID(), @addr60 = UUID(),
+    @addr61 = UUID(), @addr62 = UUID(), @addr63 = UUID(), @addr64 = UUID(), @addr65 = UUID(),
+    @addr66 = UUID(), @addr67 = UUID(), @addr68 = UUID(), @addr69 = UUID(), @addr70 = UUID(),
+    @addr71 = UUID(), @addr72 = UUID(), @addr73 = UUID(), @addr74 = UUID(), @addr75 = UUID(),
+    @addr76 = UUID(), @addr77 = UUID(), @addr78 = UUID(), @addr79 = UUID(), @addr80 = UUID(),
+    @addr81 = UUID(), @addr82 = UUID(), @addr83 = UUID(), @addr84 = UUID(), @addr85 = UUID(),
+    @addr86 = UUID(), @addr87 = UUID(), @addr88 = UUID(), @addr89 = UUID(), @addr90 = UUID(),
+    @addr91 = UUID(), @addr92 = UUID(), @addr93 = UUID(), @addr94 = UUID(), @addr95 = UUID(),
+    @addr96 = UUID(), @addr97 = UUID(), @addr98 = UUID(), @addr99 = UUID(), @addr100 = UUID();
 
-SET
-    @addrM1 = UUID(), @addrM2 = UUID(), @addrM3 = UUID(),
-    @addrM4 = UUID(), @addrM5 = UUID(), @addrM6 = UUID(),
-    @addrM7 = UUID(), @addrM8 = UUID(), @addrM9 = UUID();
 
 -- ===================================================================
 -- QGs
-SET @hq1= UUID(), @hq2=UUID(),   @hq3=UUID();
+SET @hq1= UUID(), @hq2=UUID(),   @hq3=UUID(), @hq4=UUID(), @hq5=UUID(), @hq6=UUID();
 
 -- ===================================================================
 -- Equipes
 SET
   @team1  = UUID(),  @team2  = UUID(),  @team3  = UUID(),  @team4  = UUID(),
   @team5  = UUID(),  @team6  = UUID(),  @team7  = UUID(),  @team8  = UUID(),
-  @team9  = UUID(),  @team10 = UUID(),  @team11 = UUID(),  @team12 = UUID();
+  @team9  = UUID(),  @team10 = UUID(),  @team11 = UUID(),  @team12 = UUID(),
+  @team13  = UUID(),  @team14 = UUID(),  @team15 = UUID(),  @team16 = UUID(),
+  @team17  = UUID(),  @team18 = UUID(),  @team19 = UUID(),  @team20 = UUID(),
+  @team21  = UUID(),  @team22 = UUID(),  @team23 = UUID(),  @team24 = UUID(),
+  @team25  = UUID(),  @team26 = UUID(),  @team27 = UUID(),  @team28 = UUID();
 
 -- ===================================================================
 -- Elementos
@@ -57,8 +78,26 @@ SET
 -- ===================================================================
 -- Missões
 SET
-    @miss1= UUID(),  @miss2= UUID(), @miss3=UUID(), @miss4=UUID(), @miss5=UUID(),
-    @miss6=UUID(), @miss7=UUID(), @miss8=UUID(), @miss9=UUID();
+    @miss1   = UUID(), @miss2   = UUID(), @miss3   = UUID(), @miss4   = UUID(), @miss5   = UUID(),
+    @miss6   = UUID(), @miss7   = UUID(), @miss8   = UUID(), @miss9   = UUID(), @miss10  = UUID(),
+    @miss11  = UUID(), @miss12  = UUID(), @miss13  = UUID(), @miss14  = UUID(), @miss15  = UUID(),
+    @miss16  = UUID(), @miss17  = UUID(), @miss18  = UUID(), @miss19  = UUID(), @miss20  = UUID(),
+    @miss21  = UUID(), @miss22  = UUID(), @miss23  = UUID(), @miss24  = UUID(), @miss25  = UUID(),
+    @miss26  = UUID(), @miss27  = UUID(), @miss28  = UUID(), @miss29  = UUID(), @miss30  = UUID(),
+    @miss31  = UUID(), @miss32  = UUID(), @miss33  = UUID(), @miss34  = UUID(), @miss35  = UUID(),
+    @miss36  = UUID(), @miss37  = UUID(), @miss38  = UUID(), @miss39  = UUID(), @miss40  = UUID(),
+    @miss41  = UUID(), @miss42  = UUID(), @miss43  = UUID(), @miss44  = UUID(), @miss45  = UUID(),
+    @miss46  = UUID(), @miss47  = UUID(), @miss48  = UUID(), @miss49  = UUID(), @miss50  = UUID(),
+    @miss51  = UUID(), @miss52  = UUID(), @miss53  = UUID(), @miss54  = UUID(), @miss55  = UUID(),
+    @miss56  = UUID(), @miss57  = UUID(), @miss58  = UUID(), @miss59  = UUID(), @miss60  = UUID(),
+    @miss61  = UUID(), @miss62  = UUID(), @miss63  = UUID(), @miss64  = UUID(), @miss65  = UUID(),
+    @miss66  = UUID(), @miss67  = UUID(), @miss68  = UUID(), @miss69  = UUID(), @miss70  = UUID(),
+    @miss71  = UUID(), @miss72  = UUID(), @miss73  = UUID(), @miss74  = UUID(), @miss75  = UUID(),
+    @miss76  = UUID(), @miss77  = UUID(), @miss78  = UUID(), @miss79  = UUID(), @miss80  = UUID(),
+    @miss81  = UUID(), @miss82  = UUID(), @miss83  = UUID(), @miss84  = UUID(), @miss85  = UUID(),
+    @miss86  = UUID(), @miss87  = UUID(), @miss88  = UUID(), @miss89  = UUID(), @miss90  = UUID(),
+    @miss91  = UUID(), @miss92  = UUID(), @miss93  = UUID(), @miss94  = UUID(), @miss95  = UUID(),
+    @miss96  = UUID(), @miss97  = UUID(), @miss98  = UUID(), @miss99  = UUID(), @miss100 = UUID();
 
 -- ===================================================================
 -- Evidencias
@@ -86,28 +125,28 @@ SET
     @mem21=UUID(), @mem22=UUID(), @mem23=UUID(), @mem24=UUID();
 
 -- ===================================================================
--- População de AGENTS
+-- População de AGENTS OK
 INSERT INTO AGENTS (id_agent, name, birth_date, phone, specialization, rank_agent, nex, retired, transcended) VALUES
 (@ag1,  'Alice Silva',    '1985-06-15', '81999990001', 'Ocultista',   'Recruta',  20, FALSE, FALSE),
 (@ag2,  'Bruno Costa',    '1978-02-20', '81999990002', 'Especialista','Veterano', 45, FALSE, FALSE),
 (@ag3,  'Carla Souza',    '1990-10-05', '81999990003', 'Combatente',  'Elite',    85, FALSE, TRUE),
 (@ag4,  'Daniel Lima',    '1970-12-01', '81999990004', 'Especialista','Veterano', 60, TRUE,  FALSE),
-(@ag5,  'Eva Santos',     '1982-03-12', '81999990005', 'Ocultista',   'Elite',    95, FALSE, TRUE),
-(@ag6,  'Fabio Rocha',    '1995-07-30', '81999990006', 'Combatente',  'Recruta',  10, FALSE, FALSE),
-(@ag7,  'Gustavo Pires',  '1981-01-10', '81999990007', 'Especialista','Recruta',  25, FALSE, FALSE),
-(@ag8,  'Helena Dias',    '1984-05-22', '81999990008', 'Ocultista',   'Veterano', 50, FALSE, FALSE),
-(@ag9,  'Igor Almeida',   '1979-11-11', '81999990009', 'Combatente',  'Elite',    90, FALSE, FALSE),
-(@ag10, 'Juliana Freitas','1992-08-17', '81999990010', 'Combatente',  'Recruta',  15, FALSE, FALSE),
-(@ag11, 'Karina Moura',   '1986-04-03', '81999990011', 'Ocultista',   'Veterano', 55, FALSE, FALSE),
-(@ag12, 'Lucas Batista',  '1988-09-29', '81999990012', 'Especialista','Elite',    80, FALSE, FALSE),
-(@ag13, 'Mariana Costa',  '1991-12-05', '81999990013', 'Combatente',  'Veterano', 65, FALSE, FALSE),
-(@ag14, 'Nicolas Horn',   '1975-07-07', '81999990014', 'Especialista','Recruta',  18, FALSE, FALSE),
-(@ag15, 'Olivia Reis',    '1983-02-14', '81999990015', 'Ocultista',   'Elite',    88, FALSE, TRUE),
-(@ag16, 'Pedro Lima',     '1976-06-21', '81999990016', 'Combatente',  'Veterano', 58, TRUE,  FALSE),
-(@ag17, 'Quesia Tavares', '1989-03-30', '81999990017', 'Especialista','Recruta',  22, FALSE, FALSE),
-(@ag18, 'Renato Alves',   '1993-10-12', '81999990018', 'Especialista','Veterano', 47, FALSE, FALSE),
-(@ag19, 'Sofia Gomes',    '1987-11-25', '81999990019', 'Ocultista',   'Elite',    92, FALSE, TRUE),
-(@ag20, 'Thiago Varela',  '1990-01-18', '81999990020', 'Combatente',  'Recruta',  12, FALSE, FALSE),
+(@ag5,  'Eva Santos',     '1982-03-12', '82999990005', 'Ocultista',   'Elite',    95, FALSE, TRUE),
+(@ag6,  'Fabio Rocha',    '1995-07-30', '87999990006', 'Combatente',  'Recruta',  10, FALSE, FALSE),
+(@ag7,  'Gustavo Pires',  '1981-01-10', '11999990007', 'Especialista','Recruta',  25, FALSE, FALSE),
+(@ag8,  'Helena Dias',    '1984-05-22', '11999990008', 'Ocultista',   'Veterano', 50, FALSE, FALSE),
+(@ag9,  'Igor Almeida',   '1979-11-11', '11999990009', 'Combatente',  'Elite',    90, FALSE, FALSE),
+(@ag10, 'Juliana Freitas','1992-08-17', '11999990010', 'Combatente',  'Recruta',  15, FALSE, FALSE),
+(@ag11, 'Karina Moura',   '1986-04-03', '11999990011', 'Ocultista',   'Veterano', 55, FALSE, FALSE),
+(@ag12, 'Lucas Batista',  '1988-09-29', '11999990012', 'Especialista','Elite',    80, FALSE, FALSE),
+(@ag13, 'Mariana Costa',  '1991-12-05', '21999990013', 'Combatente',  'Veterano', 65, FALSE, FALSE),
+(@ag14, 'Nicolas Horn',   '1975-07-07', '21999990014', 'Especialista','Recruta',  18, FALSE, FALSE),
+(@ag15, 'Olivia Reis',    '1983-02-14', '21999990015', 'Ocultista',   'Elite',    88, FALSE, TRUE),
+(@ag16, 'Pedro Lima',     '1976-06-21', '21999990016', 'Combatente',  'Veterano', 58, TRUE,  FALSE),
+(@ag17, 'Quesia Tavares', '1989-03-30', '11999990017', 'Especialista','Recruta',  22, FALSE, FALSE),
+(@ag18, 'Renato Alves',   '1993-10-12', '11999990018', 'Especialista','Veterano', 47, FALSE, FALSE),
+(@ag19, 'Sofia Gomes',    '1987-11-25', '11999990019', 'Ocultista',   'Elite',    92, FALSE, TRUE),
+(@ag20, 'Thiago Varela',  '1990-01-18', '11999990020', 'Combatente',  'Recruta',  12, FALSE, FALSE),
 (@ag21, 'Ubirajara Luz',  '1972-08-08', '81999990021', 'Especialista','Veterano', 60, TRUE,  FALSE),
 (@ag22, 'Valéria Rocha',  '1985-09-09', '81999990022', 'Combatente',  'Recruta',  14, FALSE, FALSE),
 (@ag23, 'Wellington Paz', '1982-03-03', '81999990023', 'Combatente',  'Elite',    85, FALSE, TRUE),
@@ -118,77 +157,237 @@ INSERT INTO AGENTS (id_agent, name, birth_date, phone, specialization, rank_agen
 (@ag28, 'Beatriz Silva',  '1991-02-02', '81999990028', 'Ocultista',   'Recruta',  17, FALSE, FALSE),
 (@ag29, 'Cassio Nunes',   '1983-06-06', '81999990029', 'Especialista','Elite',    82, FALSE, TRUE),
 (@ag30, 'Diana Azevedo',  '1989-09-09', '81999990030', 'Combatente',  'Veterano', 57, FALSE, FALSE),
-(@ag31,'Camila Andrade','1988-02-05','(31)93456-7890','Combatente','Elite',95,FALSE,FALSE),
-(@ag32,'Diego Ferreira','1979-11-17','(41)94567-8901','Ocultista','Veterano',60,TRUE,FALSE),
-(@ag33,'Eduarda Gomes','1992-06-30','(51)95678-9012','Especialista','Recruta',20,FALSE,FALSE),
-(@ag34,'Felipe Ramos','1983-01-22','(61)96789-0123','Combatente','Veterano',50,FALSE,TRUE),
-(@ag35,'Gabriela Melo','1995-08-14','(71)97890-1234','Ocultista','Elite',88,FALSE,FALSE),
-(@ag36,'Henrique Alves','1981-12-09','(81)98901-2345','Especialista','Veterano',65,FALSE,FALSE),
-(@ag37,'Isabela Pinto','1993-03-19','(91)99012-3456','Combatente','Recruta',25,TRUE,FALSE),
-(@ag38,'João Duarte','1977-07-27','(95)90123-4567','Ocultista','Veterano',55,FALSE,FALSE),
-(@ag39,'Karina Santos','1986-10-03','(47)91234-5678','Especialista','Elite',92,FALSE,FALSE),
-(@ag40,'Leonardo Vieira','1980-05-11','(67)92345-6789','Combatente','Veterano',58,FALSE,FALSE),
-(@ag41,'Mariana Lopes','1991-12-25','(27)93456-7890','Ocultista','Recruta',35,TRUE,FALSE),
-(@ag42,'Nicolas Rocha','1984-04-04','(37)94567-8901','Especialista','Veterano',63,FALSE,FALSE),
-(@ag43,'Olívia Castro','1996-09-18','(57)95678-9012','Combatente','Elite',99,FALSE,FALSE),
-(@ag44,'Pedro Martins','1978-02-28','(77)96789-0123','Ocultista','Veterano',68,FALSE,FALSE),
-(@ag45,'Quésia Lima','1989-11-11','(87)97890-1234','Especialista','Recruta',22,FALSE,FALSE),
-(@ag46,'Ricardo Moura','1982-06-06','(97)98901-2345','Combatente','Veterano',57,FALSE,FALSE),
-(@ag47,'Sofia Teixeira','1994-03-23','(17)99012-3456','Ocultista','Elite',94,FALSE,FALSE),
-(@ag48,'Tiago Sousa','1976-08-08','(27)90123-4567','Especialista','Veterano',66,TRUE,FALSE),
-(@ag49,'Úrsula Nunes','1987-01-15','(47)91234-5678','Combatente','Recruta',29,FALSE,FALSE),
-(@ag50,'Vitor Braga','1990-05-05','(67)92345-6789','Ocultista','Veterano',71,FALSE,FALSE),
-(@ag51,'Wagner Melo','1983-10-10','(87)93456-7890','Especialista','Elite',89,FALSE,FALSE),
-(@ag52,'Ximena Farias','1992-12-12','(97)94567-8901','Combatente','Veterano',54,FALSE,FALSE),
-(@ag53,'Yara Costa','1985-07-07','(37)95678-9012','Ocultista','Recruta',33,FALSE,FALSE),
-(@ag54,'Zeca Ribeiro','1979-03-03','(17)96789-0123','Especialista','Veterano',62,TRUE,FALSE),
-(@ag55,'Arthur Silva','1986-11-11','(47)97890-1234','Combatente','Elite',96,FALSE,FALSE),
-(@ag56,'Beatriz Rocha','1991-02-02','(67)98901-2345','Ocultista','Veterano',61,FALSE,FALSE),
-(@ag57,'Caio Lima','1993-06-06','(87)99012-3456','Especialista','Recruta',28,FALSE,FALSE),
-(@ag58,'Diana Vieira','1984-09-09','(97)90123-4567','Combatente','Veterano',59,FALSE,FALSE),
-(@ag59,'Emanuel Santos','1978-04-04','(17)91234-5678','Ocultista','Elite',97,FALSE,FALSE),
-(@ag60,'Fernanda Pereira','1989-01-01','(37)92345-6789','Especialista','Veterano',64,TRUE,FALSE);
+(@ag31,'Camila Andrade','1988-02-05','3193456-7890','Combatente','Elite',95,FALSE,FALSE),
+(@ag32,'Diego Ferreira','1979-11-17','4194567-8901','Ocultista','Veterano',60,TRUE,FALSE),
+(@ag33,'Eduarda Gomes','1992-06-30','5195678-9012','Especialista','Recruta',20,FALSE,FALSE),
+(@ag34,'Felipe Ramos','1983-01-22','6196789-0123','Combatente','Veterano',50,FALSE,TRUE),
+(@ag35,'Gabriela Melo','1995-08-14','7197890-1234','Ocultista','Elite',88,FALSE,FALSE),
+(@ag36,'Henrique Alves','1981-12-09','8198901-2345','Especialista','Veterano',65,FALSE,FALSE),
+(@ag37,'Isabela Pinto','1993-03-19','9199012-3456','Combatente','Recruta',25,TRUE,FALSE),
+(@ag38,'João Duarte','1977-07-27','9590123-4567','Ocultista','Veterano',55,FALSE,FALSE),
+(@ag39,'Karina Santos','1986-10-03','4791234-5678','Especialista','Elite',92,FALSE,FALSE),
+(@ag40,'Leonardo Vieira','1980-05-11','6792345-6789','Combatente','Veterano',58,FALSE,FALSE),
+(@ag41,'Mariana Lopes','1991-12-25','2793456-7890','Ocultista','Recruta',35,TRUE,FALSE),
+(@ag42,'Nicolas Rocha','1984-04-04','3794567-8901','Especialista','Veterano',63,FALSE,FALSE),
+(@ag43,'Olívia Castro','1996-09-18','5795678-9012','Combatente','Elite',99,FALSE,FALSE),
+(@ag44,'Pedro Martins','1978-02-28','7796789-0123','Ocultista','Veterano',68,FALSE,FALSE),
+(@ag45,'Quésia Lima','1989-11-11','8797890-1234','Especialista','Recruta',22,FALSE,FALSE),
+(@ag46,'Ricardo Moura','1982-06-06','9798901-2345','Combatente','Veterano',57,FALSE,FALSE),
+(@ag47,'Sofia Teixeira','1994-03-23','1799012-3456','Ocultista','Elite',94,FALSE,FALSE),
+(@ag48,'Tiago Sousa','1976-08-08','2790123-4567','Especialista','Veterano',66,TRUE,FALSE),
+(@ag49,'Úrsula Nunes','1987-01-15','4791234-5678','Combatente','Recruta',29,FALSE,FALSE),
+(@ag50,'Vitor Braga','1990-05-05','6792345-6789','Ocultista','Veterano',71,FALSE,FALSE),
+(@ag51,'Wagner Melo','1983-10-10','8793456-7890','Especialista','Elite',89,FALSE,FALSE),
+(@ag52,'Ximena Farias','1992-12-12','9794567-8901','Combatente','Veterano',54,FALSE,FALSE),
+(@ag53,'Yara Costa','1985-07-07','3795678-9012','Ocultista','Recruta',33,FALSE,FALSE),
+(@ag54,'Zeca Ribeiro','1979-03-03','1796789-0123','Especialista','Veterano',62,TRUE,FALSE),
+(@ag55,'Arthur Silva','1986-11-11','4797890-1234','Combatente','Elite',96,FALSE,FALSE),
+(@ag56,'Beatriz Rocha','1991-02-02','(6798901-2345','Ocultista','Veterano',61,FALSE,FALSE),
+(@ag57,'Gabriel Melo Cavalcanti de Albuquerque','1993-06-06','8799012-3456','Especialista','Recruta',28,FALSE,FALSE),
+(@ag58,'Ana Clara Gomes da Silva','1984-09-09','9790123-4567','Combatente','Veterano',59,FALSE,FALSE),
+(@ag59,'Sophia de Araújo Gallindo Pinto','1978-04-04','1791234-5678','Ocultista','Elite',67,FALSE,FALSE),
+(@ag60,'Fernanda Pereira','1989-01-01','3792345-6789','Especialista','Veterano',64,TRUE,FALSE),
+(@ag61,  'Eduarda Ramos',     '1988-04-12', '87999990061', 'Ocultista',    'Recruta',  10, FALSE, FALSE),
+(@ag62,  'Felipe Andrade',    '1992-11-03', '87999990062', 'Combatente',   'Veterano', 35, FALSE, FALSE),
+(@ag63,  'Gabriela Melo',     '1984-08-27', '87999990063', 'Especialista', 'Veterano', 50, FALSE, FALSE),
+(@ag64,  'Henrique Duarte',   '1975-06-15', '82999990064', 'Ocultista',    'Elite',    95, FALSE, TRUE),
+(@ag65,  'Isabela Rocha',     '1995-01-19', '82999990065', 'Combatente',   'Recruta',  15, FALSE, FALSE),
+(@ag66,  'João Pedro Lima',   '1981-09-10', '82999990066', 'Especialista', 'Veterano', 40, FALSE, FALSE),
+(@ag67,  'Karen Nunes',       '1986-03-24', '67999990067', 'Ocultista',    'Veterano', 55, FALSE, FALSE),
+(@ag68,  'Lucas Fernandes',   '1990-07-06', '67999990068', 'Combatente',   'Elite',    88, FALSE, FALSE),
+(@ag69,  'Marina Teixeira',   '1989-10-30', '67999990069', 'Especialista', 'Veterano', 38, FALSE, FALSE),
+(@ag70,  'Nicolas Castro',    '1982-12-11', '77999990070', 'Ocultista',    'Veterano', 65, FALSE, FALSE),
+(@ag71,  'Olívia Martins',    '1993-05-22', '67999990071', 'Combatente',   'Recruta',  12, FALSE, FALSE),
+(@ag72,  'Paulo Henrique',    '1976-02-17', '67999990072', 'Especialista', 'Elite',    91, TRUE,  TRUE),
+(@ag73,  'Quésia Lopes',      '1987-11-08', '67999990073', 'Ocultista',    'Veterano', 30, FALSE, FALSE),
+(@ag74,  'Rafael Santana',    '1980-01-05', '67999990074', 'Combatente',   'Veterano', 52, FALSE, FALSE),
+(@ag75,  'Sabrina Vieira',    '1994-04-18', '67999990075', 'Especialista', 'Recruta',  18, FALSE, FALSE),
+(@ag76,  'Thiago Araújo',     '1983-09-21', '67999990076', 'Ocultista',    'Veterano', 44, FALSE, FALSE),
+(@ag77,  'Úrsula Farias',     '1979-07-30', '67999990077', 'Combatente',   'Elite',    89, FALSE, TRUE),
+(@ag78,  'Vitor Correia',     '1986-12-14', '67999990078', 'Especialista', 'Veterano', 63, FALSE, FALSE),
+(@ag79,  'Wesley Monteiro',   '1991-03-07', '82999990079', 'Ocultista',    'Veterano', 36, FALSE, FALSE),
+(@ag80,  'Xênia Barros',      '1985-06-29', '3999990080', 'Combatente',   'Veterano', 58, FALSE, FALSE),
+(@ag81,  'Yuri Cardoso',      '1980-11-02', '21999990081', 'Especialista', 'Elite',    87, FALSE, TRUE),
+(@ag82,  'Zuleika Torres',    '1996-08-13', '79999990082', 'Ocultista',    'Recruta',  20, FALSE, FALSE),
+(@ag83,  'Aline Matos',       '1982-02-20', '79999990083', 'Combatente',   'Veterano', 34, FALSE, FALSE),
+(@ag84,  'Brenda Almeida',    '1989-09-09', '81999990084', 'Especialista', 'Veterano', 61, FALSE, FALSE),
+(@ag85,  'Carlos Moura',      '1974-01-11', '81999990085', 'Ocultista',    'Elite',    93, TRUE,  FALSE),
+(@ag86,  'Débora Pinheiro',   '1992-05-26', '81999990086', 'Combatente',   'Recruta',  8,  FALSE, FALSE),
+(@ag87,  'Emerson Leal',      '1987-10-03', '81999990087', 'Especialista', 'Veterano', 42, FALSE, FALSE),
+(@ag88,  'Fernanda Prado',    '1983-07-15', '81999990088', 'Ocultista',    'Veterano', 53, FALSE, FALSE),
+(@ag89,  'Gustavo Paiva',     '1977-12-19', '81999990089', 'Combatente',   'Elite',    97, TRUE,  TRUE),
+(@ag90,  'Helena Bastos',     '1981-06-09', '81999990090', 'Especialista', 'Veterano', 67, FALSE, FALSE),
+(@ag91,  'Igor Batista',      '1990-03-30', '21999990091', 'Ocultista',    'Veterano', 41, FALSE, FALSE),
+(@ag92,  'Júlia Camargo',     '1993-10-17', '21999990092', 'Combatente',   'Recruta',  19, FALSE, FALSE),
+(@ag93,  'Kauan Ribeiro',     '1988-01-22', '11999990093', 'Especialista', 'Veterano', 39, FALSE, FALSE),
+(@ag94,  'Lorena Silveira',   '1984-04-11', '11999990094', 'Ocultista',    'Veterano', 59, FALSE, FALSE),
+(@ag95,  'Matheus Rezende',   '1979-09-25', '11999990095', 'Combatente',   'Elite',    90, TRUE,  TRUE),
+(@ag96,  'Natália Gomes',     '1986-08-05', '81999990096', 'Especialista', 'Veterano', 62, FALSE, FALSE),
+(@ag97,  'Otávio Neves',      '1995-11-28', '11999990097', 'Ocultista',    'Recruta',  16, FALSE, FALSE),
+(@ag98,  'Priscila Galvão',   '1991-02-08', '81999990098', 'Combatente',   'Veterano', 37, FALSE, FALSE),
+(@ag99,  'Renato Cunha',      '1985-12-23', '81999990099', 'Especialista', 'Veterano', 56, FALSE, FALSE),
+(@ag100, 'Simone Oliveira',   '1980-07-01', '81999990100', 'Ocultista',    'Elite',    96, TRUE,  TRUE);
 
--- População de VERISSIMO
+-- População de VERISSIMO OK
 INSERT INTO VERISSIMO (id_verissimo, login, password_ver) VALUES
 (@ver1, 'BC', 'cost876'),
 (@ver2,'OR','olive457'),
-(@ver3,'WP','peace8233');
+(@ver3,'WP','peace8233'),
+(@ver4, 'GMCA', 'ellie2021'),
+(@ver5, 'ACGS', 'pingo2014'),
+(@ver6, 'SAGP', 'time2021');
 
--- População de ENDEREÇOS
+-- População de ENDEREÇOS OK
 INSERT INTO ADDRESS (id_address, street, number, neighborhood, city, state, postal_code) VALUES
 (@addr1,'Rua da Aurora',123,'Boa Vista','Recife','PE','50000-000'),
 (@addr2,'Av. Beira Mar', 45,'Meireles','Fortaleza','CE','60000-000'),
 (@addr3,'Av. Borges de Medeiros',789,'Centro','Porto Alegre','RS','90000-000'),
-(@addrM1, 'Rua do Cemitério',        50,  'Campo Santo',       'Recife',        'PE', '50010-000'),
-(@addrM2, 'Rua da Lapa',             123, 'Boa Vista',         'Recife',        'PE', '50020-000'),
-(@addrM3, 'Av. dos Malassombros',    300, 'Santo Amaro',       'Recife',        'PE', '50030-000'),
-(@addrM4, 'Av. Beira Mar',           45,  'Meireles',          'Fortaleza',     'CE', '60000-000'),
-(@addrM5, 'Rua dos Encantamentos',   77,  'Praia de Iracema',   'Fortaleza',     'CE', '60010-000'),
-(@addrM6, 'Av. da Luz',              200, 'Centro',            'Fortaleza',     'CE', '60020-000'),
-(@addrM7, 'Rua do Trabalho',         10,  'Distrito Industrial','Porto Alegre','RS','90010-000'),
-(@addrM8, 'Praça da Matriz',         1,   'Centro Histórico',  'Porto Alegre',  'RS', '90020-000'),
-(@addrM9, 'Rua da Câmara',           250, 'Cidade Baixa',      'Porto Alegre',  'RS', '90030-000');
-
--- População de QGs
+(@addr4, 'Av. Beira Mar',           45,  'Meireles',          'Fortaleza',     'CE', '60000-000'),
+(@addr5, 'Rua dos Encantamentos',   77,  'Praia de Iracema',   'Fortaleza',     'CE', '60010-000'),
+(@addr6, 'Av. da Luz',              200, 'Centro',            'Fortaleza',     'CE', '60020-000'),
+(@addr7, 'Rua do Trabalho',         10,  'Distrito Industrial','Porto Alegre','RS','90010-000'),
+(@addr8, 'Praça da Matriz',         1,   'Centro Histórico',  'Porto Alegre',  'RS', '90020-000'),
+(@addr9, 'Rua da Câmara',           250, 'Cidade Baixa',      'Porto Alegre',  'RS', '90030-000'),
+(@addr10, 'Rua das Almas',             101, 'Santo Amaro',         'Recife',        'PE', '50040-000'),
+(@addr11, 'Travessa do Sol',           55,  'Boa Vista',           'Recife',        'PE', '50050-000'),
+(@addr12, 'Av. do Forte',              400, 'Tamarineira',         'Recife',        'PE', '50060-000'),
+(@addr13, 'Rua do Encanto',            78,  'Centro',              'Manaus',        'AM', '69000-000'),
+(@addr14, 'Rua Rio Negro',             145, 'Adrianópolis',        'Manaus',        'AM', '69010-000'),
+(@addr15, 'Av. Paulista',              1000, 'Bela Vista',         'São Paulo',     'SP', '01310-000'),
+(@addr16, 'Rua Augusta',               250,  'Consolação',         'São Paulo',     'SP', '01305-000'),
+(@addr17, 'Rua Vergueiro',             785,  'Liberdade',          'São Paulo',     'SP', '01504-001'),
+(@addr18, 'Rua das Palmeiras',         66,  'Graças',              'Recife',        'PE', '50090-000'),
+(@addr19, 'Av. das Nações Unidas',     3000, 'Brooklin',           'São Paulo',     'SP', '04578-000'),
+(@addr20, 'Rua das Orquídeas',         98,  'Centro',              'Goiânia',       'GO', '74000-000'),
+(@addr21, 'Rua do Cerrado',            204, 'Setor Bueno',         'Goiânia',       'GO', '74120-000'),
+(@addr22, 'Esplanada dos Ministérios', 0,   'Zona Cívico-Administrativa','Brasília','DF','70000-000'),
+(@addr23, 'SQS 308 Bloco A',           5,   'Asa Sul',             'Brasília',      'DF', '70330-550'),
+(@addr24, 'Rua das Sombras',           13,  'Aflitos',             'Recife',        'PE', '50100-000'),
+(@addr25, 'Rua das Laranjeiras',       12,  'Jardim Botânico',     'Rio de Janeiro','RJ','22470-000'),
+(@addr26, 'Av. das Américas',          500, 'Barra da Tijuca',     'Rio de Janeiro','RJ','22640-100'),
+(@addr27, 'Rua da Aurora Boreal',      42,  'Adrianópolis',        'Manaus',        'AM', '69020-000'),
+(@addr28, 'Rua do Contorno',           120, 'Ponta Negra',         'Manaus',        'AM', '69037-000'),
+(@addr29, 'Rua da Catedral',           1,   'Centro Histórico',    'Porto Alegre',  'RS', '90040-000'),
+(@addr30, 'Rua João Pessoa',           560, 'Cidade Baixa',        'Porto Alegre',  'RS', '90050-000'),
+(@addr31, 'Av. Ipiranga',              1200,'Partenon',            'Porto Alegre',  'RS', '90610-000'),
+(@addr32, 'Rua Goiás',                 110, 'Funcionários',        'Belo Horizonte','MG','30150-030'),
+(@addr33, 'Av. Afonso Pena',           1300,'Centro',              'Belo Horizonte','MG','30130-003'),
+(@addr34, 'Av. Fernando Corrêa',       3200,'Coxipó',              'Cuiabá',        'MT', '78080-000'),
+(@addr35, 'Rua do Sol Nascente',       15,  'Boa Esperança',       'Campo Grande',  'MS', '79000-000'),
+(@addr36, 'Rua do Comércio',           222, 'Centro',              'Florianópolis', 'SC', '88010-000'),
+(@addr37, 'Av. Beira Rio',             91,  'Centro',              'Joinville',     'SC', '89201-000'),
+(@addr38, 'Rua Barão do Rio Branco',   444, 'Centro',              'Curitiba',      'PR', '80010-000'),
+(@addr39, 'Rua das Violetas',          75,  'Água Verde',          'Curitiba',      'PR', '80240-320'),
+(@addr40, 'Rua do Forte Orange',          150, 'Recife Antigo',    'Recife',    'PE', '50010-001'),
+(@addr41, 'Rua do Arsenal',               22,  'Boa Vista',       'Recife',    'PE', '50020-002'),
+(@addr42, 'Travessa do Cabanga',          75,  'Cabanga',         'Recife',    'PE', '50100-003'),
+(@addr43, 'Rua da Casa Amarela',          310, 'Casa Amarela',     'Recife',    'PE', '50720-004'),
+(@addr44, 'Av. Recife',                   123, 'Santo Amaro',      'Recife',    'PE', '50050-005'),
+(@addr45, 'Rua das Graças',               58,  'Graças',           'Recife',    'PE', '52011-006'),
+(@addr46, 'Rua da Imbiribeira',           200, 'Imbiribeira',      'Recife',    'PE', '51110-007'),
+(@addr47, 'Rua do Espinheiro',            410, 'Espinheiro',       'Recife',    'PE', '52011-008'),
+(@addr48, 'Rua de Casa Forte',            345, 'Casa Forte',       'Recife',    'PE', '52011-009'),
+(@addr49, 'Rua da Iputinga',              129, 'Iputinga',         'Recife',    'PE', '51210-010'),
+(@addr50, 'Rua da Piedade',               201, 'Piedade',          'Recife',    'PE', '52130-011'),
+(@addr51, 'Rua do Parnamirim',            88,  'Parnamirim',       'Recife',    'PE', '54330-012'),
+(@addr52, 'Rua Presidente Kennedy',       500, 'Santo Amaro',      'Recife',    'PE', '50790-013'),
+(@addr53, 'Rua do Espinheiro',            120, 'Espinheiro',       'Recife',    'PE', '52010-014'),
+(@addr54, 'Rua do Sol Poente',            26,  'Encruzilhada',     'Recife',    'PE', '51260-015'),
+(@addr55, 'Rua dos Andradas',             345, 'Centro',            'Porto Alegre', 'RS', '90020-016'),
+(@addr56, 'Av. Julio de Castilhos',       780, 'Centro',            'Porto Alegre', 'RS', '90030-017'),
+(@addr57, 'Rua da Praia de Belas',        150, 'Praia de Belas',    'Porto Alegre', 'RS', '90110-018'),
+(@addr58, 'Rua da Conceição',             220, 'Partenon',          'Porto Alegre', 'RS', '90610-019'),
+(@addr59, 'Rua Sarmento Leite',           410, 'Cidade Baixa',      'Porto Alegre', 'RS', '90020-020'),
+(@addr60, 'Rua Riachuelo',                90,  'Centro Histórico',  'Porto Alegre', 'RS', '90010-021'),
+(@addr61, 'Rua João Alfredo',             60,  'Praia de Belas',    'Porto Alegre', 'RS', '90110-022'),
+(@addr62, 'Rua Dr. Flores',               320, 'Floresta',          'Porto Alegre', 'RS', '90840-023'),
+(@addr63, 'Rua Santa Cecília',            275, 'Rio Branco',        'Porto Alegre', 'RS', '90050-024'),
+(@addr64, 'Av. Goethe',                   185, 'Três Figueiras',    'Porto Alegre', 'RS', '90690-025'),
+(@addr65, 'Rua Mariante',                 110, 'Bom Fim',           'Porto Alegre', 'RS', '90035-026'),
+(@addr66, 'Rua São Carlos',               240, 'Santana',           'Porto Alegre', 'RS', '90810-027'),
+(@addr67, 'Rua Tupi',                     15,  'Menino Deus',       'Porto Alegre', 'RS', '90040-028'),
+(@addr68, 'Rua Coronel Vicente',          99,  'Bom Jesus',         'Porto Alegre', 'RS', '90620-029'),
+(@addr69, 'Av. Padre Cacique',            135, 'Cristal',           'Porto Alegre', 'RS', '90430-030'),
+(@addr70, 'Av. Paulista',                 1578, 'Bela Vista',        'São Paulo', 'SP', '01310-031'),
+(@addr71, 'Rua da Consolação',            210,  'Consolação',        'São Paulo', 'SP', '01302-032'),
+(@addr72, 'Rua Augusta',                  250,  'Consolação',        'São Paulo', 'SP', '01305-033'),
+(@addr73, 'Rua Vergueiro',                650,  'Liberdade',         'São Paulo', 'SP', '01504-034'),
+(@addr74, 'Rua 25 de Março',              400,  'Centro',            'São Paulo', 'SP', '01021-035'),
+(@addr75, 'Av. Ipiranga',                 800,  'República',         'São Paulo', 'SP', '01046-036'),
+(@addr76, 'Rua da Cantareira',            110,  'Centro',            'São Paulo', 'SP', '01222-037'),
+(@addr77, 'Rua Boa Vista',                100,  'Centro',            'São Paulo', 'SP', '01014-038'),
+(@addr78, 'Praça da Sé',                  1,    'Sé',                'São Paulo', 'SP', '01001-039'),
+(@addr79, 'Rua Direita',                  45,   'Sé',                'São Paulo', 'SP', '01002-040'),
+(@addr80, 'Rua Santa Ifigênia',           350,  'Santa Ifigênia',    'São Paulo', 'SP', '01207-041'),
+(@addr81, 'Rua 24 de Maio',               200,  'Sé',                'São Paulo', 'SP', '01049-042'),
+(@addr82, 'Av. Rio Branco',               500,  'Centro',            'São Paulo', 'SP', '01009-043'),
+(@addr83, 'Rua Helvétia',                 120,  'República',         'São Paulo', 'SP', '01225-044'),
+(@addr84, 'Rua Álvaro de Carvalho',       300,  'Centro',            'São Paulo', 'SP', '01009-045'),
+(@addr85, 'Rua Rio Solimões',             100, 'Centro',            'Manaus', 'AM', '69010-046'),
+(@addr86, 'Rua Eduardo Ribeiro',          250, 'Centro',            'Manaus', 'AM', '69010-047'),
+(@addr87, 'Rua 10 de Julho',              75,  'Adrianópolis',      'Manaus', 'AM', '69063-048'),
+(@addr88, 'Av. Djalma Batista',           1200,'Chapada',           'Manaus', 'AM', '69050-049'),
+(@addr89, 'Travessa East-West',           45,  'Centro',            'Manaus', 'AM', '69010-050'),
+(@addr90, 'Rua Barão de Mauá',            310, 'Centro',            'Manaus', 'AM', '69010-051'),
+(@addr91, 'Rua Joaquim Nabuco',           88,  'Centro',            'Manaus', 'AM', '69010-052'),
+(@addr92, 'Rua Benjamin Constant',        150, 'Centro',            'Manaus', 'AM', '69010-053'),
+(@addr93, 'Av. Sete de Setembro',         500, 'Adrianópolis',      'Manaus', 'AM', '69050-054'),
+(@addr94, 'Rua General Carneiro',         220, 'Centro',            'Manaus', 'AM', '69010-055'),
+(@addr95, 'Rua Joaquim Sarmento',         45,  'Centro Histórico',  'Manaus', 'AM', '69010-056'),
+(@addr96, 'Rua Monsenhor Coutinho',       120, 'Centro',            'Manaus', 'AM', '69010-057'),
+(@addr97, 'Rua Barão do Rio Branco',      390, 'Centro',            'Manaus', 'AM', '69010-058'),
+(@addr98, 'Travessa Coronel Brandão',     75,  'Centro Histórico',  'Manaus', 'AM', '69010-059'),
+(@addr99, 'Rua Saldanha Marinho',         210, 'Centro',            'Manaus', 'AM', '69010-060'),
+(@addr100, 'Esplanada dos Ministérios',   700, 'Zona Cívico-Administrativa', 'Brasília', 'DF', '70100-000');
+-- População de QGs OK
 INSERT INTO HQ (id_hq, name, security_level, room_count, id_address, id_verissimo) VALUES
-(@hq1,'QG Central',      9.0,  8,@addr1,@ver1),
-(@hq2,'QG Fortaleza',    7.5,  6,@addr2,@ver2),
-(@hq3,'QG Porto Alegre', 8.0,  7,@addr3,@ver3);
+(@hq1,'QG Central',      9.0,  8,@addr23,@ver1),
+(@hq2,'QG Recife',    8.5,  6,@addr1,@ver2),
+(@hq3,'QG Porto Alegre', 8.0,  7,@addr31,@ver3),
+(@hq4, 'QG São Paulo', 10.0, 10, @addr17, @ver4),
+(@hq5, 'QG Manaus', 8.0, 5, @addr13, @ver5),
+(@hq6, 'QG Rio de Janeiro', 4.0, 9, @addr26, @ver6);
 
--- Relação AGENTS_IN_HQ
+-- Relação AGENTS_IN_HQ OK
 INSERT INTO AGENTS_IN_HQ (id_hq, id_agent) VALUES
--- QG1
+-- QG1 (17 agentes)
 (@hq1,@ag1),(@hq1,@ag2),(@hq1,@ag3),(@hq1,@ag4),(@hq1,@ag5),
 (@hq1,@ag6),(@hq1,@ag7),(@hq1,@ag8),(@hq1,@ag9),(@hq1,@ag10),
--- QG2
-(@hq2,@ag11),(@hq2,@ag12),(@hq2,@ag13),(@hq2,@ag14),(@hq2,@ag15),
-(@hq2,@ag16),(@hq2,@ag17),(@hq2,@ag18),(@hq2,@ag19),(@hq2,@ag20),
--- QG3
-(@hq3,@ag21),(@hq3,@ag22),(@hq3,@ag23),(@hq3,@ag24),(@hq3,@ag25),
-(@hq3,@ag26),(@hq3,@ag27),(@hq3,@ag28),(@hq3,@ag29),(@hq3,@ag30);
+(@hq1,@ag11),(@hq1,@ag12),(@hq1,@ag13),(@hq1,@ag14),(@hq1,@ag15),
+(@hq1,@ag16),(@hq1,@ag17),
 
--- Elementos (ELEMENTS)
+-- QG2 (17 agentes)
+(@hq2,@ag18),(@hq2,@ag19),(@hq2,@ag20),(@hq2,@ag21),(@hq2,@ag22),
+(@hq2,@ag23),(@hq2,@ag24),(@hq2,@ag25),(@hq2,@ag26),(@hq2,@ag27),
+(@hq2,@ag28),(@hq2,@ag29),(@hq2,@ag30),(@hq2,@ag31),(@hq2,@ag32),
+(@hq2,@ag33),(@hq2,@ag34),
+
+-- QG3 (17 agentes)
+(@hq3,@ag35),(@hq3,@ag36),(@hq3,@ag37),(@hq3,@ag38),(@hq3,@ag39),
+(@hq3,@ag40),(@hq3,@ag41),(@hq3,@ag42),(@hq3,@ag43),(@hq3,@ag44),
+(@hq3,@ag45),(@hq3,@ag46),(@hq3,@ag47),(@hq3,@ag48),(@hq3,@ag49),
+(@hq3,@ag50),(@hq3,@ag51),
+
+-- QG4 (16 agentes)
+(@hq4,@ag52),(@hq4,@ag53),(@hq4,@ag54),(@hq4,@ag55),(@hq4,@ag56),
+(@hq4,@ag57),(@hq4,@ag58),(@hq4,@ag59),(@hq4,@ag60),(@hq4,@ag61),
+(@hq4,@ag62),(@hq4,@ag63),(@hq4,@ag64),(@hq4,@ag65),(@hq4,@ag66),
+(@hq4,@ag67),
+
+-- QG5 (16 agentes)
+(@hq5,@ag68),(@hq5,@ag69),(@hq5,@ag70),(@hq5,@ag71),(@hq5,@ag72),
+(@hq5,@ag73),(@hq5,@ag74),(@hq5,@ag75),(@hq5,@ag76),(@hq5,@ag77),
+(@hq5,@ag78),(@hq5,@ag79),(@hq5,@ag80),(@hq5,@ag81),(@hq5,@ag82),
+(@hq5,@ag83),
+
+-- QG6 (16 agentes)
+(@hq6,@ag84),(@hq6,@ag85),(@hq6,@ag86),(@hq6,@ag87),(@hq6,@ag88),
+(@hq6,@ag89),(@hq6,@ag90),(@hq6,@ag91),(@hq6,@ag92),(@hq6,@ag93),
+(@hq6,@ag94),(@hq6,@ag95),(@hq6,@ag96),(@hq6,@ag97),(@hq6,@ag98),
+(@hq6,@ag99),(@hq6,@ag100);
+
+
+-- Elementos (ELEMENTS) OK
 INSERT INTO ELEMENTS (id_element, name, description) VALUES
 (@elMedo,   'Medo',         'Elemento neutro sem fraquezas ou vantagens'),
 (@elMorte,  'Morte',        'Elemento forte contra Sangue'),
@@ -196,13 +395,13 @@ INSERT INTO ELEMENTS (id_element, name, description) VALUES
 (@elConhe,  'Conhecimento','Elemento forte contra Energia'),
 (@elEnergia,'Energia',      'Elemento forte contra Morte');
 
--- Atualização de vantagem entre elementos
+-- Atualização de vantagem entre elementos OK
 UPDATE ELEMENTS SET id_advantage = @elSangue WHERE id_element = @elMorte;
 UPDATE ELEMENTS SET id_advantage = @elConhe  WHERE id_element = @elSangue;
 UPDATE ELEMENTS SET id_advantage = @elEnergia WHERE id_element = @elConhe;
 UPDATE ELEMENTS SET id_advantage = @elMorte   WHERE id_element = @elEnergia;
 
--- Rituais (RITUALS)
+-- Rituais (RITUALS) !
 INSERT INTO RITUALS (id_ritual, name, description, requirements, risks, id_element) VALUES
 (@rit1, 'Ritual do Medo',   'Provoca temor intenso no alvo',   'Tocha, sal grosso',              'Reações psicóticas', @elMedo),
 (@rit2, 'Ritual Sangrento', 'Invoca poder através do sangue', 'Gotas de sangue verdadeiro',     'Hemorragia grave',   @elSangue),
@@ -219,7 +418,6 @@ INSERT INTO RITUALS (id_ritual, name, description, requirements, risks, id_eleme
 (@rit13,'Ritual Fúnebre','Convoca a morte','Velas fúnebres','Depressão profunda',@elMorte),
 (@rit14,'Ritual da Lâmina Mental','Corta mentes','Fio de prata','Distorção psíquica',@elConhe),
 (@rit15,'Ritual Primordial','Desperta a essência','Cristal bruto','Explosão de energia',@elEnergia);
-
 -- Agentes que dominam rituais
 INSERT INTO AGENT_RITUALS (id_agent, id_ritual) VALUES
 (@ag3, @rit2),(@ag3, @rit3),
@@ -231,102 +429,257 @@ INSERT INTO AGENT_RITUALS (id_agent, id_ritual) VALUES
 (@ag15,@rit12),(@ag16,@rit13),
 (@ag17,@rit14),(@ag18,@rit15);
 
--- Missões
+-- Missões OK
 INSERT INTO MISSION (id_mission, title, status, risks, objective, start_date, end_date, id_address, id_hq) VALUES
-(@miss1, 'Investigação no Cemitério',               'Aberta',    'Alto',   'Investigar aparições',                '2025-04-01 07:00:00', NULL,         @addrM1, @hq1),
-(@miss2, 'Combate à Seita Oculta',                  'Concluida', 'Médio',  'Desmantelar seita',                   '2025-02-01 09:00:00', '2025-03-15', @addrM2, @hq1),
-(@miss3, 'Patrulha Noturna',                        'Aberta',    'Baixo',  'Monitorar atividade paranormal',      '2025-05-05 22:00:00', NULL,         @addrM3, @hq1),
-(@miss4, 'Investigação na Praia',                   'Aberta',    'Médio',  'Coletar testemunhos',                 '2025-05-10 06:00:00', NULL,         @addrM4, @hq2),
-(@miss5, 'Ritual de Contenção',                     'Aberta',    'Alto',   'Conter manifestação',                 '2025-05-12 20:00:00', NULL,         @addrM5, @hq2),
-(@miss6, 'Reconhecimento Urbano',                   'Concluida', 'Baixo',  'Mapear pontos quentes',               '2025-04-20 10:00:00', '2025-04-21', @addrM6, @hq2),
-(@miss7, 'Investigação em Fábrica Abandonada',      'Aberta',    'Alto',   'Examinar fenômenos',                  '2025-05-08 14:00:00', NULL,         @addrM7, @hq3),
-(@miss8, 'Proteção de Local Histórico',             'Aberta',    'Médio',  'Garantir segurança',                  '2025-05-15 09:00:00', NULL,         @addrM8, @hq3),
-(@miss9, 'Análise de Artefato',                     'Concluida', 'Baixo',  'Estudar relíquia',                    '2025-03-01 08:00:00', '2025-03-03', @addrM9, @hq3);
+-- QG 1
+(@miss1,  'Investigação no Cemitério',            'Aberta',    'Alto',   'Investigar aparições',           '2025-04-01 07:00:00', NULL,         @addr1,  @hq1),
+(@miss2,  'Combate à Seita Oculta',               'Concluida', 'Médio',  'Desmantelar seita',              '2025-02-01 09:00:00', '2025-03-15', @addr2,  @hq1),
+(@miss3, 'Escola em chamas', 'Concluida', 'Alto', 'Identificar se houve presença paranormal', '2025-04-20 09:15:00', '2025-04-27', @addr99, @hq6),
+(@miss20, 'Mapeamento do Cerrado',                'Aberta',    'Médio',  'Identificar hotspots energéticos','2025-05-20 09:15:00', NULL,         @addr20, @hq1),
+(@miss21, 'Coleta de Amostras',                   'Concluida', 'Baixo',  'Recolher solo e fauna local',    '2025-02-25 06:00:00', '2025-02-27', @addr21, @hq1),
+(@miss22, 'Proteção de Monumentos Nacionais',     'Aberta',    'Alto',   'Evitar vandalismo ectoplásmico', '2025-05-01 07:30:00', NULL,         @addr22, @hq1),
+(@miss23, 'Ronda na Asa Sul',                     'Concluida', 'Médio',  'Monitorar entradas secundárias', '2025-03-15 14:00:00', '2025-03-16', @addr23, @hq1),
+(@miss34, 'Monitoramento de Fazenda',             'Concluida', 'Baixo',  'Registrar atividade animal',     '2025-03-12 05:00:00', '2025-03-13', @addr34, @hq1),
+(@miss35, 'Ronda em Vila Rural',                  'Aberta',    'Médio',  'Entrevistar moradores locais',   '2025-04-25 08:00:00', NULL,         @addr35, @hq1),
+(@miss40, 'Ronda nos Bairros Centrais',        'Aberta',    'Médio',  'Observar padrões místicos',         '2025-05-21 20:00:00', NULL,         @addr40, @hq1),
+(@miss41, 'Verificação de Linhas de Ley',      'Aberta',    'Baixo',  'Confirmar convergência energética', '2025-05-22 08:00:00', NULL,         @addr41, @hq1),
+(@miss42, 'Análise de Estrutura Abandonada',   'Concluida', 'Médio',  'Inspecionar anomalias físicas',     '2025-04-10 14:00:00', '2025-04-11', @addr42, @hq1),
+(@miss43, 'Proteção de Escola Municipal',      'Aberta',    'Alto',   'Evitar surtos espirituais',         '2025-05-25 07:00:00', NULL,         @addr43, @hq1),
+(@miss44, 'Exploração de Vielas Antigas',      'Aberta',    'Médio',  'Registrar ocorrências místicas',    '2025-05-26 21:30:00', NULL,         @addr44, @hq1),
+(@miss45, 'Ritual de Silenciamento',           'Concluida', 'Alto',   'Conter entidade sonora',            '2025-04-02 01:00:00', '2025-04-03', @addr45, @hq1),
+(@miss46, 'Proteção em Feira de Rua',          'Aberta',    'Médio',  'Evitar manipulação psíquica',       '2025-05-28 10:00:00', NULL,         @addr46, @hq1),
+(@miss47, 'Mapeamento de Zonas Residenciais',  'Aberta',    'Baixo',  'Coletar dados de rotina',           '2025-05-29 08:00:00', NULL,         @addr47, @hq1),
+(@miss48, 'Investida em Galpão Desativado',    'Concluida', 'Médio',  'Verificar movimentações ocultas',   '2025-04-14 15:00:00', '2025-04-15', @addr48, @hq1),
+(@miss49, 'Ronda de Final de Semana',          'Aberta',    'Médio',  'Patrulhar centros culturais',       '2025-06-01 19:00:00', NULL,         @addr49, @hq1),
+(@miss100, 'Calamidade', 'Aberta', 'Crítico', 'Anomalia de Classe Desconhecida detectada. Convergência de forças extraplanares em escala nunca registrada. Mobilização total autorizada.', '2021-09-04 00:00:00', NULL, @addr100, @hq1),
 
--- Equipes
+-- QG 2
+
+(@miss4,  'Investigação na Praia',                'Aberta',    'Médio',  'Coletar testemunhos',            '2025-05-10 06:00:00', NULL,         @addr4,  @hq2),
+(@miss5,  'Ritual de Contenção',                  'Aberta',    'Alto',   'Conter manifestação',            '2025-05-12 20:00:00', NULL,         @addr5,  @hq2),
+(@miss6,  'Reconhecimento Urbano',                'Concluida', 'Baixo',  'Mapear pontos quentes',          '2025-04-20 10:00:00', '2025-04-21', @addr6,  @hq2),
+(@miss10, 'Investigação no Forte Histórico',      'Aberta',    'Médio',  'Coletar artefatos',              '2025-02-15 08:30:00', NULL,         @addr10, @hq2),
+(@miss11, 'Patrulha Preventiva',                  'Concluida', 'Baixo',  'Vistorias de rotina',            '2025-03-01 06:00:00', '2025-03-05', @addr11, @hq2),
+(@miss12, 'Rastreamento de Fenômenos',            'Aberta',    'Alto',   'Registrar ocorrências estranhas','2025-04-10 21:00:00', NULL,         @addr12, @hq2),
+(@miss18, 'Ritual de Proteção Costeira',          'Aberta',    'Médio',  'Erguer barreiras energéticas',   '2025-04-05 05:45:00', NULL,         @addr18, @hq2),
+(@miss24, 'Patrulha em Armazém Abandonado',       'Aberta',    'Alto',   'Documentar estranhezas',         '2025-04-12 13:00:00', NULL,         @addr24, @hq2),
+(@miss50, 'Inspeção de Mirante',               'Aberta',    'Médio',  'Evitar invasões astrais',           '2025-05-21 06:00:00', NULL,         @addr50, @hq2),
+(@miss51, 'Vigilância de Zona Costeira',       'Aberta',    'Alto',   'Detectar portais dimensionais',     '2025-05-22 04:00:00', NULL,         @addr51, @hq2),
+(@miss52, 'Análise de Fragmento Rúnico',       'Concluida', 'Médio',  'Investigar inscrições antigas',     '2025-04-10 16:00:00', '2025-04-11', @addr52, @hq2),
+(@miss53, 'Inspeção de Navio Ancorado',        'Aberta',    'Alto',   'Averiguar distorções temporais',    '2025-05-24 02:30:00', NULL,         @addr53, @hq2),
+(@miss54, 'Reconhecimento em Zona Rural',      'Aberta',    'Médio',  'Catalogar fenômenos discretos',     '2025-05-27 08:00:00', NULL,         @addr54, @hq2),
+(@miss55, 'Patrulha Pós-Ritual',               'Concluida', 'Médio',  'Garantir dissipação de energia',     '2025-04-01 12:00:00', '2025-04-02', @addr55, @hq2),
+(@miss56, 'Monitoramento de Assentamentos',    'Aberta',    'Baixo',  'Estabelecer perímetro seguro',      '2025-05-30 07:00:00', NULL,         @addr56, @hq2),
+(@miss57, 'Ritual de Proteção de Riacho',      'Aberta',    'Médio',  'Evitar contaminação espiritual',    '2025-06-02 06:30:00', NULL,         @addr57, @hq2),
+(@miss58, 'Coleta em Solo Contaminado',        'Concluida', 'Baixo',  'Extração controlada',               '2025-04-12 10:00:00', '2025-04-13', @addr58, @hq2),
+(@miss59, 'Supervisão de Intervenção Mística', 'Aberta',    'Alto',   'Acompanhar conjuradores',           '2025-06-03 08:00:00', NULL,         @addr59, @hq2),
+
+-- QG 3
+(@miss7,  'Investigação em Fábrica Abandonada',   'Aberta',    'Alto',   'Examinar fenômenos',             '2025-05-08 14:00:00', NULL,         @addr7,  @hq3),
+(@miss8,  'Proteção de Local Histórico',          'Aberta',    'Médio',  'Garantir segurança',             '2025-05-15 09:00:00', NULL,         @addr8,  @hq3),
+(@miss9,  'Análise de Artefato',                  'Concluida', 'Baixo',  'Estudar relíquia',               '2025-03-01 08:00:00', '2025-03-03', @addr9,  @hq3),
+(@miss29, 'Vigia do Centro Histórico',            'Aberta',    'Médio',  'Patrulha noturna',               '2025-05-14 22:00:00', NULL,         @addr29, @hq3),
+(@miss30, 'Inspeção de Túneis Urbanos',           'Concluida', 'Alto',   'Avaliar riscos de colapso',      '2025-03-22 11:30:00', '2025-03-23', @addr30, @hq3),
+(@miss31, 'Operação Ponto de Ônibus',             'Aberta',    'Baixo',  'Monitorar aparições rápidas',    '2025-04-28 17:00:00', NULL,         @addr31, @hq3),
+(@miss36, 'Proteção de Porto Pesqueiro',          'Aberta',    'Médio',  'Patrulhar docas',                '2025-05-03 06:30:00', NULL,         @addr36, @hq3),
+(@miss60, 'Ronda em Centro Comercial',         'Aberta',    'Médio',  'Observar distúrbios sutis',         '2025-05-21 14:00:00', NULL,         @addr60, @hq3),
+(@miss61, 'Investigação de Loja Oculta',       'Aberta',    'Alto',   'Examinar fundo mágico',             '2025-05-22 10:00:00', NULL,         @addr61, @hq3),
+(@miss62, 'Ritual de Harmonização Urbana',     'Concluida', 'Médio',  'Equalizar energias da região',      '2025-04-10 18:00:00', '2025-04-11', @addr62, @hq3),
+(@miss63, 'Exploração de Estrutura Antiga',    'Aberta',    'Médio',  'Mapear traços arcanos',             '2025-05-24 16:00:00', NULL,         @addr63, @hq3),
+(@miss64, 'Proteção em Escola Técnica',        'Aberta',    'Alto',   'Neutralizar influência nefasta',    '2025-05-26 08:00:00', NULL,         @addr64, @hq3),
+(@miss65, 'Investigação no Teatro Municipal',  'Concluida', 'Médio',  'Registrar presenças não-humanas',   '2025-04-01 20:00:00', '2025-04-02', @addr65, @hq3),
+(@miss66, 'Ronda Especial em Feira Noturna',   'Aberta',    'Médio',  'Prevenir ocorrências espontâneas',  '2025-05-28 19:00:00', NULL,         @addr66, @hq3),
+(@miss67, 'Inspeção de Biblioteca Arcana',     'Aberta',    'Baixo',  'Verificar tomos selados',           '2025-05-29 15:00:00', NULL,         @addr67, @hq3),
+(@miss68, 'Verificação de Metrô Abandonado',   'Concluida', 'Alto',   'Identificar criaturas subterrâneas','2025-04-13 22:00:00', '2025-04-14', @addr68, @hq3),
+(@miss69, 'Ronda em Zona Industrial',          'Aberta',    'Médio',  'Examinar dispositivos',             '2025-06-01 17:00:00', NULL,         @addr69, @hq3),
+
+-- QG 4
+(@miss15, 'Proteção de Arranha-céu',              'Aberta',    'Alto',   'Evitar invasões espectrais',     '2025-05-12 23:00:00', NULL,         @addr15, @hq4),
+(@miss16, 'Ronda Cultural Urbana',                'Concluida', 'Baixo',  'Inspeção em teatros antigos',    '2025-02-28 18:00:00', '2025-02-28', @addr16, @hq4),
+(@miss17, 'Investigação em Túnel Subterrâneo',    'Aberta',    'Médio',  'Averiguar ruídos estranhos',     '2025-05-18 22:30:00', NULL,         @addr17, @hq4),
+(@miss19, 'Vigilância de Torre Corporativa',      'Concluida', 'Baixo',  'Checar alarmes místicos',        '2025-03-10 20:00:00', '2025-03-11', @addr19, @hq4),
+(@miss32, 'Patrulha em Favela Histórica',         'Concluida', 'Médio',  'Coletar relatos locais',         '2025-02-18 20:00:00', '2025-02-19', @addr32, @hq4),
+(@miss33, 'Ritual de Purificação',                'Aberta',    'Alto',   'Realizar cerimônia noturna',     '2025-05-16 21:00:00', NULL,         @addr33, @hq4),
+(@miss37, 'Inspeção de Indústria Química',        'Concluida', 'Alto',   'Verificar contaminações',        '2025-02-22 14:00:00', '2025-02-23', @addr37, @hq4),
+(@miss38, 'Ronda de Rodovia',                     'Aberta',    'Médio',  'Monitorar acidentes',            '2025-04-30 15:00:00', NULL,         @addr38, @hq4),
+(@miss39, 'Coleta de Testemunhos',                'Concluida', 'Baixo',  'Registrar depoimentos',          '2025-03-28 10:00:00', '2025-03-29', @addr39, @hq4),
+(@miss70, 'Vigilância de Subestação Elétrica', 'Aberta',    'Médio',  'Detectar instabilidade dimensional','2025-05-21 07:00:00', NULL,         @addr70, @hq4),
+(@miss71, 'Ritual em Museu Histórico',         'Aberta',    'Alto',   'Conservar relíquias protegidas',    '2025-05-22 11:00:00', NULL,         @addr71, @hq4),
+(@miss72, 'Investigação em Escadaria Secreta', 'Concluida', 'Médio',  'Desvendar padrões ocultos',         '2025-04-15 09:00:00', '2025-04-16', @addr72, @hq4),
+(@miss73, 'Proteção de Prédio Governamental',  'Aberta',    'Alto',   'Evitar sabotagens espectrais',      '2025-05-24 08:30:00', NULL,         @addr73, @hq4),
+(@miss74, 'Verificação de Espaço Cultural',    'Aberta',    'Médio',  'Identificar distorções no ar',      '2025-05-26 10:00:00', NULL,         @addr74, @hq4),
+(@miss75, 'Supervisão de agentes Recrutas','Concluida', 'Baixo',  'Avaliar habilidades de combate',     '2025-04-03 14:00:00', '2025-04-04', @addr75, @hq4),
+(@miss76, 'Patrulha em Terminal Rodoviário',   'Aberta',    'Médio',  'Prevenir influências hostis',       '2025-05-30 12:00:00', NULL,         @addr76, @hq4),
+(@miss77, 'Observação de Ponto Turístico',     'Aberta',    'Baixo',  'Registrar fluxos energéticos',      '2025-06-01 09:30:00', NULL,         @addr77, @hq4),
+(@miss78, 'Análise de Documento Amaldiçoado',  'Concluida', 'Médio',  'Neutralizar efeitos residuais',     '2025-04-17 10:00:00', '2025-04-18', @addr78, @hq4),
+(@miss79, 'Ronda Cultural na Orla',            'Aberta',    'Médio',  'Examinar arte urbana ritualística', '2025-06-02 17:30:00', NULL,         @addr79, @hq4),
+
+-- QG 5
+(@miss13, 'Monitoramento da Floresta',            'Aberta',    'Médio',  'Detectar sinais místicos',       '2025-05-02 07:00:00', NULL,         @addr13, @hq5),
+(@miss14, 'Análise de Relíquias',                 'Concluida', 'Alto',   'Catalogar objetos sagrados',     '2025-03-20 09:00:00', '2025-04-01', @addr14, @hq5),
+(@miss27, 'Expedição Fluvial',                    'Aberta',    'Médio',  'Explorar igarapés remotos',      '2025-04-18 06:00:00', NULL,         @addr27, @hq5),
+(@miss28, 'Reconhecimento de Margem',             'Concluida', 'Baixo',  'Mapear cursos d’água',           '2025-03-05 07:00:00', '2025-03-07', @addr28, @hq5),
+(@miss80, 'Expedição à Caverna Cristalina',     'Aberta',    'Alto',   'Explorar cavernas com energia',     '2025-05-21 08:00:00', NULL,         @addr80, @hq5),
+(@miss81, 'Monitoramento em Tribo Isolada',     'Aberta',    'Médio',  'Verificar contatos místicos',       '2025-05-22 06:00:00', NULL,         @addr81, @hq5),
+(@miss82, 'Ritual de Isolamento Florestal',     'Concluida', 'Alto',   'Selar zona contaminada',            '2025-04-18 21:00:00', '2025-04-19', @addr82, @hq5),
+(@miss83, 'Coleta em Zona Enlameada',           'Aberta',    'Baixo',  'Extrair lama simbiótica',           '2025-05-24 10:00:00', NULL,         @addr83, @hq5),
+(@miss84, 'Proteção de Ponte Suspensa',         'Aberta',    'Médio',  'Evitar manifestação aquática',      '2025-05-25 07:30:00', NULL,         @addr84, @hq5),
+(@miss85, 'Reconhecimento em Região Alagada',   'Concluida', 'Médio',  'Avaliar presença de portais',       '2025-04-05 15:00:00', '2025-04-06', @addr85, @hq5),
+(@miss86, 'Vigilância em Comunidade Ribeirinha','Aberta',    'Médio',  'Monitorar ondas energéticas',       '2025-05-28 08:00:00', NULL,         @addr86, @hq5),
+(@miss87, 'Supervisão de Pesquisadores',        'Aberta',    'Baixo',  'Garantir segurança espiritual',     '2025-05-29 07:00:00', NULL,         @addr87, @hq5),
+(@miss88, 'Investigação em Ilha Fluvial',       'Concluida', 'Alto',   'Neutralizar presença oculta',       '2025-04-07 13:00:00', '2025-04-08', @addr88, @hq5),
+(@miss89, 'Ritual de Reequilíbrio da Fauna',    'Aberta',    'Médio',  'Harmonizar flora e fauna afetadas', '2025-06-02 05:00:00', NULL,         @addr89, @hq5),
+
+-- QG 6
+(@miss25, 'Inspeção em Palacete Histórico',       'Concluida', 'Médio',  'Revisar integridade estrutural', '2025-02-20 10:00:00', '2025-02-21', @addr25, @hq6),
+(@miss26, 'Monitoramento de Comunidade',          'Aberta',    'Baixo',  'Entrevistar moradores',        '2025-05-08 09:00:00', NULL,         @addr26, @hq6),
+(@miss90, 'Inspeção no Canal de Esgoto Antigo',   'Aberta',    'Médio',  'Rastreamento de corrupção mística',     '2025-05-21 23:00:00', NULL,         @addr90, @hq6),
+(@miss91, 'Ritual de Contenção no Subsolo',       'Aberta',    'Alto',   'Selar passagem dimensional instável',   '2025-05-22 01:00:00', NULL,         @addr91, @hq6),
+(@miss92, 'Exploração de Tunelamento Urbano',     'Concluida', 'Médio',  'Analisar runas esquecidas',             '2025-04-08 04:00:00', '2025-04-09', @addr92, @hq6),
+(@miss93, 'Vigilância em Centro de Reciclagem',   'Aberta',    'Baixo',  'Prevenir contaminação espiritual',      '2025-05-24 05:30:00', NULL,         @addr93, @hq6),
+(@miss94, 'Monitoramento de Armazém Portuário',   'Aberta',    'Médio',  'Verificar fluxos arcanos ilegais',      '2025-05-26 02:00:00', NULL,         @addr94, @hq6),
+(@miss95, 'Análise de Entulho Anômalo',           'Concluida', 'Médio',  'Catalogar resíduos mágicos',            '2025-04-01 03:00:00', '2025-04-02', @addr95, @hq6),
+(@miss96, 'Ronda Secreta em Distrito Industrial', 'Aberta',    'Alto',   'Identificar entidades encobertas',      '2025-05-30 22:00:00', NULL,         @addr96, @hq6),
+(@miss97, 'Supervisão de Interdição Ritualística','Aberta',    'Médio',  'Manter área protegida',                 '2025-06-02 04:30:00', NULL,         @addr97, @hq6),
+(@miss98, 'Inspeção de Reservatório de Água',     'Concluida', 'Médio',  'Identificar substâncias encantadas',    '2025-04-13 05:00:00', '2025-04-14', @addr98, @hq6),
+(@miss99, 'Verificação de Correntes Etéreas',     'Aberta',    'Médio',  'Examinar presença de vórtices sutis',   '2025-06-03 03:00:00', NULL,         @addr99, @hq6);
+
+
+-- Equipes OK
 INSERT INTO TEAM (id_team, name, specialization) VALUES
 -- QG Central (@hq1)
 (@team1,  'Vigilantes da Aurora',    'Investigação'),
 (@team2,  'Legião Sombria',          'Combate'),
 (@team3,  'Guardiões do Crepúsculo', 'Suporte'),
 (@team4,  'Olhos da Realidade',      'Investigação'),
+(@team13, 'Guardas do Véu',             'Suporte'),
+(@team14, 'Lâminas do Silêncio',       'Combate'),
 
 -- QG Fortaleza (@hq2)
 (@team5,  'Maré Oculta',             'Investigação'),
 (@team6,  'Titãs de Rocha',          'Combate'),
 (@team7,  'Sentinelas da Bruma',     'Suporte'),
 (@team8,  'Oráculo do Horizonte',    'Investigação'),
+(@team15, 'Sentinelas do Eclipse',     'Suporte'),
+(@team16, 'Marujos do Abismo',         'Investigação'),
 
 -- QG Porto Alegre (@hq3)
 (@team9,  'Andarilhos da Névoa',     'Investigação'),
 (@team10, 'Fúria do Guaíba',         'Combate'),
 (@team11, 'Protetores da Pedra',     'Suporte'),
-(@team12, 'Tecelões de Sombras',     'Investigação');
+(@team12, 'Tecelões de Sombras',     'Investigação'),
+(@team17, 'Guardas Rubros',            'Combate'),
+(@team18, 'Sussurros da Serra',        'Suporte'),
 
+-- QG 4
+(@team19, 'Escudos do Cerrado',        'Combate'),
+(@team20, 'Estudiosos do Além',        'Investigação'),
+(@team23, 'Falcões do Horizonte',      'Investigação'),
+(@team24, 'Escuridão Vigilante',       'Combate'),
+-- QG 5
+(@team21, 'Anjos da Noite',            'Suporte'),
+(@team22, 'Rastros da Verdade',        'Investigação'),
+(@team25, 'Guardas da Ruptura',        'Suporte'),
+(@team26, 'Olhos da Vigília',          'Investigação'),
+-- QG 6
+(@team27, 'Tempestade Interna',        'Combate'),
+(@team28, 'Vultos do Infinito',        'Investigação');
 
--- Agentes nas equipes
+-- Agentes nas equipes OK
 INSERT INTO AGENTS_IN_TEAM (id_team, id_agent, start_date, end_date) VALUES
--- QG Central (agentes @ag1…@ag10)
-(@team1,  @ag1,  '2025-05-01 08:00:00', NULL),
-(@team1,  @ag2,  '2025-05-01 08:00:00', NULL),
-(@team1,  @ag3,  '2025-05-01 08:00:00', NULL),
-(@team2,  @ag4,  '2025-05-01 08:00:00', NULL),
-(@team2,  @ag5,  '2025-05-01 08:00:00', NULL),
-(@team2,  @ag6,  '2025-05-01 08:00:00', NULL),
-(@team3,  @ag7,  '2025-05-01 08:00:00', NULL),
-(@team3,  @ag8,  '2025-05-01 08:00:00', NULL),
-(@team4,  @ag9,  '2025-05-01 08:00:00', NULL),
-(@team4,  @ag10, '2025-05-01 08:00:00', NULL),
+-- QG Central (@hq1)
+(@team2,  @ag1,  '2025-06-01 09:00:00', NULL),
+(@team2,  @ag3,  '2025-06-02 10:30:00', NULL),
+(@team4,  @ag6,  '2025-06-01 09:15:00', NULL),
+(@team4,  @ag2,  '2025-06-03 11:00:00', NULL),
+(@team13, @ag10, '2025-06-03 08:45:00', NULL),
+(@team13, @ag11, '2025-06-04 09:30:00', NULL),
 
--- QG Fortaleza (agentes @ag11…@ag20)
-(@team5,  @ag11, '2025-05-01 09:00:00', NULL),
-(@team5,  @ag12, '2025-05-01 09:00:00', NULL),
-(@team5,  @ag13, '2025-05-01 09:00:00', NULL),
-(@team6,  @ag14, '2025-05-01 09:00:00', NULL),
-(@team6,  @ag15, '2025-05-01 09:00:00', NULL),
-(@team6,  @ag16, '2025-05-01 09:00:00', NULL),
-(@team7,  @ag17, '2025-05-01 09:00:00', NULL),
-(@team7,  @ag18, '2025-05-01 09:00:00', NULL),
-(@team8,  @ag19, '2025-05-01 09:00:00', NULL),
-(@team8,  @ag20, '2025-05-01 09:00:00', NULL),
+-- QG Fortaleza (@hq2)
+(@team5,  @ag18, '2025-06-01 07:00:00', NULL),
+(@team5,  @ag19, '2025-06-02 08:15:00', NULL),
+(@team6,  @ag23, '2025-06-02 11:00:00', NULL),
+(@team6,  @ag20, '2025-06-03 12:30:00', NULL),
 
--- QG Porto Alegre (agentes @ag21…@ag30)
-(@team9,  @ag21, '2025-05-01 10:00:00', NULL),
-(@team9,  @ag22, '2025-05-01 10:00:00', NULL),
-(@team9,  @ag23, '2025-05-01 10:00:00', NULL),
-(@team10, @ag24, '2025-05-01 10:00:00', NULL),
-(@team10, @ag25, '2025-05-01 10:00:00', NULL),
-(@team10, @ag26, '2025-05-01 10:00:00', NULL),
-(@team11, @ag27, '2025-05-01 10:00:00', NULL),
-(@team11, @ag28, '2025-05-01 10:00:00', NULL),
-(@team12, @ag29, '2025-05-01 10:00:00', NULL),
-(@team12, @ag30, '2025-05-01 10:00:00', NULL);
+-- QG Porto Alegre (@hq3)
+(@team9,  @ag35, '2025-06-01 09:30:00', NULL),
+(@team9,  @ag36, '2025-06-02 10:45:00', NULL),
+(@team11, @ag39, '2025-06-03 14:00:00', NULL),
+(@team11, @ag37, '2025-06-04 15:20:00', NULL),
+(@team12, @ag42, '2025-06-02 16:15:00', NULL),
+(@team12, @ag38, '2025-06-03 17:30:00', NULL),
 
--- Alocação de equipes em missões
+-- QG Belo Horizonte (@hq4)
+(@team19, @ag52, '2025-06-01 08:00:00', NULL),
+(@team19, @ag53, '2025-06-02 09:10:00', NULL),
+(@team24, @ag64, '2025-06-02 13:45:00', NULL),
+(@team24, @ag54, '2025-06-03 14:55:00', NULL),
+
+-- QG São Paulo (@hq5)
+(@team21, @ag68, '2025-06-01 10:00:00', NULL),
+(@team21, @ag69, '2025-06-02 11:15:00', NULL),
+(@team26, @ag81, '2025-06-03 09:30:00', NULL),
+(@team26, @ag70, '2025-06-04 10:45:00', NULL),
+
+-- QG Curitiba (@hq6)
+(@team27, @ag85, '2025-06-01 12:00:00', NULL),
+(@team27, @ag86, '2025-06-02 13:20:00', NULL),
+(@team28, @ag94, '2025-06-02 15:00:00', NULL),
+(@team28, @ag87, '2025-06-03 16:10:00', NULL);
+
+-- Alocação de equipes em missões OK
 INSERT INTO MISSION_ASSIGNMENT (id_team, id_mission, allocation_date, deallocation_date) VALUES
--- QG Central (miss1, miss2, miss3)
-(@team1,  @miss1, '2025-04-01 08:00:00', NULL),
-(@team2,  @miss2, '2025-04-01 08:15:00', NULL),
-(@team3,  @miss3, '2025-02-01 09:00:00', '2025-03-15'),
-(@team4,  @miss3, '2025-05-05 22:20:00', NULL),
 
--- QG Fortaleza (miss4, miss5, miss6)
+(@team1,  @miss1, '2025-04-01 08:00:00', NULL),
 (@team5,  @miss4, '2025-05-10 06:30:00', NULL),
 (@team6,  @miss4, '2025-05-10 06:45:00', NULL),
 (@team7,  @miss5, '2025-05-12 20:10:00', NULL),
 (@team8,  @miss6, '2025-04-20 10:05:00', '2025-04-21'),
-
--- QG Porto Alegre (miss7, miss8, miss9)
 (@team9,  @miss7, '2025-05-08 14:10:00', NULL),
 (@team10, @miss7, '2025-05-08 14:25:00', NULL),
 (@team11, @miss8, '2025-05-15 09:10:00', NULL),
-(@team12, @miss9, '2025-03-01 08:10:00', '2025-03-03');
+(@team12, @miss9, '2025-03-01 08:10:00', '2025-03-03'),
+(@team2,  @miss2,  '2025-04-01 08:15:00', NULL),
+(@team4,  @miss3,  '2025-05-06 00:30:00', NULL),
+(@team5,  @miss6,  '2025-04-20 10:05:00', NULL),
+(@team6,  @miss9,  '2025-03-01 08:15:00', NULL),
+(@team9,  @miss11, '2025-03-01 06:30:00', NULL),
+(@team11, @miss14, '2025-04-01 09:30:00', NULL),
+(@team12, @miss16, '2025-02-28 18:15:00', NULL),
+(@team13, @miss19, '2025-03-10 20:15:00', NULL),
+(@team14, @miss21, '2025-02-25 06:15:00', NULL),
+(@team15, @miss23, '2025-03-15 14:15:00', NULL),
+(@team16, @miss25, '2025-02-20 10:15:00', NULL),
+(@team17, @miss28, '2025-03-05 07:15:00', NULL),
+(@team18, @miss30, '2025-03-22 11:45:00', NULL),
+(@team19, @miss32, '2025-02-18 20:15:00', NULL),
+(@team20, @miss34, '2025-03-12 05:15:00', NULL),
+(@team21, @miss37, '2025-02-22 14:15:00', NULL),
+(@team22, @miss39, '2025-03-28 10:15:00', NULL),
+(@team23, @miss42, '2025-04-10 14:15:00', NULL),
+(@team24, @miss45, '2025-04-02 01:15:00', NULL),
+(@team25, @miss48, '2025-04-14 15:15:00', NULL),
+(@team26, @miss52, '2025-04-10 16:15:00', NULL),
+(@team27, @miss55, '2025-04-01 12:15:00', NULL),
+(@team28, @miss58, '2025-04-12 10:15:00', NULL),
+(@team2,  @miss62, '2025-04-10 18:15:00', NULL),
+(@team4,  @miss65, '2025-04-01 20:15:00', NULL),
+(@team5,  @miss68, '2025-04-13 22:15:00', NULL),
+(@team6,  @miss72, '2025-04-15 09:15:00', NULL),
+(@team9,  @miss75, '2025-04-03 14:15:00', NULL),
+(@team11, @miss78, '2025-04-17 10:15:00', NULL),
+(@team12, @miss82, '2025-04-18 21:15:00', NULL),
+(@team13, @miss85, '2025-04-05 15:15:00', NULL),
+(@team14, @miss88, '2025-04-07 13:15:00', NULL),
+(@team15, @miss92, '2025-04-08 04:15:00', NULL),
+(@team16, @miss95, '2025-03-12 05:15:00', NULL),
+(@team17, @miss98, '2025-04-13 05:15:00', NULL);
 
--- Evidências
+-- Evidências !
 INSERT INTO EVIDENCE (id_evidence, origin, description, stability_level, id_mission) VALUES
 (@evid1, 'Objeto ritualístico',          'Livro antigo com símbolos',                'Perigoso',  @miss1),
 (@evid2, 'Manuscrito cifrado',           'Textos estranhos em línguas mortas',       'Volatil',   @miss2),
-(@evid3, 'Diário enigmático',            'Entradas sobre visões noturnas',           'Volatil',  @miss3),
+(@evid3, 'Diário enigmático',            'Entradas sobre visões noturnas',           'Volatil',  @miss4),
 (@evid4, 'Coleta de areia',              'Amostras brilhantes da praia',             'Estável',   @miss4),
 (@evid5, 'Círculo ritual',               'Cacos de pedra com runas',                 'Perigoso',  @miss5),
 (@evid6, 'Mapa urbano',                  'Marcas sinalizando portais',               'Volatil',   @miss6),
@@ -334,7 +687,7 @@ INSERT INTO EVIDENCE (id_evidence, origin, description, stability_level, id_miss
 (@evid8, 'Placa comemorativa',           'Inscrições antigas apagadas',              'Volatil',  @miss8),
 (@evid9, 'Relíquia cerimonial',          'Objeto entalhado com selos',               'Perigoso',  @miss9);
 
--- Ameaças
+-- Ameaças !
 INSERT INTO THREATS (id_threat, description) VALUES
 (@thr1,'Organização oculta que pratica rituais sombrios'),
 (@thr2,'Entidade de energia sombria que se manifesta em cemitérios'),

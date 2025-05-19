@@ -164,7 +164,8 @@ public class QGDAO{
                         FROM AGENTS a
                             JOIN AGENTS_IN_HQ aq ON a.id_agent = aq.id_agent
                         WHERE aq.id_hq = ?
-                        ORDER BY missoes_concluidas DESC;
+                        ORDER BY missoes_concluidas DESC
+                        LIMIT 10;
                 """;
 
         try(Connection conn = ConnectionFactory.getConnection();
