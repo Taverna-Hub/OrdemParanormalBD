@@ -6,7 +6,12 @@ SET
   @ag7=UUID(),  @ag8=UUID(),  @ag9=UUID(),  @ag10=UUID(), @ag11=UUID(), @ag12=UUID(),
   @ag13=UUID(), @ag14=UUID(), @ag15=UUID(), @ag16=UUID(), @ag17=UUID(), @ag18=UUID(),
   @ag19=UUID(), @ag20=UUID(), @ag21=UUID(), @ag22=UUID(), @ag23=UUID(), @ag24=UUID(),
-  @ag25=UUID(), @ag26=UUID(), @ag27=UUID(), @ag28=UUID(), @ag29=UUID(), @ag30=UUID();
+  @ag25=UUID(), @ag26=UUID(), @ag27=UUID(), @ag28=UUID(), @ag29=UUID(), @ag30=UUID(),
+  @ag31=UUID(), @ag32=UUID(), @ag33=UUID(), @ag34=UUID(), @ag35=UUID(), @ag36=UUID(),
+  @ag37=UUID(), @ag38=UUID(), @ag39=UUID(), @ag40=UUID(), @ag41=UUID(), @ag42=UUID(),
+  @ag43=UUID(), @ag44=UUID(), @ag45=UUID(), @ag46=UUID(), @ag47=UUID(), @ag48=UUID(),
+  @ag49=UUID(), @ag50=UUID(), @ag51=UUID(), @ag52=UUID(), @ag53=UUID(), @ag54=UUID(),
+  @ag55=UUID(), @ag56=UUID(), @ag57=UUID(), @ag58=UUID(), @ag59=UUID(), @ag60=UUID();
 
 -- ===================================================================
 -- Verissimos
@@ -112,7 +117,37 @@ INSERT INTO AGENTS (id_agent, name, birth_date, phone, specialization, rank_agen
 (@ag27, 'Alan Cardoso',   '1977-05-05', '81999990027', 'Combatente',  'Veterano', 63, FALSE, FALSE),  -- corrigido
 (@ag28, 'Beatriz Silva',  '1991-02-02', '81999990028', 'Ocultista',   'Recruta',  17, FALSE, FALSE),
 (@ag29, 'Cassio Nunes',   '1983-06-06', '81999990029', 'Especialista','Elite',    82, FALSE, TRUE),
-(@ag30, 'Diana Azevedo',  '1989-09-09', '81999990030', 'Combatente',  'Veterano', 57, FALSE, FALSE);
+(@ag30, 'Diana Azevedo',  '1989-09-09', '81999990030', 'Combatente',  'Veterano', 57, FALSE, FALSE),
+(@ag31,'Camila Andrade','1988-02-05','(31)93456-7890','Combatente','Elite',95,FALSE,FALSE),
+(@ag32,'Diego Ferreira','1979-11-17','(41)94567-8901','Ocultista','Veterano',60,TRUE,FALSE),
+(@ag33,'Eduarda Gomes','1992-06-30','(51)95678-9012','Especialista','Recruta',20,FALSE,FALSE),
+(@ag34,'Felipe Ramos','1983-01-22','(61)96789-0123','Combatente','Veterano',50,FALSE,TRUE),
+(@ag35,'Gabriela Melo','1995-08-14','(71)97890-1234','Ocultista','Elite',88,FALSE,FALSE),
+(@ag36,'Henrique Alves','1981-12-09','(81)98901-2345','Especialista','Veterano',65,FALSE,FALSE),
+(@ag37,'Isabela Pinto','1993-03-19','(91)99012-3456','Combatente','Recruta',25,TRUE,FALSE),
+(@ag38,'João Duarte','1977-07-27','(95)90123-4567','Ocultista','Veterano',55,FALSE,FALSE),
+(@ag39,'Karina Santos','1986-10-03','(47)91234-5678','Especialista','Elite',92,FALSE,FALSE),
+(@ag40,'Leonardo Vieira','1980-05-11','(67)92345-6789','Combatente','Veterano',58,FALSE,FALSE),
+(@ag41,'Mariana Lopes','1991-12-25','(27)93456-7890','Ocultista','Recruta',35,TRUE,FALSE),
+(@ag42,'Nicolas Rocha','1984-04-04','(37)94567-8901','Especialista','Veterano',63,FALSE,FALSE),
+(@ag43,'Olívia Castro','1996-09-18','(57)95678-9012','Combatente','Elite',99,FALSE,FALSE),
+(@ag44,'Pedro Martins','1978-02-28','(77)96789-0123','Ocultista','Veterano',68,FALSE,FALSE),
+(@ag45,'Quésia Lima','1989-11-11','(87)97890-1234','Especialista','Recruta',22,FALSE,FALSE),
+(@ag46,'Ricardo Moura','1982-06-06','(97)98901-2345','Combatente','Veterano',57,FALSE,FALSE),
+(@ag47,'Sofia Teixeira','1994-03-23','(17)99012-3456','Ocultista','Elite',94,FALSE,FALSE),
+(@ag48,'Tiago Sousa','1976-08-08','(27)90123-4567','Especialista','Veterano',66,TRUE,FALSE),
+(@ag49,'Úrsula Nunes','1987-01-15','(47)91234-5678','Combatente','Recruta',29,FALSE,FALSE),
+(@ag50,'Vitor Braga','1990-05-05','(67)92345-6789','Ocultista','Veterano',71,FALSE,FALSE),
+(@ag51,'Wagner Melo','1983-10-10','(87)93456-7890','Especialista','Elite',89,FALSE,FALSE),
+(@ag52,'Ximena Farias','1992-12-12','(97)94567-8901','Combatente','Veterano',54,FALSE,FALSE),
+(@ag53,'Yara Costa','1985-07-07','(37)95678-9012','Ocultista','Recruta',33,FALSE,FALSE),
+(@ag54,'Zeca Ribeiro','1979-03-03','(17)96789-0123','Especialista','Veterano',62,TRUE,FALSE),
+(@ag55,'Arthur Silva','1986-11-11','(47)97890-1234','Combatente','Elite',96,FALSE,FALSE),
+(@ag56,'Beatriz Rocha','1991-02-02','(67)98901-2345','Ocultista','Veterano',61,FALSE,FALSE),
+(@ag57,'Caio Lima','1993-06-06','(87)99012-3456','Especialista','Recruta',28,FALSE,FALSE),
+(@ag58,'Diana Vieira','1984-09-09','(97)90123-4567','Combatente','Veterano',59,FALSE,FALSE),
+(@ag59,'Emanuel Santos','1978-04-04','(17)91234-5678','Ocultista','Elite',97,FALSE,FALSE),
+(@ag60,'Fernanda Pereira','1989-01-01','(37)92345-6789','Especialista','Veterano',64,TRUE,FALSE);
 
 -- População de VERISSIMO
 INSERT INTO VERISSIMO (id_verissimo, login, password_ver) VALUES
