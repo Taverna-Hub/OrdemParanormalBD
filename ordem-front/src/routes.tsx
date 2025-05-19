@@ -17,71 +17,136 @@ import { UpdateTeam } from './pages/teams/id';
 import { CreateAddress } from './pages/address/create';
 import { CreateOrganizationThreats } from './pages/threats/createOrganization';
 import { UpdateOrganization } from './pages/threats/idOrganizatino';
+import { ProtectedRoute } from './components/ProtectedRoute';
 
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <Dashboard />,
+    element: (
+      <ProtectedRoute>
+        <Dashboard />,
+      </ProtectedRoute>
+    )
   },
   {
     path: '/missoes',
-    element: <Missions />,
+    element: (
+      <ProtectedRoute>
+        <Missions />
+      </ProtectedRoute>
+    ),
   },
   {
     path: '/missoes/criar',
-    element: <CreateMission />,
+    element: (
+      <ProtectedRoute>
+        <CreateMission />
+      </ProtectedRoute>
+    ),
   },
   {
     path: '/missoes/:id',
-    element: <SpecificMission />,
+    element: (
+      <ProtectedRoute>
+        <SpecificMission />
+      </ProtectedRoute>
+    ),
   },
   {
     path: '/agentes',
-    element: <Agents />,
+    element: (
+      <ProtectedRoute>
+        <Agents />
+      </ProtectedRoute>
+    ),
   },
   {
     path: '/agentes/criar',
-    element: <CreateAgent />,
+    element: (
+      <ProtectedRoute>
+        <CreateAgent />
+      </ProtectedRoute>
+    ),
   },
   {
     path: 'agentes/:id',
-    element: <EditAgent />,
+    element: (
+      <ProtectedRoute>
+        <EditAgent />
+      </ProtectedRoute>
+    ),
   },
   {
     path: '/equipes',
-    element: <Teams />,
+    element: (
+      <ProtectedRoute>
+        <Teams />
+      </ProtectedRoute>
+    ),
   },
   {
     path: '/equipes/criar',
-    element: <CreateTeam />,
+    element: (
+      <ProtectedRoute>
+        <CreateTeam />
+      </ProtectedRoute>
+    ),
   },
   {
     path: '/equipes/:id',
-    element: <UpdateTeam />,
+    element: (
+      <ProtectedRoute>
+        <UpdateTeam />
+      </ProtectedRoute>
+    ),
   },
   {
     path: '/ameacas',
-    element: <Threats />,
+    element: (
+      <ProtectedRoute>
+        <Threats />
+      </ProtectedRoute>
+    ),
   },
   {
     path: '/ameacas/criar/paranormal',
-    element: <CreateParanormalThreats />,
+    element: (
+      <ProtectedRoute>
+        <CreateParanormalThreats />
+      </ProtectedRoute>
+    ),
   },
   {
     path: '/ameacas/criar/organizacao',
-    element: <CreateOrganizationThreats />,
+    element: (
+      <ProtectedRoute>
+        <CreateOrganizationThreats />
+      </ProtectedRoute>
+    ),
   },
   {
     path: '/ameacas/paranormal/:id',
-    element: <UpdateThreats />,
+    element: (
+      <ProtectedRoute>
+        <UpdateThreats />
+      </ProtectedRoute>
+    ),
   },
   {
     path: '/ameacas/organizacao/:id',
-    element: <UpdateOrganization />,
+    element: (
+      <ProtectedRoute>
+        <UpdateOrganization />
+      </ProtectedRoute>
+    ),
   },
   {
     path: '/elementos',
-    element: <Elements />,
+    element: (
+      <ProtectedRoute>
+        <Elements />
+      </ProtectedRoute>
+    ),
   },
   {
     path: '/login',
@@ -89,6 +154,10 @@ export const router = createBrowserRouter([
   },
   {
     path: '/endereco/criar',
-    element: <CreateAddress />,
+    element: (
+      <ProtectedRoute>
+        <CreateAddress />
+      </ProtectedRoute>
+    ),
   },
 ]);

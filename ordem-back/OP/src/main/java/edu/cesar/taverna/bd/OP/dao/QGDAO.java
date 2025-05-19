@@ -1,9 +1,6 @@
 package edu.cesar.taverna.bd.OP.dao;
 
-import edu.cesar.taverna.bd.OP.DTO.AgentsBySpecializationDTO;
-import edu.cesar.taverna.bd.OP.DTO.MissionByStatusDTO;
-import edu.cesar.taverna.bd.OP.DTO.NexByHqDTO;
-import edu.cesar.taverna.bd.OP.DTO.TeamsSpecializationsInHQ;
+import edu.cesar.taverna.bd.OP.DTO.*;
 import edu.cesar.taverna.bd.OP.config.ConnectionFactory;
 import lombok.Data;
 
@@ -19,9 +16,6 @@ import static edu.cesar.taverna.bd.OP.config.ConnectionFactory.getConnection;
 
 @Data
 public class QGDAO{
-
-
-
 
     public UUID findQGIdByVerissimo(UUID verissimo_id) throws SQLException {
         String selectHQ = "SELECT id_hq FROM HQ WHERE id_verissimo = ?";

@@ -13,7 +13,7 @@ export function App() {
   return (
     <>
       <HelmetProvider>
-        <Helmet titleTemplate="%s | OP" />
+        <Helmet titleTemplate="%s | UMBRA" />
         <ThemeProvider theme={theme}>
           <QueryClientProvider client={queryClient}>
             <AuthProvider>

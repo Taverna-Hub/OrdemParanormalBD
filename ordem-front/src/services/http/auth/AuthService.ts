@@ -6,10 +6,15 @@ export type LoginProps = {
 };
 export const AuthService = {
   login: async ({ login, password }: LoginProps) => {
-    const { data } = await api.post(`/login`, {
+    const { data } = await api.post(`/auth/login`, {
       login,
       password,
     });
+
+    console.log(data);
+
+    const credentials = btoa(`${login}:${password}`);
+    localStorage.setItem('ordem:auth', credentials);
 
     return data;
   },

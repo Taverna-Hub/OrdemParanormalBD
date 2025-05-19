@@ -20,6 +20,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     },
     onSuccess: () => {
       toast.success('Login efetuado com sucesso!');
+      window.location.href = "/";
     },
     onError: () => {
       toast.error('Ocorreu um erro ao fazer o login!');
