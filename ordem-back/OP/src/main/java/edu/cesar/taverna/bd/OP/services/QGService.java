@@ -28,4 +28,20 @@ public class QGService {
     public List<RankAgentsDTO> getRankAgentsByHQ(UUID id){
         return hqDAO.getRankAgentsByHQ(id);
     }
+
+    public FinishedMissionDTO getFinishedMissions(UUID id, int month, int year){
+        return hqDAO.getFinishedMissions(id, month, year);
+    }
+
+    public ActiveAgentsDTO getActiveAgents(UUID id) {
+        return hqDAO.getActiveAgents(id);
+    }
+
+    public OpenMissionsDTO getOpenMissions(UUID id) {
+        return hqDAO.getOpenMissions(id);
+    }
+
+    public MissionAvgDurationDTO getMissionAverageDuration(UUID id, int month, int year) {
+        return hqDAO.getMissionAverageDuration(id, month, year);
+    }
 }

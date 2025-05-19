@@ -25,6 +25,27 @@ export type RankAgentsDTO = {
   missions_success_count: number;
 };
 
+export type FinishedMissionsDTO = {
+  hq_name: string;
+  total_finished: number;
+  total_finished_month: number;
+};
+
+export type ActiveAgentsDTO = {
+  total_agents: number;
+  active_agents: number;
+};
+
+export type OpenMissionsDTO = {
+  hq_name: number;
+  total: number;
+};
+
+export type MissionAvgDurationDTO = {
+  hq_name: number;
+  avgDurationDays: number;
+};
+
 export const HqService = {
   getSpecializationsInHQ: async (): Promise<TeamsSpecializationsInHQ[]> => {
     const { data } = await api.get('/qg/teams/specializations');
@@ -50,6 +71,36 @@ export const HqService = {
 
   getRankAgentsByHQ: async (): Promise<RankAgentsDTO[]> => {
     const { data } = await api.get('/qg/agents/rank');
+    return data;
+  },
+
+  getFinishedMissionsByMonth: async (
+    month = new Date().getMonth(),
+    year = new Date().getFullYear(),
+  ): Promise<FinishedMissionsDTO> => {
+    const { data } = await api.get(
+      `/qg/missions/finished?m=${month}&y=${year}`,
+    );
+    return data;
+  },
+
+  getActiveAgents: async (): Promise<ActiveAgentsDTO> => {
+    const { data } = await api.get(`/qg/agents/active`);
+    return data;
+  },
+
+  getOpenMissions: async (): Promise<OpenMissionsDTO> => {
+    const { data } = await api.get(`/qg/missions/open`);
+    return data;
+  },
+
+  getMissionsAverageDuration: async (
+    month = new Date().getMonth(),
+    year = new Date().getFullYear(),
+  ): Promise<MissionAvgDurationDTO> => {
+    const { data } = await api.get(
+      `/qg/missions/duration?m=${month}&y=${year}`,
+    );
     return data;
   },
 };

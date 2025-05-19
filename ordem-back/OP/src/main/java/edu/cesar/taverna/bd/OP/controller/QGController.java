@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public class QGController {
 
 
     @GetMapping("/teams/specializations")
-    private List<TeamsSpecializationsInHQ> getSpecialzationsInHQ(){
+    private List<TeamsSpecializationsInHQ> getSpecialzationsInHQ() {
         UUID id = (UUID) session.getAttribute("id_hq");
         return service.getSpecializationsInHQ(id);
     }
@@ -31,6 +32,13 @@ public class QGController {
     public List<MissionByStatusDTO> getMissionsByStatus() {
         UUID id = (UUID) session.getAttribute("id_hq");
         return service.getMissionByStatus(id);
+    }
+
+    @GetMapping("/missions/finished")
+    public FinishedMissionDTO getFinishedMissions(@RequestParam("m") Integer month,
+                                                  @RequestParam("y") Integer year) {
+        UUID id = (UUID) session.getAttribute("id_hq");
+        return service.getFinishedMissions(id, month, year);
     }
 
     @GetMapping("/agents/nex")
@@ -51,4 +59,22 @@ public class QGController {
         return service.getRankAgentsByHQ(id);
     }
 
+    @GetMapping("/agents/active")
+    public ActiveAgentsDTO getActiveAgents() {
+        UUID id = (UUID) session.getAttribute("id_hq");
+        return service.getActiveAgents(id);
+    }
+
+    @GetMapping("/missions/open")
+    public OpenMissionsDTO getOpenMissions() {
+        UUID id = (UUID) session.getAttribute("id_hq");
+        return service.getOpenMissions(id);
+    }
+
+    @GetMapping("/missions/duration")
+    public MissionAvgDurationDTO getAvgMissionDuration(@RequestParam("m") Integer month,
+                                                       @RequestParam("y") Integer year) {
+        UUID id = (UUID) session.getAttribute("id_hq");
+        return service.getMissionAverageDuration(id, month, year);
+    }
 }
