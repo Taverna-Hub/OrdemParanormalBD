@@ -341,12 +341,12 @@ INSERT INTO ADDRESS (id_address, street, number, neighborhood, city, state, post
 (@addr100, 'Esplanada dos Ministérios',   700, 'Zona Cívico-Administrativa', 'Brasília', 'DF', '70100-000');
 -- População de QGs OK
 INSERT INTO HQ (id_hq, name, security_level, room_count, id_address, id_verissimo) VALUES
-(@hq1,'QG Central',      9.0,  8,@addr23,@ver1),
-(@hq2,'QG Recife',    8.5,  6,@addr1,@ver2),
-(@hq3,'QG Porto Alegre', 8.0,  7,@addr31,@ver3),
-(@hq4, 'QG São Paulo', 10.0, 10, @addr17, @ver4),
-(@hq5, 'QG Manaus', 8.0, 5, @addr13, @ver5),
-(@hq6, 'QG Rio de Janeiro', 4.0, 9, @addr26, @ver6);
+(@hq1,'QG Central',         9.0,  8, @addr23, @ver1),
+(@hq2,'QG Recife',          8.5,  6, @addr1,  @ver2),
+(@hq3,'QG Porto Alegre',    8.0,  7, @addr31, @ver3),
+(@hq4, 'QG São Paulo',     10.0, 10, @addr17, @ver4),
+(@hq5, 'QG Manaus',         8.0,  5, @addr13, @ver5),
+(@hq6, 'QG Rio de Janeiro', 4.0,  9, @addr26, @ver6);
 
 -- Relação AGENTS_IN_HQ OK
 INSERT INTO AGENTS_IN_HQ (id_hq, id_agent) VALUES
@@ -406,12 +406,12 @@ INSERT INTO RITUALS (id_ritual, name, description, requirements, risks, id_eleme
 (@rit1, 'Ritual do Medo',   'Provoca temor intenso no alvo',   'Tocha, sal grosso',              'Reações psicóticas', @elMedo),
 (@rit2, 'Ritual Sangrento', 'Invoca poder através do sangue', 'Gotas de sangue verdadeiro',     'Hemorragia grave',   @elSangue),
 (@rit3, 'Ritual de Morte',  'Enfraquece a vitalidade',        'Cenário fúnebre, ossos',         'Desgaste físico',    @elMorte),
-(@rit4,'Ritual do Conhecimento','Expõe segredos ocultos','Tinta invisível','Visões perturbadoras',@elConhe),
-(@rit5,'Ritual da Energia','Amplifica poderes','Cristal energético','Sobrecarga vital',@elEnergia),
-(@rit6,'Ritual Noturno','Convoca a penumbra','Vela negra','Visão turva',@elMedo),
-(@rit7,'Ritual Sanguinário Ancestral','Forja alianças sombrias','Cálice ancestral','Maldição prolongada',@elSangue),
-(@rit8,'Ritual de Transição','Renasce a alma','Pó de ossos','Enfraquece espírito',@elMorte),
-(@rit9,'Ritual do Arcano','Enfraquece barreiras','Manuscrito arcano','Esgotamento mental',@elConhe),
+(@rit4, 'Ritual do Conhecimento','Expõe segredos ocultos','Tinta invisível','Visões perturbadoras',@elConhe),
+(@rit5, 'Ritual da Energia','Amplifica poderes','Cristal energético','Sobrecarga vital',@elEnergia),
+(@rit6, 'Ritual Noturno','Convoca a penumbra','Vela negra','Visão turva',@elMedo),
+(@rit7, 'Ritual Sanguinário Ancestral','Forja alianças sombrias','Cálice ancestral','Maldição prolongada',@elSangue),
+(@rit8, 'Ritual de Transição','Renasce a alma','Pó de ossos','Enfraquece espírito',@elMorte),
+(@rit9, 'Ritual do Arcano','Enfraquece barreiras','Manuscrito arcano','Esgotamento mental',@elConhe),
 (@rit10,'Ritual Vital','Regenera ferimentos','Sangue puro','Dependência',@elEnergia),
 (@rit11,'Ritual do Eclipse','Apaga luz','Obsidiana','Perda de visão',@elMedo),
 (@rit12,'Ritual Rubro','Manifesta chamas','Brasa eterna','Queimaduras internas',@elSangue),
@@ -432,26 +432,26 @@ INSERT INTO AGENT_RITUALS (id_agent, id_ritual) VALUES
 -- Missões OK
 INSERT INTO MISSION (id_mission, title, status, risks, objective, start_date, end_date, id_address, id_hq) VALUES
 -- QG 1
-(@miss1,  'Investigação no Cemitério',            'Aberta',    'Alto',   'Investigar aparições',           '2025-04-01 07:00:00', NULL,         @addr1,  @hq1),
-(@miss2,  'Combate à Seita Oculta',               'Concluida', 'Médio',  'Desmantelar seita',              '2025-02-01 09:00:00', '2025-03-15', @addr2,  @hq1),
-(@miss3, 'Escola em chamas', 'Concluida', 'Alto', 'Identificar se houve presença paranormal', '2025-04-20 09:15:00', '2025-04-27', @addr99, @hq6),
-(@miss20, 'Mapeamento do Cerrado',                'Aberta',    'Médio',  'Identificar hotspots energéticos','2025-05-20 09:15:00', NULL,         @addr20, @hq1),
-(@miss21, 'Coleta de Amostras',                   'Concluida', 'Baixo',  'Recolher solo e fauna local',    '2025-02-25 06:00:00', '2025-02-27', @addr21, @hq1),
-(@miss22, 'Proteção de Monumentos Nacionais',     'Aberta',    'Alto',   'Evitar vandalismo ectoplásmico', '2025-05-01 07:30:00', NULL,         @addr22, @hq1),
-(@miss23, 'Ronda na Asa Sul',                     'Concluida', 'Médio',  'Monitorar entradas secundárias', '2025-03-15 14:00:00', '2025-03-16', @addr23, @hq1),
-(@miss34, 'Monitoramento de Fazenda',             'Concluida', 'Baixo',  'Registrar atividade animal',     '2025-03-12 05:00:00', '2025-03-13', @addr34, @hq1),
-(@miss35, 'Ronda em Vila Rural',                  'Aberta',    'Médio',  'Entrevistar moradores locais',   '2025-04-25 08:00:00', NULL,         @addr35, @hq1),
-(@miss40, 'Ronda nos Bairros Centrais',        'Aberta',    'Médio',  'Observar padrões místicos',         '2025-05-21 20:00:00', NULL,         @addr40, @hq1),
-(@miss41, 'Verificação de Linhas de Ley',      'Aberta',    'Baixo',  'Confirmar convergência energética', '2025-05-22 08:00:00', NULL,         @addr41, @hq1),
-(@miss42, 'Análise de Estrutura Abandonada',   'Concluida', 'Médio',  'Inspecionar anomalias físicas',     '2025-04-10 14:00:00', '2025-04-11', @addr42, @hq1),
-(@miss43, 'Proteção de Escola Municipal',      'Aberta',    'Alto',   'Evitar surtos espirituais',         '2025-05-25 07:00:00', NULL,         @addr43, @hq1),
-(@miss44, 'Exploração de Vielas Antigas',      'Aberta',    'Médio',  'Registrar ocorrências místicas',    '2025-05-26 21:30:00', NULL,         @addr44, @hq1),
-(@miss45, 'Ritual de Silenciamento',           'Concluida', 'Alto',   'Conter entidade sonora',            '2025-04-02 01:00:00', '2025-04-03', @addr45, @hq1),
-(@miss46, 'Proteção em Feira de Rua',          'Aberta',    'Médio',  'Evitar manipulação psíquica',       '2025-05-28 10:00:00', NULL,         @addr46, @hq1),
-(@miss47, 'Mapeamento de Zonas Residenciais',  'Aberta',    'Baixo',  'Coletar dados de rotina',           '2025-05-29 08:00:00', NULL,         @addr47, @hq1),
-(@miss48, 'Investida em Galpão Desativado',    'Concluida', 'Médio',  'Verificar movimentações ocultas',   '2025-04-14 15:00:00', '2025-04-15', @addr48, @hq1),
-(@miss49, 'Ronda de Final de Semana',          'Aberta',    'Médio',  'Patrulhar centros culturais',       '2025-06-01 19:00:00', NULL,         @addr49, @hq1),
-(@miss100, 'Calamidade', 'Aberta', 'Crítico', 'Anomalia de Classe Desconhecida detectada. Convergência de forças extraplanares em escala nunca registrada. Mobilização total autorizada.', '2021-09-04 00:00:00', NULL, @addr100, @hq1),
+(@miss1,  'Investigação no Cemitério',            'Aberta',    'Alto',   'Investigar aparições',                     '2025-04-01 07:00:00', NULL,         @addr1,  @hq1),
+(@miss2,  'Combate à Seita Oculta',               'Concluida', 'Médio',  'Desmantelar seita',                        '2025-02-01 09:00:00', '2025-03-15', @addr2,  @hq1),
+(@miss3, 'Escola em chamas',                      'Concluida', 'Alto',   'Identificar se houve presença paranormal', '2025-04-20 09:15:00', '2025-04-27', @addr99, @hq1),
+(@miss20, 'Mapeamento do Cerrado',                'Aberta',    'Médio',  'Identificar hotspots energéticos',         '2025-05-20 09:15:00', NULL,         @addr20, @hq1),
+(@miss21, 'Coleta de Amostras',                   'Concluida', 'Baixo',  'Recolher solo e fauna local',              '2025-02-25 06:00:00', '2025-02-27', @addr21, @hq1),
+(@miss22, 'Proteção de Monumentos Nacionais',     'Aberta',    'Alto',   'Evitar vandalismo ectoplásmico',           '2025-05-01 07:30:00', NULL,         @addr22, @hq1),
+(@miss23, 'Ronda na Asa Sul',                     'Concluida', 'Médio',  'Monitorar entradas secundárias',           '2025-03-15 14:00:00', '2025-03-16', @addr23, @hq1),
+(@miss34, 'Monitoramento de Fazenda',             'Concluida', 'Baixo',  'Registrar atividade animal',               '2025-03-12 05:00:00', '2025-03-13', @addr34, @hq1),
+(@miss35, 'Ronda em Vila Rural',                  'Aberta',    'Médio',  'Entrevistar moradores locais',             '2025-04-25 08:00:00', NULL,         @addr35, @hq1),
+(@miss40, 'Ronda nos Bairros Centrais',           'Aberta',    'Médio',  'Observar padrões místicos',                '2025-05-21 20:00:00', NULL,         @addr40, @hq1),
+(@miss41, 'Verificação de Linhas de Ley',         'Aberta',    'Baixo',  'Confirmar convergência energética',        '2025-05-22 08:00:00', NULL,         @addr41, @hq1),
+(@miss42, 'Análise de Estrutura Abandonada',      'Concluida', 'Médio',  'Inspecionar anomalias físicas',            '2025-04-10 14:00:00', '2025-04-11', @addr42, @hq1),
+(@miss43, 'Proteção de Escola Municipal',         'Aberta',    'Alto',   'Evitar surtos espirituais',                '2025-05-25 07:00:00', NULL,         @addr43, @hq1),
+(@miss44, 'Exploração de Vielas Antigas',         'Aberta',    'Médio',  'Registrar ocorrências místicas',           '2025-05-26 21:30:00', NULL,         @addr44, @hq1),
+(@miss45, 'Ritual de Silenciamento',              'Concluida', 'Alto',   'Conter entidade sonora',                   '2025-04-02 01:00:00', '2025-04-03', @addr45, @hq1),
+(@miss46, 'Proteção em Feira de Rua',             'Aberta',    'Médio',  'Evitar manipulação psíquica',              '2025-05-28 10:00:00', NULL,         @addr46, @hq1),
+(@miss47, 'Mapeamento de Zonas Residenciais',     'Aberta',    'Baixo',  'Coletar dados de rotina',                  '2025-05-29 08:00:00', NULL,         @addr47, @hq1),
+(@miss48, 'Investida em Galpão Desativado',       'Concluida', 'Médio',  'Verificar movimentações ocultas',          '2025-04-14 15:00:00', '2025-04-15', @addr48, @hq1),
+(@miss49, 'Ronda de Final de Semana',             'Aberta',    'Médio',  'Patrulhar centros culturais',              '2025-06-01 19:00:00', NULL,         @addr49, @hq1),
+(@miss100, 'Calamidade',                          'Aberta',    'Crítico','Anomalia de Classe Desconhecida detectada. Convergência de forças extraplanares em escala nunca registrada. Mobilização total autorizada.', '2021-09-04 00:00:00', NULL, @addr100, @hq1),
 
 -- QG 2
 
@@ -588,12 +588,20 @@ INSERT INTO TEAM (id_team, name, specialization) VALUES
 -- Agentes nas equipes OK
 INSERT INTO AGENTS_IN_TEAM (id_team, id_agent, start_date, end_date) VALUES
 -- QG Central (@hq1)
+(@team1,  @ag5,  '2025-06-01 09:00:00', NULL),
+(@team1,  @ag12,  '2025-06-01 09:00:00', NULL),
 (@team2,  @ag1,  '2025-06-01 09:00:00', NULL),
 (@team2,  @ag3,  '2025-06-02 10:30:00', NULL),
+(@team3,  @ag8,  '2025-06-01 09:00:00', NULL),
+(@team3,  @ag9,  '2025-06-01 09:00:00', NULL),
+(@team3,  @ag10,  '2025-06-01 09:00:00', NULL),
 (@team4,  @ag6,  '2025-06-01 09:15:00', NULL),
 (@team4,  @ag2,  '2025-06-03 11:00:00', NULL),
 (@team13, @ag10, '2025-06-03 08:45:00', NULL),
 (@team13, @ag11, '2025-06-04 09:30:00', NULL),
+(@team14,  @ag15,  '2025-06-01 09:00:00', NULL),
+(@team14,  @ag16,  '2025-06-01 09:00:00', NULL),
+(@team14,  @ag17,  '2025-06-01 09:00:00', NULL),
 
 -- QG Fortaleza (@hq2)
 (@team5,  @ag18, '2025-06-01 07:00:00', NULL),

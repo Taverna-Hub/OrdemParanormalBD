@@ -31,9 +31,9 @@ export const TableContainer = styled.div`
   ${({ theme }) => css`
     margin-top: ${theme.spacings.medium};
     overflow-x: auto;
-    background-color: rgba(255, 255, 255, 1);
+    background-color: ${theme.colors.blue_800};
     border-radius: ${theme.border.radius.xxsmall};
-
+    
     div {
       display: flex;
       align-items: center;
@@ -71,13 +71,30 @@ export const TableRow = styled.tr`
     transition: background-color 0.2s;
 
     td {
+
+      &:first-child {
+        color: ${({ theme }) => theme.colors.gray_500};
+      }
+      
       font-size: ${({ theme }) => theme.font.sizes.small};
+      color:  ${({ theme }) => theme.colors.white};
+      
+      max-width: 100px;
+      cursor: pointer;
+      
+      p {
+        text-overflow: ellipsis;
+        white-space: normal;
+      }
     }
 
+
     &:hover {
-      background-color: rgba(64, 64, 64, 0.1);
+      background-color: rgba(30, 58, 138, 0.2); /* mantém o fundo */
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.05);
       border-radius: 0.375rem;
-    }
+      border-color: rgba(30, 58, 138, 0.2);
+      }
 
     .status {
       padding: ${theme.spacings.xxsmall};
@@ -86,18 +103,21 @@ export const TableRow = styled.tr`
       font-weight: ${theme.font.bold};
 
       &.Aberta {
-        background-color: ${theme.colors.yellow_200};
-        color: ${theme.colors.yellow_600};
+        border: 1px solid ${theme.colors.yellow_200};
+        background-color: ${theme.colors.yellow_600};
+        color: ${theme.colors.yellow_200};
       }
 
       &.Arquivada {
-        background-color: ${theme.colors.red_200};
-        color: ${theme.colors.red_600};
+        border: 1px solid ${theme.colors.red_200};
+        background-color: ${theme.colors.red_600};
+        color: ${theme.colors.red_200};
       }
 
       &.Concluida {
-        background-color: ${theme.colors.green_200};
-        color: ${theme.colors.green_600};
+        border: 1px solid ${theme.colors.green_200};
+        background-color: ${theme.colors.green_600};
+        color: ${theme.colors.green_200};
       }
     }
   `}

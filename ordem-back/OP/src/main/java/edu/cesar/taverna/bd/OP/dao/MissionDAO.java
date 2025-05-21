@@ -1,6 +1,7 @@
 package edu.cesar.taverna.bd.OP.dao;
 
 import edu.cesar.taverna.bd.OP.DTO.AgentsBySpecializationDTO;
+import edu.cesar.taverna.bd.OP.DTO.MissionWithTeamDTO;
 import edu.cesar.taverna.bd.OP.config.ConnectionFactory;
 import edu.cesar.taverna.bd.OP.entity.Agent;
 import edu.cesar.taverna.bd.OP.entity.Mission;
@@ -64,6 +65,57 @@ public class MissionDAO extends GenericDAO<Mission>{
             throw new RuntimeException("Erro na busca por missões do HQ: ", e);
         }
 
+
+    }
+
+    public List<MissionWithTeamDTO> getAllFromHQWithTeam(UUID id){
+        List<MissionWithTeamDTO> missionList = new ArrayList<>();
+        String SQL =
+                """
+                SELECT m.id_mission,
+                 m.title,
+                 m.status,
+                 m.objective,
+                 m.risks,
+                 m.start_date,
+                 m.end_date,
+                 m.id_address,
+                 m.id_hq,
+                 mt.name as team_name
+                FROM MISSION m
+                LEFT JOIN MISSION_ASSIGNMENT ma ON m.id_mission = ma.id_mission
+                    AND ma.allocation_date <= CURRENT_DATE()
+                    AND (ma.deallocation_date IS NULL OR ma.deallocation_date >= CURRENT_DATE())
+                LEFT JOIN TEAM mt on ma.id_team = mt.id_team
+                WHERE m.id_hq = ?;
+                """;
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(SQL)) {
+            stmt.setString(1, id.toString());
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    missionList.add(new MissionWithTeamDTO(
+                            UUID.fromString(rs.getString("id_mission")),
+                            rs.getString("title"),
+                            rs.getString("status"),
+                            rs.getString("objective"),
+                            rs.getString("risks"),
+                            rs.getDate("start_date"),
+                            rs.getDate("end_date"),
+                            UUID.fromString(rs.getString("id_address")),
+                            UUID.fromString(rs.getString("id_hq")),
+                            rs.getString("team_name")
+                    ));
+                }
+            }
+
+            return missionList;
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro na busca por missões do HQ: ", e);
+        }
 
     }
 

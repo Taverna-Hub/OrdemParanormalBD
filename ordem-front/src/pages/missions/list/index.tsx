@@ -36,9 +36,6 @@ export function Missions() {
       </S.SearchInterface>
 
       <S.TableContainer>
-        <div>
-          <h2>Missões</h2>
-        </div>
         <S.Table>
           <S.TableHead>
             <tr>
@@ -46,6 +43,7 @@ export function Missions() {
               <th>Título</th>
               <th>Objetivo</th>
               <th>Data de começo</th>
+              <th>Equipe</th>
               <th>Status</th>
             </tr>
           </S.TableHead>
@@ -71,6 +69,9 @@ export function Missions() {
                           'pt-br',
                         )}
                       </p>
+                    </td>
+                    <td>
+                        <p><p>{mission.team_name || 'Sem Equipe'}</p></p>
                     </td>
                     <td>
                       <div className={`status ${mission.status}`}>

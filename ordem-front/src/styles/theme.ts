@@ -47,17 +47,18 @@ export default {
 
     slate_700: 'oklch(37.2% 0.044 257.287)',
 
-    green_200: '#DCFCE7',
+    green_200: '#16A34A',
     green_500: 'oklch(62.7% 0.194 149.214)',
-    green_600: '#016630',
+    green_600: '#0D2F23',
 
     teal_700: '#00866e',
 
-    red_200: '#FFE2E2',
-    red_600: '#C10007',
+    red_200: '#DC2626',
+    red_600: '#2F0D0D',
 
-    yellow_200: '#FEF9C2',
-    yellow_600: '#F8B425',
+
+    yellow_200: '#F8B425',
+    yellow_600: '#292B12',
 
     white: '#fff',
   },

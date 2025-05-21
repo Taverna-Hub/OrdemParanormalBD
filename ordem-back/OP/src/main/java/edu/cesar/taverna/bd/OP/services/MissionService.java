@@ -1,6 +1,7 @@
 package edu.cesar.taverna.bd.OP.services;
 
 import edu.cesar.taverna.bd.OP.DTO.AgentsBySpecializationDTO;
+import edu.cesar.taverna.bd.OP.DTO.MissionWithTeamDTO;
 import edu.cesar.taverna.bd.OP.dao.MissionDAO;
 import edu.cesar.taverna.bd.OP.entity.Agent;
 import edu.cesar.taverna.bd.OP.entity.Mission;
@@ -26,6 +27,10 @@ public class MissionService {
 
     public List<Mission> getAllMissionsByHQ(UUID id){
         return missionDAO.getAllFromHQ(id);
+    }
+
+    public List<MissionWithTeamDTO> getAllMissionsWithTeam(UUID id){
+        return missionDAO.getAllFromHQWithTeam(id);
     }
 
     public Optional<Mission> getMissionById(UUID id) {
