@@ -1,8 +1,10 @@
 package edu.cesar.taverna.bd.OP.dao;
 
 import edu.cesar.taverna.bd.OP.DTO.AgentByRanksDTO;
+import edu.cesar.taverna.bd.OP.DTO.AgentDTO;
 import edu.cesar.taverna.bd.OP.config.ConnectionFactory;
 import edu.cesar.taverna.bd.OP.entity.Agent;
+import edu.cesar.taverna.bd.OP.entity.Ritual;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public class AgentDAO extends GenericDAO<Agent> {
@@ -134,4 +137,54 @@ public class AgentDAO extends GenericDAO<Agent> {
         return agentsRank;
     }
 
+    public Optional<AgentDTO> searchByIDWithRitual(UUID id) throws SQLException {
+        String sql = """
+                SELECT *
+                FROM AGENTS a
+                JOIN AGENT_RITUALS at2 ON at2.id_agent = a.id_agent
+                JOIN RITUALS r ON r.id_ritual = at2.id_ritual
+                WHERE a.id_agent = ?
+            """;
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, id.toString());
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                Agent agent = null;
+                List<Ritual> rituals = new ArrayList<>();
+
+                while (rs.next()) {
+                    if (agent == null) {
+                        agent = new Agent();
+                        agent.setId(UUID.fromString(rs.getString("id_agent")));
+                        agent.setName(rs.getString("name"));
+                        agent.setBirthDate(rs.getDate("birth_date").toLocalDate());
+                        agent.setTelNumber(rs.getString("phone"));
+                        agent.setRank_agent(rs.getString("rank_agent"));
+                        agent.setNex(rs.getInt("nex"));
+                        agent.setRetired(rs.getBoolean("retired"));
+                        agent.setTranscended(rs.getBoolean("transcended"));
+                        agent.setSpecialization(rs.getString("specialization"));
+                    }
+
+                    Ritual ritual = new Ritual();
+                    ritual.setId_ritual(UUID.fromString(rs.getString("r.id_ritual")));
+                    ritual.setName(rs.getString("r.name"));
+                    ritual.setDescription(rs.getString("r.description"));
+                    ritual.setRequirements(rs.getString("r.requirements"));
+                    ritual.setRisks(rs.getString("r.risks"));
+                    ritual.setId_element(UUID.fromString(rs.getString("r.id_element")));
+                    rituals.add(ritual);
+                }
+
+                if (agent != null) {
+                    return Optional.of(new AgentDTO(agent, rituals));
+                }
+            }
+        }
+
+        return Optional.empty();
+    }
 }
