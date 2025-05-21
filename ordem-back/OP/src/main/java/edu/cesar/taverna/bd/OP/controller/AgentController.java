@@ -3,15 +3,13 @@
     import edu.cesar.taverna.bd.OP.DTO.AgentByRanksDTO;
     import edu.cesar.taverna.bd.OP.DTO.AgentDTO;
     import edu.cesar.taverna.bd.OP.entity.Agent;
+    import edu.cesar.taverna.bd.OP.entity.AgentRitual;
     import edu.cesar.taverna.bd.OP.services.AgentService;
     import jakarta.servlet.http.HttpSession;
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.http.HttpStatus;
     import org.springframework.http.ResponseEntity;
-    import org.springframework.web.bind.annotation.GetMapping;
-    import org.springframework.web.bind.annotation.PathVariable;
-    import org.springframework.web.bind.annotation.RequestMapping;
-    import org.springframework.web.bind.annotation.RestController;
+    import org.springframework.web.bind.annotation.*;
 
     import java.sql.SQLException;
     import java.util.List;
@@ -93,6 +91,10 @@
                     .orElse(ResponseEntity.notFound().build());
         }
 
+        @PostMapping("/ritual")
+        public ResponseEntity<String> performRegister(@RequestBody AgentRitual agentRitual) {
+            return service.registerAgentRitual(agentRitual);
+        }
 
         /*
         public ResponseEntity<List<Agent>> getByHQ(HttpSession session) {
