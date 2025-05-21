@@ -31,9 +31,10 @@ export const TableContainer = styled.div`
   ${({ theme }) => css`
     margin-top: ${theme.spacings.medium};
     overflow-x: auto;
+    //overflow-y: auto;
     background-color: ${theme.colors.blue_800};
     border-radius: ${theme.border.radius.xxsmall};
-    
+    //max-height: 480px;
     div {
       display: flex;
       align-items: center;
@@ -58,9 +59,14 @@ export const TableHead = styled.thead`
   }
 
   & th {
+    //position: sticky;
+    //top: 0;
+    //z-index: 1;
+    //background-color: ${({ theme }) => theme.colors.blue_800};
     text-align: left;
     color: #9ca3af;
     font-size: ${({ theme }) => theme.font.sizes.medium};
+    //padding-top: 2rem;
     padding-bottom: 0.5rem;
   }
 `;
@@ -69,7 +75,6 @@ export const TableRow = styled.tr`
   ${({ theme }) => css`
     height: 4rem;
     transition: background-color 0.2s;
-
     td {
 
       &:first-child {
@@ -90,7 +95,7 @@ export const TableRow = styled.tr`
 
 
     &:hover {
-      background-color: rgba(30, 58, 138, 0.2); /* mantém o fundo */
+      background-color: rgba(30, 58, 138, 0.2); 
       box-shadow: 0 0 8px rgba(255, 255, 255, 0.05);
       border-radius: 0.375rem;
       border-color: rgba(30, 58, 138, 0.2);

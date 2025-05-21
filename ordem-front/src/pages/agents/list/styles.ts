@@ -31,7 +31,7 @@ export const TableContainer = styled.div`
   ${({ theme }) => css`
     margin-top: ${theme.spacings.medium};
     overflow-x: auto;
-    background-color: rgba(255, 255, 255, 1);
+    background-color: ${theme.colors.blue_800};
     border-radius: ${theme.border.radius.xxsmall};
 
     div {
@@ -70,11 +70,28 @@ export const TableRow = styled.tr`
   transition: background-color 0.2s;
 
   td {
+
+    &:first-child {
+      color: ${({ theme }) => theme.colors.gray_500};
+    }
+
     font-size: ${({ theme }) => theme.font.sizes.small};
+    color:  ${({ theme }) => theme.colors.white};
+
+    max-width: 100px;
+    cursor: pointer;
+
+    p {
+      text-overflow: ellipsis;
+      white-space: normal;
+    }
   }
 
+
   &:hover {
-    background-color: rgba(64, 64, 64, 0.1);
+    background-color: rgba(30, 58, 138, 0.2);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.05);
     border-radius: 0.375rem;
+    border-color: rgba(30, 58, 138, 0.2);
   }
 `;

@@ -69,9 +69,6 @@ export function Teams() {
       </S.SearchInterface>
 
       <S.TableContainer>
-        <div>
-          <h2>Equipes</h2>
-        </div>
         <S.Table>
           <S.TableHead>
             <tr>

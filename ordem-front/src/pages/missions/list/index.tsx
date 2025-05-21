@@ -71,7 +71,7 @@ export function Missions() {
                       </p>
                     </td>
                     <td>
-                        <p><p>{mission.team_name || 'Sem Equipe'}</p></p>
+                        <p>{mission.team_name || 'Sem Equipe'}</p>
                     </td>
                     <td>
                       <div className={`status ${mission.status}`}>

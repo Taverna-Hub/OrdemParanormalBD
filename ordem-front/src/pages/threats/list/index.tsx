@@ -116,9 +116,6 @@ export function Threats() {
       </S.SearchInterface>
 
       <S.TableContainer>
-        <div>
-          <h2>Ameaças</h2>
-        </div>
         <S.Table>
           {threatType?.value === 'entity' && (
             <>
