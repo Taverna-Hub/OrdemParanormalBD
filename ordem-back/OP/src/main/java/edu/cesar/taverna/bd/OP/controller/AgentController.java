@@ -1,6 +1,7 @@
     package edu.cesar.taverna.bd.OP.controller;
 
     import edu.cesar.taverna.bd.OP.DTO.AgentByRanksDTO;
+    import edu.cesar.taverna.bd.OP.DTO.AgentDTO;
     import edu.cesar.taverna.bd.OP.entity.Agent;
     import edu.cesar.taverna.bd.OP.services.AgentService;
     import jakarta.servlet.http.HttpSession;
@@ -8,6 +9,7 @@
     import org.springframework.http.HttpStatus;
     import org.springframework.http.ResponseEntity;
     import org.springframework.web.bind.annotation.GetMapping;
+    import org.springframework.web.bind.annotation.PathVariable;
     import org.springframework.web.bind.annotation.RequestMapping;
     import org.springframework.web.bind.annotation.RestController;
 
@@ -83,6 +85,14 @@
             List<AgentByRanksDTO> ranks = service.getAgentsRanks(id_hq);
             return ResponseEntity.ok(ranks);
         }
+
+        @GetMapping("/{id}/ritual")
+        public ResponseEntity<AgentDTO> getByIdWithRituals(@PathVariable UUID id) {
+            return service.getAgentsWithRituals(id)
+                    .map(ResponseEntity::ok)
+                    .orElse(ResponseEntity.notFound().build());
+        }
+
 
         /*
         public ResponseEntity<List<Agent>> getByHQ(HttpSession session) {

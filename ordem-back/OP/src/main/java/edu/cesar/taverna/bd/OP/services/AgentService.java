@@ -1,6 +1,7 @@
 package edu.cesar.taverna.bd.OP.services;
 
 import edu.cesar.taverna.bd.OP.DTO.AgentByRanksDTO;
+import edu.cesar.taverna.bd.OP.DTO.AgentDTO;
 import edu.cesar.taverna.bd.OP.dao.AgentDAO;
 import edu.cesar.taverna.bd.OP.entity.Agent;
 import org.hibernate.annotations.processing.SQL;
@@ -104,4 +105,13 @@ public class AgentService {
             throw  new RuntimeException(e);
         }
     }
+
+    public Optional<AgentDTO> getAgentsWithRituals(UUID id) {
+        try {
+            return agentDAO.searchByIDWithRitual(id);
+        } catch (SQLException e) {
+            throw new RuntimeException("Failed to get agent with rituals", e);
+        }
+    }
+
 }

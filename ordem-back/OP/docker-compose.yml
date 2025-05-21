@@ -13,6 +13,7 @@ services:
       - ordemdb_data:/var/lib/mysql
       - ./scripts:/docker-entrypoint-initdb.d
       - ./dumps:/dumps
+      - ./my.cnf:/etc/mysql/conf.d/my.cnf
 
 volumes:
   ordemdb_data:
