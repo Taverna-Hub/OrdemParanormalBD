@@ -4,6 +4,7 @@ import edu.cesar.taverna.bd.OP.DTO.AgentByRanksDTO;
 import edu.cesar.taverna.bd.OP.DTO.AgentDTO;
 import edu.cesar.taverna.bd.OP.dao.AgentDAO;
 import edu.cesar.taverna.bd.OP.entity.Agent;
+import edu.cesar.taverna.bd.OP.entity.AgentRitual;
 import org.hibernate.annotations.processing.SQL;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -60,7 +61,15 @@ public class AgentService {
 
         agentDAO.save(agent);
         return ResponseEntity.ok("Agente criado com sucesso");
+    }
 
+    public ResponseEntity<String> registerAgentRitual(AgentRitual agentRitual) {
+        try {
+            agentDAO.addRitualToAgent(agentRitual.getId_agent(), agentRitual.getId_ritual());
+            return ResponseEntity.ok("Ritual associado ao agente com sucesso.");
+        } catch (SQLException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao associar ritual: " + e.getMessage());
+        }
     }
 
     public List<Agent> getAllAgents() throws SQLException {

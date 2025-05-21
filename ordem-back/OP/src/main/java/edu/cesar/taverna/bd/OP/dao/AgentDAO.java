@@ -4,6 +4,7 @@ import edu.cesar.taverna.bd.OP.DTO.AgentByRanksDTO;
 import edu.cesar.taverna.bd.OP.DTO.AgentDTO;
 import edu.cesar.taverna.bd.OP.config.ConnectionFactory;
 import edu.cesar.taverna.bd.OP.entity.Agent;
+import edu.cesar.taverna.bd.OP.entity.AgentRitual;
 import edu.cesar.taverna.bd.OP.entity.Ritual;
 
 import java.sql.Connection;
@@ -186,5 +187,18 @@ public class AgentDAO extends GenericDAO<Agent> {
         }
 
         return Optional.empty();
+    }
+
+    public void addRitualToAgent(UUID id_agent, UUID id_ritual) throws SQLException {
+        String sql = "INSERT INTO AGENT_RITUALS (id_agent, id_ritual) VALUES (?, ?)";
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, id_agent.toString());
+            stmt.setString(2, id_ritual.toString());
+
+            stmt.executeUpdate();
+        }
     }
 }
