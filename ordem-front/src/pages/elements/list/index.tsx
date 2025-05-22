@@ -8,11 +8,26 @@ import {
   ElementService,
 } from '../../../services/http/elements/ElementService';
 
+type ElementWithVantagemNome = Element & { vantagemNome: string };
+
 export function Elements() {
-  const { data: elements } = useQuery({
-    queryKey: ['elements'],
-    queryFn: () => ElementService.findAll(),
-  });
+    const { data: elements } = useQuery({
+        queryKey: ['elements'],
+        queryFn: async (): Promise<ElementWithVantagemNome[]> => {
+            const allElements = await ElementService.findAll();
+
+            const idToNameMap = new Map<string, string>();
+            allElements?.forEach((el: Element) => {
+                idToNameMap.set(el.id_element, el.name);
+            });
+
+            return allElements?.map((el: Element) => ({
+                ...el,
+                vantagemNome: idToNameMap.get(el.vantagem) ?? 'Desconhecida',
+            })) ?? [];
+        },
+    });
+
 
   return (
     <S.Wrapper>
@@ -24,41 +39,21 @@ export function Elements() {
         <Input placeholder="Procure um elemento..." />
       </S.SearchInterface>
 
-      <S.TableContainer>
-        <div>
-          <h2>Elementos</h2>
-        </div>
-        <S.Table>
-          <S.TableHead>
-            <tr>
-              <th>#</th>
-              <th>Nome</th>
-              <th>Descrição</th>
-              <th>Vantagem</th>
-            </tr>
-          </S.TableHead>
-          <tbody>
-            {elements?.map((element: Element, index: number) => {
-              return (
-                <S.TableRow>
-                  <td>
-                    <span>{index + 1}</span>
-                  </td>
-                  <td>
-                    <p>{element.name}</p>
-                  </td>
-                  <td>
-                    <p>{element.desciption}</p>
-                  </td>
-                  <td>
-                    <p>{element.vantagem}</p>
-                  </td>
-                </S.TableRow>
-              );
-            })}
-          </tbody>
-        </S.Table>
-      </S.TableContainer>
+
+        <S.GridContainer>
+            {elements?.map((element : ElementWithVantagemNome) => (
+                <S.GridCard
+                    key={element.id_element} className={element.name}>
+                    <S.CardTitle>{element.name}</S.CardTitle>
+                    <S.CardDescription>{element.desciption}</S.CardDescription>
+                    {element.vantagem && (
+                        <S.CardAdvantage>Vantagem: {element.vantagemNome}</S.CardAdvantage>
+                    )}
+
+                </S.GridCard>
+            ))}
+        </S.GridContainer>
+
 
       <Navigation />
     </S.Wrapper>
