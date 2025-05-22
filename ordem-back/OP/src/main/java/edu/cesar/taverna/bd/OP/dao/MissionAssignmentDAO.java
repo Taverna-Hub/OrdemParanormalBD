@@ -13,7 +13,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-public class MissionAssignmentDAO extends GenericDAO<MissionAssignment> {
+public class  MissionAssignmentDAO extends GenericDAO<MissionAssignment> {
     @Override
     protected String getInsertSQL() {
         return "INSERT INTO MISSION_ASSIGNMENT (id_team, id_mission, deallocation_date) VALUES (?, ?, ?)";

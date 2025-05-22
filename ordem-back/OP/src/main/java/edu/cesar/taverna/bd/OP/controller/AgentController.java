@@ -85,11 +85,10 @@
         }
 
         @GetMapping("/{id}/ritual")
-        public ResponseEntity<AgentDTO> getByIdWithRituals(@PathVariable UUID id) {
-            return service.getAgentsWithRituals(id)
-                    .map(ResponseEntity::ok)
-                    .orElse(ResponseEntity.notFound().build());
+        public AgentDTO getByIdWithRituals(@PathVariable UUID id) {
+            return service.getAgentsWithRituals(id);
         }
+
 
         @PostMapping("/ritual")
         public ResponseEntity<String> performRegister(@RequestBody AgentRitual agentRitual) {

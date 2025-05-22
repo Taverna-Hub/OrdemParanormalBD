@@ -2,7 +2,9 @@ package edu.cesar.taverna.bd.OP.controller;
 
 import edu.cesar.taverna.bd.OP.DTO.AgentsBySpecializationDTO;
 import edu.cesar.taverna.bd.OP.DTO.MissionWithTeamDTO;
+import edu.cesar.taverna.bd.OP.DTO.ThreatByMissionDTO;
 import edu.cesar.taverna.bd.OP.entity.Mission;
+import edu.cesar.taverna.bd.OP.entity.ThreatNeutralization;
 import edu.cesar.taverna.bd.OP.services.MissionService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,5 +78,15 @@ public class MissionController extends GenericController<Mission, MissionService
         UUID id_hq = (UUID) session.getAttribute("id_hq");
 
         return service.getAgentsSpecializationInMission(id_hq, id_mission);
+    }
+
+    @GetMapping("/threats/{id_mission}")
+    public List<ThreatByMissionDTO> getThreatsByMission(@PathVariable String id_mission) {
+        return service.getThreatsByMission(UUID.fromString(id_mission));
+    }
+
+    @GetMapping("/neutralization/{id_mission}")
+    public List<ThreatNeutralization> getThreatsNeutralizationByMission(@PathVariable String id_mission) {
+        return service.getThreatsNeutralizationByMission(UUID.fromString(id_mission));
     }
 }

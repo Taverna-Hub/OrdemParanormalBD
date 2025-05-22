@@ -138,14 +138,17 @@ public class AgentDAO extends GenericDAO<Agent> {
         return agentsRank;
     }
 
-    public Optional<AgentDTO> searchByIDWithRitual(UUID id) throws SQLException {
+    public AgentDTO searchByIDWithRitual(UUID id) throws SQLException {
+        Agent agent = null;
+        List<Ritual> rituals = new ArrayList<>();
+
         String sql = """
-                SELECT *
-                FROM AGENTS a
-                JOIN AGENT_RITUALS at2 ON at2.id_agent = a.id_agent
-                JOIN RITUALS r ON r.id_ritual = at2.id_ritual
-                WHERE a.id_agent = ?
-            """;
+            SELECT *
+            FROM AGENTS a
+            LEFT JOIN AGENT_RITUALS at2 ON at2.id_agent = a.id_agent
+            LEFT JOIN RITUALS r ON r.id_ritual = at2.id_ritual
+            WHERE a.id_agent = ?
+        """;
 
         try (Connection conn = ConnectionFactory.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -153,8 +156,6 @@ public class AgentDAO extends GenericDAO<Agent> {
             stmt.setString(1, id.toString());
 
             try (ResultSet rs = stmt.executeQuery()) {
-                Agent agent = null;
-                List<Ritual> rituals = new ArrayList<>();
 
                 while (rs.next()) {
                     if (agent == null) {
@@ -170,23 +171,26 @@ public class AgentDAO extends GenericDAO<Agent> {
                         agent.setSpecialization(rs.getString("specialization"));
                     }
 
-                    Ritual ritual = new Ritual();
-                    ritual.setId_ritual(UUID.fromString(rs.getString("r.id_ritual")));
-                    ritual.setName(rs.getString("r.name"));
-                    ritual.setDescription(rs.getString("r.description"));
-                    ritual.setRequirements(rs.getString("r.requirements"));
-                    ritual.setRisks(rs.getString("r.risks"));
-                    ritual.setId_element(UUID.fromString(rs.getString("r.id_element")));
-                    rituals.add(ritual);
+                    String ritualIdStr = rs.getString("id_ritual");
+                    if (ritualIdStr != null) {
+                        Ritual ritual = new Ritual();
+                        ritual.setId_ritual(UUID.fromString(ritualIdStr));
+                        ritual.setName(rs.getString("r.name"));
+                        ritual.setDescription(rs.getString("description"));
+                        ritual.setRequirements(rs.getString("requirements"));
+                        ritual.setRisks(rs.getString("risks"));
+                        ritual.setId_element(rs.getString("id_element") != null ? UUID.fromString(rs.getString("id_element")) : null);
+                        rituals.add(ritual);
+                    }
                 }
 
                 if (agent != null) {
-                    return Optional.of(new AgentDTO(agent, rituals));
+                    return new AgentDTO(agent, rituals);
                 }
             }
         }
 
-        return Optional.empty();
+        return null;
     }
 
     public void addRitualToAgent(UUID id_agent, UUID id_ritual) throws SQLException {

@@ -2,9 +2,11 @@ package edu.cesar.taverna.bd.OP.dao;
 
 import edu.cesar.taverna.bd.OP.DTO.AgentsBySpecializationDTO;
 import edu.cesar.taverna.bd.OP.DTO.MissionWithTeamDTO;
+import edu.cesar.taverna.bd.OP.DTO.ThreatByMissionDTO;
 import edu.cesar.taverna.bd.OP.config.ConnectionFactory;
 import edu.cesar.taverna.bd.OP.entity.Agent;
 import edu.cesar.taverna.bd.OP.entity.Mission;
+import edu.cesar.taverna.bd.OP.entity.ThreatNeutralization;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -199,4 +201,95 @@ public class MissionDAO extends GenericDAO<Mission>{
 
         return agentsSpecialization;
     }
+
+    public List<ThreatByMissionDTO> getThreatsByMission(UUID id) {
+        List<ThreatByMissionDTO> threats = new ArrayList<>();
+
+        String SQL = """
+            SELECT 
+                t.id_threat,
+                GROUP_CONCAT(DISTINCT tn.name) AS threat_names,
+                t.description,
+                CASE 
+                    WHEN pe.id_entity IS NOT NULL THEN 'Entidade Paranormal'
+                    WHEN po.id_organization IS NOT NULL THEN 'Organização Paranormal'
+                    ELSE 'Ameaça Genérica'
+                END AS threat_type
+            FROM 
+                THREATS t
+            JOIN 
+                THREAT_MISSION tm ON t.id_threat = tm.id_threat
+            LEFT JOIN 
+                THREATS_NAMES tn ON t.id_threat = tn.id_threat
+            LEFT JOIN 
+                PARANORMAL_ENTITY pe ON t.id_threat = pe.id_entity
+            LEFT JOIN 
+                PARANORMAL_ORGANIZATION po ON t.id_threat = po.id_organization
+            WHERE 
+                tm.id_mission = ?
+            GROUP BY 
+                t.id_threat, t.description, threat_type;
+            """;
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(SQL)) {
+
+            stmt.setString(1, id.toString());
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    UUID idThreat = UUID.fromString(rs.getString("id_threat"));
+                    String threatNames = rs.getString("threat_names");
+                    String description = rs.getString("description");
+                    String threatType = rs.getString("threat_type");
+
+                    threats.add(new ThreatByMissionDTO(
+                            idThreat,
+                            threatNames,
+                            description,
+                            threatType
+                    ));
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro na busca das ameaças da missão: ", e);
+        }
+
+        return threats;
+    }
+
+    public List<ThreatNeutralization> getThreatNeutralizationByMission(UUID id) {
+        List<ThreatNeutralization> threatsNeutralization = new ArrayList<>();
+
+        String SQL = """
+            SELECT * 
+            FROM THREAT_NEUTRALIZATION
+            WHERE id_mission = ?
+            """;
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(SQL)) {
+
+            stmt.setString(1, id.toString());
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    UUID idTeam = UUID.fromString(rs.getString("id_team"));
+                    UUID idMission = UUID.fromString(rs.getString("id_mission"));
+                    UUID idThreat = UUID.fromString(rs.getString("id_threat"));
+                    String result = rs.getString("result");
+                    String method = rs.getString("method");
+
+                    threatsNeutralization.add(new ThreatNeutralization(
+                            idTeam, idMission, idThreat, method, result
+                    ));
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro na busca de forma de neutralização da missão: ", e);
+        }
+
+        return threatsNeutralization;
+    }
+
 }

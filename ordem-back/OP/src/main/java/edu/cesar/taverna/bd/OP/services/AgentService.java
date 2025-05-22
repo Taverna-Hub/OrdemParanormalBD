@@ -115,7 +115,7 @@ public class AgentService {
         }
     }
 
-    public Optional<AgentDTO> getAgentsWithRituals(UUID id) {
+    public AgentDTO getAgentsWithRituals(UUID id) {
         try {
             return agentDAO.searchByIDWithRitual(id);
         } catch (SQLException e) {

@@ -44,7 +44,7 @@ public class MissionAssignmentController extends GenericController<MissionAssign
     }
 
     @PutMapping
-    public ResponseEntity<String> update(@RequestBody Map<String, UUID> payload) {
+    public ResponseEntity<String> updateAssignment(@RequestBody Map<String, UUID> payload) {
         try {
             UUID id_team = payload.get("id_team");
             UUID id_mission = payload.get("id_mission");

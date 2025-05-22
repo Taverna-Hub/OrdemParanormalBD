@@ -15,6 +15,11 @@ public class AuthInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest req,
                              HttpServletResponse res,
                              Object handler) throws Exception {
+        if ("OPTIONS".equalsIgnoreCase(req.getMethod())) {
+            res.setStatus(HttpServletResponse.SC_OK);
+            return true;
+        }
+
         HttpSession session = req.getSession(false);
         if (session == null) {
             res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
@@ -44,4 +49,5 @@ public class AuthInterceptor implements HandlerInterceptor {
 
         return true;
     }
+
 }
