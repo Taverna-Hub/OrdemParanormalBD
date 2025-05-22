@@ -12,6 +12,21 @@ export type Mission = {
   team_name: string;
 };
 
+export type MissionThreat = {
+  description: string;
+  id_threat: string;
+  threatType: string;
+  threat_names: string;
+};
+
+export type MissionNeutralizedThreat = {
+  id_mission: string;
+  id_team: string;
+  id_threat: string;
+  method: string;
+  result: string;
+};
+
 export type CreateMissionProps = Omit<Mission, 'id_mission'>;
 
 export const MissionService = {
@@ -21,6 +36,14 @@ export const MissionService = {
   },
   findAll: async () => {
     const { data } = await api.get('/missions/with_team');
+    return data;
+  },
+  findMissionThreats: async (id: string) => {
+    const { data } = await api.get(`missions/threats/${id}`);
+    return data;
+  },
+  findMissionNeutralizedThreats: async (id: string) => {
+    const { data } = await api.get(`missions/neutralization/${id}`);
     return data;
   },
   create: async (mission: Mission) => {

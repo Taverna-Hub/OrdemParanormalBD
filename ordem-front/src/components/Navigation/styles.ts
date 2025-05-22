@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const Wrapper = styled.main`
+export const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -11,15 +11,11 @@ export const Wrapper = styled.main`
   border-radius: ${({ theme }) => theme.border.radius.full};
 
   position: fixed;
-  //bottom: 4rem;
-  bottom: -8rem; 
+  bottom: -8rem;
   left: 50%;
   transform: translateX(-50%);
-  transition:
-      background-color 0.3s ease,
-      transform 0.3s ease,
-      bottom 0.3s ease;
-  
+  transition: background-color 0.3s ease, transform 0.3s ease, bottom 0.3s ease;
+
   &::after {
     content: '';
     position: absolute;
@@ -28,7 +24,7 @@ export const Wrapper = styled.main`
     right: 0;
     height: 3rem;
   }
-  
+
   &:hover {
     bottom: 1rem;
     backdrop-filter: none;

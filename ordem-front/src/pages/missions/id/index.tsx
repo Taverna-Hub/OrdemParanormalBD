@@ -11,7 +11,9 @@ import * as S from './styles';
 import { useParams } from 'react-router';
 import {
   Mission,
+  MissionNeutralizedThreat,
   MissionService,
+  MissionThreat,
 } from '../../../services/http/missions/MissionService';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Select } from '../../../components/Select';
@@ -82,7 +84,19 @@ export function SpecificMission() {
     queryFn: () => EvidenceService.findById(id as string),
   });
 
-  console.log(evidences);
+  const { data: missionThreats } = useQuery({
+    queryKey: ['missionThreats'],
+    queryFn: () => MissionService.findMissionThreats(id as string),
+  });
+
+  const { data: missionNeutralizedThreats } = useQuery<
+    MissionNeutralizedThreat[]
+  >({
+    queryKey: ['missionNeutralizedThreats'],
+    queryFn: () => MissionService.findMissionNeutralizedThreats(id as string),
+  });
+
+  console.log(missionNeutralizedThreats);
 
   const { mutate } = useMutation({
     mutationFn: async (data: CreateAssignmentProps) => {
@@ -304,16 +318,78 @@ export function SpecificMission() {
             />
           </S.InfoCardHeader>
 
-          <ul>
-            {evidences?.map((evidence: Evidence) => {
-              return (
-                <li key={evidence.id_evidence}>
-                  {evidence.origin} - {evidence.stability_level} -{' '}
-                  {evidence.description}
-                </li>
-              );
-            })}
-          </ul>
+          <S.CardContent>
+            <ul>
+              {evidences?.map((evidence: Evidence) => {
+                return (
+                  <li key={evidence.id_evidence}>
+                    {evidence.origin} - {evidence.stability_level} -{' '}
+                    {evidence.description}
+                  </li>
+                );
+              })}
+            </ul>
+          </S.CardContent>
+        </S.InfoCard>
+
+        <S.InfoCard>
+          <S.InfoCardHeader>
+            <FiAlertCircle />
+            <h2>Ameaças</h2>
+          </S.InfoCardHeader>
+
+          <S.Table>
+            <S.TableHead>
+              <tr>
+                <th>#</th>
+                <th>Nomes da Ameaça</th>
+                <th>Tipo da ameaça</th>
+                <th>Método de neutralização</th>
+                <th>Resultado</th>
+              </tr>
+            </S.TableHead>
+            <tbody>
+              {missionThreats &&
+                missionThreats.map(
+                  (missionThreat: MissionThreat, index: number) => {
+                    const neutralization = missionNeutralizedThreats?.find(
+                      (neutralized) =>
+                        neutralized.id_threat === missionThreat.id_threat,
+                    );
+
+                    return (
+                      <>
+                        <S.TableRow>
+                          <td>
+                            <span>{index + 1}</span>
+                          </td>
+                          <td>
+                            <p>{missionThreat.threat_names}</p>
+                          </td>
+                          <td>
+                            <p>{missionThreat.threatType}</p>
+                          </td>
+                          <td>
+                            <p>
+                              {neutralization?.method
+                                ? neutralization?.method
+                                : 'Ameaça não neutralizada'}
+                            </p>
+                          </td>
+                          <td>
+                            <p>
+                              {neutralization?.result
+                                ? neutralization?.result
+                                : 'Ameaça não neutralizada'}
+                            </p>
+                          </td>
+                        </S.TableRow>
+                      </>
+                    );
+                  },
+                )}
+            </tbody>
+          </S.Table>
         </S.InfoCard>
       </S.MissionInfo>
 

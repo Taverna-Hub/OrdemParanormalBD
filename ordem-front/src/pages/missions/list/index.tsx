@@ -51,34 +51,36 @@ export function Missions() {
             {missions &&
               missions.map((mission: Mission, index: number) => {
                 return (
-                  <S.TableRow
-                    onClick={() => handleGoToMission(mission.id_mission)}
-                  >
-                    <td>
-                      <span>{index + 1}</span>
-                    </td>
-                    <td>
-                      <p>{mission.title}</p>
-                    </td>
-                    <td>
-                      <p>{mission.objective}</p>
-                    </td>
-                    <td>
-                      <p>
-                        {new Date(mission.start_date).toLocaleDateString(
-                          'pt-br',
-                        )}
-                      </p>
-                    </td>
-                    <td>
+                  <>
+                    <S.TableRow
+                      onClick={() => handleGoToMission(mission.id_mission)}
+                    >
+                      <td>
+                        <span>{index + 1}</span>
+                      </td>
+                      <td>
+                        <p>{mission.title}</p>
+                      </td>
+                      <td>
+                        <p>{mission.objective}</p>
+                      </td>
+                      <td>
+                        <p>
+                          {new Date(mission.start_date).toLocaleDateString(
+                            'pt-br',
+                          )}
+                        </p>
+                      </td>
+                      <td>
                         <p>{mission.team_name || 'Sem Equipe'}</p>
-                    </td>
-                    <td>
-                      <div className={`status ${mission.status}`}>
-                        <p>{mission.status}</p>
-                      </div>
-                    </td>
-                  </S.TableRow>
+                      </td>
+                      <td>
+                        <div className={`status ${mission.status}`}>
+                          <p>{mission.status}</p>
+                        </div>
+                      </td>
+                    </S.TableRow>
+                  </>
                 );
               })}
           </tbody>
