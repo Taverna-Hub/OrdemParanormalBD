@@ -18,7 +18,7 @@ SET
 -- ===================================================================
 -- Verissimos
 SET
-@ver1 = @ag2, @ver2=@ag15, @ver3=@ag23, @ver4=@ag58, @ver5=@ag57, @ver6=@ag59;
+@ver1 = @ag2, @ver2=@ag25, @ver3=@ag49, @ver4=@ag57, @ver5=@ag75, @ver6=@ag94;
 
 -- ===================================================================
 -- Endereços
@@ -155,13 +155,13 @@ INSERT INTO AGENTS (id_agent, name, birth_date, phone, specialization, rank_agen
 (@ag19, 'Sofia Gomes',    '1987-11-25', '11999990019', 'Ocultista',   'Elite',    92, FALSE, TRUE),
 (@ag20, 'Thiago Varela',  '1990-01-18', '11999990020', 'Combatente',  'Recruta',  12, FALSE, FALSE),
 (@ag21, 'Ubirajara Luz',  '1972-08-08', '81999990021', 'Especialista','Veterano', 60, FALSE,  FALSE),
-(@ag22, 'Valéria Rocha',  '1985-09-09', '81999990022', 'Combatente',  'Recruta',  14, FALSE, FALSE),
-(@ag23, 'Wellington Paz', '1982-03-03', '81999990023', 'Combatente',  'Elite',    85, FALSE, TRUE),
-(@ag24, 'Ximena Duarte',  '1994-12-12', '81999990024', 'Ocultista',   'Veterano', 53, TRUE, FALSE),
-(@ag25, 'Yuri Santana',   '1988-07-07', '81999990025', 'Especialista','Recruta',  19, FALSE, FALSE),
-(@ag26, 'Zara Pinto',     '1992-10-10', '81999990026', 'Combatente',  'Elite',    89, FALSE, TRUE),
-(@ag27, 'Alan Cardoso',   '1977-05-05', '81999990027', 'Combatente',  'Veterano', 63, FALSE, FALSE),  -- corrigido
-(@ag28, 'Beatriz Silva',  '1991-02-02', '81999990028', 'Ocultista',   'Recruta',  17, FALSE, FALSE),
+(@ag22,'Gustavo Mourato','1979-03-03','1796789-0123','Especialista','Veterano',      62,FALSE,FALSE),
+(@ag23,'Vinicius de Andrade','1986-11-11','4797890-1234','Combatente','Elite',           96,TRUE,FALSE),
+(@ag24,'Luan Hiroshi Kato','1991-02-02','(6798901-2345','Ocultista','Veterano',       61,FALSE,FALSE),
+(@ag25,'Gabriel Melo Cavalcanti de Albuquerque','1993-06-06','8799012-3456','Especialista','Recruta',28,FALSE,FALSE),
+(@ag26,'Ana Clara Gomes da Silva','1984-09-09','9790123-4567','Combatente','Veterano',               59,FALSE,FALSE),
+(@ag27,'Sophia de Araújo Gallindo Pinto','1978-04-04','1791234-5678','Ocultista','Elite',            67,FALSE,FALSE),
+(@ag28,'Paulo Rosado','1989-01-01','3792345-6789','Especialista','Veterano',       64,FALSE,FALSE),
 (@ag29, 'Cassio Nunes',   '1983-06-06', '81999990029', 'Especialista','Elite',    82, FALSE, TRUE),
 (@ag30, 'Diana Azevedo',  '1989-09-09', '81999990030', 'Combatente',  'Veterano', 57, FALSE, FALSE),
 (@ag31,'Camila Andrade','1988-02-05','3193456-7890','Combatente','Elite',         95,FALSE,FALSE),
@@ -189,13 +189,13 @@ INSERT INTO AGENTS (id_agent, name, birth_date, phone, specialization, rank_agen
 -- QG4
 (@ag52,'Ximena Farias','1992-12-12','9794567-8901','Combatente','Veterano',       54,FALSE,FALSE),
 (@ag53,'Yara Costa','1985-07-07','3795678-9012','Ocultista','Recruta',            33,FALSE,FALSE),
-(@ag54,'Zeca Ribeiro','1979-03-03','1796789-0123','Especialista','Veterano',      62,FALSE,FALSE),
-(@ag55,'Arthur Silva','1986-11-11','4797890-1234','Combatente','Elite',           96,TRUE,FALSE),
-(@ag56,'Beatriz Rocha','1991-02-02','(6798901-2345','Ocultista','Veterano',       61,FALSE,FALSE),
-(@ag57,'Gabriel Melo Cavalcanti de Albuquerque','1993-06-06','8799012-3456','Especialista','Recruta',28,FALSE,FALSE),
-(@ag58,'Ana Clara Gomes da Silva','1984-09-09','9790123-4567','Combatente','Veterano',               59,FALSE,FALSE),
-(@ag59,'Sophia de Araújo Gallindo Pinto','1978-04-04','1791234-5678','Ocultista','Elite',            67,FALSE,FALSE),
-(@ag60,'Fernanda Pereira','1989-01-01','3792345-6789','Especialista','Veterano',       64,FALSE,FALSE),
+(@ag54, 'Valéria Rocha',  '1985-09-09', '81999990022', 'Combatente',  'Recruta',  14, FALSE, FALSE),
+(@ag55, 'Wellington Paz', '1982-03-03', '81999990023', 'Combatente',  'Elite',    85, FALSE, TRUE),
+(@ag56, 'Ximena Duarte',  '1994-12-12', '81999990024', 'Ocultista',   'Veterano', 53, TRUE, FALSE),
+(@ag57, 'Yuri Santana',   '1988-07-07', '81999990025', 'Especialista','Recruta',  19, FALSE, FALSE),
+(@ag58, 'Zara Pinto',     '1992-10-10', '81999990026', 'Combatente',  'Elite',    89, FALSE, TRUE),
+(@ag59, 'Alan Cardoso',   '1977-05-05', '81999990027', 'Combatente',  'Veterano', 63, FALSE, FALSE),  -- corrigido
+(@ag60, 'Beatriz Silva',  '1991-02-02', '81999990028', 'Ocultista',   'Recruta',  17, FALSE, FALSE),
 (@ag61,  'Eduarda Ramos',     '1988-04-12', '87999990061', 'Ocultista',    'Recruta',  10, FALSE, FALSE),
 (@ag62,  'Felipe Andrade',    '1992-11-03', '87999990062', 'Combatente',   'Veterano', 35, FALSE, FALSE),
 (@ag63,  'Gabriela Melo',     '1984-08-27', '87999990063', 'Especialista', 'Veterano', 50, FALSE, FALSE),
@@ -242,11 +242,11 @@ INSERT INTO AGENTS (id_agent, name, birth_date, phone, specialization, rank_agen
 -- População de VERISSIMO OK
 INSERT INTO VERISSIMO (id_verissimo, login, password_ver) VALUES
 (@ver1, 'BC', 'cost876'),
-(@ver2,'OR','olive457'),
-(@ver3,'WP','peace8233'),
-(@ver4, 'GMCA', 'ellie2021'),
-(@ver5, 'ACGS', 'pingo2014'),
-(@ver6, 'SAGP', 'time2021');
+(@ver2,'GMCA','ellie2021'),
+(@ver3,'US','naruto8715'),
+(@ver4, 'YS', 'onice8877'),
+(@ver5, 'SV', 'carpenter9441'),
+(@ver6, 'LS', 'lore8441');
 
 -- População de ENDEREÇOS OK
 INSERT INTO ADDRESS (id_address, street, number, neighborhood, city, state, postal_code) VALUES
