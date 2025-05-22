@@ -124,10 +124,10 @@ export const MissionInfo = styled.section`
 
 export const InfoCard = styled.div`
   ${({ theme }) => css`
-    background-color: ${theme.colors.blue_800};
-    border: 1px solid ${theme.colors.gray_500};
+    background-color: ${theme.colors.purple_900};
+    border: 2px solid ${theme.colors.gray_500};
     border-radius: ${theme.border.radius.xxsmall};
-    color: oklch(55.4% 0.046 257.417);
+    color: ${theme.colors.white};
     min-height: 25rem;
 
     > div {
@@ -135,6 +135,10 @@ export const InfoCard = styled.div`
     }
 
     &:nth-child(3) {
+      grid-column: span 2;
+    }
+
+    &:nth-child(5) {
       grid-column: span 2;
     }
   `}
@@ -147,7 +151,7 @@ export const InfoCardHeader = styled.div`
     gap: ${theme.spacings.xxsmall};
 
     padding: ${theme.spacings.xsmall};
-    border-bottom: 1px solid ${theme.colors.gray_500};
+    border-bottom: 2px solid ${theme.colors.gray_500};
     font-size: ${theme.font.sizes.xsmall};
 
     svg {
@@ -180,6 +184,10 @@ export const CardContent = styled.div`
     flex-direction: column;
     padding: ${theme.spacings.xsmall};
     font-size: ${theme.font.sizes.medium};
+
+    ul {
+      margin-left: ${theme.spacings.xsmall};
+    }
   `}
 `;
 
@@ -260,6 +268,88 @@ export const AgentCard = styled.div`
     ${Avatar} {
       background-color: ${theme.colors.green_600};
       color: ${theme.colors.green_200};
+    }
+  `}
+`;
+
+export const Table = styled.table`
+  ${({ theme }) => css`
+    width: 100%;
+    min-width: 640px;
+    padding: ${theme.spacings.xsmall} ${theme.spacings.small};
+  `}
+`;
+
+export const TableHead = styled.thead`
+  & tr {
+    border-bottom: 1px solid #333;
+  }
+
+  & th {
+    //position: sticky;
+    //top: 0;
+    //z-index: 1;
+    //background-color: ${({ theme }) => theme.colors.blue_800};
+    text-align: left;
+    color: #9ca3af;
+    font-size: ${({ theme }) => theme.font.sizes.medium};
+    //padding-top: 2rem;
+    padding-bottom: 0.5rem;
+  }
+`;
+
+export const TableRow = styled.tr`
+  ${({ theme }) => css`
+    height: 4.8rem;
+    transition: background-color 0.2s;
+
+    td {
+      &:first-child {
+        color: ${({ theme }) => theme.colors.gray_500};
+      }
+
+      font-size: ${({ theme }) => theme.font.sizes.small};
+      color: ${({ theme }) => theme.colors.white};
+
+      max-width: 100px;
+      cursor: pointer;
+
+      p {
+        text-overflow: ellipsis;
+        white-space: normal;
+      }
+    }
+
+    &:hover {
+      background-color: rgba(30, 58, 138, 0.2);
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.05);
+      border-radius: 0.375rem;
+      border-color: rgba(30, 58, 138, 0.2);
+    }
+
+    .status {
+      padding: ${theme.spacings.xxsmall};
+      border-radius: ${theme.border.radius.full};
+      width: fit-content;
+      font-weight: ${theme.font.bold};
+
+      &.Aberta {
+        border: 1px solid ${theme.colors.yellow_200};
+        background-color: ${theme.colors.yellow_600};
+        color: ${theme.colors.yellow_200};
+      }
+
+      &.Arquivada {
+        border: 1px solid ${theme.colors.red_200};
+        background-color: ${theme.colors.red_600};
+        color: ${theme.colors.red_200};
+      }
+
+      &.Concluida {
+        border: 1px solid ${theme.colors.green_200};
+        background-color: ${theme.colors.green_600};
+        color: ${theme.colors.green_200};
+      }
     }
   `}
 `;

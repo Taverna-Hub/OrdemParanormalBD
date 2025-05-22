@@ -12,9 +12,14 @@ export type Agent = {
   transcended: boolean;
 };
 
+export type AgentRitual = {
+  id_agent: string;
+  id_ritual: string;
+};
+
 export const AgentService = {
   findById: async (id: string) => {
-    const { data } = await api.get(`/agents/${id}`)
+    const { data } = await api.get(`/agents/${id}/ritual`);
     return data;
   },
   findAll: async () => {
@@ -24,6 +29,14 @@ export const AgentService = {
   create: async (agent: Agent) => {
     try {
       const data = await api.post('/agents', agent);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  createAgentRitual: async (agentRitual: AgentRitual) => {
+    try {
+      const data = await api.post('/agents/ritual', agentRitual);
       return data;
     } catch (error) {
       console.log(error);
@@ -45,5 +58,5 @@ export const AgentService = {
       console.error('Erro ao deletar agente:', error);
       throw error;
     }
-  }
+  },
 };

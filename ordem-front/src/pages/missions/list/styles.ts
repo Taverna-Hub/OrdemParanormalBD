@@ -3,7 +3,8 @@ import { Input } from '../../../components/Input/styles';
 
 export const Wrapper = styled.main`
   ${({ theme }) => css`
-    margin: 4.8rem auto;
+    margin: 0 auto;
+    padding-top: 4.8rem;
     max-width: ${theme.grid.container};
     width: 100%;
 
@@ -31,8 +32,10 @@ export const TableContainer = styled.div`
   ${({ theme }) => css`
     margin-top: ${theme.spacings.medium};
     overflow-x: auto;
-    background-color: rgba(255, 255, 255, 1);
+    overflow-y: auto;
+    background-color: ${theme.colors.blue_800};
     border-radius: ${theme.border.radius.xxsmall};
+    max-height: calc(100vh - 260px);
 
     div {
       display: flex;
@@ -40,6 +43,19 @@ export const TableContainer = styled.div`
       justify-content: space-between;
 
       padding: 2.4rem;
+    }
+
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: ${({ theme }) => theme.colors.gray_500};
+      border-radius: 20px;
     }
   `}
 `;
@@ -58,25 +74,45 @@ export const TableHead = styled.thead`
   }
 
   & th {
+    //position: sticky;
+    //top: 0;
+    //z-index: 1;
+    //background-color: ${({ theme }) => theme.colors.blue_800};
     text-align: left;
     color: #9ca3af;
     font-size: ${({ theme }) => theme.font.sizes.medium};
+    //padding-top: 2rem;
     padding-bottom: 0.5rem;
   }
 `;
 
 export const TableRow = styled.tr`
   ${({ theme }) => css`
-    height: 4rem;
+    height: 4.8rem;
     transition: background-color 0.2s;
 
     td {
+      &:first-child {
+        color: ${({ theme }) => theme.colors.gray_500};
+      }
+
       font-size: ${({ theme }) => theme.font.sizes.small};
+      color: ${({ theme }) => theme.colors.white};
+
+      max-width: 100px;
+      cursor: pointer;
+
+      p {
+        text-overflow: ellipsis;
+        white-space: normal;
+      }
     }
 
     &:hover {
-      background-color: rgba(64, 64, 64, 0.1);
+      background-color: rgba(30, 58, 138, 0.2);
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.05);
       border-radius: 0.375rem;
+      border-color: rgba(30, 58, 138, 0.2);
     }
 
     .status {
@@ -86,18 +122,21 @@ export const TableRow = styled.tr`
       font-weight: ${theme.font.bold};
 
       &.Aberta {
-        background-color: ${theme.colors.yellow_200};
-        color: ${theme.colors.yellow_600};
+        border: 1px solid ${theme.colors.yellow_200};
+        background-color: ${theme.colors.yellow_600};
+        color: ${theme.colors.yellow_200};
       }
 
       &.Arquivada {
-        background-color: ${theme.colors.red_200};
-        color: ${theme.colors.red_600};
+        border: 1px solid ${theme.colors.red_200};
+        background-color: ${theme.colors.red_600};
+        color: ${theme.colors.red_200};
       }
 
       &.Concluida {
-        background-color: ${theme.colors.green_200};
-        color: ${theme.colors.green_600};
+        border: 1px solid ${theme.colors.green_200};
+        background-color: ${theme.colors.green_600};
+        color: ${theme.colors.green_200};
       }
     }
   `}

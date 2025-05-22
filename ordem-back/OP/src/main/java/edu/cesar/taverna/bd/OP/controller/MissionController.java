@@ -1,7 +1,10 @@
 package edu.cesar.taverna.bd.OP.controller;
 
 import edu.cesar.taverna.bd.OP.DTO.AgentsBySpecializationDTO;
+import edu.cesar.taverna.bd.OP.DTO.MissionWithTeamDTO;
+import edu.cesar.taverna.bd.OP.DTO.ThreatByMissionDTO;
 import edu.cesar.taverna.bd.OP.entity.Mission;
+import edu.cesar.taverna.bd.OP.entity.ThreatNeutralization;
 import edu.cesar.taverna.bd.OP.services.MissionService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +45,16 @@ public class MissionController extends GenericController<Mission, MissionService
         return ResponseEntity.ok(missionList);
     }
 
+    @RequestMapping("/with_team")
+    public ResponseEntity<List<MissionWithTeamDTO>> getAllWithTeam() throws SQLException {
+        UUID id_hq = (UUID) session.getAttribute("id_hq");
+        List<MissionWithTeamDTO> missionList = service.getAllMissionsWithTeam(id_hq);
+        if (missionList.isEmpty()){
+            return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).body(null);
+        }
+        return ResponseEntity.ok(missionList);
+    }
+
     @Override
     public ResponseEntity<Mission> getById(UUID id) {
         System.out.println(id);
@@ -65,5 +78,15 @@ public class MissionController extends GenericController<Mission, MissionService
         UUID id_hq = (UUID) session.getAttribute("id_hq");
 
         return service.getAgentsSpecializationInMission(id_hq, id_mission);
+    }
+
+    @GetMapping("/threats/{id_mission}")
+    public List<ThreatByMissionDTO> getThreatsByMission(@PathVariable String id_mission) {
+        return service.getThreatsByMission(UUID.fromString(id_mission));
+    }
+
+    @GetMapping("/neutralization/{id_mission}")
+    public List<ThreatNeutralization> getThreatsNeutralizationByMission(@PathVariable String id_mission) {
+        return service.getThreatsNeutralizationByMission(UUID.fromString(id_mission));
     }
 }

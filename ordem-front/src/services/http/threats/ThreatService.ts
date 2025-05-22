@@ -42,7 +42,7 @@ export type GetOrganizationProps = {
 export const ThreatService = {
   createParanormal: async (threat: CreateThreatProps) => {
     try {
-      const data = await api.post('/ParanormalEntity', threat);
+      const data = await api.post('/paranormalEntity', threat);
       return data;
     } catch (error) {
       console.log(error);
@@ -50,31 +50,31 @@ export const ThreatService = {
   },
   createOrganization: async (threat: CreateOrganizationProps) => {
     try {
-      const data = await api.post('/Organization', threat);
+      const data = await api.post('/organization', threat);
       return data;
     } catch (error) {
       console.log(error);
     }
   },
   findAllParanormalEntity: async () => {
-    const { data } = await api.get('/ParanormalEntity');
+    const { data } = await api.get('/paranormalEntity');
     return data;
   },
   findAllOrganization: async () => {
-    const { data } = await api.get('/Organization');
+    const { data } = await api.get('/organization');
     return data;
   },
   findParanormalById: async (id: string) => {
-    const { data } = await api.get(`/ParanormalEntity/${id}`);
+    const { data } = await api.get(`/paranormalEntity/${id}`);
     return data;
   },
   findOrganizationById: async (id: string) => {
-    const { data } = await api.get(`/Organization/${id}`);
+    const { data } = await api.get(`/organization/${id}`);
     return data;
   },
   addMember: async (id: string, member: Member) => {
     try {
-      const data = await api.post(`/Organization/add/${id}`, member);
+      const data = await api.post(`/organization/add/${id}`, member);
       return data;
     } catch (error) {
       console.log(error);
