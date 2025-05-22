@@ -14,8 +14,12 @@ import {
   FiMinus,
   FiTarget,
   FiUsers,
+  FiLogOut,
 } from 'react-icons/fi';
 import { getLastMonthAndYear } from '../../utils/getLastMonthAndYear';
+import {Button} from "../../components/Button";
+import {AuthService} from "../../services/http/auth/AuthService.ts";
+import {useNavigate} from "react-router";
 
 export function Dashboard() {
   const { data: activeAgents } = useQuery({
@@ -74,6 +78,13 @@ export function Dashboard() {
     queryKey: ['agentsRank'],
     queryFn: () => HqService.getRankAgentsByHQ(),
   });
+
+  const {data: verissimoHQ} = useQuery({
+    queryKey: ['verissimoHQ'],
+    queryFn: () => HqService.getVerissimoHQ(),
+  });
+
+  const navigate = useNavigate();
 
   const isLoading =
     !teamsSpecialization &&
@@ -296,10 +307,32 @@ export function Dashboard() {
   const isFinishedMissionsPositive =
     differenceFinishedMissions !== null && differenceFinishedMissions > 0;
 
+  async function handleLogout() {
+    try {
+      await AuthService.logout();
+      navigate('/login');
+    } catch (error) {
+      console.error('Erro ao fazer logout:', error);
+    }
+  }
+
   return (
     <>
       <Helmet title="Dashboard" />
       <S.Wrapper>
+        <S.PageHeader>
+          <h1>{verissimoHQ?.hqName} – Bem-vindo de volta, {verissimoHQ?.verName}!</h1>
+          <div>
+            {/*<p>Logout</p>*/}
+            <Button onClick={handleLogout}>
+              <S.Icon backgroundColor="trasnparent">
+                <FiLogOut color="#fff"/>
+              </S.Icon>
+            </Button>
+          </div>
+        </S.PageHeader>
+
+
         <S.TopGraphsWrapper>
           <S.TopGraphCard>
             <header>

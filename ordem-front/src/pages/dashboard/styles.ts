@@ -14,7 +14,26 @@ export const Wrapper = styled.main`
       color: white;
       font-size: ${theme.font.sizes['3xlarge']};
     }
+    
   `}
+`;
+
+export const PageHeader = styled.div`
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding-bottom: 4rem;
+  
+  div {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  div p {
+    color: ${({ theme }) => theme.colors.white}; // ou a cor desejada
+    font-size: ${({ theme }) => theme.font.sizes.small};
+  }
 `;
 
 export const TopGraphsWrapper = styled.section`

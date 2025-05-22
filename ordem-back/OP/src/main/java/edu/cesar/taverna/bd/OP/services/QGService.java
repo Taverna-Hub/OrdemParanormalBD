@@ -44,4 +44,8 @@ public class QGService {
     public MissionAvgDurationDTO getMissionAverageDuration(UUID id, int month, int year) {
         return hqDAO.getMissionAverageDuration(id, month, year);
     }
+
+    public VerissimoDTO getVerissimoHQ(UUID id) {
+        return hqDAO.getVerissimoHQ(id);
+    }
 }

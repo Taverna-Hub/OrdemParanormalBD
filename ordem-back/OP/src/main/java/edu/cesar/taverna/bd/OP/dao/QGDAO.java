@@ -305,4 +305,33 @@ public class QGDAO{
         }
     }
 
+    public VerissimoDTO getVerissimoHQ(UUID id){
+        String SQL = """
+                SELECT hq.name as hq_name, a.name as ver_name
+                    FROM HQ hq
+                    JOIN VERISSIMO v ON hq.id_verissimo = v.id_verissimo
+                    JOIN ordemdb.AGENTS a on v.id_verissimo = a.id_agent
+                WHERE hq.id_hq = ?;
+                """;
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             CallableStatement stmt = conn.prepareCall(SQL)) {
+            stmt.setString(1, id.toString());
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                String hqName =  rs.getString("hq_name");
+                String verName = rs.getString("ver_name");
+                String firstName = verName.split(" ")[0];
+                return new VerissimoDTO(hqName, firstName);
+
+            }else {
+                return new VerissimoDTO(null, null);
+            }
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

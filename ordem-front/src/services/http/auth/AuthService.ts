@@ -18,4 +18,9 @@ export const AuthService = {
 
     return data;
   },
+  logout: async () => {
+    await api.post(`/auth/logout`);
+    localStorage.removeItem('ordem:auth');
+  },
+
 };

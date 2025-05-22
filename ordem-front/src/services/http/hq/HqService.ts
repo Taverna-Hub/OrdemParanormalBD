@@ -46,6 +46,11 @@ export type MissionAvgDurationDTO = {
   avgDurationDays: number;
 };
 
+export type VerissimoDTO = {
+  hqName: string;
+  verName: string;
+};
+
 export const HqService = {
   getSpecializationsInHQ: async (): Promise<TeamsSpecializationsInHQ[]> => {
     const { data } = await api.get('/qg/teams/specializations');
@@ -103,4 +108,10 @@ export const HqService = {
     );
     return data;
   },
+
+  getVerissimoHQ: async(): Promise<VerissimoDTO> =>{
+    const {data} = await api.get(`/qg/welcome`);
+    return data;
+  },
+
 };

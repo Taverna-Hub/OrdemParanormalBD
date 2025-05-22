@@ -77,4 +77,10 @@ public class QGController {
         UUID id = (UUID) session.getAttribute("id_hq");
         return service.getMissionAverageDuration(id, month, year);
     }
+
+    @GetMapping("/welcome")
+    public VerissimoDTO getVerissimoHQ(){
+        UUID id = (UUID) session.getAttribute("id_hq");
+        return service.getVerissimoHQ(id);
+    }
 }
