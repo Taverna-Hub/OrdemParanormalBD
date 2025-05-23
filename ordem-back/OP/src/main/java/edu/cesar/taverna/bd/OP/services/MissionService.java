@@ -18,10 +18,15 @@ public class MissionService {
     private  final MissionDAO missionDAO = new MissionDAO();
 
     public ResponseEntity<String> register(Mission mission){
-
         missionDAO.save(mission);
         return ResponseEntity.ok("");
     }
+
+    public ResponseEntity<String> updateMission(Mission mission) {
+        missionDAO.update(mission);
+        return ResponseEntity.ok("Missão atualizado com sucesso");
+    }
+
 
     public List<Mission> getAllMissions() throws SQLException {
         return missionDAO.getAll();

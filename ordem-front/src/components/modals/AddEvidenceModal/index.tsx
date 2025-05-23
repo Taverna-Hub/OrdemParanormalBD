@@ -1,15 +1,15 @@
 import { useForm } from 'react-hook-form';
-import { Input } from '../Input';
-import { Textarea } from '../Textarea';
+import { Input } from '../../Input';
+import { Textarea } from '../../Textarea';
 import * as S from './styles';
-import { Select } from '../Select';
-import { Button } from '../Button';
-import { useMutation } from '@tanstack/react-query';
+import { Select } from '../../Select';
+import { Button } from '../../Button';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import {
   CreateEvidenceProps,
   Evidence,
   EvidenceService,
-} from '../../services/http/evidences/EvidenceService';
+} from '../../../services/http/evidences/EvidenceService';
 import { toast } from 'sonner';
 
 type ModalProps = {
@@ -30,6 +30,8 @@ type CreateEvidencePropsModal = Omit<CreateEvidenceProps, 'stability_level'> & {
 export function AddEvidenceModal({ isOpen, onClose, id_mission }: ModalProps) {
   const { control, register, handleSubmit } =
     useForm<CreateEvidencePropsModal>();
+
+  const queryClient = useQueryClient();
 
   const stabilityLevelOptions = [
     {
@@ -62,6 +64,7 @@ export function AddEvidenceModal({ isOpen, onClose, id_mission }: ModalProps) {
     },
     onSuccess: () => {
       toast.success('Evidência adicionada com sucesso!');
+      queryClient.invalidateQueries({ queryKey: ['evidences', id_mission] });
       onClose();
     },
     onError: () => {

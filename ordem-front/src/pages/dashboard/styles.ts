@@ -14,7 +14,6 @@ export const Wrapper = styled.main`
       color: white;
       font-size: ${theme.font.sizes['3xlarge']};
     }
-    
   `}
 `;
 
@@ -23,7 +22,7 @@ export const PageHeader = styled.div`
   align-items: flex-end;
   justify-content: space-between;
   padding-bottom: 4rem;
-  
+
   div {
     display: flex;
     align-items: center;
@@ -44,9 +43,9 @@ export const TopGraphsWrapper = styled.section`
 
 export const TopGraphCard = styled.div`
   ${({ theme }) => css`
-    background-color: ${theme.colors.blue_800};
-    border-radius: ${theme.border.radius.xxsmall};
-    border: 1px solid ${theme.colors.slate_700};
+    background-color: ${theme.colors.midnight_900};
+    border-radius: ${theme.border.radius.medium};
+    border: 1px solid ${theme.colors.purple_850};
     padding: ${theme.spacings.xsmall};
     width: 40rem;
     height: 12.8rem;
@@ -94,7 +93,7 @@ export const Icon = styled.div<DashboardIconProps>`
     align-items: center;
     justify-content: center;
     background-color: ${backgroundColor};
-    border-radius: ${theme.border.radius.xxsmall};
+    border-radius: ${theme.border.radius.medium};
     font-size: ${theme.font.sizes.xlarge};
   `}
 `;
@@ -112,9 +111,10 @@ export const RankAgentsTableContainer = styled.div`
   ${({ theme }) => css`
     margin-top: ${theme.spacings.medium};
     overflow-x: auto;
-    background-color: ${theme.colors.blue_800};
+    background-color: ${theme.colors.midnight_900};
+    border: 1px solid ${theme.colors.purple_850};
     backdrop-filter: blur(10px);
-    border-radius: ${theme.border.radius.xxsmall};
+    border-radius: ${theme.border.radius.medium};
     width: 100%;
 
     div {
@@ -189,9 +189,11 @@ export const TableRow = styled.tr`
 
 export const GraphContainer = styled.div`
   ${({ theme }) => css`
+    padding: ${theme.spacings.xxsmall};
     margin-top: ${theme.spacings.medium};
-    background-color: ${theme.colors.blue_800};
-    border-radius: ${theme.border.radius.xxsmall};
+    background-color: ${theme.colors.midnight_900};
+    border: 1px solid ${theme.colors.purple_850};
+    border-radius: ${theme.border.radius.medium};
     min-height: 400px;
   `}
 `;

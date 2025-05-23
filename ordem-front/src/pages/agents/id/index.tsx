@@ -18,7 +18,7 @@ import {
 } from '../../../services/http/agents/AgentService';
 import { useEffect, useState } from 'react';
 import { Ritual } from '../../../services/http/rituals/RitualService';
-import { AddRitualModal } from '../../../components/AddRitualModal';
+import { AddRitualModal } from '../../../components/modals/AddRitualModal';
 
 type SelectOptions = {
   label: string;

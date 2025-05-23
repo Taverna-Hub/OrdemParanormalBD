@@ -8,7 +8,7 @@ export const Wrapper = styled.button`
 
     width: 4rem;
     height: 4rem;
-    border-radius: ${theme.border.radius.xxsmall};
+    border-radius: ${theme.border.radius.medium};
 
     background-color: ${theme.colors.purple_500};
     color: ${theme.colors.white};

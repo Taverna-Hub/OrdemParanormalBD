@@ -13,7 +13,7 @@ import java.util.UUID;
 public class ParanormalEntityService {
     private final ParanormalEntityDAO paranormalDAO = new ParanormalEntityDAO();
 
-    public ResponseEntity<String> register(ParanormalEntity entity){
+    public ResponseEntity<String> register(ParanormalEntity entity) {
          paranormalDAO.save(entity);
         return ResponseEntity.ok("");
 

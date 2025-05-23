@@ -11,7 +11,7 @@ export const FormWrapper = styled.section`
   width: 80%;
   background-color: ${({ theme }) => theme.colors.purple_900};
   padding: 3.2rem;
-  border-radius: ${({ theme }) => theme.border.radius.xxsmall};
+  border-radius: ${({ theme }) => theme.border.radius.medium};
 
   > div {
     margin-bottom: ${({ theme }) => theme.spacings.medium};
@@ -57,7 +57,7 @@ export const NamesListWrapper = styled.div`
     padding: ${theme.spacings.xxsmall};
     border: 1px solid ${theme.colors.gray_500};
     margin-top: ${theme.spacings.small};
-    border-radius: ${theme.border.radius.xxsmall};
+    border-radius: ${theme.border.radius.medium};
 
     h2 {
       font-size: ${theme.font.sizes.large};

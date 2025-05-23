@@ -27,6 +27,19 @@ export type MissionNeutralizedThreat = {
   result: string;
 };
 
+export type CreateThreatMission = {
+  id_threat: string;
+  id_mission: string;
+};
+
+export type CreateThreatNeutralization = {
+  id_threat: string;
+  id_mission: string;
+  id_team: string;
+  method: string;
+  result: string;
+};
+
 export type CreateMissionProps = Omit<Mission, 'id_mission'>;
 
 export const MissionService = {
@@ -46,9 +59,39 @@ export const MissionService = {
     const { data } = await api.get(`missions/neutralization/${id}`);
     return data;
   },
+  update: async (mission: Mission) => {
+    try {
+      console.log(mission);
+      const data = await api.put(`/missions/${mission.id_mission}`, mission);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  },
   create: async (mission: Mission) => {
     try {
       const data = await api.post('/missions', mission);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  createThreatMission: async (threatMission: CreateThreatMission) => {
+    try {
+      const data = await api.post('/threatMission', threatMission);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  createThreatNeutralization: async (
+    threatNeutralization: CreateThreatNeutralization,
+  ) => {
+    try {
+      const data = await api.post(
+        '/threatNeutralization',
+        threatNeutralization,
+      );
       return data;
     } catch (error) {
       console.log(error);

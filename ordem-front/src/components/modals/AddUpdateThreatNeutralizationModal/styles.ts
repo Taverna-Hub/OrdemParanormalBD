@@ -13,15 +13,15 @@ export const Overlay = styled.div`
 export const Content = styled.div`
   ${({ theme }) => css`
     background: ${theme.colors.blue_800};
-    border-radius: ${theme.border.radius.xxsmall};
+    border-radius: ${theme.border.radius.medium};
     padding: ${theme.spacings.small};
     width: 100%;
-    max-width: 40rem;
+    max-width: 64rem;
 
     h2 {
-      margin-bottom: 1rem;
+      margin-bottom: ${theme.spacings.medium};
       color: ${theme.colors.white};
-      font-size: ${theme.font.sizes.large};
+      font-size: ${theme.font.sizes.xlarge};
     }
 
     p {
@@ -31,10 +31,15 @@ export const Content = styled.div`
   `}
 `;
 
-export const EvidenceForm = styled.form``;
+export const ThreatMissionForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+`;
 
 export const Actions = styled.div`
   display: flex;
-  justify-content: space-between;
-  margin-top: 2rem;
+  justify-content: flex-end;
+  gap: 1.6rem;
+  margin-top: 2.4rem;
 `;

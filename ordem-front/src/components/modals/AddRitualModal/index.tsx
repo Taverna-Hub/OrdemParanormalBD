@@ -1,14 +1,14 @@
 import { useForm } from 'react-hook-form';
 import * as S from './styles';
-import { Select } from '../Select';
-import { Button } from '../Button';
+import { Select } from '../../Select';
+import { Button } from '../../Button';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import {
   Ritual,
   RitualService,
-} from '../../services/http/rituals/RitualService';
-import { AgentService } from '../../services/http/agents/AgentService';
+} from '../../../services/http/rituals/RitualService';
+import { AgentService } from '../../../services/http/agents/AgentService';
 
 type ModalProps = {
   isOpen: boolean;
@@ -67,7 +67,7 @@ export function AddRitualModal({ isOpen, onClose, id_agent }: ModalProps) {
   return (
     <S.Overlay>
       <S.Content>
-        <h2>Adicionar evidência</h2>
+        <h2>Adicionar ritual</h2>
 
         <S.RitualForm onSubmit={handleSubmit(handleCreateRitual)}>
           <Select

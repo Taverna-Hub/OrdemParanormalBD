@@ -30,9 +30,10 @@ export const Wrapper = styled.main`
 
 export const MissionHeader = styled.header`
   ${({ theme }) => css`
-    border: 1px solid ${theme.colors.gray_500};
+    border: 1px solid ${theme.colors.purple_850};
     padding: ${theme.spacings.xsmall};
     border-radius: ${theme.border.radius.xsmall};
+    background-color: ${theme.colors.midnight_900};
 
     h1 {
       color: ${theme.colors.white};
@@ -81,7 +82,7 @@ export const AvatarAgent = styled.div`
     width: 5rem;
     height: 5rem;
     border-radius: ${theme.border.radius.full};
-    border: 4px solid ${theme.colors.blue_900};
+    border: 4px solid ${theme.colors.midnight_900};
     background-color: ${theme.colors.green_600};
     color: ${theme.colors.white};
     position: relative;
@@ -100,11 +101,10 @@ export const HeaderAgents = styled.div`
     gap: ${theme.spacings.xsmall};
 
     width: fit-content;
-    border: 1px solid ${theme.colors.gray_500};
-    border-radius: ${theme.border.radius.xxsmall};
+    border-radius: ${theme.border.radius.medium};
     padding: ${theme.spacings.xsmall};
     font-size: ${theme.font.sizes.medium};
-    color: oklch(55.4% 0.046 257.417);
+    color: ${({ theme }) => theme.colors.gray_500};
 
     > div {
       display: flex;
@@ -124,9 +124,9 @@ export const MissionInfo = styled.section`
 
 export const InfoCard = styled.div`
   ${({ theme }) => css`
-    background-color: ${theme.colors.purple_900};
-    border: 2px solid ${theme.colors.gray_500};
-    border-radius: ${theme.border.radius.xxsmall};
+    background-color: ${theme.colors.midnight_900};
+    border-radius: ${theme.border.radius.medium};
+    border: 1px solid ${theme.colors.purple_850};
     color: ${theme.colors.white};
     min-height: 25rem;
 
@@ -135,6 +135,10 @@ export const InfoCard = styled.div`
     }
 
     &:nth-child(3) {
+      grid-column: span 2;
+    }
+
+    &:nth-child(4) {
       grid-column: span 2;
     }
 
@@ -148,11 +152,16 @@ export const InfoCardHeader = styled.div`
   ${({ theme }) => css`
     display: flex;
     align-items: center;
-    gap: ${theme.spacings.xxsmall};
+    justify-content: space-between;
 
     padding: ${theme.spacings.xsmall};
-    border-bottom: 2px solid ${theme.colors.gray_500};
     font-size: ${theme.font.sizes.xsmall};
+
+    div {
+      display: flex;
+      align-items: center;
+      gap: ${theme.spacings.xxsmall};
+    }
 
     svg {
       font-size: ${theme.font.sizes.xxlarge};
@@ -208,9 +217,9 @@ export const SelectedTeam = styled.div`
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    border: 1px solid ${theme.colors.gray_500};
-    padding: ${theme.spacings.xsmall} ${theme.spacings.xxsmall};
-    border-radius: ${theme.border.radius.xxsmall};
+    background-color: ${theme.colors.purple_950};
+    padding: ${theme.spacings.xsmall};
+    border-radius: ${theme.border.radius.medium};
 
     p {
       color: ${theme.colors.white};
@@ -240,7 +249,8 @@ export const SelectedTeam = styled.div`
 
 export const SelectedTeamsAction = styled.div`
   ${Button} {
-    background-color: ${({ theme }) => theme.colors.red_600};
+    background-color: ${({ theme }) => theme.colors.red_900};
+    color: ${({ theme }) => theme.colors.red_200};
     margin-left: auto;
   }
 `;
@@ -262,8 +272,8 @@ export const AgentCard = styled.div`
     align-items: center;
     gap: ${theme.spacings.xxsmall};
     padding: ${theme.spacings.xsmall};
-    border: 1px solid ${theme.colors.gray_500};
-    border-radius: ${theme.border.radius.xxsmall};
+    background-color: ${theme.colors.purple_950};
+    border-radius: ${theme.border.radius.medium};
 
     ${Avatar} {
       background-color: ${theme.colors.green_600};
@@ -272,11 +282,46 @@ export const AgentCard = styled.div`
   `}
 `;
 
+export const EvidencesList = styled.div`
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: ${({ theme }) => theme.spacings.small};
+`;
+
+export const EvidenceCard = styled.div`
+  background-color: #1a1a2a;
+  border-radius: 8px;
+  padding: 16px;
+  border: 1px solid #2a2a3a;
+  transition: all 0.2s ease;
+  max-width: 32rem;
+
+  &:hover {
+    border-color: #4a4a8a;
+    transform: translateY(-2px);
+  }
+`;
+
+export const EvidenceTitle = styled.p`
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: #fff;
+`;
+
+export const EvidenceDescription = styled.p`
+  color: #8a8a9a;
+  font-size: 14px;
+  line-height: 1.4;
+`;
+
 export const Table = styled.table`
   ${({ theme }) => css`
     width: 100%;
-    min-width: 640px;
     padding: ${theme.spacings.xsmall} ${theme.spacings.small};
+    background-color: ${theme.colors.purple_950};
+    border-radius: ${theme.border.radius.medium};
   `}
 `;
 

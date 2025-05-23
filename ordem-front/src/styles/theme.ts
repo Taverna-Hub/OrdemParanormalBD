@@ -35,13 +35,16 @@ export default {
     purple_500: '#6366f1',
     purple_700: '#1A194D',
     purple_800: '#2A2D45',
+    purple_850: '#2a2a3a',
     purple_900: '#1E2235',
+    purple_950: '#1A1A2A',
+
+    midnight_500: '#1e2040',
+    midnight_900: '#0F0F1A',
 
     blue_600: '#007595',
     blue_800: '#111827',
-    blue_900: '#000214',
-
-    midnight_500: '#1e2040',
+    blue_900: '#0A0A14',
 
     gray_500: '#6A7282',
 
@@ -55,7 +58,7 @@ export default {
 
     red_200: '#DC2626',
     red_600: '#2F0D0D',
-
+    red_900: '#43242E',
 
     yellow_200: '#F8B425',
     yellow_600: '#292B12',

@@ -1,11 +1,4 @@
-import {
-  FiAlertCircle,
-  FiCalendar,
-  FiPlus,
-  FiTarget,
-  FiTrash2,
-  FiUsers,
-} from 'react-icons/fi';
+import { FiAlertCircle, FiCalendar, FiTarget, FiUsers } from 'react-icons/fi';
 import { Navigation } from '../../../components/Navigation';
 import * as S from './styles';
 import { useParams } from 'react-router';
@@ -26,13 +19,16 @@ import {
 } from '../../../services/http/missionAssignment/MissionAssignmentService';
 import { toast } from 'sonner';
 import { Agent } from '../../../services/http/agents/AgentService';
-import { IconButton } from '../../../components/IconButton';
 import { useState } from 'react';
-import { AddEvidenceModal } from '../../../components/AddEvidenceModal';
+import { AddEvidenceModal } from '../../../components/modals/AddEvidenceModal';
 import {
   Evidence,
   EvidenceService,
 } from '../../../services/http/evidences/EvidenceService';
+import { AddThreatToMissionModal } from '../../../components/modals/AddThreatToMissionModal';
+import { Helmet } from 'react-helmet-async';
+import { AddUpdateThreatNeutralizationModal } from '../../../components/modals/AddUpdateThreatNeutralizationModal';
+import { StatusSelector } from '../../../components/StatusSelector';
 
 type Options = {
   label: string;
@@ -46,7 +42,15 @@ type CreateAssignmentProps = Omit<MissionAssignment, 'id_team'> & {
 export function SpecificMission() {
   const { id } = useParams();
   const { control, getValues } = useForm();
+  const [idThreat, setIdThreat] = useState('');
+  const [currentStatus, setCurrentStatus] = useState('aberta');
   const [isAddEvidenceModalOpen, setIsAddEvidenceModalOpen] = useState(false);
+  const [isAddThreatToMissionModalOpen, setIsAddThreatToMissionModalOpen] =
+    useState(false);
+  const [
+    isAddThreatNeutralizationModalOpen,
+    setIsAddThreatNeutralizationModalOpen,
+  ] = useState(false);
 
   const queryClient = useQueryClient();
 
@@ -69,7 +73,7 @@ export function SpecificMission() {
     (ass: MissionAssignment) => ass.deallocation_date === null,
   );
 
-  const { data: assignedTeam } = useQuery<Team[]>({
+  const { data: assignedTeam } = useQuery<Team>({
     queryKey: ['team', id],
     queryFn: () => TeamService.findById(assignment?.id_team as string),
   });
@@ -79,7 +83,7 @@ export function SpecificMission() {
     queryFn: () => TeamService.findAgentsById(assignment?.id_team as string),
   });
 
-  const { data: evidences } = useQuery<Agent[]>({
+  const { data: evidences } = useQuery<Evidence[]>({
     queryKey: ['evidences', id],
     queryFn: () => EvidenceService.findById(id as string),
   });
@@ -95,8 +99,6 @@ export function SpecificMission() {
     queryKey: ['missionNeutralizedThreats'],
     queryFn: () => MissionService.findMissionNeutralizedThreats(id as string),
   });
-
-  console.log(missionNeutralizedThreats);
 
   const { mutate } = useMutation({
     mutationFn: async (data: CreateAssignmentProps) => {
@@ -134,6 +136,23 @@ export function SpecificMission() {
     },
   });
 
+  const { mutate: mutateUpdateMission } = useMutation({
+    mutationFn: async () => {
+      const data = {
+        ...mission,
+        status: currentStatus,
+      };
+
+      await MissionService.update(data as Mission);
+    },
+    onSuccess: async () => {
+      toast.success('Missão atualizada com sucesso!');
+    },
+    onError: () => {
+      toast.error('Ocorreu um erro ao atualizar a missão!');
+    },
+  });
+
   function handleDeallocate() {
     mutateDeallocateTeam();
     queryClient.invalidateQueries({ queryKey: ['team-agents', id] });
@@ -143,6 +162,26 @@ export function SpecificMission() {
     const data = getValues() as CreateAssignmentProps;
     mutate(data);
     queryClient.invalidateQueries({ queryKey: ['team-agents', id] });
+  }
+
+  function handleUpdateMission() {
+    mutateUpdateMission();
+  }
+
+  function handleOpenNeutralizationModal(idThreat: string) {
+    if (!assignedTeam?.id_team) {
+      return toast.error(
+        'Não é possível adicionar a estratégia sem uma equipe alocada para a missão',
+      );
+    }
+
+    setIdThreat(idThreat);
+    setIsAddThreatNeutralizationModalOpen(true);
+  }
+
+  function handleStatusChange(newStatus: string) {
+    setCurrentStatus(newStatus);
+    handleUpdateMission();
   }
 
   if (!mission) {
@@ -162,12 +201,14 @@ export function SpecificMission() {
 
   return (
     <S.Wrapper>
+      <Helmet title={mission.title} />
       <S.MissionHeader>
         <S.HeaderDetail>
           <div>
-            <S.Status className={mission?.status}>
-              <p>{mission?.status} </p>
-            </S.Status>
+            <StatusSelector
+              initialStatus={currentStatus}
+              onStatusChange={handleStatusChange}
+            />
 
             <h1>{mission?.title}</h1>
 
@@ -231,8 +272,10 @@ export function SpecificMission() {
       <S.MissionInfo>
         <S.InfoCard>
           <S.InfoCardHeader>
-            <FiTarget />
-            <h2>Objetivos</h2>
+            <div>
+              <FiTarget />
+              <h2>Objetivos</h2>
+            </div>
           </S.InfoCardHeader>
 
           <S.CardContent>
@@ -242,8 +285,10 @@ export function SpecificMission() {
 
         <S.InfoCard>
           <S.InfoCardHeader>
-            <FiAlertCircle />
-            <h2>Riscos</h2>
+            <div>
+              <FiAlertCircle />
+              <h2>Riscos</h2>
+            </div>
           </S.InfoCardHeader>
 
           <S.CardContent>
@@ -253,8 +298,10 @@ export function SpecificMission() {
 
         <S.InfoCard>
           <S.InfoCardHeader>
-            <FiUsers />
-            <h2>Atribuição de Equipe</h2>
+            <div>
+              <FiUsers />
+              <h2>Atribuição de Equipe</h2>
+            </div>
           </S.InfoCardHeader>
 
           {!teamAgents ? (
@@ -285,9 +332,7 @@ export function SpecificMission() {
                   </section>
 
                   <S.SelectedTeamsAction>
-                    <Button onClick={() => handleDeallocate()}>
-                      Remover <FiTrash2 />
-                    </Button>
+                    <Button onClick={() => handleDeallocate()}>Remover</Button>
                   </S.SelectedTeamsAction>
                 </S.SelectedTeam>
 
@@ -309,87 +354,108 @@ export function SpecificMission() {
 
         <S.InfoCard>
           <S.InfoCardHeader>
-            <FiAlertCircle />
-            <h2>Evidências</h2>
+            <div>
+              <FiAlertCircle />
+              <h2>Evidências</h2>
+            </div>
 
-            <IconButton
-              icon={<FiPlus />}
-              onClick={() => setIsAddEvidenceModalOpen(true)}
-            />
+            <Button onClick={() => setIsAddEvidenceModalOpen(true)}>
+              Adicionar
+            </Button>
           </S.InfoCardHeader>
 
           <S.CardContent>
-            <ul>
+            <S.EvidencesList>
               {evidences?.map((evidence: Evidence) => {
                 return (
-                  <li key={evidence.id_evidence}>
-                    {evidence.origin} - {evidence.stability_level} -{' '}
-                    {evidence.description}
-                  </li>
+                  <>
+                    <S.EvidenceCard>
+                      <S.EvidenceTitle>
+                        {evidence.origin} - {evidence.stability_level}
+                      </S.EvidenceTitle>
+                      <S.EvidenceDescription>
+                        {evidence.description}
+                      </S.EvidenceDescription>
+                    </S.EvidenceCard>
+                  </>
                 );
               })}
-            </ul>
+            </S.EvidencesList>
           </S.CardContent>
         </S.InfoCard>
 
         <S.InfoCard>
           <S.InfoCardHeader>
-            <FiAlertCircle />
-            <h2>Ameaças</h2>
+            <div>
+              <FiAlertCircle />
+              <h2>Ameaças</h2>
+            </div>
+
+            <Button onClick={() => setIsAddEvidenceModalOpen(true)}>
+              Adicionar
+            </Button>
           </S.InfoCardHeader>
 
-          <S.Table>
-            <S.TableHead>
-              <tr>
-                <th>#</th>
-                <th>Nomes da Ameaça</th>
-                <th>Tipo da ameaça</th>
-                <th>Método de neutralização</th>
-                <th>Resultado</th>
-              </tr>
-            </S.TableHead>
-            <tbody>
-              {missionThreats &&
-                missionThreats.map(
-                  (missionThreat: MissionThreat, index: number) => {
-                    const neutralization = missionNeutralizedThreats?.find(
-                      (neutralized) =>
-                        neutralized.id_threat === missionThreat.id_threat,
-                    );
+          <S.CardContent>
+            <S.Table>
+              <S.TableHead>
+                <tr>
+                  <th>#</th>
+                  <th>Nomes da Ameaça</th>
+                  <th>Tipo da ameaça</th>
+                  <th>Método de neutralização</th>
+                  <th>Resultado</th>
+                </tr>
+              </S.TableHead>
+              <tbody>
+                {missionThreats &&
+                  missionThreats.map(
+                    (missionThreat: MissionThreat, index: number) => {
+                      const neutralization = missionNeutralizedThreats?.find(
+                        (neutralized) =>
+                          neutralized.id_threat === missionThreat.id_threat,
+                      );
 
-                    return (
-                      <>
-                        <S.TableRow>
-                          <td>
-                            <span>{index + 1}</span>
-                          </td>
-                          <td>
-                            <p>{missionThreat.threat_names}</p>
-                          </td>
-                          <td>
-                            <p>{missionThreat.threatType}</p>
-                          </td>
-                          <td>
-                            <p>
-                              {neutralization?.method
-                                ? neutralization?.method
-                                : 'Ameaça não neutralizada'}
-                            </p>
-                          </td>
-                          <td>
-                            <p>
-                              {neutralization?.result
-                                ? neutralization?.result
-                                : 'Ameaça não neutralizada'}
-                            </p>
-                          </td>
-                        </S.TableRow>
-                      </>
-                    );
-                  },
-                )}
-            </tbody>
-          </S.Table>
+                      return (
+                        <>
+                          <S.TableRow
+                            onClick={() =>
+                              handleOpenNeutralizationModal(
+                                missionThreat.id_threat,
+                              )
+                            }
+                          >
+                            <td>
+                              <span>{index + 1}</span>
+                            </td>
+                            <td>
+                              <p>{missionThreat.threat_names}</p>
+                            </td>
+                            <td>
+                              <p>{missionThreat.threatType}</p>
+                            </td>
+                            <td>
+                              <p>
+                                {neutralization?.method
+                                  ? neutralization?.method
+                                  : 'Ameaça não neutralizada'}
+                              </p>
+                            </td>
+                            <td>
+                              <p>
+                                {neutralization?.result
+                                  ? neutralization?.result
+                                  : 'Ameaça não neutralizada'}
+                              </p>
+                            </td>
+                          </S.TableRow>
+                        </>
+                      );
+                    },
+                  )}
+              </tbody>
+            </S.Table>
+          </S.CardContent>
         </S.InfoCard>
       </S.MissionInfo>
 
@@ -399,6 +465,20 @@ export function SpecificMission() {
         isOpen={isAddEvidenceModalOpen}
         onClose={() => setIsAddEvidenceModalOpen(false)}
         id_mission={id!}
+      />
+
+      <AddThreatToMissionModal
+        isOpen={isAddThreatToMissionModalOpen}
+        onClose={() => setIsAddThreatToMissionModalOpen(false)}
+        id_mission={id!}
+      />
+
+      <AddUpdateThreatNeutralizationModal
+        isOpen={isAddThreatNeutralizationModalOpen}
+        onClose={() => setIsAddThreatNeutralizationModalOpen(false)}
+        id_mission={id!}
+        id_team={assignedTeam?.id_team}
+        id_threat={idThreat}
       />
     </S.Wrapper>
   );

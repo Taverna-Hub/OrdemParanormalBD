@@ -11,7 +11,7 @@ export const FormWrapper = styled.section`
   width: 80%;
   background-color: ${({ theme }) => theme.colors.purple_900};
   padding: 3.2rem;
-  border-radius: ${({ theme }) => theme.border.radius.xxsmall};
+  border-radius: ${({ theme }) => theme.border.radius.medium};
 
   > div {
     margin-bottom: ${({ theme }) => theme.spacings.medium};

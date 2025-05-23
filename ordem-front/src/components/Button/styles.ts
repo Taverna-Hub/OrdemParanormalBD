@@ -43,7 +43,7 @@ export const Wrapper = styled.button<WrapperProps>`
     justify-content: center;
 
     border: none;
-    border-radius: ${theme.border.radius.xxsmall};
+    border-radius: ${theme.border.radius.medium};
     font-weight: ${theme.font.bold};
     cursor: pointer;
     padding: ${theme.spacings.xxsmall};

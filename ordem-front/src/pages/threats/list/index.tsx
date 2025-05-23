@@ -10,7 +10,7 @@ import {
   GetThreatProps,
   ThreatService,
 } from '../../../services/http/threats/ThreatService';
-import { DeleteModal } from '../../../components/DeleteModal';
+import { DeleteModal } from '../../../components/modals/DeleteModal';
 import { FiTrash2, FiEdit3 } from 'react-icons/fi';
 import { useState } from 'react';
 import { toast } from 'sonner';

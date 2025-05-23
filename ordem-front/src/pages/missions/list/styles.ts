@@ -34,7 +34,7 @@ export const TableContainer = styled.div`
     overflow-x: auto;
     overflow-y: auto;
     background-color: ${theme.colors.blue_800};
-    border-radius: ${theme.border.radius.xxsmall};
+    border-radius: ${theme.border.radius.medium};
     max-height: calc(100vh - 260px);
 
     div {

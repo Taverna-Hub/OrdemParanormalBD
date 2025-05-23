@@ -19,7 +19,7 @@ export const LoginForm = styled.form`
     padding: ${theme.spacings.medium};
 
     background-color: #111327;
-    border-radius: ${theme.border.radius.xxsmall};
+    border-radius: ${theme.border.radius.medium};
     border: 1px solid ${theme.colors.midnight_500};
 
     width: 58rem;

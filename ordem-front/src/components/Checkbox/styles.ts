@@ -18,7 +18,7 @@ export const Wrapper = styled.div`
 
       width: 2.4rem;
       height: 2.4rem;
-      border-radius: ${theme.border.radius.xxsmall};
+      border-radius: ${theme.border.radius.medium};
       border: 1px solid ${theme.colors.gray_500};
 
       transition: all 0.3s;

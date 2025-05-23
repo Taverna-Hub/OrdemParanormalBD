@@ -7,8 +7,11 @@ import { useNavigate } from 'react-router';
 import { Input } from '../../../components/Input';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
-import { Agent, AgentService } from '../../../services/http/agents/AgentService';
-import { DeleteModal } from '../../../components/DeleteModal';
+import {
+  Agent,
+  AgentService,
+} from '../../../services/http/agents/AgentService';
+import { DeleteModal } from '../../../components/modals/DeleteModal';
 import { toast } from 'sonner';
 
 export function Agents() {

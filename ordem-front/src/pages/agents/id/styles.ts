@@ -13,7 +13,7 @@ export const FormWrapper = styled.section`
   width: 80%;
   background-color: ${({ theme }) => theme.colors.purple_900};
   padding: 3.2rem;
-  border-radius: ${({ theme }) => theme.border.radius.xxsmall};
+  border-radius: ${({ theme }) => theme.border.radius.medium};
 
   > div {
     display: flex;
@@ -54,7 +54,7 @@ export const TableContainer = styled.div`
     overflow-x: auto;
     overflow-y: auto;
     background-color: ${theme.colors.blue_800};
-    border-radius: ${theme.border.radius.xxsmall};
+    border-radius: ${theme.border.radius.medium};
     max-height: calc(100vh - 260px);
 
     div {

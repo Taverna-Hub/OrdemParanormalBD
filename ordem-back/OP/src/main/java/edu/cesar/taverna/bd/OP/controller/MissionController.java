@@ -65,7 +65,12 @@ public class MissionController extends GenericController<Mission, MissionService
 
     @Override
     public ResponseEntity<String> update(UUID id, Mission entity) {
-        return null;
+        try {
+            entity.setId_mission(id);
+            return service.updateMission(entity);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Failed to update mission." + e);
+        }
     }
 
     @Override

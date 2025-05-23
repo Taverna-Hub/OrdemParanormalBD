@@ -42,7 +42,7 @@ export const TableContainer = styled.div`
   margin-top: ${({ theme }) => theme.spacings.medium};
   overflow-x: auto;
   background-color: ${({ theme }) => theme.colors.blue_800};
-  border-radius: ${({ theme }) => theme.border.radius.xxsmall};
+  border-radius: ${({ theme }) => theme.border.radius.medium};
 
   div {
     padding: 2.4rem;
@@ -75,13 +75,12 @@ export const TableRow = styled.tr`
   transition: background-color 0.2s;
 
   td {
-
     &:first-child {
       color: ${({ theme }) => theme.colors.gray_500};
     }
 
     font-size: ${({ theme }) => theme.font.sizes.small};
-    color:  ${({ theme }) => theme.colors.white};
+    color: ${({ theme }) => theme.colors.white};
 
     max-width: 100px;
     cursor: pointer;
@@ -91,7 +90,6 @@ export const TableRow = styled.tr`
       white-space: normal;
     }
   }
-
 
   &:hover {
     background-color: rgba(30, 58, 138, 0.2);

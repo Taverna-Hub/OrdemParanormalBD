@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
     width: 100%;
     background-color: ${theme.colors.white};
     padding: ${theme.spacings.xsmall};
-    border-radius: ${theme.border.radius.xxsmall};
+    border-radius: ${theme.border.radius.medium};
 
     ${Button} {
       align-self: flex-end;

@@ -128,7 +128,7 @@ public class MissionDAO extends GenericDAO<Mission>{
 
     @Override
     protected String getUpdateSQL() {
-        return "";
+        return "UPDATE MISSION SET title = ?, status = ?, risks = ?, objective = ?, start_date = ?, end_date = ?, id_address = ?, id_hq = ? WHERE id_mission = ?";
     }
 
     @Override
@@ -146,7 +146,7 @@ public class MissionDAO extends GenericDAO<Mission>{
 
     @Override
     protected void prepareUpdate(PreparedStatement stmt, Mission entity) throws SQLException {
-
+        this.prepareInsert(stmt, entity);
     }
 
     @Override
@@ -291,5 +291,4 @@ public class MissionDAO extends GenericDAO<Mission>{
 
         return threatsNeutralization;
     }
-
 }
