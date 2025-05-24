@@ -391,7 +391,7 @@ export function SpecificMission() {
               <h2>Ameaças</h2>
             </div>
 
-            <Button onClick={() => setIsAddEvidenceModalOpen(true)}>
+            <Button onClick={() => setIsAddThreatToMissionModalOpen(true)}>
               Adicionar
             </Button>
           </S.InfoCardHeader>
