@@ -107,17 +107,22 @@ SET
 -- ===================================================================
 -- Evidencias
 SET
-@evid1 = UUID(), @evid2 = UUID(), @evid3 = UUID(),
-@evid4 = UUID(), @evid5 = UUID(), @evid6 = UUID(),
-@evid7 = UUID(), @evid8 = UUID(), @evid9 = UUID();
+@evid1 = UUID(),  @evid2 = UUID(),  @evid3 = UUID(),
+@evid4 = UUID(),  @evid5 = UUID(),  @evid6 = UUID(),
+@evid7 = UUID(),  @evid8 = UUID(),  @evid9 = UUID(),
+@evid10 = UUID(), @evid11 = UUID(), @evid12 = UUID(),
+@evid13 = UUID(), @evid14 = UUID(), @evid15 = UUID(),
+@evid16 = UUID();
 
 
 -- ===================================================================
 -- Ameaças
 SET
-@thr1=UUID(),  @thr2=UUID(),  @thr3=UUID(),  @thr4=UUID(),  @thr5=UUID(),
-@thr6=UUID(),  @thr7=UUID(),  @thr8=UUID(),  @thr9=UUID(),  @thr10=UUID(),
-@thr11=UUID(), @thr12=UUID(), @thr13=UUID(), @thr14=UUID(), @thr15=UUID();
+@thr1 = UUID(),  @thr2 = UUID(),  @thr3 = UUID(),  @thr4 = UUID(),  @thr5 = UUID(),
+@thr6 = UUID(),  @thr7 = UUID(),  @thr8 = UUID(),  @thr9 = UUID(),  @thr10 = UUID(),
+@thr11 = UUID(), @thr12 = UUID(), @thr13 = UUID(), @thr14 = UUID(), @thr15 = UUID(),
+@thr16 = UUID(), @thr17 = UUID(), @thr18 = UUID(), @thr19 = UUID(), @thr20 = UUID(),
+@thr21 = UUID(), @thr22 = UUID();
 
 -- ===================================================================
 -- Membros-organizações
@@ -127,7 +132,11 @@ SET
 @mem9=UUID(),  @mem10=UUID(), @mem11=UUID(), @mem12=UUID(),
 @mem13=UUID(), @mem14=UUID(), @mem15=UUID(), @mem16=UUID(),
 @mem17=UUID(), @mem18=UUID(), @mem19=UUID(), @mem20=UUID(),
-@mem21=UUID(), @mem22=UUID(), @mem23=UUID(), @mem24=UUID();
+@mem21=UUID(), @mem22=UUID(), @mem23=UUID(), @mem24=UUID(),
+@mem25=UUID(), @mem26=UUID(), @mem27=UUID(), @mem28=UUID(),
+@mem29=UUID(), @mem30=UUID(), @mem31=UUID(), @mem32=UUID(),
+@mem33=UUID(), @mem34=UUID(), @mem35=UUID(), @mem36=UUID(),
+@mem37=UUID(), @mem38=UUID(), @mem39=UUID();
 
 -- ===================================================================
 -- População de AGENTS OK
@@ -876,8 +885,14 @@ INSERT INTO EVIDENCE (id_evidence, origin, description, stability_level, id_miss
 (@evid6, 'Mapa urbano',                  'Marcas sinalizando portais',               'Volatil',   @miss6),
 (@evid7, 'Fragmento metálico',           'Pedaço de maquinário corroído',            'Estável',   @miss7),
 (@evid8, 'Placa comemorativa',           'Inscrições antigas apagadas',              'Volatil',  @miss8),
-(@evid9, 'Relíquia cerimonial',          'Objeto entalhado com selos',               'Perigoso',  @miss9);
-
+(@evid9, 'Relíquia cerimonial',          'Objeto entalhado com selos',               'Perigoso',  @miss9),
+(@evid10, 'Estátua miniatura', 'Figura com olhos que acompanham o observador', 'Volátil', @miss2),
+(@evid11, 'Roupas ensanguentadas', 'Tecidos com padrões ritualísticos', 'Perigoso', @miss3),
+(@evid12, 'Gravação EVP',             'Sons não identificáveis captados em ritual',        'Estável',   @miss4),
+(@evid13, 'Fotografia distorcida',    'Imagem com presença sombria não observada a olho nu','Volatil', @miss5),
+(@evid14, 'Ampola de ectoplasma',     'Substância viscosa coletada após manifestação',     'Volatil',   @miss6),
+(@evid15, 'Anel com símbolos',        'Joia que reage à presença de entidades',            'Estável',   @miss7),
+(@evid16, 'Máscara rachada',          'Fragmento de relíquia usada em possessões',         'Perigoso',  @miss8);
 -- Ameaças !
 INSERT INTO THREATS (id_threat, description) VALUES
 (@thr1,'Organização oculta que pratica rituais sombrios'),
@@ -894,14 +909,24 @@ INSERT INTO THREATS (id_threat, description) VALUES
 (@thr12,'Guardião de pedra viva'),
 (@thr13,'Véu de névoa carmesim'),
 (@thr14,'Sombras vivas na floresta'),
-(@thr15,'Gárgula vampírica');
+(@thr15,'Gárgula vampírica'),
+(@thr16, 'Entidade que assume a forma de memórias perdidas'),
+(@thr17, 'Serpente etérea que habita bibliotecas antigas'),
+(@thr18, 'Corvo de olhos múltiplos que anuncia a morte'),
+(@thr19, 'Manto vivo que envolve e consome suas vítimas'),
+(@thr20, 'Eco de um inquisidor enlouquecido'),
+(@thr21, 'Colecionador de nomes verdadeiros'),
+(@thr22, 'A criança sem rosto que brinca nas frestas do tempo');
 
 INSERT INTO THREATS_NAMES (id_threat, name) VALUES
 (@thr1,'Seita Negra'),(@thr2,'Sombra Vivente'),(@thr3,'Espírito da Cripta'),
 (@thr4,'Morsa Gélida'),(@thr5,'Eco Silencioso'),(@thr6,'Máscara da Agonia'),
 (@thr7,'Fungo da Perdição'),(@thr8,'Olhar Vampírico'),(@thr9,'Flama Imortal'),
 (@thr10,'Lamento Infantil'),(@thr11,'Corrente Enjaulada'),(@thr12,'Guardião de Pedra'),
-(@thr13,'Névoa Rubra'),(@thr14,'Árvores Sombras'),(@thr15,'Gárgula Sombria');
+(@thr13,'Névoa Rubra'),(@thr14,'Árvores Sombras'),(@thr15,'Gárgula Sombria'),
+(@thr16, 'Sombras do Passado'),(@thr17, 'Serpente do Saber'),(@thr18, 'O Corvo dos Olhos'),
+(@thr19, 'Manto Faminto'),(@thr20, 'Inquisidor Caído'),(@thr21, 'Guardião dos Nomes'),
+(@thr22, 'Peão do Vazio');
 
 
 INSERT INTO THREAT_MISSION (id_threat, id_mission) VALUES
@@ -919,7 +944,14 @@ INSERT INTO THREAT_MISSION (id_threat, id_mission) VALUES
 (@thr12, @miss4),
 (@thr13, @miss5),
 (@thr14, @miss6),
-(@thr15, @miss7);
+(@thr15, @miss7),
+(@thr16, @miss8),
+(@thr17, @miss9),
+(@thr18, @miss2),
+(@thr19, @miss3),
+(@thr20, @miss5),
+(@thr21, @miss6),
+(@thr22, @miss7);
 
 INSERT INTO THREAT_NEUTRALIZATION (id_team, id_mission, id_threat, method, result) VALUES
 (@team1,@miss2,@thr1,'Confronto direto com encantamentos','Seita dispersa'),
@@ -943,7 +975,21 @@ INSERT INTO THREAT_ELEMENTS (id_element, id_threat) VALUES
 (@elConhe,  @thr12),
 (@elEnergia,@thr13),
 (@elMedo,   @thr14),
-(@elMorte,  @thr15);
+(@elMorte,  @thr15),
+(@elConhe,  @thr16),
+(@elMedo,   @thr16),
+(@elConhe,  @thr17),
+(@elEnergia,@thr17),
+(@elMorte,  @thr18),
+(@elMedo,   @thr18),
+(@elSangue, @thr19),
+(@elMorte,  @thr19),
+(@elMedo,   @thr20),
+(@elConhe,  @thr20),
+(@elSangue, @thr21),
+(@elEnergia,@thr21),
+(@elMedo,   @thr22),
+(@elMorte,  @thr22);
 
 INSERT INTO PARANORMAL_ENTITY (id_entity, enigma) VALUES
 (@thr2,  'Decifrar os sussurros sombrios revela seu ponto fraco'),
@@ -955,7 +1001,12 @@ INSERT INTO PARANORMAL_ENTITY (id_entity, enigma) VALUES
 (@thr12, 'O coração de pedra pulsa com guardiões adormecidos'),
 (@thr13, 'A névoa rubra sussurra segredos de sacrifício'),
 (@thr14, 'Sombras entrelaçadas nas raízes de antigas árvores'),
-(@thr15, 'Gárgulas despertam sob a luz da lua para caçar');
+(@thr16, 'Sombras do passado retornam apenas quando reconhecidas'),
+(@thr17, 'O saber proibido tem olhos onde menos se espera'),
+(@thr18, 'O olhar do corvo vê todos os destinos'),
+(@thr19, 'A fome do manto cresce no silêncio'),
+(@thr20, 'A fúria inquisitória condena até os inocentes'),
+(@thr21, 'Um nome pronunciado é uma alma ofertada');
 
 INSERT INTO ENTITY_ABILITY (id_entity, ability) VALUES
 (@thr2,  'Intangibilidade'),
@@ -987,11 +1038,32 @@ INSERT INTO ENTITY_ABILITY (id_entity, ability) VALUES
 (@thr14, 'Mobilidade Sombria'),
 
 (@thr15, 'Voo de Pedra'),
-(@thr15, 'Salto Sombrio');
+(@thr15, 'Salto Sombrio'),
+
+(@thr16, 'Manipulação de Memórias'),
+(@thr16, 'Invisibilidade Psíquica'),
+
+(@thr17, 'Enlace Mental'),
+(@thr17, 'Voz Hipnótica'),
+
+(@thr18, 'Visão Multidimensional'),
+(@thr18, 'Profecia Fatal'),
+
+(@thr19, 'Envoltura da morte'),
+(@thr19, 'Transmutação Sombria'),
+
+(@thr20, 'Sentença Psíquica'),
+(@thr20, 'Cegueira do Justo'),
+
+(@thr21, 'Roubo de Identidade'),
+(@thr21, 'Contrato de Sangue'),
+
+(@thr22, 'Manipulação Temporal'),
+(@thr22, 'Ilusão Infantil');
 
 INSERT INTO PARANORMAL_ORGANIZATION (id_organization) VALUES
 (@thr1), (@thr4),(@thr5),
-(@thr6), (@thr7);
+(@thr6), (@thr7), (@thr16), (@thr20), (@thr21);
 
 INSERT INTO MEMBERS (id_member, id_organization, name, role) VALUES
 (@mem1,@thr1,'Sacerdote Sombrio','Lider'),
@@ -1025,4 +1097,25 @@ INSERT INTO MEMBERS (id_member, id_organization, name, role) VALUES
 (@mem21,@thr7,'Patrícia Costa','Líder'),
 (@mem22,@thr7,'Rafael Martins','Ocultista'),
 (@mem23,@thr7,'Sílvia Barbosa','Simpatizante'),
-(@mem24,@thr7,'Tiago Mendes','Simpatizante');
+(@mem24,@thr7,'Tiago Mendes','Simpatizante'),
+
+ -- Para thr16 (Sombras do Passado)
+(@mem25,@thr16,'Ursula Moura','Líder'),
+(@mem26,@thr16,'Vitor Sampaio','Ocultista'),
+(@mem27,@thr16,'Wesley Cunha','Ocultista'),
+(@mem28,@thr16,'Xênia Dias','Pesquisador'),
+(@mem29,@thr16,'Yuri Batista','Simpatizante'),
+
+-- Para thr20 (Inquisidor Caído)
+(@mem30,@thr20,'Zélia Amaral','Líder'),
+(@mem31,@thr20,'Álvaro Lopes','Pesquisador'),
+(@mem32,@thr20,'Beatriz Torres','Pesquisador'),
+(@mem33,@thr20,'Caio Ramos','Ocultista'),
+(@mem34,@thr20,'Dandara Melo','Simpatizante'),
+
+-- Para thr21 (Guardião dos Nomes)
+(@mem35,@thr21,'Eduarda Lima','Líder'),
+(@mem36,@thr21,'Félix Moura','Pesquisador'),
+(@mem37,@thr21,'Geovana Reis','Ocultista'),
+(@mem38,@thr21,'Henrique Silva','Ocultista'),
+(@mem39,@thr21,'Ísis Mourão','Simpatizante');

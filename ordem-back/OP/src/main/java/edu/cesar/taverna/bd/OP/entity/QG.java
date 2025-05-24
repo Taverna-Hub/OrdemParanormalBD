@@ -12,7 +12,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class QG {
+public class  QG {
     private UUID id;
     private String name;
     private float security;
