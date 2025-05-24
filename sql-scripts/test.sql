@@ -31,18 +31,17 @@ WHERE tm.id_mission = ?;
 -- terminando
 -- count de ameaças por missão no qg geral
 
-SELECT t.id_threat, tn.name, count(*) as quantidade_ameaças
+SELECT t.id_threat, tn.name,  count(*) as quantidade_ameaças
 FROM THREATS t
          JOIN THREATS_NAMES tn ON t.id_threat = tn.id_threat
          JOIN THREAT_MISSION tm ON t.id_threat = tm.id_threat
 group by t.id_threat, tn.name
 order by quantidade_ameaças DESC;
 
-SELECT t.id_threat, tn.name, a.postal_code, count(*) as quantidade_ameaças
+SELECT a.postal_code, e.name
 FROM THREATS t
-         JOIN THREATS_NAMES tn ON t.id_threat = tn.id_threat
          JOIN THREAT_MISSION tm ON t.id_threat = tm.id_threat
          JOIN MISSION m ON tm.id_mission = m.id_mission
          JOIN ADDRESS a ON m.id_address = a.id_address
-group by t.id_threat, tn.name, a.postal_code
-order by quantidade_ameaças DESC;
+         JOIN THREAT_ELEMENTS TE on t.id_threat = TE.id_threat
+         JOIN ELEMENTS e ON TE.id_element = e.id_element;
