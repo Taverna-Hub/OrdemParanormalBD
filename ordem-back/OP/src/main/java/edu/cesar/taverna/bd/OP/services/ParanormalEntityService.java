@@ -1,6 +1,7 @@
 package edu.cesar.taverna.bd.OP.services;
 
 
+import edu.cesar.taverna.bd.OP.DTO.UpdateParanormalEntityDTO;
 import edu.cesar.taverna.bd.OP.dao.ParanormalEntityDAO;
 import edu.cesar.taverna.bd.OP.entity.Threats.ParanormalEntity;
 import org.springframework.http.ResponseEntity;
@@ -27,8 +28,8 @@ public class ParanormalEntityService {
         return Optional.ofNullable(paranormalDAO.getById(id));
     }
 
-    public ResponseEntity<String> updateParanormalEntity(ParanormalEntity entity) throws SQLException {
-         paranormalDAO.updatee(entity);
+    public ResponseEntity<String> updateParanormalEntity(UpdateParanormalEntityDTO entity) throws SQLException {
+        paranormalDAO.updatee(entity);
         return ResponseEntity.ok("");
 
     }

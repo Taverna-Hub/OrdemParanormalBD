@@ -72,15 +72,15 @@ export function UpdateThreats() {
 
       const payload = {
         id_threat: id,
-        names: names.length > 0 ? names : [data.name],
-        abilities: abilities.length > 0 ? abilities : [data.ability],
-        description: data.description,
-        enigma: data.enigma,
-        elements: elementsList,
+        new_names: names.length > 0 ? names : [data.name],
+        new_abilities: abilities.length > 0 ? abilities : [data.ability],
+        new_description: data.description,
+        new_enigma: data.enigma,
+        new_elements: elementsList,
       };
 
       console.log('Payload enviado para update:', payload);
-      await ThreatService.update(id, payload);
+      await ThreatService.updateParanormal(payload);
     },
     onSuccess: () => {
       toast.success('Ameaça atualizada com sucesso!');

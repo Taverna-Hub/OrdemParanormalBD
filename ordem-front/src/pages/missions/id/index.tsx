@@ -206,7 +206,7 @@ export function SpecificMission() {
         <S.HeaderDetail>
           <div>
             <StatusSelector
-              initialStatus={currentStatus}
+              initialStatus={mission.status}
               onStatusChange={handleStatusChange}
             />
 

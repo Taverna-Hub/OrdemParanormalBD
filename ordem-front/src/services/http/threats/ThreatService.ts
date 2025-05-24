@@ -48,6 +48,14 @@ export const ThreatService = {
       console.log(error);
     }
   },
+  updateParanormal: async (threat: CreateThreatProps) => {
+    try {
+      const data = await api.put('/paranormalEntity', threat);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  },
   createOrganization: async (threat: CreateOrganizationProps) => {
     try {
       const data = await api.post('/organization', threat);

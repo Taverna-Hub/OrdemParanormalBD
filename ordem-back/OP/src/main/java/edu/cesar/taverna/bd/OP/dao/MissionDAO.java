@@ -20,7 +20,7 @@ public class MissionDAO extends GenericDAO<Mission>{
 
     @Override
     protected String getInsertSQL() {
-        return "INSERT INTO MISSION (id_mission, title, status, risks, objective, start_date, end_date, id_address, id_hq)" +
+        return "INSERT INTO MISSION (title, status, risks, objective, start_date, end_date, id_address, id_hq, id_mission)" +
                 " VALUES (?, ? ,? ,?, ?, ?, ?, ?, ?)";
     }
 
@@ -133,20 +133,28 @@ public class MissionDAO extends GenericDAO<Mission>{
 
     @Override
     protected void prepareInsert(PreparedStatement stmt, Mission mission) throws SQLException {
-        stmt.setString(1, mission.getId_mission().toString());
-        stmt.setString(2, mission.getTitle());
-        stmt.setString(3, mission.getStatus());
-        stmt.setString(4, mission.getRisks());
-        stmt.setString(5, mission.getObjective());
-        stmt.setDate(6, java.sql.Date.valueOf(mission.getStart_date()));
-        stmt.setDate(7, mission.getEnd_date() != null ? java.sql.Date.valueOf(mission.getEnd_date()) : null);
-        stmt.setString(8, mission.getId_address().toString());
-        stmt.setString(9, mission.getId_hq().toString());
+        stmt.setString(1, mission.getTitle());
+        stmt.setString(2, mission.getStatus());
+        stmt.setString(3, mission.getRisks());
+        stmt.setString(4, mission.getObjective());
+        stmt.setDate(5, java.sql.Date.valueOf(mission.getStart_date()));
+        stmt.setDate(6, mission.getEnd_date() != null ? java.sql.Date.valueOf(mission.getEnd_date()) : null);
+        stmt.setString(7, mission.getId_address().toString());
+        stmt.setString(8, mission.getId_hq().toString());
+        stmt.setString(9, mission.getId_mission().toString());
     }
 
     @Override
-    protected void prepareUpdate(PreparedStatement stmt, Mission entity) throws SQLException {
-        this.prepareInsert(stmt, entity);
+    protected void prepareUpdate(PreparedStatement stmt, Mission mission) throws SQLException {
+        stmt.setString(1, mission.getTitle());
+        stmt.setString(2, mission.getStatus());
+        stmt.setString(3, mission.getRisks());
+        stmt.setString(4, mission.getObjective());
+        stmt.setDate(5, java.sql.Date.valueOf(mission.getStart_date()));
+        stmt.setDate(6, mission.getEnd_date() != null ? java.sql.Date.valueOf(mission.getEnd_date()) : null);
+        stmt.setString(7, mission.getId_address().toString());
+        stmt.setString(8, mission.getId_hq().toString());
+        stmt.setString(9, mission.getId_mission().toString());
     }
 
     @Override

@@ -1,5 +1,6 @@
 package edu.cesar.taverna.bd.OP.dao;
 
+import edu.cesar.taverna.bd.OP.DTO.UpdateParanormalEntityDTO;
 import edu.cesar.taverna.bd.OP.config.ConnectionFactory;
 import edu.cesar.taverna.bd.OP.entity.Threats.ParanormalEntity;
 
@@ -7,10 +8,6 @@ import java.sql.*;
 import java.util.*;
 
 public class ParanormalEntityDAO extends GenericDAO<ParanormalEntity> {
-
-
-
-
     @Override
     protected String getInsertSQL() {
         return "INSERT INTO PARANORMAL_ENTITY (id_entity, enigma) VALUES (?, ?)";
@@ -418,76 +415,80 @@ public class ParanormalEntityDAO extends GenericDAO<ParanormalEntity> {
         }
     }
 
-    public void updatee(ParanormalEntity entity) throws SQLException {
-        String updateThreat = "UPDATE THREATS SET description = ? WHERE id_threat = ?";
-        String updateEntity = "UPDATE PARANORMAL_ENTITY SET enigma = ? WHERE id_entity = ?";
+    public void updatee(
+            UpdateParanormalEntityDTO updateParanormalEntityDTO
+    ) throws SQLException {
+        Connection conn = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
 
-        String deleteThreatNames = "DELETE FROM THREATS_NAMES WHERE id_threat = ?";
-        String insertThreatName = "INSERT INTO THREATS_NAMES (id_threat, name) VALUES (?, ?)";
-
-        String deleteAbilities = "DELETE FROM ENTITY_ABILITY WHERE id_entity = ?";
-        String insertAbility = "INSERT INTO ENTITY_ABILITY (id_entity, ability) VALUES (?, ?)";
-
-        String deleteElements = "DELETE FROM THREAT_ELEMENTS WHERE id_threat = ?";
-        String insertElement = "INSERT INTO THREAT_ELEMENTS (id_threat, id_element) VALUES (?, ?)";
-
-        try (Connection conn = ConnectionFactory.getConnection()) {
+        try {
             conn.setAutoCommit(false);
 
-            try (
-                    PreparedStatement stmtThreat = conn.prepareStatement(updateThreat);
-                    PreparedStatement stmtEntity = conn.prepareStatement(updateEntity);
-                    PreparedStatement stmtDelNames = conn.prepareStatement(deleteThreatNames);
-                    PreparedStatement stmtInsName = conn.prepareStatement(insertThreatName);
-                    PreparedStatement stmtDelAbilities = conn.prepareStatement(deleteAbilities);
-                    PreparedStatement stmtInsAbility = conn.prepareStatement(insertAbility);
-                    PreparedStatement stmtDelElements = conn.prepareStatement(deleteElements);
-                    PreparedStatement stmtInsElement = conn.prepareStatement(insertElement)
-            ) {
-                UUID id = entity.getId_threat();
+            stmt = conn.prepareStatement("DELETE FROM THREATS_NAMES WHERE id_threat = ?");
+            stmt.setString(1, updateParanormalEntityDTO.id_threat());
+            stmt.executeUpdate();
+            stmt.close();
 
-                // Atualiza atributos principais
-                stmtThreat.setString(1, entity.getDescription());
-                stmtThreat.setString(2, id.toString());
-                stmtThreat.executeUpdate();
+            stmt = conn.prepareStatement("DELETE FROM ENTITY_ABILITY WHERE id_entity = ?");
+            stmt.setString(1, updateParanormalEntityDTO.id_threat());
+            stmt.executeUpdate();
+            stmt.close();
 
-                stmtEntity.setString(1, entity.getEnigma());
-                stmtEntity.setString(2, id.toString());
-                stmtEntity.executeUpdate();
+            stmt = conn.prepareStatement("DELETE FROM THREAT_ELEMENTS WHERE id_threat = ?");
+            stmt.setString(1, updateParanormalEntityDTO.id_threat());
+            stmt.executeUpdate();
+            stmt.close();
 
-                // Atualiza nomes
-                stmtDelNames.setString(1, id.toString());
-                stmtDelNames.executeUpdate();
-                for (String name : entity.getNames()) {
-                    stmtInsName.setString(1, id.toString());
-                    stmtInsName.setString(2, name);
-                    stmtInsName.executeUpdate();
-                }
-
-                // Atualiza habilidades
-                stmtDelAbilities.setString(1, id.toString());
-                stmtDelAbilities.executeUpdate();
-                for (String ability : entity.getAbilities()) {
-                    stmtInsAbility.setString(1, id.toString());
-                    stmtInsAbility.setString(2, ability);
-                    stmtInsAbility.executeUpdate();
-                }
-
-                // Atualiza elementos
-                stmtDelElements.setString(1, id.toString());
-                stmtDelElements.executeUpdate();
-                for (UUID elementId : entity.getElements()) {
-                    stmtInsElement.setString(1, id.toString());
-                    stmtInsElement.setString(2, elementId.toString());
-                    stmtInsElement.executeUpdate();
-                }
-
-                conn.commit();
-            } catch (SQLException ex) {
-                conn.rollback();
-                throw ex;
+            stmt = conn.prepareStatement("INSERT INTO THREATS_NAMES (id_threat, name) VALUES (?, ?)");
+            for (String name : updateParanormalEntityDTO.new_names()) {
+                stmt.setString(1, updateParanormalEntityDTO.id_threat());
+                stmt.setString(2, name);
+                stmt.addBatch();
             }
+            stmt.executeBatch();
+            stmt.close();
+
+            stmt = conn.prepareStatement("INSERT INTO ENTITY_ABILITY (id_entity, ability) VALUES (?, ?)");
+            for (String ability : updateParanormalEntityDTO.new_abilities()) {
+                stmt.setString(1, updateParanormalEntityDTO.id_threat());
+                stmt.setString(2, ability);
+                stmt.addBatch();
+            }
+            stmt.executeBatch();
+            stmt.close();
+
+            stmt = conn.prepareStatement("INSERT INTO THREAT_ELEMENTS (id_threat, id_element) VALUES (?, ?)");
+            for (String element : updateParanormalEntityDTO.new_elements()) {
+                stmt.setString(1, updateParanormalEntityDTO.id_threat());
+                stmt.setString(2, element);
+                stmt.addBatch();
+            }
+            stmt.executeBatch();
+            stmt.close();
+
+            stmt = conn.prepareStatement("UPDATE THREATS SET description = ? WHERE id_threat = ?");
+            stmt.setString(1, updateParanormalEntityDTO.new_description());
+            stmt.setString(2, updateParanormalEntityDTO.id_threat());
+            stmt.executeUpdate();
+            stmt.close();
+
+            stmt = conn.prepareStatement("UPDATE PARANORMAL_ENTITY SET enigma = ? WHERE id_entity = ?");
+            stmt.setString(1, updateParanormalEntityDTO.new_enigma());
+            stmt.setString(2, updateParanormalEntityDTO.id_threat());
+            stmt.executeUpdate();
+            stmt.close();
+
+            conn.commit();
+
+        } catch (SQLException e) {
+            if (conn != null) {
+                conn.rollback();
+            }
+            throw e;
+        } finally {
+            if (stmt != null) stmt.close();
+            if (conn != null) conn.close();
         }
     }
-
 }
+
