@@ -1001,6 +1001,7 @@ INSERT INTO PARANORMAL_ENTITY (id_entity, enigma) VALUES
 (@thr12, 'O coração de pedra pulsa com guardiões adormecidos'),
 (@thr13, 'A névoa rubra sussurra segredos de sacrifício'),
 (@thr14, 'Sombras entrelaçadas nas raízes de antigas árvores'),
+(@thr15, 'Localizar e destruir o seu totem de invocação'),
 (@thr16, 'Sombras do passado retornam apenas quando reconhecidas'),
 (@thr17, 'O saber proibido tem olhos onde menos se espera'),
 (@thr18, 'O olhar do corvo vê todos os destinos'),
@@ -1056,10 +1057,9 @@ INSERT INTO ENTITY_ABILITY (id_entity, ability) VALUES
 (@thr20, 'Cegueira do Justo'),
 
 (@thr21, 'Roubo de Identidade'),
-(@thr21, 'Contrato de Sangue'),
+(@thr21, 'Contrato de Sangue');
 
-(@thr22, 'Manipulação Temporal'),
-(@thr22, 'Ilusão Infantil');
+
 
 INSERT INTO PARANORMAL_ORGANIZATION (id_organization) VALUES
 (@thr1), (@thr4),(@thr5),
