@@ -51,6 +51,12 @@ export type VerissimoDTO = {
   verName: string;
 };
 
+export type ThreatsLocationDTO = {
+  element: string;
+  lat: string;
+  lng: string;
+};
+
 export const HqService = {
   getSpecializationsInHQ: async (): Promise<TeamsSpecializationsInHQ[]> => {
     const { data } = await api.get('/qg/teams/specializations');
@@ -108,10 +114,13 @@ export const HqService = {
     );
     return data;
   },
-
-  getVerissimoHQ: async(): Promise<VerissimoDTO> =>{
-    const {data} = await api.get(`/qg/welcome`);
+  getVerissimoHQ: async (): Promise<VerissimoDTO> => {
+    const { data } = await api.get(`/qg/welcome`);
     return data;
   },
 
+  getLocation: async (): Promise<ThreatsLocationDTO[]> => {
+    const { data } = await api.get(`/qg/threats/location`);
+    return data;
+  },
 };
