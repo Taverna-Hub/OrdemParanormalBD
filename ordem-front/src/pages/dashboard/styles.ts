@@ -189,15 +189,15 @@ export const TableRow = styled.tr`
 
 export const GraphContainer = styled.div`
   ${({ theme }) => css`
-    padding: ${theme.spacings.xxsmall};
+    padding: ${theme.spacings.xsmall};
     margin-top: ${theme.spacings.medium};
     background-color: ${theme.colors.midnight_900};
     border: 1px solid ${theme.colors.purple_850};
     border-radius: ${theme.border.radius.medium};
     min-height: 400px;
-    
-    .barsGraph {
-      padding: 1.6rem 2.4rem;
+
+    > div {
+      margin-bottom: ${theme.spacings.xsmall};
 
       h2 {
         font-size: ${theme.font.sizes.large};

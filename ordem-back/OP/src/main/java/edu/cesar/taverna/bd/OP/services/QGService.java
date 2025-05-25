@@ -2,7 +2,16 @@ package edu.cesar.taverna.bd.OP.services;
 
 import edu.cesar.taverna.bd.OP.DTO.*;
 import edu.cesar.taverna.bd.OP.dao.QGDAO;
+import org.springframework.web.client.RestTemplate;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -47,5 +56,22 @@ public class QGService {
 
     public VerissimoDTO getVerissimoHQ(UUID id) {
         return hqDAO.getVerissimoHQ(id);
+    }
+
+    public List<ThreatElementOnGeoCord> getThreatElementCord() throws SQLException{
+        List<ThreatElementOnCEP> listOnCep = hqDAO.getThreatElementOnCEP();
+        List<ThreatElementOnGeoCord> listOnGeoCord = new ArrayList<>();
+
+        String url = "https://cep.awesomeapi.com.br/json/";
+        RestTemplate restTemplate = new RestTemplate();
+
+        listOnCep.forEach(threat -> {
+
+            ThreatElementOnGeoCord response = restTemplate.getForObject(url+threat.cep(), ThreatElementOnGeoCord.class);
+            assert response != null;
+            response.setElement(threat.element());
+            listOnGeoCord.add(response);
+        });
+        return listOnGeoCord;
     }
 }

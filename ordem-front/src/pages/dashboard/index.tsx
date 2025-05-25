@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { useEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Navigation } from '../../components/Navigation';
 import { useQuery } from '@tanstack/react-query';
@@ -17,11 +18,19 @@ import {
   FiLogOut,
 } from 'react-icons/fi';
 import { getLastMonthAndYear } from '../../utils/getLastMonthAndYear';
-import {Button} from "../../components/Button";
-import {AuthService} from "../../services/http/auth/AuthService.ts";
-import {useNavigate} from "react-router";
+import { Button } from '../../components/Button';
+import { AuthService } from '../../services/http/auth/AuthService.ts';
+import { useNavigate } from 'react-router';
+
+import maplibregl from 'maplibre-gl';
+import Map, { NavigationControl } from 'react-map-gl/maplibre';
+import 'maplibre-gl/dist/maplibre-gl.css';
 
 export function Dashboard() {
+  const navigate = useNavigate();
+  const mapRef = useRef<maplibregl.Map | null>(null);
+  const markersRef = useRef<maplibregl.Marker[]>([]);
+
   const { data: activeAgents } = useQuery({
     queryKey: ['activeAgents'],
     queryFn: () => HqService.getActiveAgents(),
@@ -79,12 +88,92 @@ export function Dashboard() {
     queryFn: () => HqService.getRankAgentsByHQ(),
   });
 
-  const {data: verissimoHQ} = useQuery({
+  const { data: verissimoHQ } = useQuery({
     queryKey: ['verissimoHQ'],
     queryFn: () => HqService.getVerissimoHQ(),
   });
 
-  const navigate = useNavigate();
+  const { data: threatsLocation } = useQuery({
+    queryKey: ['location'],
+    queryFn: () => HqService.getLocation(),
+  });
+
+  const elementColors: Record<string, string> = {
+    Medo: '#6B7AFF',
+    Morte: '#3D375A',
+    Sangue: '#FA1C43',
+    Conhecimento: '#F6DD00',
+    Energia: '#8C3EEC',
+  };
+
+  useEffect(() => {
+    if (!mapRef.current || !Array.isArray(threatsLocation)) return;
+
+    markersRef.current.forEach((marker) => marker.remove());
+    markersRef.current = [];
+
+    const grouped = threatsLocation.reduce(
+      (acc: Record<string, any[]>, threat: any) => {
+        const key = `${threat.lat},${threat.lng}`;
+        if (!acc[key]) acc[key] = [];
+        acc[key].push(threat);
+        return acc;
+      },
+      {},
+    );
+
+    Object.values(grouped).forEach((threats: any[]) => {
+      const { lat, lng } = threats[0];
+      const elements = threats.map((t) => t.element);
+      const uniqueElements = Array.from(new Set(elements));
+      const size = 20 + (uniqueElements.length - 1) * 10;
+
+      const elementCounts = elements.reduce(
+        (acc: Record<string, number>, el: string) => {
+          acc[el] = (acc[el] || 0) + 1;
+          return acc;
+        },
+        {},
+      );
+
+      const title = uniqueElements
+        .map((el) => `${el} (${elementCounts[el]})`)
+        .join(', ');
+
+      const el = document.createElement('div');
+      el.style.width = `${size}px`;
+      el.style.height = `${size}px`;
+      el.style.borderRadius = '50%';
+      el.style.border = '2px solid white';
+      el.style.zIndex = '10';
+      el.title = title;
+
+      if (uniqueElements.length === 1) {
+        el.style.backgroundColor = elementColors[uniqueElements[0]] || 'gray';
+        el.style.boxShadow = `0 0 0 2px ${
+          elementColors[uniqueElements[0]] || 'gray'
+        }`;
+      } else {
+        const colors = uniqueElements.map((e) => elementColors[e] || 'gray');
+        const step = 100 / colors.length;
+        const gradient = colors
+          .map((color, i) => `${color} ${i * step}% ${(i + 1) * step}%`)
+          .join(', ');
+        el.style.background = `conic-gradient(${gradient})`;
+        el.style.boxShadow = `0 0 0 2px #fff`;
+      }
+
+      const marker = new maplibregl.Marker({ element: el })
+        .setLngLat([parseFloat(lng), parseFloat(lat)])
+        .addTo(mapRef.current!);
+
+      markersRef.current.push(marker);
+    });
+  }, [threatsLocation, mapRef.current]);
+
+  function handleMapLoad(event: any) {
+    mapRef.current = event.target;
+  }
 
   const isLoading =
     !teamsSpecialization &&
@@ -121,7 +210,7 @@ export function Dashboard() {
     xaxis: {
       labels: {
         style: {
-          colors: ['#fff', '#fff', '#fff'],
+          colors: '#fff',
         },
       },
       categories: meanNex.map((item) => item.hqName),
@@ -321,17 +410,18 @@ export function Dashboard() {
       <Helmet title="Dashboard" />
       <S.Wrapper>
         <S.PageHeader>
-          <h1>{verissimoHQ?.hqName} – Bem-vindo de volta, {verissimoHQ?.verName}!</h1>
+          <h1>
+            {verissimoHQ?.hqName} – Bem-vindo de volta, {verissimoHQ?.verName}!
+          </h1>
           <div>
             {/*<p>Logout</p>*/}
             <Button onClick={handleLogout}>
               <S.Icon backgroundColor="trasnparent">
-                <FiLogOut color="#fff"/>
+                <FiLogOut color="#fff" />
               </S.Icon>
             </Button>
           </div>
         </S.PageHeader>
-
 
         <S.TopGraphsWrapper>
           <S.TopGraphCard>
@@ -418,6 +508,27 @@ export function Dashboard() {
             </footer>
           </S.TopGraphCard>
         </S.TopGraphsWrapper>
+
+        <S.GraphContainer>
+          <div>
+            <h2>Ocorrência de ameaças por elemento</h2>
+          </div>
+          <Map
+            onLoad={handleMapLoad}
+            initialViewState={{
+              longitude: -51.9253,
+              latitude: -14.235,
+              zoom: 4,
+            }}
+            style={{ width: '100%', height: 800 }}
+            mapStyle={`https://api.maptiler.com/maps/streets-v2-dark/style.json?key=${
+              import.meta.env.VITE_MAPTILER_API_KEY
+            }`}
+            mapLib={maplibregl}
+          >
+            <NavigationControl position="top-right" />
+          </Map>
+        </S.GraphContainer>
 
         <S.GridWrapper>
           <S.RankAgentsTableContainer>

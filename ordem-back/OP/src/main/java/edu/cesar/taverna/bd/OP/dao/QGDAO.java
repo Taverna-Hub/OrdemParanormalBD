@@ -334,4 +334,35 @@ public class QGDAO{
             throw new RuntimeException(e);
         }
     }
+
+    public List<ThreatElementOnCEP> getThreatElementOnCEP() throws SQLException {
+        String SQL = """
+                 SELECT a.postal_code as CEP, e.name
+                 FROM THREATS t
+                 JOIN THREAT_MISSION tm ON t.id_threat = tm.id_threat
+                 JOIN MISSION m ON tm.id_mission = m.id_mission
+                 JOIN ADDRESS a ON m.id_address = a.id_address
+                 JOIN THREAT_ELEMENTS TE on t.id_threat = TE.id_threat
+                 JOIN ELEMENTS e ON TE.id_element = e.id_element;
+                """;
+        List<ThreatElementOnCEP> list = new ArrayList<>();
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             CallableStatement stmt = conn.prepareCall(SQL)) {
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()){
+
+                String postalCode = rs.getString("CEP");
+                String name = rs.getString("name");
+                postalCode = postalCode.replace("-", "");
+                list.add(new ThreatElementOnCEP(postalCode, name));
+            }
+            return list;
+
+        }
+        catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    
 }
