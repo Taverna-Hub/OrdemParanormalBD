@@ -494,6 +494,9 @@ export function Dashboard() {
 
         {hasData(agentsBySpecialization) && (
           <S.GraphContainer>
+            {/* <div className="barsGraph">
+              <h2>Especializações dos agentes</h2>
+            </div> */}
             <Chart
               options={agentsBySpecializationOptions}
               series={agentsBySpecializationSeries}

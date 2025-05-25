@@ -18,6 +18,7 @@ import {
   Address,
   AddressService,
 } from '../../../services/http/address/AddressService';
+import React from "react";
 
 type SelectOptions = {
   label: string;
@@ -86,6 +87,11 @@ export function CreateMission() {
     mutate(data);
   }
 
+  function handleCancelClick(e: React.MouseEvent<HTMLButtonElement>) {
+    e.preventDefault();
+    navigate('/missoes');
+  }
+
   return (
     <S.Wrapper>
       <Helmet title="Criar Missão" />
@@ -136,7 +142,7 @@ export function CreateMission() {
           <div />
 
           <S.Actions>
-            <Button variant="secondary" type="button">
+            <Button variant="secondary" type="button" onClick={handleCancelClick}>
               Cancelar
             </Button>
 

@@ -1,5 +1,6 @@
 package edu.cesar.taverna.bd.OP.services;
 
+import edu.cesar.taverna.bd.OP.DTO.MembersOrganizationDTO;
 import edu.cesar.taverna.bd.OP.dao.OrganizationDAO;
 import edu.cesar.taverna.bd.OP.entity.Threats.OrgMember;
 import edu.cesar.taverna.bd.OP.entity.Threats.Organization;
@@ -35,6 +36,7 @@ public class OrganizationService {
     public void delete(UUID id){
         organizationDAO.delete(id);
     }
+
     public ResponseEntity<String> addMember(UUID id_org, OrgMember member) throws SQLException {
         organizationDAO.addMember(id_org, member);
         return ResponseEntity.ok("");
@@ -43,6 +45,10 @@ public class OrganizationService {
         organizationDAO.removeMember(id_org, member);
         return ResponseEntity.ok("");
 
+    }
+
+    public List<MembersOrganizationDTO> getMembers(UUID id_org) throws SQLException {
+        return  organizationDAO.listMembers(id_org);
     }
 
 

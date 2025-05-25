@@ -1,5 +1,6 @@
 package edu.cesar.taverna.bd.OP.controller;
 
+import edu.cesar.taverna.bd.OP.DTO.MembersOrganizationDTO;
 import edu.cesar.taverna.bd.OP.entity.Threats.OrgMember;
 import edu.cesar.taverna.bd.OP.entity.Threats.Organization;
 import edu.cesar.taverna.bd.OP.services.OrganizationService;
@@ -65,5 +66,11 @@ public class OrganizationController extends GenericController<Organization, Orga
         UUID id_org = payload.get("id_org");
         UUID id_member = payload.get("id_member");
         return service.removeMember(id_org, id_member);
+    }
+
+    @GetMapping("/members/{id}")
+    public ResponseEntity<List<MembersOrganizationDTO>> getMembers(@PathVariable UUID id) throws SQLException {
+        List<MembersOrganizationDTO> list = service.getMembers(id);
+        return ResponseEntity.ok(list);
     }
 }

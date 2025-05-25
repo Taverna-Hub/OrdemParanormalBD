@@ -1,5 +1,7 @@
 package edu.cesar.taverna.bd.OP.dao;
 
+import edu.cesar.taverna.bd.OP.DTO.MembersOrganizationDTO;
+import edu.cesar.taverna.bd.OP.DTO.UpdateOrganizationDTO;
 import edu.cesar.taverna.bd.OP.config.ConnectionFactory;
 import edu.cesar.taverna.bd.OP.entity.Threats.OrgMember;
 import edu.cesar.taverna.bd.OP.entity.Threats.Organization;
@@ -228,6 +230,67 @@ public class OrganizationDAO extends GenericDAO<Organization> {
                 throw new RuntimeException("Error saving entity", e);
 
             }
+        }
+    }
+
+    public List<MembersOrganizationDTO> listMembers(UUID id_org) throws  SQLException {
+        String sql =
+                """
+                SELECT m.id_member, m.name, m.role
+                FROM MEMBERS m
+                WHERE m.id_organization = ?;
+                """;
+
+        List<MembersOrganizationDTO> list = new ArrayList<>();
+
+        try (Connection conn = ConnectionFactory.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, id_org.toString());
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    String id_member = rs.getString("id_member");
+                    String memberName = rs.getString("name");
+                    String memberRole = rs.getString("role");
+
+                    list.add(new MembersOrganizationDTO(memberName, memberRole, id_member));
+
+                }
+
+                return list;
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    public void updateOrganization(UpdateOrganizationDTO updateOrganizationDTO) throws SQLException {
+        Connection conn = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+
+        try {
+            conn.setAutoCommit(false);
+
+            stmt = conn.prepareStatement("DELETE FROM THREATS_NAMES WHERE id_threat = ?");
+            stmt.setString(1, updateOrganizationDTO.id_threat());
+            stmt.executeUpdate();
+            stmt.close();
+
+            stmt = conn.prepareStatement("DELETE FROM THREAT_ELEMENTS WHERE id_threat = ?");
+            stmt.setString(1, updateOrganizationDTO.id_threat());
+            stmt.executeUpdate();
+            stmt.close();
+
+
+        } catch (SQLException e) {
+            if (conn != null) {
+                conn.rollback();
+            }
+            throw e;
+        } finally {
+            if (stmt != null) stmt.close();
+            if (conn != null) conn.close();
         }
     }
 }

@@ -195,5 +195,22 @@ export const GraphContainer = styled.div`
     border: 1px solid ${theme.colors.purple_850};
     border-radius: ${theme.border.radius.medium};
     min-height: 400px;
+    
+    .barsGraph {
+      padding: 1.6rem 2.4rem;
+
+      h2 {
+        font-size: ${theme.font.sizes.large};
+        color: ${theme.colors.white};
+      }
+
+      p {
+        margin-top: ${theme.spacings.xxsmall};
+        font-size: ${theme.font.sizes.small};
+        color: ${theme.colors.gray_500};
+      }
+      
+    }
+    
   `}
 `;

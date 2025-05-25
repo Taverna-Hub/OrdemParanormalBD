@@ -14,6 +14,7 @@ import {
   CreateAddressProps,
 } from '../../../services/http/address/AddressService';
 import { useNavigate } from 'react-router';
+import React from "react";
 
 export type ZipCodeProps = {
   logradouro: string;
@@ -66,6 +67,12 @@ export function CreateAddress() {
     mutate(data);
   }
 
+  function handleCancelClick(e: React.MouseEvent<HTMLButtonElement>) {
+    e.preventDefault();
+    navigate('/missoes/criar');
+  }
+
+
   return (
     <S.Wrapper>
       <Helmet title="Criar Endereço" />
@@ -91,12 +98,12 @@ export function CreateAddress() {
           <div />
 
           <S.Actions>
-            <Button variant="secondary" type="button">
-              Cancelar
+            <Button variant="secondary" type="button"  onClick={handleCancelClick}  >
+              Não adicionar
             </Button>
 
             <Button iconRight={() => <FiArrowRight />} type="submit">
-              Adicionar endereço
+              Adicionar novo endereço
             </Button>
           </S.Actions>
         </S.Form>
