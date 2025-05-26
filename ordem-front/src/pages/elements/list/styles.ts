@@ -37,46 +37,53 @@ export const GridContainer = styled.div`
 export const GridCard = styled.div`
   position: relative;
   overflow: hidden;
-  
+
   border-radius: 16px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.3s ease;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  
-  /* min-height: 220px; */
-  height: 100dvh;
+
+  min-height: 220px;
 
   img {
     position: absolute;
     top: 0;
-    z-index: 10;
+    right: -9rem;
+    height: 25rem;
+    filter: opacity(0.1);
+    transition: all 0.3s ease;
   }
-  
-  &:hover{
+
+  &:hover {
     transform: scale(1.05);
+
+    img {
+      filter: opacity(0.5);
+      transform: scale(1.1);
+    }
   }
 
   &.Medo {
-    background: linear-gradient(to bottom right, #5A7CA2 50%, #1B273A 100%);
+    background: linear-gradient(to bottom right, #5a7ca2 50%, #1b273a 100%);
   }
-  
+
   &.Morte {
-    background: linear-gradient(to bottom right, #27262C 50%, #151418 100%);
+    background: linear-gradient(to bottom right, #27262c 50%, #151418 100%);
   }
 
   &.Sangue {
-    background: linear-gradient(to bottom right, #6C161B 50%, #271513 100%);
+    background: linear-gradient(to bottom right, #6c161b 50%, #271513 100%);
   }
 
   &.Conhecimento {
-    background: linear-gradient(to bottom right, #8F6603 50%, #291D01 100%);
+    background: linear-gradient(to bottom right, #8f6603 50%, #291d01 100%);
   }
-  
+
   &.Energia {
-    background: linear-gradient(to bottom right, #44248B 50%, #1C182B 100%);
+    background: linear-gradient(to bottom right, #44248b 50%, #1c182b 100%);
   }
 
   &.Medo:hover {
@@ -98,13 +105,11 @@ export const GridCard = styled.div`
   &.Energia:hover {
     box-shadow: 0 10px 25px rgba(68, 36, 139, 0.4);
   }
-
-
 `;
 
 export const CardTitle = styled.h2`
   padding: 20px;
-  
+
   font-size: ${({ theme }) => theme.font.sizes.medium};
   font-weight: 700;
   color: #f8fafc;
@@ -113,23 +118,23 @@ export const CardTitle = styled.h2`
 export const CardDescription = styled.p`
   padding: 0 20px;
   color: #e2e8f0;
-  
+
   font-size: ${({ theme }) => theme.font.sizes.small};
   line-height: 1.4;
-  
+
   flex: 1;
 `;
 
 export const CardAdvantage = styled.p`
   margin: 16px 20px 20px 20px;
-  
+
   font-size: ${({ theme }) => theme.font.sizes.xsmall};
   font-family: 'Fira Code', monospace;
-  
+
   background-color: rgba(255, 255, 255, 0.05);
   padding: 10px;
   border-radius: 8px;
   color: #cbd5e1;
-  
+
   white-space: pre-wrap;
 `;
