@@ -49,7 +49,7 @@ public class AgentService {
         return null;
     }
 
-    public ResponseEntity<String> register(Agent agent){
+    public ResponseEntity<String> register(Agent agent, UUID id_hq) {
         while (agentDAO.searchByID(agent.getId()) != null){
             agent.setId(UUID.randomUUID());
         }
@@ -60,6 +60,8 @@ public class AgentService {
         }
 
         agentDAO.save(agent);
+
+        agentDAO.insertAgentHQ(agent.getId(), id_hq);
         return ResponseEntity.ok("Agente criado com sucesso");
     }
 

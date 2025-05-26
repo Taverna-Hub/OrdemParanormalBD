@@ -28,7 +28,8 @@
 
         @Override
         protected ResponseEntity<String> performRegister(Agent agent) {
-           return service.register(agent);
+            UUID id_hq = (UUID) session.getAttribute("id_hq");
+           return service.register(agent, id_hq);
         }
 
         @Override
@@ -42,7 +43,6 @@
             return ResponseEntity.ok(agents);
 
         }
-
 
         @Override
         public ResponseEntity<Agent> getById(UUID id) {
@@ -94,23 +94,4 @@
         public ResponseEntity<String> performRegister(@RequestBody AgentRitual agentRitual) {
             return service.registerAgentRitual(agentRitual);
         }
-
-        /*
-        public ResponseEntity<List<Agent>> getByHQ(HttpSession session) {
-            UUID id_hq = (UUID) session.getAttribute("id_hq");
-            if (id_hq == null){
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-            }
-
-            List<Agent> agents = service.listByHQ(id_hq);
-            return ResponseEntity.ok(agents);
-
-        }
-         */
-
-        /*
-        public ResponseEntity<List<Agent>> getAll() throws SQLException {
-            return ResponseEntity.ok(service.getAllAgents());
-        }
-         */
     }
