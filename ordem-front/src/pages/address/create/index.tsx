@@ -1,4 +1,3 @@
-import { FiArrowRight } from 'react-icons/fi';
 import { Button } from '../../../components/Button';
 import { Input } from '../../../components/Input';
 import { Navigation } from '../../../components/Navigation';
@@ -8,7 +7,7 @@ import { Helmet } from 'react-helmet-async';
 
 import axios from 'axios';
 import { toast } from 'sonner';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import {
   AddressService,
   CreateAddressProps,
@@ -38,6 +37,7 @@ export function CreateAddress() {
   } = useForm<AddressFormSchema>({
     resolver: zodResolver(addressSchema),
   });
+  const queryClient = useQueryClient();
 
   const zip_code = watch('postal_code');
 
@@ -67,6 +67,7 @@ export function CreateAddress() {
     },
     onSuccess: async () => {
       toast.success('Endereço cadastrado com sucesso!');
+      queryClient.invalidateQueries({ queryKey: ['addressess'] });
       navigate('/missoes/criar');
     },
     onError: () => {
@@ -140,9 +141,7 @@ export function CreateAddress() {
               Não adicionar
             </Button>
 
-            <Button iconRight={() => <FiArrowRight />} type="submit">
-              Adicionar novo endereço
-            </Button>
+            <Button type="submit">Adicionar novo endereço</Button>
           </S.Actions>
         </S.Form>
       </S.FormWrapper>

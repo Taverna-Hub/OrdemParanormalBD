@@ -1,7 +1,6 @@
-import { FiArrowRight } from 'react-icons/fi';
 import { Helmet } from 'react-helmet-async';
 import { useForm } from 'react-hook-form';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useNavigate, useParams } from 'react-router';
 import { toast } from 'sonner';
 
@@ -48,6 +47,8 @@ export function EditAgent() {
   const { id } = useParams();
   const { control, register, handleSubmit, setValue } = useForm<FormValues>();
 
+  const queryClient = useQueryClient();
+
   const specialties = [
     { value: 'Especialista', label: 'Especialista' },
     { value: 'Ocultista', label: 'Ocultista' },
@@ -75,8 +76,9 @@ export function EditAgent() {
 
       await AgentService.update(id as string, formattedData);
     },
-    onSuccess: (data) => {
+    onSuccess: () => {
       toast.success('Agente atualizado com sucesso!');
+      queryClient.invalidateQueries({ queryKey: ['agents'] });
       navigate('/agentes');
     },
     onError: () => {
@@ -90,19 +92,28 @@ export function EditAgent() {
   });
 
   function handleLoadValues() {
-    setValue('name', agent?.agent?.name);
-    setValue('telNumber', agent?.agent?.telNumber);
-    setValue('birthDate', agent?.agent?.birthDate.split('T')[0]);
-    setValue('nex', agent?.agent?.nex);
-    setValue('retired', agent?.agent?.retired);
-    setValue('transcended', agent?.agent?.transcended);
+    if (!agent || !agent.agent) return;
+    setValue('name', agent.agent.name ?? '');
+    setValue('telNumber', agent.agent.telNumber ?? '');
+    let birthDate = '';
+    if (agent.agent.birthDate) {
+      if (typeof agent.agent.birthDate === 'string') {
+        birthDate = (agent.agent.birthDate as string).split('T')[0];
+      } else if (agent.agent.birthDate instanceof Date) {
+        birthDate = agent.agent.birthDate.toISOString().split('T')[0];
+      }
+    }
+    setValue('birthDate', birthDate);
+    setValue('nex', agent.agent.nex ?? 0);
+    setValue('retired', agent.agent.retired ?? false);
+    setValue('transcended', agent.agent.transcended ?? false);
     setValue('rank_agent', {
-      value: agent?.agent?.rank_agent,
-      label: agent?.agent?.rank_agent,
+      value: agent.agent.rank_agent ?? '',
+      label: agent.agent.rank_agent ?? '',
     });
     setValue('specialization', {
-      value: agent?.agent?.specialization,
-      label: agent?.agent?.specialization,
+      value: agent.agent.specialization ?? '',
+      label: agent.agent.specialization ?? '',
     });
   }
 
@@ -165,11 +176,7 @@ export function EditAgent() {
             >
               Cancelar
             </Button>
-            <Button
-              iconRight={() => <FiArrowRight />}
-              type="submit"
-              disabled={isPending}
-            >
+            <Button type="submit" disabled={isPending}>
               {isPending ? 'Salvando...' : 'Salvar alterações'}
             </Button>
           </S.Actions>

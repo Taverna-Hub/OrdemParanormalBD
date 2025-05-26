@@ -11,7 +11,7 @@ export const Wrapper = styled.main`
 
 export const FormWrapper = styled.section`
   width: 80%;
-  background-color: ${({ theme }) => theme.colors.purple_900};
+  background-color: ${({ theme }) => theme.colors.midnight_900};
   padding: 3.2rem;
   border-radius: ${({ theme }) => theme.border.radius.medium};
 
@@ -53,7 +53,7 @@ export const TableContainer = styled.div`
     margin-top: ${theme.spacings.medium};
     overflow-x: auto;
     overflow-y: auto;
-    background-color: ${theme.colors.blue_800};
+    background-color: ${theme.colors.midnight_900};
     border-radius: ${theme.border.radius.medium};
     max-height: calc(100vh - 260px);
 
@@ -97,7 +97,7 @@ export const TableHead = styled.thead`
     //position: sticky;
     //top: 0;
     //z-index: 1;
-    //background-color: ${({ theme }) => theme.colors.blue_800};
+    //background-color: ${({ theme }) => theme.colors.midnight_900};
     text-align: left;
     color: #9ca3af;
     font-size: ${({ theme }) => theme.font.sizes.medium};

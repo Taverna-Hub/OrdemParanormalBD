@@ -10,7 +10,7 @@ export const InputWrapper = styled.div`
   ${({ theme }) => css`
     display: flex;
     align-items: center;
-    background: ${theme.colors.purple_800};
+    background: ${theme.colors.purple_950};
     border-radius: 0.8rem;
     border: 0.2rem solid ${theme.colors.midnight_500};
     transition: all 0.3s;

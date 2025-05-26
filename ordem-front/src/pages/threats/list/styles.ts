@@ -41,7 +41,7 @@ export const SearchInterface = styled.div`
 export const TableContainer = styled.div`
   margin-top: ${({ theme }) => theme.spacings.medium};
   overflow-x: auto;
-  background-color: ${({ theme }) => theme.colors.blue_800};
+  background-color: ${({ theme }) => theme.colors.midnight_900};
   border-radius: ${({ theme }) => theme.border.radius.medium};
 
   div {
@@ -98,5 +98,3 @@ export const TableRow = styled.tr`
     border-color: rgba(30, 58, 138, 0.2);
   }
 `;
-
-

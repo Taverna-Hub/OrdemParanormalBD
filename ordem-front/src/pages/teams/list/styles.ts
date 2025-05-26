@@ -31,7 +31,7 @@ export const TableContainer = styled.div`
   ${({ theme }) => css`
     margin-top: ${theme.spacings.medium};
     overflow-x: auto;
-    background-color: ${theme.colors.blue_800};
+    background-color: ${theme.colors.midnight_900};
     border-radius: ${theme.border.radius.medium};
 
     div {

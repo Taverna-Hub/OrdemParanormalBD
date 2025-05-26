@@ -568,6 +568,9 @@ export function Dashboard() {
 
           {hasData(meanNex) && (
             <S.GraphContainer>
+              <div>
+                <h2>NEX médio por QG</h2>
+              </div>
               <Chart
                 options={nexOptions}
                 series={nexSeries}
@@ -580,6 +583,9 @@ export function Dashboard() {
 
           {hasData(teamsSpecialization) && (
             <S.GraphContainer>
+              <div>
+                <h2>Equipes por especialização</h2>
+              </div>
               <Chart
                 options={teamSpecializationOptions}
                 series={teamSpecializationSeries}
@@ -592,6 +598,9 @@ export function Dashboard() {
 
           {hasData(missionStatus) && (
             <S.GraphContainer>
+              <div>
+                <h2>Missões por status</h2>
+              </div>
               <Chart
                 options={missionStatusOptions}
                 series={missionStatusSeries}
@@ -605,9 +614,9 @@ export function Dashboard() {
 
         {hasData(agentsBySpecialization) && (
           <S.GraphContainer>
-            {/* <div className="barsGraph">
-              <h2>Especializações dos agentes</h2>
-            </div> */}
+            <div>
+              <h2>Agentes por especialização</h2>
+            </div>
             <Chart
               options={agentsBySpecializationOptions}
               series={agentsBySpecializationSeries}

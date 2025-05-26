@@ -28,7 +28,7 @@ export const GridColumn = styled.div`
 
 export const GridCard = styled.div`
   ${({ theme }) => css`
-    background-color: ${theme.colors.blue_800};
+    background-color: ${theme.colors.midnight_900};
     padding: 1.5rem;
     border-radius: ${theme.border.radius.xsmall};
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);

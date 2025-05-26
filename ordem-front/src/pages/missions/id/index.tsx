@@ -113,6 +113,8 @@ export function SpecificMission() {
     },
     onSuccess: async () => {
       toast.success('Equipe alocada com sucesso!');
+      queryClient.invalidateQueries({ queryKey: ['assignments', id] });
+      queryClient.invalidateQueries({ queryKey: ['team', id] });
     },
     onError: () => {
       toast.error('Ocorreu um erro ao alocar equipe!');
@@ -130,6 +132,8 @@ export function SpecificMission() {
     },
     onSuccess: async () => {
       toast.success('Equipe desalocada com sucesso!');
+      queryClient.invalidateQueries({ queryKey: ['assignments', id] });
+      queryClient.invalidateQueries({ queryKey: ['team', id] });
     },
     onError: () => {
       toast.error('Ocorreu um erro ao desalocar equipe!');

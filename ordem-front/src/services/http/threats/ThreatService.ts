@@ -88,8 +88,12 @@ export const ThreatService = {
       console.log(error);
     }
   },
-  getMembers: async ( id : string ) => {
+  getMembers: async (id: string) => {
     const { data } = await api.get(`organization/members/${id}`);
     return data;
-  }
+  },
+  delete: async (id: string) => {
+    console.log(id);
+    return;
+  },
 };

@@ -25,7 +25,7 @@ export function Threats() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { control, watch } = useForm();
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
 
   const threatType = watch('threatType');
 
@@ -52,20 +52,19 @@ export function Threats() {
 
   const normalizedSearch = searchTerm.trim().toLowerCase();
 
-  const filteredParanormalEntities = paranormalEntities?.filter(entity =>
+  const filteredParanormalEntities = paranormalEntities?.filter(
+    (entity) =>
       normalizedSearch === '' ||
-      entity.names.some(name =>
-          name.toLowerCase().includes(normalizedSearch)
-      )
+      entity.names.some((name) =>
+        name.toLowerCase().includes(normalizedSearch),
+      ),
   );
 
-  const filteredOrganizations = organizations?.filter(org =>
+  const filteredOrganizations = organizations?.filter(
+    (org) =>
       normalizedSearch === '' ||
-      org.names.some(name =>
-          name.toLowerCase().includes(normalizedSearch)
-      )
+      org.names.some((name) => name.toLowerCase().includes(normalizedSearch)),
   );
-
 
   function handleGoToParanormalEntity(id: string) {
     navigate(`/ameacas/paranormal/${id}`);
@@ -79,7 +78,8 @@ export function Threats() {
     mutationFn: (threatId: string) => ThreatService.delete(threatId),
     onSuccess: () => {
       toast.success('Ameaça deletada com sucesso!');
-      queryClient.invalidateQueries({ queryKey: ['threats'] });
+      queryClient.invalidateQueries({ queryKey: ['organizations'] });
+      queryClient.invalidateQueries({ queryKey: ['paranormalEntity'] });
       handleCloseDeleteModal();
     },
     onError: () => {
@@ -111,9 +111,9 @@ export function Threats() {
 
       <S.SearchInterface>
         <Input
-            placeholder="Procure uma ameaças..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+          placeholder="Procure uma ameaças..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
         />
 
         <div>

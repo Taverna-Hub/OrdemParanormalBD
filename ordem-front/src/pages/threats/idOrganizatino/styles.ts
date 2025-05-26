@@ -13,7 +13,7 @@ export const FormWrapper = styled.section`
   min-width: 400px;
   max-width: 700px;
   min-height: 650px;
-  background-color: ${({ theme }) => theme.colors.purple_900};
+  background-color: ${({ theme }) => theme.colors.midnight_900};
   padding: 3.2rem;
   border-radius: ${({ theme }) => theme.border.radius.medium};
 
@@ -99,12 +99,11 @@ export const ListItem = styled.li`
   `}
 `;
 
-
 export const TableContainer = styled.div`
   margin-top: ${({ theme }) => theme.spacings.medium};
   overflow: auto;
   max-height: 340px;
-  background-color: ${({ theme }) => theme.colors.blue_800};
+  background-color: ${({ theme }) => theme.colors.midnight_900};
   border-radius: ${({ theme }) => theme.border.radius.medium};
 
   div {
@@ -161,4 +160,3 @@ export const TableRow = styled.tr`
     border-color: rgba(30, 58, 138, 0.2);
   }
 `;
-

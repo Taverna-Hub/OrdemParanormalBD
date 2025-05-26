@@ -5,7 +5,7 @@ import { Input } from '../../../components/Input';
 import { Select } from '../../../components/Select';
 import { Button } from '../../../components/Button';
 import { Navigation } from '../../../components/Navigation';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import {
   Agent,
   AgentService,
@@ -62,12 +62,12 @@ export function CreateTeam() {
       ],
     },
   });
-
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const handleCancel = () => {
     navigate('/equipes');
-  }
+  };
 
   const { control, getValues, handleSubmit, register, resetField } =
     useForm<CreateTeamUnformattedProps>();
@@ -155,6 +155,7 @@ export function CreateTeam() {
     },
     onSuccess: async () => {
       toast.success('Equipe criada com sucesso!');
+      queryClient.invalidateQueries({ queryKey: ['teams'] });
       navigate('/equipes');
     },
     onError: () => {
@@ -238,13 +239,19 @@ export function CreateTeam() {
                     <h3>{agent.name}</h3>
                     <p>{agent.specialization}</p>
                   </S.Label>
-                  <IconButton type="button" onClick={() => handleRemoveAgent(agent.id)} icon={<FiTrash2 />} />
+                  <IconButton
+                    type="button"
+                    onClick={() => handleRemoveAgent(agent.id)}
+                    icon={<FiTrash2 />}
+                  />
                 </S.AgentCard>
               ))}
           </S.TeamSelectAgents>
 
           <S.GridButtons>
-            <Button type="button" onClick={handleCancel}>Cancelar</Button>
+            <Button type="button" onClick={handleCancel}>
+              Cancelar
+            </Button>
             <Button type="submit"> Criar Equipe </Button>
           </S.GridButtons>
         </S.GridColumn>

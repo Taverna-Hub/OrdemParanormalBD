@@ -19,12 +19,12 @@ export const StyledSelect = styled(Select).attrs({
 })`
   ${({ theme }) => css`
     .react-select__control {
-      border: 2px solid ${theme.colors.gray_500};
+      border: 2px solid ${theme.colors.midnight_500};
       border-radius: ${theme.border.radius.medium};
       padding: ${theme.spacings.xxsmall};
       box-shadow: none;
       cursor: pointer;
-      background-color: ${theme.colors.purple_800};
+      background-color: ${theme.colors.purple_950};
 
       font-size: ${theme.font.sizes.small};
 

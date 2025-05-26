@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 export const agentSchema = z.object({
   name: z.string().min(1, 'O nome do agente não pode ser nulo'),
-  birthDate: z.date().refine(
+  birthDate: z.string().refine(
     (date) => {
       if (!date) return false;
       const birth = new Date(date);
@@ -33,9 +33,14 @@ export const agentSchema = z.object({
     label: z.string(),
   }),
   nex: z
-    .number({ invalid_type_error: 'O nível de exposição deve ser um número' })
-    .min(0, 'O nível de exposição deve estar entre 0% e 100%')
-    .max(100, 'O nível de exposição deve estar entre 0% e 100%'),
+    .string({ required_error: 'O nível de exposição é obrigatório' })
+    .transform((val) => Number(val))
+    .refine((val) => !isNaN(val), {
+      message: 'O nível de exposição deve ser um número',
+    })
+    .refine((val) => val >= 0 && val <= 100, {
+      message: 'O nível de exposição deve estar entre 0 e 100',
+    }),
   telNumber: z
     .string()
     .regex(

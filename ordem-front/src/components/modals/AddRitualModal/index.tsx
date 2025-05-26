@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import * as S from './styles';
 import { Select } from '../../Select';
 import { Button } from '../../Button';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import {
   Ritual,
@@ -27,6 +27,7 @@ type CreateRitualPropsModal = {
 
 export function AddRitualModal({ isOpen, onClose, id_agent }: ModalProps) {
   const { control, handleSubmit } = useForm<CreateRitualPropsModal>();
+  const queryClient = useQueryClient();
 
   const { data: rituals } = useQuery<Ritual[]>({
     queryKey: ['rituals'],
@@ -50,6 +51,7 @@ export function AddRitualModal({ isOpen, onClose, id_agent }: ModalProps) {
     },
     onSuccess: () => {
       toast.success('Ritual adicionado ao agente com sucesso!');
+      queryClient.invalidateQueries({ queryKey: ['agent', id_agent] });
       onClose();
     },
     onError: () => {

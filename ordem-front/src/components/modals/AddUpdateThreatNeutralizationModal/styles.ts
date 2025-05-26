@@ -12,7 +12,7 @@ export const Overlay = styled.div`
 
 export const Content = styled.div`
   ${({ theme }) => css`
-    background: ${theme.colors.blue_800};
+    background: ${theme.colors.midnight_900};
     border-radius: ${theme.border.radius.medium};
     padding: ${theme.spacings.small};
     width: 100%;

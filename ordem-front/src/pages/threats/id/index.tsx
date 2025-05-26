@@ -1,4 +1,4 @@
-import { FiArrowRight, FiPlus } from 'react-icons/fi';
+import { FiPlus } from 'react-icons/fi';
 import { Button } from '../../../components/Button';
 import { Input } from '../../../components/Input';
 import { Navigation } from '../../../components/Navigation';
@@ -6,7 +6,7 @@ import { Select } from '../../../components/Select';
 import * as S from './styles';
 import { useForm } from 'react-hook-form';
 import { Helmet } from 'react-helmet-async';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import {
   Element,
   ElementService,
@@ -43,6 +43,7 @@ export function UpdateThreats() {
 
   const { control, register, getValues, resetField, handleSubmit, setValue } =
     useForm<CreateThreatProps>();
+  const queryClient = useQueryClient();
 
   const { data: elements } = useQuery({
     queryKey: ['elements'],
@@ -84,6 +85,7 @@ export function UpdateThreats() {
     },
     onSuccess: () => {
       toast.success('Ameaça atualizada com sucesso!');
+      queryClient.invalidateQueries({ queryKey: ['paranormalEntity'] });
       navigate('/ameacas');
     },
     onError: (error: any) => {
@@ -199,9 +201,7 @@ export function UpdateThreats() {
               Cancelar
             </Button>
 
-            <Button iconRight={() => <FiArrowRight />} type="submit">
-              Atualizar ameaça
-            </Button>
+            <Button type="submit">Atualizar ameaça</Button>
           </S.Actions>
         </S.Form>
       </S.FormWrapper>

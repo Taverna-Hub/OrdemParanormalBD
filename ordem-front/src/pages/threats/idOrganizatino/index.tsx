@@ -1,26 +1,25 @@
-import { FiArrowRight, FiPlus } from "react-icons/fi";
-import { Button } from "../../../components/Button";
-import { Input } from "../../../components/Input";
-import { Navigation } from "../../../components/Navigation";
-import { Select } from "../../../components/Select";
-import * as S from "./styles";
-import { useForm } from "react-hook-form";
-import { Helmet } from "react-helmet-async";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { Button } from '../../../components/Button';
+import { Input } from '../../../components/Input';
+import { Navigation } from '../../../components/Navigation';
+import { Select } from '../../../components/Select';
+import * as S from './styles';
+import { useForm } from 'react-hook-form';
+import { Helmet } from 'react-helmet-async';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import {
   Element,
   ElementService,
-} from "../../../services/http/elements/ElementService";
-import { useCallback, useEffect, useState } from "react";
-import { Textarea } from "../../../components/Textarea";
+} from '../../../services/http/elements/ElementService';
+import { useCallback, useEffect, useState } from 'react';
+import { Textarea } from '../../../components/Textarea';
 import {
   CreateOrganizationProps,
   GetThreatProps,
   Member,
   ThreatService,
-} from "../../../services/http/threats/ThreatService";
-import { useNavigate, useParams } from "react-router";
-import { IconButton } from "../../../components/IconButton";
+} from '../../../services/http/threats/ThreatService';
+import { useNavigate, useParams } from 'react-router';
+import { IconButton } from '../../../components/IconButton';
 
 type CreateMemberProps = {
   name: string;
@@ -34,9 +33,9 @@ export function UpdateOrganization() {
   const { id } = useParams();
 
   const [names, setNames] = useState<string[]>([]);
-  const [nameInput, setNameInput] = useState("");
+  const [nameInput, setNameInput] = useState('');
 
-  const [members, setMembers] = useState<Omit<Member, "id_member">[]>([]);
+  const [members, setMembers] = useState<Omit<Member, 'id_member'>[]>([]);
   const navigate = useNavigate();
 
   const { control, register, setValue, getValues } = useForm<
@@ -44,12 +43,12 @@ export function UpdateOrganization() {
   >();
 
   const { data: elements } = useQuery({
-    queryKey: ["elements"],
+    queryKey: ['elements'],
     queryFn: () => ElementService.findAll(),
   });
 
   const { data: threat } = useQuery<GetThreatProps>({
-    queryKey: ["threat", id],
+    queryKey: ['threat', id],
     queryFn: () => ThreatService.findOrganizationById(id),
     enabled: !!id,
   });
@@ -70,9 +69,9 @@ export function UpdateOrganization() {
   });
 
   function handleAddNames() {
-    if (nameInput.trim() !== "") {
+    if (nameInput.trim() !== '') {
       setNames((old) => [...old, nameInput]);
-      setNameInput("");
+      setNameInput('');
     }
   }
 
@@ -85,20 +84,20 @@ export function UpdateOrganization() {
 
   const roleOptions = [
     {
-      value: "Lider",
-      label: "Lider",
+      value: 'Lider',
+      label: 'Lider',
     },
     {
-      value: "Pesquisador",
-      label: "Pesquisador",
+      value: 'Pesquisador',
+      label: 'Pesquisador',
     },
     {
-      value: "Ocultista",
-      label: "Ocultista",
+      value: 'Ocultista',
+      label: 'Ocultista',
     },
     {
-      value: "Simpatizante",
-      label: "Simpatizante",
+      value: 'Simpatizante',
+      label: 'Simpatizante',
     },
   ];
 
@@ -115,8 +114,8 @@ export function UpdateOrganization() {
       }));
 
       setNames(threat.names || []);
-      setValue("description", threat.description);
-      setValue("elements", elements);
+      setValue('description', threat.description);
+      setValue('elements', elements);
     }
   }, [threat]);
 
@@ -169,23 +168,21 @@ export function UpdateOrganization() {
             isMulti
           />
 
-          <Textarea label="Descrição" {...register("description")} disabled />
+          <Textarea label="Descrição" {...register('description')} disabled />
 
           <div />
           <div />
 
           <S.Actions>
             <Button
-              onClick={() => navigate("/ameacas")}
+              onClick={() => navigate('/ameacas')}
               variant="secondary"
               type="button"
             >
               Cancelar
             </Button>
 
-            <Button iconRight={() => <FiArrowRight />} type="submit">
-              Atualizar ameaça
-            </Button>
+            <Button type="submit">Atualizar ameaça</Button>
           </S.Actions>
         </S.Form>
       </S.FormWrapper>
@@ -196,7 +193,7 @@ export function UpdateOrganization() {
         </div>
 
         <S.Form>
-          <Input label="Nome do membro" {...register("name")} />
+          <Input label="Nome do membro" {...register('name')} />
 
           <Select
             control={control}
@@ -220,7 +217,7 @@ export function UpdateOrganization() {
                   </tr>
                 </S.TableHead>
                 <tbody>
-                  {members.map((member: Omit<Member, "id_member">, idx) => (
+                  {members.map((member: Omit<Member, 'id_member'>, idx) => (
                     <S.TableRow key={idx}>
                       <td>{member.name}</td>
                       <td>{member.role}</td>

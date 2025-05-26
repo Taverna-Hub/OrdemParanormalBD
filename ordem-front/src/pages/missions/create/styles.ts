@@ -9,7 +9,7 @@ export const Wrapper = styled.main`
 
 export const FormWrapper = styled.section`
   width: 80%;
-  background-color: ${({ theme }) => theme.colors.purple_900};
+  background-color: ${({ theme }) => theme.colors.midnight_900};
   padding: 3.2rem;
   border-radius: ${({ theme }) => theme.border.radius.medium};
 
@@ -51,5 +51,4 @@ export const Address = styled.div`
   .button {
     margin-top: 2.5rem;
   }
-
 `;

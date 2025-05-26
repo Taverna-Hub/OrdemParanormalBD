@@ -334,7 +334,7 @@ export const TableHead = styled.thead`
     //position: sticky;
     //top: 0;
     //z-index: 1;
-    //background-color: ${({ theme }) => theme.colors.blue_800};
+    //background-color: ${({ theme }) => theme.colors.midnight_900};
     text-align: left;
     color: #9ca3af;
     font-size: ${({ theme }) => theme.font.sizes.medium};

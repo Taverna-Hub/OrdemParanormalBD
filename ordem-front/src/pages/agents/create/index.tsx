@@ -1,4 +1,3 @@
-import { FiArrowRight } from 'react-icons/fi';
 import { Button } from '../../../components/Button';
 import { Input } from '../../../components/Input';
 import { Navigation } from '../../../components/Navigation';
@@ -83,6 +82,7 @@ export function CreateAgent() {
     },
     onSuccess: async () => {
       toast.success('Agente cadastrado com sucesso!');
+      queryClient.invalidateQueries({ queryKey: ['agents'] });
       navigate('/agentes');
     },
     onError: () => {
@@ -163,13 +163,15 @@ export function CreateAgent() {
           <div />
 
           <S.Actions>
-            <Button variant="secondary" type="button">
+            <Button
+              variant="secondary"
+              type="button"
+              onClick={() => navigate('/agentes')}
+            >
               Cancelar
             </Button>
 
-            <Button iconRight={() => <FiArrowRight />} type="submit">
-              Adicionar agente
-            </Button>
+            <Button type="submit">Adicionar agente</Button>
           </S.Actions>
         </S.Form>
       </S.FormWrapper>

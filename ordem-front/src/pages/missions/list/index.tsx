@@ -9,23 +9,22 @@ import {
   Mission,
   MissionService,
 } from '../../../services/http/missions/MissionService';
-import {useState} from "react";
+import { useState } from 'react';
 
 export function Missions() {
   const navigate = useNavigate();
-  const [searchTerm, setSearchTerm] = useState("");
-
+  const [searchTerm, setSearchTerm] = useState('');
 
   const { data: missions } = useQuery({
     queryKey: ['missions'],
     queryFn: () => MissionService.findAll(),
   });
 
-  const filteredMissions = missions?.filter((mission : Mission) => {
+  const filteredMissions = missions?.filter((mission: Mission) => {
     const matchesSearch =
-        searchTerm === "" ||
-        mission.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        mission.status.toLowerCase().includes(searchTerm.toLowerCase())
+      searchTerm === '' ||
+      mission.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      mission.status.toLowerCase().includes(searchTerm.toLowerCase());
     return matchesSearch;
   });
 
@@ -40,14 +39,12 @@ export function Missions() {
 
       <S.SearchInterface>
         <Input
-            placeholder="Procure uma missão..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+          placeholder="Procure uma missão..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
         />
 
-        <Button onClick={() => navigate('/missoes/criar')}>
-          Criar missão
-        </Button>
+        <Button onClick={() => navigate('/missoes/criar')}>Criar missão</Button>
       </S.SearchInterface>
 
       <S.TableContainer>
@@ -64,7 +61,7 @@ export function Missions() {
           </S.TableHead>
           <tbody>
             {filteredMissions &&
-                filteredMissions.map((mission: Mission, index: number) => {
+              filteredMissions.map((mission: Mission, index: number) => {
                 return (
                   <>
                     <S.TableRow

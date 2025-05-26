@@ -1,4 +1,3 @@
-import { FiArrowRight } from 'react-icons/fi';
 import { Button } from '../../../components/Button';
 import { Input } from '../../../components/Input';
 import { Navigation } from '../../../components/Navigation';
@@ -6,7 +5,7 @@ import { Select } from '../../../components/Select';
 import * as S from './styles';
 import { useForm } from 'react-hook-form';
 import { Helmet } from 'react-helmet-async';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import { useNavigate } from 'react-router';
 import { Textarea } from '../../../components/Textarea';
@@ -18,7 +17,7 @@ import {
   Address,
   AddressService,
 } from '../../../services/http/address/AddressService';
-import React from "react";
+import React from 'react';
 
 type SelectOptions = {
   label: string;
@@ -36,6 +35,7 @@ type CreateMissionProps = Omit<
 export function CreateMission() {
   const navigate = useNavigate();
   const { control, register, handleSubmit } = useForm<CreateMissionProps>();
+  const queryClient = useQueryClient();
 
   const status = [
     {
@@ -76,6 +76,7 @@ export function CreateMission() {
     },
     onSuccess: async () => {
       toast.success('Missão criada com sucesso!');
+      queryClient.invalidateQueries({ queryKey: ['missions'] });
       navigate('/missoes');
     },
     onError: () => {
@@ -139,23 +140,30 @@ export function CreateMission() {
               name="id_address"
             />
 
-            <Button className='button' variant="secondary" type="button" onClick={() => navigate('/endereco/criar')} aria-label='Adicionar Novo Endereço'>
+            <Button
+              className="button"
+              variant="secondary"
+              type="button"
+              onClick={() => navigate('/endereco/criar')}
+              aria-label="Adicionar Novo Endereço"
+            >
               +
             </Button>
-            
           </S.Address>
 
           <div />
           <div />
 
           <S.Actions>
-            <Button variant="secondary" type="button" onClick={handleCancelClick}>
+            <Button
+              variant="secondary"
+              type="button"
+              onClick={handleCancelClick}
+            >
               Cancelar
             </Button>
 
-            <Button iconRight={() => <FiArrowRight />} type="submit">
-              Criar missão
-            </Button>
+            <Button type="submit">Criar missão</Button>
           </S.Actions>
         </S.Form>
       </S.FormWrapper>

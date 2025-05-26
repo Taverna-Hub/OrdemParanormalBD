@@ -1,4 +1,4 @@
-import { FiArrowRight, FiPlus } from 'react-icons/fi';
+import { FiPlus } from 'react-icons/fi';
 import { Button } from '../../../components/Button';
 import { Input } from '../../../components/Input';
 import { Navigation } from '../../../components/Navigation';
@@ -6,7 +6,7 @@ import { Select } from '../../../components/Select';
 import * as S from './styles';
 import { useForm } from 'react-hook-form';
 import { Helmet } from 'react-helmet-async';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import {
   Element,
   ElementService,
@@ -36,6 +36,7 @@ export function CreateOrganizationThreats() {
 
   const { control, register, getValues, resetField, handleSubmit } =
     useForm<CreateThreatProps>();
+  const queryClient = useQueryClient();
 
   const { data: elements } = useQuery({
     queryKey: ['elements'],
@@ -63,6 +64,7 @@ export function CreateOrganizationThreats() {
     },
     onSuccess: async () => {
       toast.success('Ameaça cadastrada com sucesso!');
+      queryClient.invalidateQueries({ queryKey: ['organizations'] });
       navigate('/ameacas');
     },
     onError: () => {
@@ -123,13 +125,15 @@ export function CreateOrganizationThreats() {
           <div />
 
           <S.Actions>
-            <Button variant="secondary" type="button">
+            <Button
+              variant="secondary"
+              type="button"
+              onClick={() => navigate('/ameacas')}
+            >
               Cancelar
             </Button>
 
-            <Button iconRight={() => <FiArrowRight />} type="submit">
-              Adicionar organização
-            </Button>
+            <Button type="submit">Adicionar organização</Button>
           </S.Actions>
         </S.Form>
       </S.FormWrapper>
