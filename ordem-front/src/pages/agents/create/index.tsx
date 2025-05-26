@@ -14,19 +14,32 @@ import {
 } from '../../../services/http/agents/AgentService';
 import { toast } from 'sonner';
 import { useNavigate } from 'react-router';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { agentSchema } from '../../../utils/validationSchemas';
+import { z } from 'zod';
 
 type SelectOptions = {
   label: string;
   value: string;
 };
-type CreateAgentProps = Omit<Agent, 'rank_agent' | 'specialization'> & {
+
+type CreateAgentProps = Omit<Agent, 'rank_agent' | 'specialization' | 'id'> & {
   rank_agent: SelectOptions;
   specialization: SelectOptions;
 };
 
+type AgentFormSchema = z.infer<typeof agentSchema>;
+
 export function CreateAgent() {
   const navigate = useNavigate();
-  const { control, register, handleSubmit } = useForm<CreateAgentProps>();
+  const {
+    control,
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<AgentFormSchema>({
+    resolver: zodResolver(agentSchema),
+  });
 
   const specialties = [
     {
@@ -77,8 +90,13 @@ export function CreateAgent() {
     },
   });
 
-  function handleCreateAgent(data: CreateAgentProps) {
-    mutate(data);
+  function handleCreateAgent(data: AgentFormSchema) {
+    const reformattedData = {
+      ...data,
+      specialization: data.specialization.value,
+      rank_agent: data.rank_agent.value,
+    };
+    mutate(reformattedData);
   }
 
   return (
@@ -90,12 +108,21 @@ export function CreateAgent() {
         </div>
 
         <S.Form onSubmit={handleSubmit(handleCreateAgent)}>
-          <Input label="Nome" {...register('name')} />
-          <Input label="Telefone" {...register('telNumber')} />
+          <Input
+            label="Nome"
+            {...register('name')}
+            error={errors.name?.message}
+          />
+          <Input
+            label="Telefone"
+            {...register('telNumber')}
+            error={errors.telNumber?.message}
+          />
           <Input
             label="Data de Nascimento"
             type="date"
             {...register('birthDate')}
+            error={errors.birthDate?.message}
           />
 
           <Select
@@ -112,7 +139,12 @@ export function CreateAgent() {
             name="rank_agent"
           />
 
-          <Input label="NEX" type="number" {...register('nex')} />
+          <Input
+            label="NEX"
+            type="number"
+            {...register('nex')}
+            error={errors.nex?.message}
+          />
 
           <S.BooleanFields>
             <Checkbox
@@ -127,6 +159,7 @@ export function CreateAgent() {
               {...register('transcended')}
             />
           </S.BooleanFields>
+          <div />
           <div />
 
           <S.Actions>
