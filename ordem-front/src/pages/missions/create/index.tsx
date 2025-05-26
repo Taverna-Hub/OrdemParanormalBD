@@ -131,12 +131,19 @@ export function CreateMission() {
             {...register('end_date')}
           />
 
-          <Select
-            control={control}
-            options={addressOptions!}
-            label="Endereço"
-            name="id_address"
-          />
+          <S.Address>
+            <Select
+              control={control}
+              options={addressOptions!}
+              label="Endereço"
+              name="id_address"
+            />
+
+            <Button className='button' variant="secondary" type="button" onClick={() => navigate('/endereco/criar')} aria-label='Adicionar Novo Endereço'>
+              +
+            </Button>
+            
+          </S.Address>
 
           <div />
           <div />

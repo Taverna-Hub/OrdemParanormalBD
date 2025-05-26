@@ -36,3 +36,20 @@ export const Actions = styled.div`
   justify-content: right;
   gap: 1.6rem;
 `;
+
+export const Address = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.6rem;
+
+  > div:first-child {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .button {
+    margin-top: 2.5rem;
+  }
+
+`;

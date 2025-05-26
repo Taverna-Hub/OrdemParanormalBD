@@ -45,7 +45,7 @@ export function Missions() {
             onChange={(e) => setSearchTerm(e.target.value)}
         />
 
-        <Button onClick={() => navigate('/endereco/criar')}>
+        <Button onClick={() => navigate('/missoes/criar')}>
           Criar missão
         </Button>
       </S.SearchInterface>
