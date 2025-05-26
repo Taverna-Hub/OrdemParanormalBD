@@ -1,6 +1,7 @@
 package edu.cesar.taverna.bd.OP.controller;
 
 import edu.cesar.taverna.bd.OP.DTO.MembersOrganizationDTO;
+import edu.cesar.taverna.bd.OP.DTO.UpdateOrganizationDTO;
 import edu.cesar.taverna.bd.OP.entity.Threats.OrgMember;
 import edu.cesar.taverna.bd.OP.entity.Threats.Organization;
 import edu.cesar.taverna.bd.OP.services.OrganizationService;
@@ -13,14 +14,12 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
-
 @RestController
 @RequestMapping("/organization")
-public class OrganizationController extends GenericController<Organization, OrganizationService>{
+public class OrganizationController extends GenericController<Organization, OrganizationService> {
     public OrganizationController() {
         super(new OrganizationService());
     }
-
 
     @Override
     protected ResponseEntity<String> performRegister(Organization entity) {
@@ -31,8 +30,8 @@ public class OrganizationController extends GenericController<Organization, Orga
     public ResponseEntity<List<Organization>> getAll() throws SQLException {
         List<Organization> list = service.getAll();
         return ResponseEntity
-                .ok()                   // status 200
-                .body(list);            // corpo = sua lista
+                .ok() // status 200
+                .body(list); // corpo = sua lista
     }
 
     @Override
@@ -42,13 +41,23 @@ public class OrganizationController extends GenericController<Organization, Orga
         Optional<Organization> optionalOrg = service.getById(id);
 
         return optionalOrg
-                .map(org -> ResponseEntity.ok().body(org))      // se estiver presente, retorna 200 com a org
+                .map(org -> ResponseEntity.ok().body(org)) // se estiver presente, retorna 200 com a org
                 .orElseGet(() -> ResponseEntity.notFound().build()); // senão, 404
     }
 
     @Override
     public ResponseEntity<String> update(UUID id, Organization entity) {
-        return null;
+        return ResponseEntity.status(405).body("Use /organization/update para atualizar organização.");
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<String> updateOrganization(@RequestBody UpdateOrganizationDTO dto) {
+        try {
+            service.updateOrganization(dto);
+            return ResponseEntity.ok("Organização atualizada com sucesso.");
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Erro ao atualizar organização: " + e.getMessage());
+        }
     }
 
     @Override

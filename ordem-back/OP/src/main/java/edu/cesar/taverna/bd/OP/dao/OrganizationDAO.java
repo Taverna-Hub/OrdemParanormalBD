@@ -26,9 +26,8 @@ public class OrganizationDAO extends GenericDAO<Organization> {
     }
 
     public List<Organization> getAll() throws SQLException {
-        String sql =
-                """
-                
+        String sql = """
+
                         SELECT\s
                     po.id_organization AS org_id,
                     t.description AS org_description,
@@ -51,7 +50,7 @@ public class OrganizationDAO extends GenericDAO<Organization> {
 
         try (Connection conn = ConnectionFactory.getConnection();
                 PreparedStatement ps = conn.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
+                ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
                 // Converte a PK para UUID
@@ -104,7 +103,7 @@ public class OrganizationDAO extends GenericDAO<Organization> {
                     org.getMembers().add(m);
                 }
             }
-        } catch (SQLException ex){
+        } catch (SQLException ex) {
             throw new SQLException(ex);
         }
 
@@ -144,9 +143,9 @@ public class OrganizationDAO extends GenericDAO<Organization> {
             conn.setAutoCommit(false);
 
             try (
-                    PreparedStatement stmt1 = conn.prepareStatement("INSERT INTO THREATS (id_threat, description) VALUES (?, ?)");
-                    PreparedStatement stmt2 = conn.prepareStatement(getInsertSQL())
-            ) {
+                    PreparedStatement stmt1 = conn
+                            .prepareStatement("INSERT INTO THREATS (id_threat, description) VALUES (?, ?)");
+                    PreparedStatement stmt2 = conn.prepareStatement(getInsertSQL())) {
                 stmt1.setString(1, organization.getId_threat().toString());
                 stmt1.setString(2, organization.getDescription());
                 stmt1.executeUpdate();
@@ -168,9 +167,10 @@ public class OrganizationDAO extends GenericDAO<Organization> {
 
     public void addDependencies(Connection conn, Organization organization) throws SQLException {
         try (
-                PreparedStatement stmt1 = conn.prepareStatement("INSERT INTO THREAT_ELEMENTS (id_element, id_threat) VALUES (?, ?);");
-                PreparedStatement stmt2 = conn.prepareStatement("INSERT INTO THREATS_NAMES (id_threat, name) VALUES (?, ?);");
-        ) {
+                PreparedStatement stmt1 = conn
+                        .prepareStatement("INSERT INTO THREAT_ELEMENTS (id_element, id_threat) VALUES (?, ?);");
+                PreparedStatement stmt2 = conn
+                        .prepareStatement("INSERT INTO THREATS_NAMES (id_threat, name) VALUES (?, ?);");) {
             for (UUID element : organization.getElements()) {
                 stmt1.setString(1, element.toString());
                 stmt1.setString(2, organization.getId_threat().toString());
@@ -196,7 +196,6 @@ public class OrganizationDAO extends GenericDAO<Organization> {
         return null;
     }
 
-
     public void addMember(UUID id_org, OrgMember member) throws SQLException {
         try (Connection conn = ConnectionFactory.getConnection()) {
 
@@ -213,7 +212,6 @@ public class OrganizationDAO extends GenericDAO<Organization> {
 
             }
         }
-
 
     }
 
@@ -233,9 +231,8 @@ public class OrganizationDAO extends GenericDAO<Organization> {
         }
     }
 
-    public List<MembersOrganizationDTO> listMembers(UUID id_org) throws  SQLException {
-        String sql =
-                """
+    public List<MembersOrganizationDTO> listMembers(UUID id_org) throws SQLException {
+        String sql = """
                 SELECT m.id_member, m.name, m.role
                 FROM MEMBERS m
                 WHERE m.id_organization = ?;
@@ -244,7 +241,7 @@ public class OrganizationDAO extends GenericDAO<Organization> {
         List<MembersOrganizationDTO> list = new ArrayList<>();
 
         try (Connection conn = ConnectionFactory.getConnection();
-            PreparedStatement stmt = conn.prepareStatement(sql)) {
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, id_org.toString());
 
             try (ResultSet rs = stmt.executeQuery()) {
@@ -282,15 +279,41 @@ public class OrganizationDAO extends GenericDAO<Organization> {
             stmt.executeUpdate();
             stmt.close();
 
+            stmt = conn.prepareStatement("INSERT INTO THREATS_NAMES (id_threat, name) VALUES (?, ?)");
+            for (String name : updateOrganizationDTO.new_names()) {
+                stmt.setString(1, updateOrganizationDTO.id_threat());
+                stmt.setString(2, name);
+                stmt.executeUpdate();
+            }
+            stmt.close();
 
+            stmt = conn.prepareStatement("INSERT INTO THREAT_ELEMENTS (id_element, id_threat) VALUES (?, ?)");
+            for (String element : updateOrganizationDTO.new_elements()) {
+                stmt.setString(1, element);
+                stmt.setString(2, updateOrganizationDTO.id_threat());
+                stmt.executeUpdate();
+            }
+            stmt.close();
+
+            if (updateOrganizationDTO.new_description() != null) {
+                stmt = conn.prepareStatement("UPDATE THREATS SET description = ? WHERE id_threat = ?");
+                stmt.setString(1, updateOrganizationDTO.new_description());
+                stmt.setString(2, updateOrganizationDTO.id_threat());
+                stmt.executeUpdate();
+                stmt.close();
+            }
+
+            conn.commit();
         } catch (SQLException e) {
             if (conn != null) {
                 conn.rollback();
             }
             throw e;
         } finally {
-            if (stmt != null) stmt.close();
-            if (conn != null) conn.close();
+            if (stmt != null)
+                stmt.close();
+            if (conn != null)
+                conn.close();
         }
     }
 }
