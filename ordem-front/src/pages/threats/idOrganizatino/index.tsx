@@ -38,7 +38,7 @@ export function UpdateOrganization() {
   const [members, setMembers] = useState<Omit<Member, 'id_member'>[]>([]);
   const navigate = useNavigate();
 
-  const { control, register, setValue, getValues } = useForm<
+  const { control, register, setValue, getValues, handleSubmit } = useForm<
     CreateMemberProps & CreateOrganizationProps
   >();
 
@@ -130,14 +130,16 @@ export function UpdateOrganization() {
     loadMembers();
   }, [loadThreatData, loadMembers]);
 
-  // <div className="inputsection">
-  //   <Input
-  //     label="Nomes"
-  //     value={nameInput}
-  //     onChange={(e) => setNameInput(e.target.value)}
-  //   />
-  //   <IconButton onClick={() => handleAddNames()} icon={<FiPlus />} />
-  // </div>;
+  const handleUpdateOrganization = async (data: CreateOrganizationProps) => {
+    if (!id) return;
+    await ThreatService.updateOrganization({
+      id_threat: id,
+      new_names: names,
+      new_description: data.description,
+      new_elements: data.elements.map((el: any) => el.value),
+    });
+    navigate('/ameacas');
+  };
 
   return (
     <S.Wrapper>
@@ -147,10 +149,21 @@ export function UpdateOrganization() {
           <h2>Editar ameaça</h2>
         </div>
 
-        <S.Form>
+        <S.Form onSubmit={handleSubmit(handleUpdateOrganization)}>
           <S.InputWrapper>
             <S.NamesListWrapper>
               <h2>Nomes</h2>
+              <div className="inputsection">
+                <Input
+                  label="Nomes"
+                  value={nameInput}
+                  onChange={(e) => setNameInput(e.target.value)}
+                />
+                <IconButton
+                  onClick={() => handleAddNames()}
+                  icon={<FiPlus />}
+                />
+              </div>
               <S.List>
                 {names?.length > 0 &&
                   names.map((name, index) => (
@@ -168,7 +181,7 @@ export function UpdateOrganization() {
             isMulti
           />
 
-          <Textarea label="Descrição" {...register('description')} disabled />
+          <Textarea label="Descrição" {...register('description')} />
 
           <div />
           <div />

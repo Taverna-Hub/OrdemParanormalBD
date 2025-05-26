@@ -96,4 +96,17 @@ export const ThreatService = {
     console.log(id);
     return;
   },
+  updateOrganization: async (dto: {
+    id_threat: string;
+    new_names: string[];
+    new_description: string;
+    new_elements: string[];
+  }) => {
+    try {
+      const { data } = await api.put('/organization/update', dto);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  },
 };
