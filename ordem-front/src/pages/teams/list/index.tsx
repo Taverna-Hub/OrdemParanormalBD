@@ -14,11 +14,20 @@ import { toast } from 'sonner';
 export function Teams() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const [searchTerm, setSearchTerm] = useState("");
 
   const { data: teams } = useQuery({
     queryKey: ['teams'],
     queryFn: () => TeamService.findAll(),
   });
+
+  const filteredTeams = teams?.filter((team : Team) => {
+    const matchesSearch =
+        searchTerm === "" ||
+        team.name.toLowerCase().includes(searchTerm.toLowerCase())
+    return matchesSearch;
+  });
+
 
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [selectedTeam, setSelectedTeam] = useState<Team | null>(null);
@@ -62,7 +71,11 @@ export function Teams() {
       <h1>Equipes</h1>
 
       <S.SearchInterface>
-        <Input placeholder="Procure uma equipe..." />
+        <Input
+            placeholder="Procure uma equipe..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+        />
 
         <Button onClick={() => navigate('/equipes/criar')}>Criar equipe</Button>
       </S.SearchInterface>
@@ -79,7 +92,7 @@ export function Teams() {
             </tr>
           </S.TableHead>
           <tbody>
-            {teams?.map((team: Team, index: number) => {
+            {filteredTeams?.map((team: Team, index: number) => {
               return (
                 <S.TableRow>
                   <td>

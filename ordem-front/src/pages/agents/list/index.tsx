@@ -17,10 +17,18 @@ import { toast } from 'sonner';
 export function Agents() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const [searchTerm, setSearchTerm] = useState("");
 
   const { data: agents } = useQuery({
     queryKey: ['agents'],
     queryFn: () => AgentService.findAll(),
+  });
+
+  const filteredAgents = agents?.filter((agent : Agent) => {
+    const matchesSearch =
+        searchTerm === "" ||
+        agent.name.toLowerCase().includes(searchTerm.toLowerCase())
+    return matchesSearch;
   });
 
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -65,7 +73,11 @@ export function Agents() {
       <h1>Agentes</h1>
 
       <S.SearchInterface>
-        <Input placeholder="Procure um agente..." />
+        <Input
+            placeholder="Procure um agente..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+        />
         <Button onClick={() => navigate('/agentes/criar')}>Criar agente</Button>
       </S.SearchInterface>
 
@@ -82,7 +94,7 @@ export function Agents() {
             </tr>
           </S.TableHead>
           <tbody>
-            {agents?.map((agent: Agent, index: number) => (
+            {filteredAgents?.map((agent: Agent, index: number) => (
               <S.TableRow key={agent.id}>
                 <td>
                   <span>{index + 1}</span>
