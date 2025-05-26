@@ -35,6 +35,7 @@ export const GridContainer = styled.div`
 `;
 
 export const GridCard = styled.div`
+  position: relative;
   overflow: hidden;
   
   border-radius: 16px;
@@ -45,14 +46,21 @@ export const GridCard = styled.div`
   flex-direction: column;
   justify-content: space-between;
   
-  min-height: 220px;
+  /* min-height: 220px; */
+  height: 100dvh;
+
+  img {
+    position: absolute;
+    top: 0;
+    z-index: 10;
+  }
   
   &:hover{
     transform: scale(1.05);
   }
 
   &.Medo {
-    background: linear-gradient(to bottom right, #4B5563  50%, #1F2937  100%);
+    background: linear-gradient(to bottom right, #5A7CA2 50%, #1B273A 100%);
   }
   
   &.Morte {
@@ -72,7 +80,7 @@ export const GridCard = styled.div`
   }
 
   &.Medo:hover {
-    box-shadow: 0 10px 25px rgba(75, 85, 99, 0.4);
+    box-shadow: 0 10px 25px rgba(90, 124, 162, 0.4);
   }
 
   &.Morte:hover {

@@ -36,8 +36,10 @@ export function Elements() {
 
         <S.GridContainer>
             {elements?.map((element : ElementWithVantagemNome) => (
-                <S.GridCard
+                <S.GridCard 
+                  
                     key={element.id_element} className={element.name}>
+                      <img src="/el-morte.png"/>
                     <S.CardTitle>{element.name}</S.CardTitle>
                     <S.CardDescription>{element.desciption}</S.CardDescription>
                     {element.vantagem && (
