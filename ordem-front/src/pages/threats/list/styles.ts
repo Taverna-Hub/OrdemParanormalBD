@@ -98,3 +98,5 @@ export const TableRow = styled.tr`
     border-color: rgba(30, 58, 138, 0.2);
   }
 `;
+
+

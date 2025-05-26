@@ -7,12 +7,6 @@ import org.springframework.http.ResponseEntity;
 public class VerissimoService extends AgentService {
     private final VerissimoDAO verissimoDAO = new VerissimoDAO();
     
-    public void register(Verissimo verissimo){
-         if (verissimo.getLogin() == null){
-            verissimo.setLogin( );
-        }
-         super.register(verissimo);
-    }
 
 
 }

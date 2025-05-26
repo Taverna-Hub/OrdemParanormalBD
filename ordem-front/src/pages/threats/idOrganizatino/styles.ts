@@ -5,10 +5,14 @@ export const Wrapper = styled.main`
   align-items: center;
   justify-content: center;
   padding: 3.2rem;
+  gap: 3.2rem;
 `;
 
 export const FormWrapper = styled.section`
-  width: 80%;
+  width: 50vw;
+  min-width: 400px;
+  max-width: 700px;
+  min-height: 650px;
   background-color: ${({ theme }) => theme.colors.purple_900};
   padding: 3.2rem;
   border-radius: ${({ theme }) => theme.border.radius.medium};
@@ -19,6 +23,12 @@ export const FormWrapper = styled.section`
     h2 {
       color: ${({ theme }) => theme.colors.white};
       font-size: 3.2rem;
+    }
+
+    h3 {
+      padding: 1.6rem;
+      color: ${({ theme }) => theme.colors.white};
+      font-size: 2.4rem;
     }
   }
 `;
@@ -88,3 +98,67 @@ export const ListItem = styled.li`
     margin-top: ${theme.spacings.xxsmall};
   `}
 `;
+
+
+export const TableContainer = styled.div`
+  margin-top: ${({ theme }) => theme.spacings.medium};
+  overflow: auto;
+  max-height: 340px;
+  background-color: ${({ theme }) => theme.colors.blue_800};
+  border-radius: ${({ theme }) => theme.border.radius.medium};
+
+  div {
+    padding: 2.4rem;
+  }
+`;
+
+export const Table = styled.table`
+  ${({ theme }) => css`
+    width: 100%;
+    min-width: 240px;
+    padding: ${theme.spacings.xsmall} ${theme.spacings.small};
+  `}
+`;
+
+export const TableHead = styled.thead`
+  & tr {
+    border-bottom: 1px solid #333;
+  }
+
+  & th {
+    text-align: left;
+    color: #9ca3af;
+    font-size: ${({ theme }) => theme.font.sizes.medium};
+    padding-bottom: 0.5rem;
+  }
+`;
+
+export const TableRow = styled.tr`
+  height: 4rem;
+  transition: background-color 0.2s;
+
+  td {
+    &:first-child {
+      color: ${({ theme }) => theme.colors.gray_500};
+    }
+
+    font-size: ${({ theme }) => theme.font.sizes.small};
+    color: ${({ theme }) => theme.colors.white};
+
+    max-width: 100px;
+    cursor: pointer;
+
+    p {
+      text-overflow: ellipsis;
+      white-space: normal;
+    }
+  }
+
+  &:hover {
+    background-color: rgba(30, 58, 138, 0.2);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.05);
+    border-radius: 0.375rem;
+    border-color: rgba(30, 58, 138, 0.2);
+  }
+`;
+

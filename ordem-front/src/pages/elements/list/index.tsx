@@ -1,7 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import * as S from './styles';
 import { Navigation } from '../../../components/Navigation';
-import { Input } from '../../../components/Input';
 import { useQuery } from '@tanstack/react-query';
 import {
   Element,
@@ -34,11 +33,6 @@ export function Elements() {
       <Helmet title="Elementos" />
 
       <h1>Elementos</h1>
-
-      <S.SearchInterface>
-        <Input placeholder="Procure um elemento..." />
-      </S.SearchInterface>
-
 
         <S.GridContainer>
             {elements?.map((element : ElementWithVantagemNome) => (

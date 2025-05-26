@@ -6,6 +6,7 @@ import edu.cesar.taverna.bd.OP.config.ConnectionFactory;
 import edu.cesar.taverna.bd.OP.entity.Agent;
 import edu.cesar.taverna.bd.OP.entity.AgentRitual;
 import edu.cesar.taverna.bd.OP.entity.Ritual;
+import org.hibernate.annotations.processing.SQL;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -60,7 +61,6 @@ public class AgentDAO extends GenericDAO<Agent> {
     protected void prepareUpdate(PreparedStatement stmt, Agent agent) throws SQLException {
         this.prepareInsert(stmt, agent);
     }
-
 
     @Override
     protected Agent mapResultSetToEntity(ResultSet rs) throws SQLException {
@@ -203,6 +203,21 @@ public class AgentDAO extends GenericDAO<Agent> {
             stmt.setString(2, id_ritual.toString());
 
             stmt.executeUpdate();
+        }
+    }
+
+    public void insertAgentHQ (UUID id_agent, UUID id_hq) {
+        String sql = "INSERT INTO AGENTS_IN_HQ (id_hq, id_agent) VALUES (?, ?)";
+
+        try (Connection conn = ConnectionFactory.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, id_hq.toString());
+            stmt.setString(2, id_agent.toString());
+
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 }

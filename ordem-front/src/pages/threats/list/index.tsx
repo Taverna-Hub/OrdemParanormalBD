@@ -25,6 +25,7 @@ export function Threats() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { control, watch } = useForm();
+  const [searchTerm, setSearchTerm] = useState("");
 
   const threatType = watch('threatType');
 
@@ -48,6 +49,23 @@ export function Threats() {
     queryKey: ['organizations'],
     queryFn: () => ThreatService.findAllOrganization(),
   });
+
+  const normalizedSearch = searchTerm.trim().toLowerCase();
+
+  const filteredParanormalEntities = paranormalEntities?.filter(entity =>
+      normalizedSearch === '' ||
+      entity.names.some(name =>
+          name.toLowerCase().includes(normalizedSearch)
+      )
+  );
+
+  const filteredOrganizations = organizations?.filter(org =>
+      normalizedSearch === '' ||
+      org.names.some(name =>
+          name.toLowerCase().includes(normalizedSearch)
+      )
+  );
+
 
   function handleGoToParanormalEntity(id: string) {
     navigate(`/ameacas/paranormal/${id}`);
@@ -92,7 +110,11 @@ export function Threats() {
       <h1>Ameaças</h1>
 
       <S.SearchInterface>
-        <Input placeholder="Procure uma ameaças..." />
+        <Input
+            placeholder="Procure uma ameaças..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+        />
 
         <div>
           <Select
@@ -129,7 +151,7 @@ export function Threats() {
                 </tr>
               </S.TableHead>
               <tbody>
-                {paranormalEntities?.map((paranormalEntity, index) => {
+                {filteredParanormalEntities?.map((paranormalEntity, index) => {
                   return (
                     <S.TableRow>
                       <td>
@@ -192,7 +214,7 @@ export function Threats() {
                 </tr>
               </S.TableHead>
               <tbody>
-                {organizations?.map(
+                {filteredOrganizations?.map(
                   (organization: GetOrganizationProps, index) => {
                     return (
                       <S.TableRow>

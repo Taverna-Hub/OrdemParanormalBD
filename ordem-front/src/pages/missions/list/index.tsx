@@ -9,13 +9,24 @@ import {
   Mission,
   MissionService,
 } from '../../../services/http/missions/MissionService';
+import {useState} from "react";
 
 export function Missions() {
   const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState("");
+
 
   const { data: missions } = useQuery({
     queryKey: ['missions'],
     queryFn: () => MissionService.findAll(),
+  });
+
+  const filteredMissions = missions?.filter((mission : Mission) => {
+    const matchesSearch =
+        searchTerm === "" ||
+        mission.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        mission.status.toLowerCase().includes(searchTerm.toLowerCase())
+    return matchesSearch;
   });
 
   function handleGoToMission(id: string) {
@@ -28,7 +39,11 @@ export function Missions() {
       <h1>Missões</h1>
 
       <S.SearchInterface>
-        <Input placeholder="Procure uma missão..." />
+        <Input
+            placeholder="Procure uma missão..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+        />
 
         <Button onClick={() => navigate('/endereco/criar')}>
           Criar missão
@@ -48,8 +63,8 @@ export function Missions() {
             </tr>
           </S.TableHead>
           <tbody>
-            {missions &&
-              missions.map((mission: Mission, index: number) => {
+            {filteredMissions &&
+                filteredMissions.map((mission: Mission, index: number) => {
                 return (
                   <>
                     <S.TableRow

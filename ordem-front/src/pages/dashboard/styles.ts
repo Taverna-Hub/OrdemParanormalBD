@@ -203,6 +203,14 @@ export const GraphContainer = styled.div`
         font-size: ${theme.font.sizes.large};
         color: ${theme.colors.white};
       }
+
+      p {
+        margin-top: ${theme.spacings.xxsmall};
+        font-size: ${theme.font.sizes.small};
+        color: ${theme.colors.gray_500};
+      }
+      
     }
+    
   `}
 `;
