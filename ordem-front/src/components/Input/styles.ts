@@ -75,7 +75,7 @@ export const Icon = styled.div<IconPositionProps>`
 
 export const Error = styled.p`
   ${({ theme }) => css`
-    color: ${theme.colors.purple_500}; // change to red
+    color: ${theme.colors.red_200}; // change to red
     font-size: ${theme.font.sizes.xsmall};
   `}
 `;
@@ -83,12 +83,12 @@ export const Error = styled.p`
 const wrapperModifiers = {
   error: (theme: DefaultTheme) => css`
     ${InputWrapper} {
-      border-color: ${theme.colors.purple_500}; // change to red
+      border-color: ${theme.colors.red_200}; // change to red
     }
 
     ${Icon},
     ${Label} {
-      color: ${theme.colors.purple_500}; // change to red
+      color: ${theme.colors.red_200}; // change to red
     }
   `,
   disabled: (theme: DefaultTheme) => css`

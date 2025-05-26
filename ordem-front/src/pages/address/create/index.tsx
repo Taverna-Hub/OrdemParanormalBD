@@ -14,7 +14,9 @@ import {
   CreateAddressProps,
 } from '../../../services/http/address/AddressService';
 import { useNavigate } from 'react-router';
-import React from "react";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { addressSchema } from '../../../utils/validationSchemas';
+import { z } from 'zod';
 
 export type ZipCodeProps = {
   logradouro: string;
@@ -23,10 +25,19 @@ export type ZipCodeProps = {
   localidade: string;
 };
 
+type AddressFormSchema = z.infer<typeof addressSchema>;
+
 export function CreateAddress() {
   const navigate = useNavigate();
-  const { register, watch, setValue, handleSubmit } =
-    useForm<CreateAddressProps>();
+  const {
+    register,
+    watch,
+    setValue,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<AddressFormSchema>({
+    resolver: zodResolver(addressSchema),
+  });
 
   const zip_code = watch('postal_code');
 
@@ -63,15 +74,17 @@ export function CreateAddress() {
     },
   });
 
-  function handleCreateAddress(data: CreateAddressProps) {
-    mutate(data);
+  function handleCreateAddress(data: AddressFormSchema) {
+    mutate({
+      ...data,
+      number: Number(data.number),
+    });
   }
 
   function handleCancelClick(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     navigate('/missoes/criar');
   }
-
 
   return (
     <S.Wrapper>
@@ -87,18 +100,43 @@ export function CreateAddress() {
             {...register('postal_code')}
             onBlur={handleZipCodeChange}
             maxLength={8}
+            error={errors.postal_code?.message}
           />
-          <Input label="Bairro" {...register('neighborhood')} />
-          <Input label="Rua" {...register('street')} />
-          <Input label="Numero" {...register('number')} />
+          <Input
+            label="Bairro"
+            {...register('neighborhood')}
+            error={errors.neighborhood?.message}
+          />
+          <Input
+            label="Rua"
+            {...register('street')}
+            error={errors.street?.message}
+          />
+          <Input
+            label="Numero"
+            {...register('number')}
+            error={errors.number?.message}
+          />
 
-          <Input label="Cidade" {...register('city')} />
-          <Input label="Estado" {...register('state')} />
+          <Input
+            label="Cidade"
+            {...register('city')}
+            error={errors.city?.message}
+          />
+          <Input
+            label="Estado"
+            {...register('state')}
+            error={errors.state?.message}
+          />
 
           <div />
 
           <S.Actions>
-            <Button variant="secondary" type="button"  onClick={handleCancelClick}  >
+            <Button
+              variant="secondary"
+              type="button"
+              onClick={handleCancelClick}
+            >
               Não adicionar
             </Button>
 
