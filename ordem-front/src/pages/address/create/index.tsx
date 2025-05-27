@@ -75,9 +75,18 @@ export function CreateAddress() {
     },
   });
 
+  function formatCep(cep: string) {
+    const digits = cep.replace(/\D/g, '');
+    if (digits.length === 8) {
+      return digits.replace(/(\d{5})(\d{3})/, '$1-$2');
+    }
+    return cep;
+  }
+
   function handleCreateAddress(data: AddressFormSchema) {
     mutate({
       ...data,
+      postal_code: formatCep(data.postal_code),
       number: Number(data.number),
     });
   }
