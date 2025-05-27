@@ -11,13 +11,12 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class QGService {
 
     private final QGDAO hqDAO = new QGDAO();
+    private Map<String, ThreatElementOnGeoCord> cepCache = new HashMap<>();
 
     public List<TeamsSpecializationsInHQ> getSpecializationsInHQ(UUID id){
         return hqDAO.getSpecializationsInHQ(id);
@@ -58,20 +57,38 @@ public class QGService {
         return hqDAO.getVerissimoHQ(id);
     }
 
-    public List<ThreatElementOnGeoCord> getThreatElementCord() throws SQLException{
+
+    public List<ThreatElementOnGeoCord> getThreatElementCord() throws SQLException {
         List<ThreatElementOnCEP> listOnCep = hqDAO.getThreatElementOnCEP();
         List<ThreatElementOnGeoCord> listOnGeoCord = new ArrayList<>();
 
         String url = "https://cep.awesomeapi.com.br/json/";
         RestTemplate restTemplate = new RestTemplate();
 
-        listOnCep.forEach(threat -> {
+        for (ThreatElementOnCEP threat : listOnCep) {
+            String cep = threat.cep();
+            ThreatElementOnGeoCord response;
 
-            ThreatElementOnGeoCord response = restTemplate.getForObject(url+threat.cep(), ThreatElementOnGeoCord.class);
-            assert response != null;
-            response.setElement(threat.element());
-            listOnGeoCord.add(response);
-        });
+            if (cepCache.containsKey(cep)) {
+//                System.out.println("pegou do cache");
+                response = new ThreatElementOnGeoCord(cepCache.get(cep));
+            }
+            else {
+//                System.out.println("pediu request");
+                response = restTemplate.getForObject(url + cep, ThreatElementOnGeoCord.class);
+                if (response != null) {
+                    cepCache.put(cep, response);
+                }
+            }
+
+            if (response != null) {
+                response.setElement(threat.element());
+                listOnGeoCord.add(response);
+            }
+        }
+//            System.out.println("--------------------------\n");
+
         return listOnGeoCord;
     }
+
 }
