@@ -80,6 +80,15 @@ export const GridCard = styled.div`
 
   &.Conhecimento {
     background: linear-gradient(to bottom right, #8f6603 50%, #291d01 100%);
+
+    &:hover {
+      transform: scale(1.05);
+
+      img {
+        filter: opacity(0.5);
+        transform: scale(1.1) rotate(45deg);
+      }
+    }
   }
 
   &.Energia {
