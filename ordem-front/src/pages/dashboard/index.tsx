@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Navigation } from '../../components/Navigation';
 import { useQuery } from '@tanstack/react-query';
@@ -30,6 +30,7 @@ export function Dashboard() {
   const navigate = useNavigate();
   const mapRef = useRef<maplibregl.Map | null>(null);
   const markersRef = useRef<maplibregl.Marker[]>([]);
+  const [mapLoaded, setMapLoaded] = useState(false);
 
   const { data: activeAgents } = useQuery({
     queryKey: ['activeAgents'],
@@ -107,7 +108,8 @@ export function Dashboard() {
   };
 
   useEffect(() => {
-    if (!mapRef.current || !Array.isArray(threatsLocation)) return;
+    if (!mapLoaded || !mapRef.current || !Array.isArray(threatsLocation))
+      return;
 
     markersRef.current.forEach((marker) => marker.remove());
     markersRef.current = [];
@@ -169,10 +171,11 @@ export function Dashboard() {
 
       markersRef.current.push(marker);
     });
-  }, [threatsLocation, mapRef.current]);
+  }, [threatsLocation, mapLoaded]);
 
   function handleMapLoad(event: any) {
     mapRef.current = event.target;
+    setMapLoaded(true);
   }
 
   const isLoading =
@@ -520,7 +523,7 @@ export function Dashboard() {
               latitude: -14.235,
               zoom: 4,
             }}
-            style={{ width: '100%', height: 800 }}
+            style={{ width: '100%', height: 600 }}
             mapStyle={`https://api.maptiler.com/maps/streets-v2-dark/style.json?key=${
               import.meta.env.VITE_MAPTILER_API_KEY
             }`}
@@ -591,7 +594,7 @@ export function Dashboard() {
                 series={teamSpecializationSeries}
                 type="donut"
                 width="100%"
-                height="100%"
+                height={400}
               />
             </S.GraphContainer>
           )}
@@ -606,7 +609,7 @@ export function Dashboard() {
                 series={missionStatusSeries}
                 type="pie"
                 width="100%"
-                height="100%"
+                height={400}
               />
             </S.GraphContainer>
           )}

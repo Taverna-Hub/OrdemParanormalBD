@@ -209,8 +209,6 @@ export const GraphContainer = styled.div`
         font-size: ${theme.font.sizes.small};
         color: ${theme.colors.gray_500};
       }
-      
     }
-    
   `}
 `;
