@@ -186,7 +186,7 @@ public class QGDAO{
         return rankList;
     }
 
-    public FinishedMissionDTO getFinishedMissions(UUID id, Integer month, Integer year) {
+    public FinishedMissionDTO getFinishedMissions(UUID id, int month, int year) {
         String SQL =
                 """
                    SELECT

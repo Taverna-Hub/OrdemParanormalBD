@@ -441,11 +441,11 @@ INSERT INTO AGENTS_IN_HQ (id_hq, id_agent) VALUES
 
 -- Elementos (ELEMENTS) OK
 INSERT INTO ELEMENTS (id_element, name, description) VALUES
-(@elMedo,   'Medo',         'O Medo é a entidade do desconhecido e do infinito. Presente desde os primórdios da humanidade, modifica a natureza do universo. A sua existência diferenciada é um mistério.'),
-(@elMorte,  'Morte',        'A Morte é a entidade do tempo. Ela busca os momentos vivenciados, distorcendo a percepção egóica da existência de cada indivíduo para seu próprio agrado. A distorção temporal da Morte arruína a percepção carnal do Sangue.'),
-(@elSangue, 'Sangue',       'O Sangue é a entidade do sentimento. Ele busca a intensidade: dor, obsessão, paixão, amor, fome, ódio - tudo que envolve sentir uma emoção extrema agrada a entidade de Sangue. Os sentimentos extremos do Sangue superam a razão e a calmaria do Conhecimento.'),
-(@elConhe,  'Conhecimento', 'O Conhecimento é a entidade da consciência. Descobrir, aprender, conhecer, decifrar. Ter a própria percepção do Outro Lado e suas entidades agrada o elemento de Conhecimento. A razão e lógica do Conhecimento reintegram e suprimem o caos da Energia.'),
-(@elEnergia,'Energia',      'A Energia é a entidade do caos. Tudo que não pode ser explicado, o intangível, a anarquia. A constante mudança, o calor e o frio, a luz e as trevas. Tudo que envolve a imprevisibilidade e a transformação agrada a entidade de Energia. A transformação da Energia sobrecarrega os efeitos da Morte.');
+(@elMedo,   'Medo',         'O Medo é a entidade do desconhecido e do infinito.'),
+(@elMorte,  'Morte',        'A Morte é a entidade do tempo.'),
+(@elSangue, 'Sangue',       'O Sangue é a entidade do sentimento.'),
+(@elConhe,  'Conhecimento', 'O Conhecimento é a entidade da consciência.'),
+(@elEnergia,'Energia',      'A Energia é a entidade do caos.');
 
 -- Atualização de vantagem entre elementos OK
 UPDATE ELEMENTS SET id_advantage = @elSangue WHERE id_element = @elMorte;
