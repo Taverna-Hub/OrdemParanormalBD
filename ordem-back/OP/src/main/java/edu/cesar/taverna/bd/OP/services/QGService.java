@@ -4,12 +4,7 @@ import edu.cesar.taverna.bd.OP.DTO.*;
 import edu.cesar.taverna.bd.OP.dao.QGDAO;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
+
 import java.sql.SQLException;
 import java.util.*;
 
