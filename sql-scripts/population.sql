@@ -11,7 +11,8 @@ SET
 @ag61=UUID(), @ag62=UUID(), @ag63=UUID(), @ag64=UUID(), @ag65=UUID(), @ag66=UUID(), @ag67=UUID(), @ag68=UUID(), @ag69=UUID(), @ag70=UUID(),
 @ag71=UUID(), @ag72=UUID(), @ag73=UUID(), @ag74=UUID(), @ag75=UUID(), @ag76=UUID(), @ag77=UUID(), @ag78=UUID(), @ag79=UUID(), @ag80=UUID(),
 @ag81=UUID(), @ag82=UUID(), @ag83=UUID(), @ag84=UUID(), @ag85=UUID(), @ag86=UUID(), @ag87=UUID(), @ag88=UUID(), @ag89=UUID(), @ag90=UUID(),
-@ag91=UUID(), @ag92=UUID(), @ag93=UUID(), @ag94=UUID(), @ag95=UUID(), @ag96=UUID(), @ag97=UUID(), @ag98=UUID(), @ag99=UUID(), @ag100=UUID();
+@ag91=UUID(), @ag92=UUID(), @ag93=UUID(), @ag94=UUID(), @ag95=UUID(), @ag96=UUID(), @ag97=UUID(), @ag98=UUID(), @ag99=UUID(), @ag100=UUID(),
+@ag101= UUID(), @ag102= UUID(), @ag103= UUID(), @ag104= UUID(), @ag105= UUID();
 
 
 
@@ -42,7 +43,8 @@ SET
 @addr81 = UUID(), @addr82 = UUID(), @addr83 = UUID(), @addr84 = UUID(), @addr85 = UUID(),
 @addr86 = UUID(), @addr87 = UUID(), @addr88 = UUID(), @addr89 = UUID(), @addr90 = UUID(),
 @addr91 = UUID(), @addr92 = UUID(), @addr93 = UUID(), @addr94 = UUID(), @addr95 = UUID(),
-@addr96 = UUID(), @addr97 = UUID(), @addr98 = UUID(), @addr99 = UUID(), @addr100 = UUID();
+@addr96 = UUID(), @addr97 = UUID(), @addr98 = UUID(), @addr99 = UUID(), @addr100 = UUID(),
+@addr101 = UUID();
 
 
 -- ===================================================================
@@ -58,7 +60,8 @@ SET
 @team13  = UUID(),  @team14 = UUID(),  @team15 = UUID(),  @team16 = UUID(),
 @team17  = UUID(),  @team18 = UUID(),  @team19 = UUID(),  @team20 = UUID(),
 @team21  = UUID(),  @team22 = UUID(),  @team23 = UUID(),  @team24 = UUID(),
-@team25  = UUID(),  @team26 = UUID(),  @team27 = UUID(),  @team28 = UUID();
+@team25  = UUID(),  @team26 = UUID(),  @team27 = UUID(),  @team28 = UUID(),
+@team29 = UUID();
 
 -- ===================================================================
 -- Elementos
@@ -102,7 +105,8 @@ SET
 @miss106  = UUID(), @miss103  = UUID(), @miss104  = UUID(), @miss105  = UUID(), @miss106 = UUID(),
 @miss107  = UUID(), @miss108  = UUID(), @miss109  = UUID(), @miss110  = UUID(), @miss111 = UUID(),
 @miss111  = UUID(), @miss112  = UUID(), @miss113  = UUID(), @miss114  = UUID(), @miss115 = UUID(),
-@miss116  = UUID(), @miss117  = UUID(), @miss118  = UUID(), @miss119  = UUID(), @miss120 = UUID();
+@miss116  = UUID(), @miss117  = UUID(), @miss118  = UUID(), @miss119  = UUID(), @miss120 = UUID(),
+@miss121= UUID();
 
 -- ===================================================================
 -- Evidencias
@@ -190,6 +194,12 @@ INSERT INTO AGENTS (id_agent, name, birth_date, phone, specialization, rank_agen
 (@ag15, 'Olivia Reis',        '1983-02-14', '21999990015', 'Ocultista',   'Elite',    88, FALSE, TRUE),
 (@ag16, 'Pedro Lima',         '1976-06-21', '21999990016', 'Combatente',  'Veterano', 58, FALSE, FALSE),
 (@ag17, 'Quesia Tavares',     '1989-03-30', '11999990017', 'Especialista','Recruta',  22, FALSE, FALSE),
+(@ag101, 'Alexandre "Xande"',     '1970-03-30', '11999990017', 'Ocultista','Recruta',  22, FALSE, FALSE),
+(@ag102, 'Francisco "Chico" Albuquerque',     '1970-03-30', '11999990017', 'Especialista','Recruta',  22, FALSE, FALSE),
+(@ag103, 'Dara Alice Venturini',     '1970-03-30', '11999990017', 'Especialista','Recruta',  22, FALSE, FALSE),
+(@ag104, 'Guilherme "Guizo" Santos',     '1970-03-30', '11999990017', 'Ocultista','Recruta',  22, FALSE, FALSE),
+(@ag105, 'Lirio Tellini',     '1970-03-30', '11999990017', 'Combatente','Recruta',  22, FALSE, FALSE),
+
 -- QG2
 (@ag18, 'Renato Alves',       '1993-10-12', '11999990018', 'Especialista','Veterano', 47, FALSE, FALSE),
 (@ag19, 'Sofia Gomes',        '1987-11-25', '11999990019', 'Ocultista',   'Elite',    92, FALSE, TRUE),
@@ -389,7 +399,8 @@ INSERT INTO ADDRESS (id_address, street, number, neighborhood, city, state, post
 (@addr97,  'Rua Barão do Rio Branco',   390, 'Flores',                'Manaus',    'AM', '69058-581'),
 (@addr98,  'Travessa Coronel Brandão',  75,  'Centro',                'Manaus',    'AM', '69010-060'),
 (@addr99,  'Rua Saldanha Marinho',      210, 'Centro',                'Manaus',    'AM', '69010-040'),
-(@addr100, 'Esplanada dos Ministérios', 700, 'Zona Cívico-Administrativa', 'Brasília', 'DF', '70040-906');
+(@addr100, 'Esplanada dos Ministérios', 700, 'Zona Cívico-Administrativa', 'Brasília', 'DF', '70040-906'),
+(@addr101, 'sem nome', 10, 'fazenda familiar', 'Porteirinha', 'MG', '39520-000');
 
 -- População de QGs OK
 INSERT INTO HQ (id_hq, name, security_level, room_count, id_address, id_verissimo) VALUES
@@ -406,7 +417,8 @@ INSERT INTO AGENTS_IN_HQ (id_hq, id_agent) VALUES
 (@hq1,@ag1),(@hq1,@ag2),(@hq1,@ag3),(@hq1,@ag4),(@hq1,@ag5),
 (@hq1,@ag6),(@hq1,@ag7),(@hq1,@ag8),(@hq1,@ag9),(@hq1,@ag10),
 (@hq1,@ag11),(@hq1,@ag12),(@hq1,@ag13),(@hq1,@ag14),(@hq1,@ag15),
-(@hq1,@ag16),(@hq1,@ag17),
+(@hq1,@ag16),(@hq1,@ag17), (@hq1,@ag101), (@hq1,@ag102), (@hq1,@ag103),
+(@hq1,@ag104), (@hq1,@ag105),
 
 -- QG2 (17 agentes)
 (@hq2,@ag18),(@hq2,@ag19),(@hq2,@ag20),(@hq2,@ag21),(@hq2,@ag22),
@@ -505,6 +517,7 @@ INSERT INTO MISSION (id_mission, title, status, risks, objective, start_date, en
 (@miss18, 'Investida em Galpão Desativado',    'Concluida', 'Médio',  'Verificar movimentações ocultas',   '2025-04-14 15:00:00', '2025-04-15', @addr48, @hq1),
 (@miss19, 'Ronda de Final de Semana',          'Aberta',    'Médio',  'Patrulhar centros culturais',       '2025-06-01 19:00:00', NULL,         @addr49, @hq1),
 (@miss20, 'Calamidade', 'Aberta', 'Crítico', 'Anomalia de Classe Desconhecida detectada. Convergência de forças extraplanares em escala nunca registrada. Mobilização total autorizada.', '2021-09-04 00:00:00', NULL, @addr100, @hq1),
+(@miss121, 'Investigação na fazenda', 'Arquivada', 'Alto', 'Localizar, estudar e neutralizar o "Alheios"', '1997-10-30 00:00:00', '1997-11-10', @addr101, @hq1),
 
 -- QG 2
 
@@ -626,6 +639,7 @@ INSERT INTO TEAM (id_team, name, specialization) VALUES
 (@team2,  'Legião Sombria',          'Combate'),
 (@team3,  'Guardiões do Crepúsculo', 'Suporte'),
 (@team4,  'Olhos da Realidade',      'Investigação'),
+(@team29,  'Os cinco',      'Combate'),
 
 
 -- QG recife (@hq2)
@@ -678,6 +692,11 @@ INSERT INTO AGENTS_IN_TEAM (id_team, id_agent, start_date, end_date) VALUES
 (@team4,@ag13, '2020-10-31', NULL),
 (@team4,@ag14, '2020-10-31', NULL),
 (@team4,@ag15, '2020-10-31', NULL),
+(@team29,@ag101, '1997-10-31', NULL),
+(@team29,@ag102, '1997-10-31', NULL),
+(@team29,@ag103, '1997-10-31', NULL),
+(@team29,@ag104, '1997-10-31', NULL),
+(@team29,@ag105, '1997-10-31', NULL),
 
 
 -- QG Recife (@hq2) team 5 - team 10
@@ -801,6 +820,7 @@ INSERT INTO MISSION_ASSIGNMENT (id_team, id_mission, allocation_date, deallocati
 (@team4, @miss18, '2025-04-14', NULL),  -- CONCLUIDA 
 (@team4, @miss19, '2025-06-01', NULL),
 (@team4, @miss20, '2021-09-04', NULL),
+(@team29, @miss121, '1997-10-31', NULL),
 -- QG 2
 (@team5, @miss21, '2025-05-10', NULL),
 (@team5, @miss22, '2025-05-12', NULL),
@@ -1145,7 +1165,9 @@ INSERT INTO THREAT_MISSION (id_threat, id_mission) VALUES
 (@thr37, @miss116), -- concluida 
 (@thr33, @miss117), -- concluida 
 (@thr34, @miss119), 
-(@thr25, @miss120); -- concluida 
+(@thr25, @miss120),
+(@thr1, @miss121),
+(@thr13, @miss121); -- concluida
 
 
 INSERT INTO THREATS_NAMES (id_threat, name) VALUES
